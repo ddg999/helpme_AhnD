@@ -2,6 +2,7 @@ package helpme_AhnD.ver01.service;
 
 public class Score {
 
+	private int hp;
 	private int score;
 	private int combo;
 	private int countExcellent;
@@ -10,12 +11,20 @@ public class Score {
 	private int countBad;
 
 	public Score() {
+		hp = 100;
 		score = 0;
 		combo = 0;
 		countExcellent = 0;
 		countGreat = 0;
 		countGood = 0;
 		countBad = 0;
+	}
+
+	public void beAttacked() {
+		if (hp <= 0) {
+			return;
+		}
+		hp -= 20;
 	}
 
 	public void excellent() {
@@ -37,7 +46,19 @@ public class Score {
 	}
 
 	public void bad() {
+		if (hp >= 20) {
+			hp -= 20;
+		}
+		combo = 0;
 		countBad++;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 	public int getScore() {
