@@ -5,8 +5,6 @@ import helpme_AhnD.ver01.components.HpBox;
 
 public class Score {
 
-	private HpBox hpBox;
-	private ComboBox comboBox;
 	private int hp;
 	private int score;
 	private int combo;
@@ -16,8 +14,6 @@ public class Score {
 	private int countBad;
 
 	public Score() {
-		hpBox = new HpBox(this);
-		comboBox = new ComboBox(this);
 		hp = 100;
 		score = 0;
 		combo = 0;
@@ -25,6 +21,9 @@ public class Score {
 		countGreat = 0;
 		countGood = 0;
 		countBad = 0;
+
+		new Thread(new ComboBox(this)).start();
+		new Thread(new HpBox(this)).start();
 	}
 
 	public void beAttacked() {
@@ -55,7 +54,6 @@ public class Score {
 
 	public void bad() {
 		beAttacked();
-		hpBox.checkHp();
 		combo = 0;
 		countBad++;
 	}
@@ -115,21 +113,4 @@ public class Score {
 	public void setCountBad(int countBad) {
 		this.countBad = countBad;
 	}
-
-	public HpBox getHpBox() {
-		return hpBox;
-	}
-
-	public void setHpBox(HpBox hpBox) {
-		this.hpBox = hpBox;
-	}
-
-	public ComboBox getComboBox() {
-		return comboBox;
-	}
-
-	public void setComboBox(ComboBox comboBox) {
-		this.comboBox = comboBox;
-	}
-
 }

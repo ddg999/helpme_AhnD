@@ -5,11 +5,12 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver01.service.Score;
 
-public class HpBox extends JLabel {
+public class HpBox extends JLabel implements Runnable {
 
 	private Score score;
 	private int x;
 	private int y;
+	private boolean isRun; // 게임 실행중
 	private ImageIcon hp100;
 	private ImageIcon hp80;
 	private ImageIcon hp60;
@@ -41,19 +42,28 @@ public class HpBox extends JLabel {
 		setLocation(x, y);
 	}
 
-	public void checkHp() {
-		if (score.getHp() >= 100) {
-			setIcon(hp100);
-		} else if (score.getHp() >= 80) {
-			setIcon(hp80);
-		} else if (score.getHp() >= 60) {
-			setIcon(hp60);
-		} else if (score.getHp() >= 40) {
-			setIcon(hp40);
-		} else if (score.getHp() > 0) {
-			setIcon(hp20);
-		} else if (score.getHp() <= 0) {
-			setIcon(hp0);
+	@Override
+	public void run() {
+		while (isRun) {
+			if (score.getHp() >= 100) {
+				setIcon(hp100);
+			} else if (score.getHp() >= 80) {
+				setIcon(hp80);
+			} else if (score.getHp() >= 60) {
+				setIcon(hp60);
+			} else if (score.getHp() >= 40) {
+				setIcon(hp40);
+			} else if (score.getHp() > 0) {
+				setIcon(hp20);
+			} else if (score.getHp() <= 0) {
+				setIcon(hp0);
+			}
+
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

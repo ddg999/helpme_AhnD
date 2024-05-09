@@ -30,7 +30,12 @@ public class ComboBox extends JLabel implements Runnable {
 	public void run() {
 		while (isRun) {
 			setText(score.getCombo() + "combo");
-			repaint();
+			
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
