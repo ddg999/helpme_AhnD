@@ -16,8 +16,8 @@ public class NoteCircle extends JLabel{
 	private int y;
 	
 	public NoteCircle(Note note) {
-		this.x = note.getX() - 10;
-		this.y = note.getY() - 10;
+		this.x = note.getX() - 16;
+		this.y = note.getY() - 14;
 		initData();
 		setInitLayout();
 		
@@ -25,18 +25,10 @@ public class NoteCircle extends JLabel{
 			try {
 				for (int i = BAD_OVER_CIRCLE; i <= BAD_LATE_CIRCLE; i++) {
 					setIcon(image[i]);
-					setLocation(x + i * 10, y + i * 10);
+					setLocation(x + i * 5, y);
+					this.repaint();
 					Thread.sleep(300);
-					
 				}
-				setIcon(image[GOOD_CIRCLE]);
-				Thread.sleep(300);
-				setIcon(image[EXCELLENT_CIRCLE]);
-				Thread.sleep(300);
-				setIcon(image[PERFECT_CIRCLE]);
-				Thread.sleep(300);
-				setIcon(image[BAD_LATE_CIRCLE]);
-				Thread.sleep(300);
 				setIcon(null);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

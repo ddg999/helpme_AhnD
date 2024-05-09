@@ -21,7 +21,7 @@ public class Note extends JLabel {
 	private final int PADDING = 100;
 
 	// 노트가 생겨날 위치에 대한 좌표
-	private final static int LAST_COORDINATE = 12; // 12곳에서 노트가 생길 수 있음
+	private final static int LAST_COORDINATE = 9; // 12곳에서 노트가 생길 수 있음
 	private int[] x = new int[LAST_COORDINATE];
 	private int[] y = new int[LAST_COORDINATE];
 	private int indexX;
@@ -65,14 +65,15 @@ public class Note extends JLabel {
 		setIcon(noteSample);
 		setSize(NOTE_WIDTH, NOTE_HEIGHT);
 		do {
-			indexX = (new Random()).nextInt(11) + 1; // 1 ~ 12 사이의 랜덤 인덱스 값
-			indexY = (new Random()).nextInt(11) + 1; // 1 ~ 12 사이의 랜덤 인덱스 값
+			indexX = (new Random()).nextInt(LAST_COORDINATE); // 0 ~ 8 사이의 랜덤 인덱스 값
+			indexY = (new Random()).nextInt(LAST_COORDINATE); // 0 ~ 8 사이의 랜덤 인덱스 값
 		} while (isUse[indexX][indexY]);
 		isUse[indexX][indexY] = true;
 		if (player == LEFT_PLAYER) {
 			setLocation(x[indexX], y[indexY]); // 12 * 12 의 박스 안에서 랜덤한 위치에 생성됨
 		} else if (player == RIGHT_PLAYER) {
-			setLocation(x[indexX] + HALF_WIDTH, y[indexY]);
+			x[indexX] += HALF_WIDTH;
+			setLocation(x[indexX], y[indexY]);
 		}
 	}
 

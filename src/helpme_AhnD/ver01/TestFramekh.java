@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -33,8 +32,8 @@ public class TestFramekh extends JFrame {
 		setInitLayout();
 		addEventListener();
 		new BGM();
-		noteService = new NoteService(mContext);
-	
+		(new NoteService(mContext)).start();
+		
 	}
 	
 	private void initData() {
