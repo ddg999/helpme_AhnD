@@ -1,4 +1,4 @@
-package helpme_AhnD.ver01;
+package helpme_AhnD.ver02;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver01.components.HpPlus;
-import helpme_AhnD.ver01.components.Items;
-import helpme_AhnD.ver01.components.ScreenHide;
+import helpme_AhnD.ver02.components.HpPlus;
+import helpme_AhnD.ver02.components.Items;
+import helpme_AhnD.ver02.components.ScreenHide;
 
 /*
  * 화면 구성 - 제목, 시작, 종료, 설정

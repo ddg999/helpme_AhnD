@@ -1,15 +1,14 @@
-package helpme_AhnD.ver01;
+package helpme_AhnD.ver02;
 
+import java.awt.Image;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver01.components.HpPlus;
-import helpme_AhnD.ver01.components.Items;
-import helpme_AhnD.ver01.components.ScreenHide;
+import helpme_AhnD.ver02.service.BGM;
+import helpme_AhnD.ver02.service.NoteService;
 
 /*
  * 화면 구성 - 제목, 시작, 종료, 설정
@@ -18,35 +17,38 @@ import helpme_AhnD.ver01.components.ScreenHide;
  * paint (이미지)
  */
 
-public class AhnteacherFrame_hj extends JFrame {
+public class TestFramekh extends JFrame {
 	// 선언
-	AhnteacherFrame_hj mContext = this;
-	private boolean isRun = true; // 게임 실행중
-	// private 이미지
+	private Image screenImage; // 이미지
+	// private        이미지 
 	private JLabel introImage;
-
+	private TestFramekh mContext;
+	private NoteService noteService;
+	
 	// 생성자
-	public AhnteacherFrame_hj() {
+	public TestFramekh() {
 		
 		initData();
 		setInitLayout();
 		addEventListener();
+		new BGM();
+		(new NoteService(mContext)).start();
+		
 	}
-
+	
 	private void initData() {
-		introImage = new JLabel(new ImageIcon("images/Frame_background.jpg"));
+		setSize(1600, 900); // 수정
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); // 창이 정중앙에 위치
-		introImage = new JLabel(new ImageIcon());
+		mContext = this;
+		//introImage = new JLabel(new ImageIcon());
 	}
-
+	
 	private void setInitLayout() {
-		setLocationRelativeTo(null); // 창이 정중앙에 위치
 		setResizable(false); // 프레임 크기 조절 불가
-		add(new ScreenHide());
 		setVisible(true); // 화면 출력
 	}
-
+	
 	private void addEventListener() { // 키 이벤트
 		
 		// 마우스
@@ -55,19 +57,28 @@ public class AhnteacherFrame_hj extends JFrame {
 		
 		
 		// 키보드
-		
-		
-	
+		this.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				
+				
+			}// end of keyPressed
+		});
 		
 		
 	}
-
+	
 	// 이미지
-
-
+	
+	
+	
+	
 	// 코드 테스트
 	public static void main(String[] args) {
-		new AhnteacherFrame_hj();
+		new TestFramekh();
 	}
+	
+	
 
 }// end of class
