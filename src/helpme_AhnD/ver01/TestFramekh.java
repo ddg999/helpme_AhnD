@@ -42,7 +42,7 @@ public class TestFramekh extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); // 창이 정중앙에 위치
 		mContext = this;
-		introImage = new JLabel(new ImageIcon());
+		//introImage = new JLabel(new ImageIcon());
 	}
 	
 	private void setInitLayout() {

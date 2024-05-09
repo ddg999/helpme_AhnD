@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 
 import helpme_AhnD.ver01.TestFramekh;
 import helpme_AhnD.ver01.components.Note;
+import helpme_AhnD.ver01.components.NoteCircle;
 
 public class NoteService extends Thread{
 	// 박자를 맞추기 위해 Thread.sleep에 입력해줄 값 음표 기준
@@ -18,7 +19,6 @@ public class NoteService extends Thread{
 	private boolean isLeftPressed;
 	private boolean isRightPressed;
 	private boolean isDownPressed;
-	private Note note;
 	private TestFramekh mContext;
 	public NoteService(TestFramekh mContext) {
 		this.mContext = mContext;
@@ -30,7 +30,7 @@ public class NoteService extends Thread{
 	public void run() {
 		while (isRun) {
 			try {
-				Thread.sleep(8000);
+				// Thread.sleep(8000);
 				createNote();
 				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
 				createNote();
@@ -39,11 +39,23 @@ public class NoteService extends Thread{
 				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
 				createNote();
 				Thread.sleep(QUATER_MS, QUATER_NS);
+				createNote();
+				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+				createNote();
+				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+				createNote();
+				Thread.sleep(QUATER_MS, QUATER_NS);
+				createNote();
+				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+				createNote();
+				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+				createNote();
+				Thread.sleep(HALF_MS, HALF_NS);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			break;
+			//break;
 		}
 	}
 	
@@ -65,8 +77,15 @@ public class NoteService extends Thread{
 	}
 	
 	private void createNote() {
-		mContext.add(new Note(Note.LEFT_PLAYER));
-		mContext.add(new Note(Note.RIGHT_PLAYER));
+		Note leftNote = new Note(Note.LEFT_PLAYER, mContext);
+		NoteCircle leftCircle = new NoteCircle(leftNote);
+		mContext.add(leftNote);
+		mContext.add(leftCircle);
+		Note rightNote = new Note(Note.RIGHT_PLAYER, mContext);
+		NoteCircle rightCircle = new NoteCircle(rightNote);
+		mContext.add(rightNote);
+		mContext.add(rightCircle);
 		mContext.repaint();
 	}
+	
 }
