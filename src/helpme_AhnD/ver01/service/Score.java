@@ -1,7 +1,11 @@
 package helpme_AhnD.ver01.service;
 
+import helpme_AhnD.ver01.AhnteacherFrame2;
+
 public class Score {
 
+	AhnteacherFrame2 mContext;
+	private int hp;
 	private int score;
 	private int combo;
 	private int countExcellent;
@@ -10,12 +14,21 @@ public class Score {
 	private int countBad;
 
 	public Score() {
+		hp = 100;
 		score = 0;
 		combo = 0;
 		countExcellent = 0;
 		countGreat = 0;
 		countGood = 0;
 		countBad = 0;
+	}
+
+	public void beAttacked() {
+		if (hp >= 20) {
+			hp -= 20;
+		} else {
+			hp = 0;
+		}
 	}
 
 	public void excellent() {
@@ -37,7 +50,17 @@ public class Score {
 	}
 
 	public void bad() {
+		beAttacked();
+		combo = 0;
 		countBad++;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
 	}
 
 	public int getScore() {
@@ -87,5 +110,4 @@ public class Score {
 	public void setCountBad(int countBad) {
 		this.countBad = countBad;
 	}
-
 }
