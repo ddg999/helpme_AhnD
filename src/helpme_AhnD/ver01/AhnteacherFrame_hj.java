@@ -8,7 +8,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver01.service.Items;
+import helpme_AhnD.ver01.components.HpPlus;
+import helpme_AhnD.ver01.components.Items;
+import helpme_AhnD.ver01.components.ScreenHide;
 
 /*
  * 화면 구성 - 제목, 시작, 종료, 설정
@@ -17,14 +19,14 @@ import helpme_AhnD.ver01.service.Items;
  * paint (이미지)
  */
 
-public class AhnteacherFrame2 extends JFrame {
+public class AhnteacherFrame_hj extends JFrame {
 	// 선언
 	private Image screenImage; // 이미지
 	// private        이미지 
 	private JLabel introImage;
 	
 	// 생성자
-	public AhnteacherFrame2() {
+	public AhnteacherFrame_hj() {
 		
 		initData();
 		setInitLayout();
@@ -36,14 +38,12 @@ public class AhnteacherFrame2 extends JFrame {
 		setSize(1600, 900); // 수정
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); // 창이 정중앙에 위치
-		
 		introImage = new JLabel(new ImageIcon());
-		
 	}
 	
 	private void setInitLayout() {
 		setResizable(false); // 프레임 크기 조절 불가
-		add(new Items());
+		add(new ScreenHide());
 		setVisible(true); // 화면 출력
 	}
 	
@@ -55,15 +55,9 @@ public class AhnteacherFrame2 extends JFrame {
 		
 		
 		// 키보드
-		this.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				System.out.println("key code : " + e.getExtendedKeyCode());
-
-				
-				
-			}// end of keyPressed
-		});
+		
+		
+	
 		
 		
 	}
@@ -75,7 +69,7 @@ public class AhnteacherFrame2 extends JFrame {
 	
 	// 코드 테스트
 	public static void main(String[] args) {
-		new AhnteacherFrame2();
+		new AhnteacherFrame_hj();
 	}
 	
 	
