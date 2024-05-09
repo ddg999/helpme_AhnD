@@ -1,15 +1,23 @@
 package helpme_AhnD.ver01.service;
 
+import helpme_AhnD.ver01.AhnteacherFrame2;
 import helpme_AhnD.ver01.components.AhnCharacter;
+import helpme_AhnD.ver01.components.ComboBox;
+import helpme_AhnD.ver01.components.HpBox;
 
 public class PlayerService implements Runnable {
+
+	AhnteacherFrame2 mContext;
 
 	private AhnCharacter player;
 	private Score score;
 
-	public PlayerService(AhnCharacter player) {
-		this.player = player;
+	public PlayerService(AhnteacherFrame2 mContext) {
+		this.mContext = mContext;
+		player = new AhnCharacter();
 		score = new Score();
+		new Thread(new ComboBox(this)).start();
+		new Thread(new HpBox(this)).start();
 	}
 
 	@Override
@@ -34,6 +42,30 @@ public class PlayerService implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public AhnCharacter getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(AhnCharacter player) {
+		this.player = player;
+	}
+
+	public Score getScore() {
+		return score;
+	}
+
+	public void setScore(Score score) {
+		this.score = score;
+	}
+
+	public AhnteacherFrame2 getmContext() {
+		return mContext;
+	}
+
+	public void setmContext(AhnteacherFrame2 mContext) {
+		this.mContext = mContext;
 	}
 
 }

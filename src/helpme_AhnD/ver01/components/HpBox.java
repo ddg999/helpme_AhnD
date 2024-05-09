@@ -3,12 +3,12 @@ package helpme_AhnD.ver01.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver01.AhnteacherFrame2;
+import helpme_AhnD.ver01.service.PlayerService;
 
 public class HpBox extends JLabel implements Runnable {
 
-	AhnteacherFrame2 mContext;
-	
+	PlayerService playerService;
+
 	// TODO 1p 2p 체력바 좌표설정
 //	private int x; 
 //	private int y;
@@ -20,8 +20,8 @@ public class HpBox extends JLabel implements Runnable {
 	private ImageIcon hp20;
 	private ImageIcon hp0;
 
-	public HpBox(AhnteacherFrame2 mContext) {
-		this.mContext = mContext;
+	public HpBox(PlayerService playerService) {
+		this.playerService = playerService;
 		initData();
 		setInitLayout();
 	}
@@ -42,23 +42,23 @@ public class HpBox extends JLabel implements Runnable {
 		setIcon(hp100);
 		setSize(100, 60);
 		setLocation(100, 100);
-		mContext.add(this);
+		playerService.getmContext().add(this);
 	}
 
 	@Override
 	public void run() {
 		while (isRun) {
-			if (mContext.getScore().getHp() >= 100) {
+			if (playerService.getScore().getHp() >= 100) {
 				setIcon(hp100);
-			} else if (mContext.getScore().getHp() >= 80) {
+			} else if (playerService.getScore().getHp() >= 80) {
 				setIcon(hp80);
-			} else if (mContext.getScore().getHp() >= 60) {
+			} else if (playerService.getScore().getHp() >= 60) {
 				setIcon(hp60);
-			} else if (mContext.getScore().getHp() >= 40) {
+			} else if (playerService.getScore().getHp() >= 40) {
 				setIcon(hp40);
-			} else if (mContext.getScore().getHp() > 0) {
+			} else if (playerService.getScore().getHp() > 0) {
 				setIcon(hp20);
-			} else if (mContext.getScore().getHp() <= 0) {
+			} else if (playerService.getScore().getHp() <= 0) {
 				setIcon(hp0);
 			}
 

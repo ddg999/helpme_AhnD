@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver01.components.ComboBox;
 import helpme_AhnD.ver01.components.HpBox;
+import helpme_AhnD.ver01.service.PlayerService;
 import helpme_AhnD.ver01.service.Score;
 
 /*
@@ -21,28 +22,25 @@ import helpme_AhnD.ver01.service.Score;
 public class AhnteacherFrame2 extends JFrame {
 	// 선언
 	AhnteacherFrame2 mContext = this;
-	private Score score;
+	private boolean isRun = true; // 게임 실행중
+	private PlayerService playerService;
 	// private 이미지
 	private JLabel introImage;
 
 	// 생성자
 	public AhnteacherFrame2() {
-
 		initData();
 		setInitLayout();
 		addEventListener();
-
 	}
 
 	private void initData() {
-		introImage = new JLabel(new ImageIcon("images/testBackground.jpg"));
+		introImage = new JLabel(new ImageIcon("images/Frame_background.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setContentPane(introImage);
 		setSize(1600, 900); // 수정
 
-		score = new Score();
-		new Thread(new ComboBox(this)).start();
-		new Thread(new HpBox(this)).start();
+		playerService = new PlayerService(this);
 	}
 
 	private void setInitLayout() {
@@ -66,31 +64,38 @@ public class AhnteacherFrame2 extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_LEFT:
-					score.excellent();
-					break;
-				case KeyEvent.VK_UP:
-					score.great();
-					break;
-				case KeyEvent.VK_RIGHT:
-					score.good();
-					break;
-				case KeyEvent.VK_DOWN:
-					score.bad();
-					break;
+				if (isRun) {
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_LEFT:
+						playerService.getScore().excellent();
+						break;
+					case KeyEvent.VK_UP:
+						playerService.getScore().great();
+						break;
+					case KeyEvent.VK_RIGHT:
+						playerService.getScore().good();
+						break;
+					case KeyEvent.VK_DOWN:
+						playerService.getScore().bad();
+						break;
 
-				default:
-					break;
+					default:
+						break;
+					}
 				}
 			}
 		});
 	}
 
-	public Score getScore() {
-		return score;
-	}
 	// 이미지
+
+	public PlayerService getPlayerService() {
+		return playerService;
+	}
+
+	public void setPlayerService(PlayerService playerService) {
+		this.playerService = playerService;
+	}
 
 	// 코드 테스트
 	public static void main(String[] args) {
