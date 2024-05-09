@@ -4,16 +4,15 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver01.service.Score;
 
-public class ComboBox extends JLabel {
+public class ComboBox extends JLabel implements Runnable {
 
-	Score score;
-
-	private int combo;
+	private Score score;
 	private int x;
 	private int y;
+	private boolean isRun; // 게임 실행중
 
 	public ComboBox(Score score) {
-		this.combo = score.getCombo();
+		this.score = score;
 		initData();
 		setInitLayout();
 	}
@@ -24,8 +23,15 @@ public class ComboBox extends JLabel {
 	}
 
 	public void setInitLayout() {
-		setText(combo + "combo");
 		setLocation(x, y);
+	}
+
+	@Override
+	public void run() {
+		while (isRun) {
+			setText(score.getCombo() + "combo");
+			repaint();
+		}
 	}
 
 }

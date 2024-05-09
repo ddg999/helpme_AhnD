@@ -10,7 +10,6 @@ public class PlayerService implements Runnable {
 	public PlayerService(AhnCharacter player) {
 		this.player = player;
 		score = new Score();
-
 	}
 
 	@Override
@@ -29,6 +28,11 @@ public class PlayerService implements Runnable {
 				score.bad();
 			}
 
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
