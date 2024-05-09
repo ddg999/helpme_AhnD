@@ -1,14 +1,15 @@
 package helpme_AhnD.ver01;
 
-import java.awt.Image;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver01.service.Items;
+import helpme_AhnD.ver01.components.ComboBox;
+import helpme_AhnD.ver01.components.HpBox;
+import helpme_AhnD.ver01.service.Score;
 
 /*
  * 화면 구성 - 제목, 시작, 종료, 설정
@@ -19,65 +20,81 @@ import helpme_AhnD.ver01.service.Items;
 
 public class AhnteacherFrame2 extends JFrame {
 	// 선언
-	private Image screenImage; // 이미지
-	// private        이미지 
+	AhnteacherFrame2 mContext = this;
+	private Score score;
+	// private 이미지
 	private JLabel introImage;
-	
+
 	// 생성자
 	public AhnteacherFrame2() {
-		
+
 		initData();
 		setInitLayout();
 		addEventListener();
-	
+
 	}
-	
+
 	private void initData() {
-		setSize(1600, 900); // 수정
+		introImage = new JLabel(new ImageIcon("images/testBackground.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null); // 창이 정중앙에 위치
-		
-		introImage = new JLabel(new ImageIcon());
-		
+		setContentPane(introImage);
+		setSize(1600, 900); // 수정
+
+		score = new Score();
+		new Thread(new ComboBox(this)).start();
+		new Thread(new HpBox(this)).start();
 	}
-	
+
 	private void setInitLayout() {
+		setLocationRelativeTo(null); // 창이 정중앙에 위치
 		setResizable(false); // 프레임 크기 조절 불가
-		add(new Items());
 		setVisible(true); // 화면 출력
 	}
-	
+
 	private void addEventListener() { // 키 이벤트
-		
-		// 마우스
-		
-		
-		
-		
-		// 키보드
-		this.addKeyListener(new KeyAdapter() {
+		addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.println("key code : " + e.getExtendedKeyCode());
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_LEFT:
+					score.excellent();
+					break;
+				case KeyEvent.VK_UP:
+					score.great();
+					break;
+				case KeyEvent.VK_RIGHT:
+					score.good();
+					break;
+				case KeyEvent.VK_DOWN:
+					score.bad();
+					break;
 
-				
-				
-			}// end of keyPressed
+				default:
+					break;
+				}
+			}
 		});
-		
-		
 	}
-	
+
+	public Score getScore() {
+		return score;
+	}
 	// 이미지
-	
-	
-	
-	
+
 	// 코드 테스트
 	public static void main(String[] args) {
 		new AhnteacherFrame2();
 	}
-	
-	
 
 }// end of class

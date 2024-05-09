@@ -3,14 +3,16 @@ package helpme_AhnD.ver01.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver01.service.Score;
+import helpme_AhnD.ver01.AhnteacherFrame2;
 
 public class HpBox extends JLabel implements Runnable {
 
-	private Score score;
-	private int x;
-	private int y;
-	private boolean isRun; // 게임 실행중
+	AhnteacherFrame2 mContext;
+	
+	// TODO 1p 2p 체력바 좌표설정
+//	private int x; 
+//	private int y;
+	private boolean isRun = true; // 게임 실행중
 	private ImageIcon hp100;
 	private ImageIcon hp80;
 	private ImageIcon hp60;
@@ -18,8 +20,8 @@ public class HpBox extends JLabel implements Runnable {
 	private ImageIcon hp20;
 	private ImageIcon hp0;
 
-	public HpBox(Score score) {
-		this.score = score;
+	public HpBox(AhnteacherFrame2 mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 	}
@@ -32,30 +34,31 @@ public class HpBox extends JLabel implements Runnable {
 		hp40 = new ImageIcon("images/hp/hp40.png");
 		hp20 = new ImageIcon("images/hp/hp20.png");
 		hp0 = new ImageIcon("images/hp/hp0.png");
-		x = 100;
-		y = 100;
+//		x = 100;
+//		y = 100;
 	}
 
 	public void setInitLayout() {
 		setIcon(hp100);
-		setSize(100, 100);
-		setLocation(x, y);
+		setSize(100, 60);
+		setLocation(100, 100);
+		mContext.add(this);
 	}
 
 	@Override
 	public void run() {
 		while (isRun) {
-			if (score.getHp() >= 100) {
+			if (mContext.getScore().getHp() >= 100) {
 				setIcon(hp100);
-			} else if (score.getHp() >= 80) {
+			} else if (mContext.getScore().getHp() >= 80) {
 				setIcon(hp80);
-			} else if (score.getHp() >= 60) {
+			} else if (mContext.getScore().getHp() >= 60) {
 				setIcon(hp60);
-			} else if (score.getHp() >= 40) {
+			} else if (mContext.getScore().getHp() >= 40) {
 				setIcon(hp40);
-			} else if (score.getHp() > 0) {
+			} else if (mContext.getScore().getHp() > 0) {
 				setIcon(hp20);
-			} else if (score.getHp() <= 0) {
+			} else if (mContext.getScore().getHp() <= 0) {
 				setIcon(hp0);
 			}
 

@@ -1,10 +1,10 @@
 package helpme_AhnD.ver01.service;
 
-import helpme_AhnD.ver01.components.ComboBox;
-import helpme_AhnD.ver01.components.HpBox;
+import helpme_AhnD.ver01.AhnteacherFrame2;
 
 public class Score {
 
+	AhnteacherFrame2 mContext;
 	private int hp;
 	private int score;
 	private int combo;
@@ -21,9 +21,6 @@ public class Score {
 		countGreat = 0;
 		countGood = 0;
 		countBad = 0;
-
-		new Thread(new ComboBox(this)).start();
-		new Thread(new HpBox(this)).start();
 	}
 
 	public void beAttacked() {
