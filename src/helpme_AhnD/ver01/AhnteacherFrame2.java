@@ -41,6 +41,7 @@ public class AhnteacherFrame2 extends JFrame {
 		setSize(1600, 900); // 수정
 
 		playerService = new PlayerService(this);
+		new Thread(playerService).start();
 	}
 
 	private void setInitLayout() {

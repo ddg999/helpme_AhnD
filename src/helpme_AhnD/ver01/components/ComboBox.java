@@ -35,12 +35,12 @@ public class ComboBox extends JLabel implements Runnable {
 		while (isRun) {
 			setText("<html><body text='white'><h2>" + playerService.getScore().getCombo()
 					+ " combo</h2></body></html>");
-			// 테스트
-			System.out.print("3점 : " + playerService.getScore().getCountExcellent() + ", ");
-			System.out.print("2점 : " + playerService.getScore().getCountGreat() + ", ");
-			System.out.print("1점 : " + playerService.getScore().getCountGood() + ", ");
-			System.out.print("0점 : " + playerService.getScore().getCountBad() + ", ");
-			System.out.println();
+//			// 테스트
+//			System.out.print("3점 : " + playerService.getScore().getCountExcellent() + ", ");
+//			System.out.print("2점 : " + playerService.getScore().getCountGreat() + ", ");
+//			System.out.print("1점 : " + playerService.getScore().getCountGood() + ", ");
+//			System.out.print("0점 : " + playerService.getScore().getCountBad() + ", ");
+//			System.out.println();
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {

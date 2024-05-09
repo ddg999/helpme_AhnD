@@ -23,18 +23,18 @@ public class PlayerService implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			if (true) {
-				score.excellent();
-			}
-			if (true) {
-				score.great();
-			}
-			if (true) {
-				score.good();
-			}
-			if (true) {
-				score.bad();
-			}
+//			if (true) {
+//				score.excellent();
+//			}
+//			if (true) {
+//				score.great();
+//			}
+//			if (true) {
+//				score.good();
+//			}
+//			if (true) {
+//				score.bad();
+//			}
 
 			try {
 				Thread.sleep(1);
