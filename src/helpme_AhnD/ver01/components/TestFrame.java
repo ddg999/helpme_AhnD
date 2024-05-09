@@ -1,5 +1,9 @@
 package helpme_AhnD.ver01.components;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Scanner;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -7,12 +11,13 @@ import javax.swing.JLabel;
 
 
 public class TestFrame extends JFrame {
-
-	private AhnCharacter ahnCharacter;
+	private static AhnCharacter ahnCharacter;
 
 	public TestFrame() {
 		initData();
 		setInitLayout();
+		addEventListener();
+		ahnCharacter.playerScoreImage();
 	}
 	
 	
@@ -35,6 +40,32 @@ public class TestFrame extends JFrame {
 
 		add(ahnCharacter);
 
+	}
+	private void addEventListener() {
+		this.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_3 : 
+					ahnCharacter.playerScore = 3;
+					System.out.println("3");
+					break;
+				
+				case KeyEvent.VK_2: 
+					ahnCharacter.playerScore = 2;
+					System.out.println("2");
+					break;
+				
+				case KeyEvent.VK_1: 
+					ahnCharacter.playerScore = 1;
+					break;
+				
+				default:
+				}
+			}
+		});
 	}
 	public static void main(String[] args) {
 		new TestFrame();

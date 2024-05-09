@@ -3,18 +3,26 @@ package helpme_AhnD.ver01.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class AhnCharacter extends JLabel {
-	
-	//  todo Score int  값 땡겨오기
+import helpme_AhnD.ver01.utils.Define;
 
-	private ImageIcon basicCharacter, highScore_Left, highScore_Right;
+public class AhnCharacter extends JLabel {
+
+	// todo Score int 값 땡겨오기
+
+	private ImageIcon basic_Character;
+	private ImageIcon threePoint_DanceR;
+	private ImageIcon threePoint_DanceL;
+	private ImageIcon twoPoint_DanceR;
+	private ImageIcon twoPoint_DanceL;
+	private ImageIcon onePoint_DanceL;
+	private ImageIcon onePoint_DanceR;
 	// 이미지 추가
 	private int x; // 위치 값
 	private int y; // 위치 값
-	private int playerScore; // 점수 todo 점수 연결 
-	private boolean gameStart ;
-	private boolean perfect = true ;
-	
+	public int playerScore; // 점수 todo 점수 연결
+	private boolean gameStart = true;
+	private boolean perfect = true;
+
 	// todo score 불러 오기
 
 	public AhnCharacter() {
@@ -24,107 +32,103 @@ public class AhnCharacter extends JLabel {
 	}
 
 	private void initData() {
-		basicCharacter = new ImageIcon("images/basicCharacter.png");
+		basic_Character = new ImageIcon(Define.IMG_BASIC_CHARCTER);
+		onePoint_DanceL = new ImageIcon(Define.IMG_ONE_POINT_RIGHT);
+		onePoint_DanceR = new ImageIcon(Define.IMG_ONE_POINT_LEFT);
+		twoPoint_DanceL = new ImageIcon(Define.IMG_TWO_POINT_LEFT);
+		twoPoint_DanceR = new ImageIcon(Define.IMG_TWO_POINT_RIGHT);
+		threePoint_DanceL = new ImageIcon(Define.IMG_THREE_POINT_LEFT);
+		threePoint_DanceR = new ImageIcon(Define.IMG_THREE_POINT_RIGHT);
 		x = 308;
 		y = 300;
+
 	}
 
 	private void setInitLayout() {
-		setIcon(basicCharacter);
-		setSize(261,500 );
+		setIcon(basic_Character);
+		setSize(261, 500);
 		setLocation(x, y);
 	}
-	
+
 	// 점수에 따라 이미지 변경 todo 이미지 추가 하기
-	private void playerScoreImage (int playerScore) {
-		
+	public void playerScoreImage() {
+
 		new Thread(() -> {
-		while(gameStart) {
-			switch (playerScore) {
-			case 3: {
-				while(true) {
-					if(playerScore == 3) {
-						if(perfect) {
-							
-						}else {
-							
+			while (gameStart) {
+				System.out.println("플레이어 스코어 : " + playerScore);
+				if (playerScore == 3) {
+					for (int i = 0; i < 3; i++) {
+						if (perfect) {
+							setIcon(threePoint_DanceL);
+
+						} else {
+
+							setIcon(threePoint_DanceR);
+
 						}
-						perfect = ! perfect;
+						perfect = !perfect;
 						try {
-							Thread.sleep(800);
+							Thread.sleep(200);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						
 					}
-					break;
-				}
-			}
-			case 2: {
-				while(true) {
-					if(playerScore == 3) {
-						if(perfect) {
-							
-						}else {
-							
+
+				} else if (playerScore == 2) {
+					for (int i = 0; i < 3; i++) {
+						if (perfect) {
+							setIcon(twoPoint_DanceL);
+							repaint();
+						} else {
+
+							setIcon(twoPoint_DanceR);
+							repaint();
 						}
-						perfect = ! perfect;
+						perfect = !perfect;
 						try {
-							Thread.sleep(800);
+							Thread.sleep(200);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						
 					}
-					break;
-				}
-			}
-			case 1: {
-				while(true) {
-					if(playerScore == 3) {
-						if(perfect) {
-							
-						}else {
-							
+
+				} else if (playerScore == 1) {
+					for (int i = 0; i < 3; i++) {
+						if (perfect) {
+							setIcon(onePoint_DanceL);
+
+						} else {
+
+							setIcon(onePoint_DanceR);
+
 						}
-						perfect = ! perfect;
+						perfect = !perfect;
 						try {
-							Thread.sleep(800);
+							Thread.sleep(200);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						
 					}
-					break;
-				}
-			}
-			
-			default:
-				
-				while(true) {
-					if(playerScore == 3) {
-						if(perfect) {
-							
-						}else {
-							
-						}
-						perfect = ! perfect;
+
+				} else if (playerScore == 0) {
+					for (int i = 0; i < 3; i++) {
+						if (perfect) {
+							setIcon(basic_Character);
+
+						} 
+						
 						try {
-							Thread.sleep(800);
+							Thread.sleep(200);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-						
 					}
-					break;
+
 				}
-				
 			}
-		
-			
-		}
+
 		}).start();
-		
+
 	}
 
 } // end of class
