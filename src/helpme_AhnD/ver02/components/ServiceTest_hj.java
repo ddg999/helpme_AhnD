@@ -17,7 +17,7 @@ public class ServiceTest_hj {
 		items[HP_PLUS] = new HpPlus();
 		items[HP_MINUS] = new HpMinus();
 		items[SCREEN_HIDE] = new ScreenHide();
-		items[SCORE] = new Score();
+		items[SCORE] = new ScoreDouble();
 		items[REVERSE] = new Reverse();
 		
 //		HpPlus hpPlus = new HpPlus();

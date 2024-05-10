@@ -1,49 +1,25 @@
 package helpme_AhnD.ver02;
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-/*
- * 화면 구성 - 제목, (버튼(시작, 종료)), 설정
- * 이벤트 - 입력 키(키보드, 마우스) 입력 받기
- * 
- * 제목 타이틀 이미지 나중에 해결하기 지금은 배경 이미지 
- * 버튼 라벨로 나중에 수정하기 
- * 인터페이스 파일... 
- */
 public class AhnteacherFrame_modify extends JFrame {
 
-	// 컨텍스트를 생성하는 방법 (셀프 참조)
-	AhnteacherFrame_modify mContext = this; // 대기
-
-	// 버튼
+	// 컴포넌트
 	private JLabel startButton;
 	private JLabel exitButton;
 	private JLabel setting;
-
+	
 	private JLabel backgroundLabel;
 
 	public AhnteacherFrame_modify() {
-		
 		initData();
 		setInitLayout();
 		addEventListener();
-
 	}
 	
 	private void initData() {
@@ -103,13 +79,6 @@ public class AhnteacherFrame_modify extends JFrame {
 				}
 			}
 		});
-	}
-	private void startPressed() {
-		backgroundLabel.setIcon(new ImageIcon("images/mainFrame/bg2.jpg"));
-		remove(startButton);
-		remove(exitButton);
-		remove(setting);
-		
 	}
 	
 	
