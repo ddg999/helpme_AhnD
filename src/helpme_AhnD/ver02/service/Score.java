@@ -1,10 +1,10 @@
 package helpme_AhnD.ver02.service;
 
-import helpme_AhnD.ver02.AhnteacherFrame2;
+import helpme_AhnD.ver02.AhnteacherFrame_jw;
 
 public class Score {
 
-	AhnteacherFrame2 mContext;
+	AhnteacherFrame_jw mContext;
 	private int hp;
 	private int score;
 	private int combo;
