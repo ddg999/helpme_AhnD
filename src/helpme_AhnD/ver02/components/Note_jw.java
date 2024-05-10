@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.AhnteacherFrame_jw;
+import helpme_AhnD.ver02.service.NoteService_jw;
 import helpme_AhnD.ver02.service.PlayerService;
 
 public class Note_jw extends JLabel implements Runnable {
@@ -24,7 +25,7 @@ public class Note_jw extends JLabel implements Runnable {
 	private final int RIGHT = 2;
 	private final int DOWN = 3;
 
-	private boolean goDown = true; // 내려가는동작
+	private boolean drop = true;
 
 	public Note_jw(PlayerService playerService) {
 		this.playerService = playerService;
@@ -36,11 +37,6 @@ public class Note_jw extends JLabel implements Runnable {
 		noteBall = new ImageIcon("images/noteSample.png");
 		Random random = new Random();
 		place = random.nextInt(4);
-//		new Thread(new NoteService_jw(this)).start();
-	}
-
-	public void setInitLayout() {
-		setSize(100, 100);
 		if (place == LEFT) {
 			x = 300;
 		} else if (place == UP) {
@@ -50,35 +46,41 @@ public class Note_jw extends JLabel implements Runnable {
 		} else if (place == DOWN) {
 			x = 600;
 		}
+
+//		new NoteService_jw(this);
+	}
+
+	public void setInitLayout() {
+		setSize(100, 100);
 		setIcon(noteBall);
 		setLocation(x, 0);
 		playerService.getmContext().add(this);
 	}
 
-	public void check() {
-		if (getY() >= 500 && getY() <= 750 && place == LEFT) {
-			System.out.println("왼쪽방향");
-		} else if (getY() >= 500 && getY() <= 750 && place == UP) {
-			System.out.println("위방향");
-		} else if (getY() >= 500 && getY() <= 750 && place == RIGHT) {
-			System.out.println("오른쪽방향");
-		} else if (getY() >= 500 && getY() <= 750 && place == DOWN) {
-			System.out.println("아래방향");
+	public void drop() {
+		if (y <= 701) {
+			y++;
+			setLocation(x, y);
+		} else {
+			drop = false;
+			setIcon(null);
 		}
 	}
 
 	@Override
 	public void run() {
-		while (goDown && y <= 850) {
-			y++;
-			setLocation(x, y);
-			try {
-				Thread.sleep(1);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		while (true) {
+			drop();
+			if (drop) {
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} else {
+				break;
 			}
 		}
-		setIcon(null);
 	}
 
 	public PlayerService getPlayerService() {
@@ -113,12 +115,12 @@ public class Note_jw extends JLabel implements Runnable {
 		this.y = y;
 	}
 
-	public boolean isGoDown() {
-		return goDown;
+	public int getPlace() {
+		return place;
 	}
 
-	public void setGoDown(boolean goDown) {
-		this.goDown = goDown;
+	public void setPlace(int place) {
+		this.place = place;
 	}
 
 }

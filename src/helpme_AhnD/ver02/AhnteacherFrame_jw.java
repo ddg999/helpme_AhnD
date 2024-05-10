@@ -23,7 +23,6 @@ public class AhnteacherFrame_jw extends JFrame {
 	AhnteacherFrame_jw mContext = this;
 	private boolean isGame = true; // 게임 실행중
 	private PlayerService playerService;
-	private Note_jw note;
 	private NoteBar_jw noteBar;
 	// private 이미지
 	private JLabel introImage;
@@ -42,8 +41,8 @@ public class AhnteacherFrame_jw extends JFrame {
 		setSize(1600, 900); // 수정
 
 		playerService = new PlayerService(this);
-		new Thread(playerService).start();
 		noteBar = new NoteBar_jw(mContext);
+		new Thread(playerService).start();
 	}
 
 	private void setInitLayout() {
@@ -66,24 +65,20 @@ public class AhnteacherFrame_jw extends JFrame {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (isGame) {
-					switch (e.getKeyCode()) {
-					case KeyEvent.VK_LEFT:
-						playerService.getNote().check();
-						break;
-					case KeyEvent.VK_UP:
-						playerService.getNote().check();
-						break;
-					case KeyEvent.VK_RIGHT:
-						playerService.getNote().check();
-						break;
-					case KeyEvent.VK_DOWN:
-						playerService.getNote().check();
-						break;
-					default:
-						break;
-					}
-				}
+//				if (isGame) {
+//					switch (e.getKeyCode()) {
+//					case KeyEvent.VK_LEFT:
+//						break;
+//					case KeyEvent.VK_UP:
+//						break;
+//					case KeyEvent.VK_RIGHT:
+//						break;
+//					case KeyEvent.VK_DOWN:
+//						break;
+//					default:
+//						break;
+//					}
+//				}
 			}
 		});
 	}
