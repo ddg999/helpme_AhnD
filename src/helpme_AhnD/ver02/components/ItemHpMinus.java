@@ -3,38 +3,30 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.utils.Define;
 
-public class HpMinus extends Items implements Useable{
+public class ItemHpMinus extends Items implements Useable{
 
 	private ImageIcon hpMinus; // 체력 -10
 	
-	public HpMinus() {
+	public ItemHpMinus() {
 		initData();
 		setInitLayout();
 	}
 
 	private void initData() {
-		hpMinus = new ImageIcon("images/hj_phmi.png");
+		hpMinus = new ImageIcon(Define.IMG_ITEMS_HP_MINUS);
 	}
 	
 	private void setInitLayout() {
 		setIcon(hpMinus);
 		setSize(50, 50);
-		setLocation(1200, 200);
+		setLocation(x, y);
 	}
 	
-	public ImageIcon getHpMinus() {
-		return hpMinus;
-	}
-
-	public void setHpMinus(ImageIcon hpMinus) {
-		this.hpMinus = hpMinus;
-	}
-
 	@Override
 	public int useItems(int input) {
-		int resulthp = input - 10;
-		return resulthp;
+		return input - 10;
 	}
 
 }

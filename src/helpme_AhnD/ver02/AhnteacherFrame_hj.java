@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.components.HpPlus;
+import helpme_AhnD.ver02.components.ItemHpPlus;
 import helpme_AhnD.ver02.components.Items;
-import helpme_AhnD.ver02.components.ScreenHide;
+import helpme_AhnD.ver02.components.ItemBomb;
 
 /*
  * 화면 구성 - 제목, 시작, 종료, 설정
@@ -43,7 +43,7 @@ public class AhnteacherFrame_hj extends JFrame {
 	private void setInitLayout() {
 		setLocationRelativeTo(null); // 창이 정중앙에 위치
 		setResizable(false); // 프레임 크기 조절 불가
-		add(new ScreenHide());
+		add(new ItemBomb());
 		setVisible(true); // 화면 출력
 	}
 

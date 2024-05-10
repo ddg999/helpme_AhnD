@@ -10,15 +10,15 @@ public class ServiceTest_hj {
 		final int HP_PLUS = 0;
 		final int HP_MINUS = 1;
 		final int SCREEN_HIDE = 2;
-		final int SCORE = 3;
+		final int SCOREDOUBLE = 3;
 		final int REVERSE = 4;
 		
 		
-		items[HP_PLUS] = new HpPlus();
-		items[HP_MINUS] = new HpMinus();
-		items[SCREEN_HIDE] = new ScreenHide();
-		items[SCORE] = new ScoreDouble();
-		items[REVERSE] = new Reverse();
+		items[HP_PLUS] = new ItemHpPlus();
+		items[HP_MINUS] = new ItemHpMinus();
+		items[SCREEN_HIDE] = new ItemBomb();
+		items[SCOREDOUBLE] = new ItemScoreDouble();
+		items[REVERSE] = new ItemReverse();
 		
 //		HpPlus hpPlus = new HpPlus();
 //		HpMinus hpMinus = new HpMinus();
@@ -42,7 +42,7 @@ public class ServiceTest_hj {
 		
 		System.out.println("-------------");
 		
-		hp = items[SCORE].useItems(hp);
+		hp = items[SCOREDOUBLE].useItems(hp);
 		System.out.println(hp);
 
 	}// end of main

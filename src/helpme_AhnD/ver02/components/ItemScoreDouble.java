@@ -4,11 +4,11 @@ import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 
-public class ScoreDouble extends Items implements Useable{
+public class ItemScoreDouble extends Items implements Useable{
 
 	private ImageIcon scoreDouble; // 점수 2배
 
-	public ScoreDouble() {
+	public ItemScoreDouble() {
 		initData();
 		setInitLayout();
 	}

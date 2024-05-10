@@ -6,8 +6,8 @@ import helpme_AhnD.ver02.interfaces.Useable;
 
 public class Items extends JLabel implements Useable{
 
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	
 	// get, set
 	public int getX() {
