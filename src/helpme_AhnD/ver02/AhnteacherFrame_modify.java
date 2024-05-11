@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.Frame.GameSelectPanel;
+
 public class AhnteacherFrame_modify extends JFrame {
 
 	// 컴포넌트
@@ -71,7 +73,7 @@ public class AhnteacherFrame_modify extends JFrame {
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_F1 :
 						setVisible(false);
-						new GamePanel_kh();
+						new GameSelectPanel();
 						break;
 					case KeyEvent.VK_F2 :
 						setVisible(false);

@@ -8,8 +8,20 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
 public class BGM {
-	Clip clip;
+	private Clip clip;
+	
+	public Clip getClip() {
+		return clip;
+	}
+	
 	FloatControl gainControl;
+	
+	
+	public FloatControl getGainControl() {
+		return gainControl;
+	}
+
+
 	public BGM() {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("sound/slamdunk.wav"));
@@ -22,7 +34,6 @@ public class BGM {
 			// 볼륨 조정
 			gainControl.setValue(-30.0f);
 			System.out.println(clip.getFrameLength());
-			clip.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -18,7 +18,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GamePanel_hj extends JFrame {
+import helpme_AhnD.ver02.service.BGM;
+
+public class GameSelectPanel extends JFrame {
 
 	private JLabel backgroundLabel; // backgroundIng
 	private JLabel songLabel; // 노래 앨범
@@ -43,10 +45,13 @@ public class GamePanel_hj extends JFrame {
 	private JLabel stop; // 음악 정지
 
 	boolean flag = true;
+	
+	// 음악
+	private BGM game1BGM;
 
 	// 새로운 게임 화면을 위한 GamePanel 클래스
 
-	public GamePanel_hj() {
+	public GameSelectPanel() {
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -96,6 +101,8 @@ public class GamePanel_hj extends JFrame {
 
 		// 뒤로 가기 버튼
 		backButton = new JLabel(new ImageIcon("images/back.png"));
+		
+		game1BGM = new BGM();
 	}
 
 	private void setInitLayout() {
@@ -164,9 +171,13 @@ public class GamePanel_hj extends JFrame {
 				case KeyEvent.VK_SPACE:
 					if(flag == true) {
 						music.setIcon(musicStopImg);
+						game1BGM.getClip().start();
 						flag = false;
 					}else {
 						music.setIcon(musicPlayImg);
+						game1BGM.getClip().stop();
+						// game1BGM.getClip().close();
+						
 						flag= true;
 					}
 					break;
@@ -197,7 +208,7 @@ public class GamePanel_hj extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new GamePanel_hj();
+		new GameSelectPanel();
 	}// end of main
 
 }// end of class
