@@ -2,18 +2,18 @@ package helpme_AhnD.ver02.components;
 
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.service.PlayerService;
+import helpme_AhnD.ver02.service.PlayerService_kh;
 
-public class ComboBox extends JLabel implements Runnable {
+public class ComboBox_kh extends JLabel implements Runnable {
 
-	PlayerService playerService;
+	PlayerService_kh playerService;
 
 	// TODO 1p 2p 콤보박스 좌표설정
 //	private int x; 
 //	private int y;
 	private boolean isRun = true; // 게임 실행중
 
-	public ComboBox(PlayerService playerService) {
+	public ComboBox_kh(PlayerService_kh playerService) {
 		this.playerService = playerService;
 		initData();
 		setInitLayout();

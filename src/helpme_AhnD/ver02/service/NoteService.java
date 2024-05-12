@@ -2,7 +2,7 @@ package helpme_AhnD.ver02.service;
 
 import java.awt.event.KeyEvent;
 
-import helpme_AhnD.ver02.TestFramekh;
+import helpme_AhnD.ver02.Frame.FirstGameFrame;
 import helpme_AhnD.ver02.components.Note;
 import helpme_AhnD.ver02.components.NoteCircle;
 
@@ -19,8 +19,8 @@ public class NoteService extends Thread{
 	private boolean isLeftPressed;
 	private boolean isRightPressed;
 	private boolean isDownPressed;
-	private TestFramekh mContext;
-	public NoteService(TestFramekh mContext) {
+	private FirstGameFrame mContext;
+	public NoteService(FirstGameFrame mContext) {
 		this.mContext = mContext;
 		isRun = true;
 		this.start();
@@ -31,26 +31,26 @@ public class NoteService extends Thread{
 		while (isRun) {
 			try {
 				// Thread.sleep(8000);
-				createNote();
-				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
-				createNote();
-				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
-				createNote();
-				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
-				createNote();
-				Thread.sleep(QUATER_MS, QUATER_NS);
-				createNote();
-				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
-				createNote();
-				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
-				createNote();
-				Thread.sleep(QUATER_MS, QUATER_NS);
-				createNote();
-				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
-				createNote();
-				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
-				createNote();
-				Thread.sleep(HALF_MS, HALF_NS);
+//				createNote();
+//				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+//				createNote();
+//				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+//				createNote();
+//				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+//				createNote();
+//				Thread.sleep(QUATER_MS, QUATER_NS);
+//				createNote();
+//				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+//				createNote();
+//				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+//				createNote();
+//				Thread.sleep(QUATER_MS, QUATER_NS);
+//				createNote();
+//				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+//				createNote();
+//				Thread.sleep(EIGHTH_MS, EIGHTH_NS);
+//				createNote();
+//				Thread.sleep(HALF_MS, HALF_NS);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -76,16 +76,16 @@ public class NoteService extends Thread{
 		}
 	}
 	
-	private void createNote() {
-		Note leftNote = new Note(Note.LEFT_PLAYER, mContext);
-		NoteCircle leftCircle = new NoteCircle(leftNote);
-		mContext.add(leftNote);
-		mContext.add(leftCircle);
-		Note rightNote = new Note(Note.RIGHT_PLAYER, mContext);
-		NoteCircle rightCircle = new NoteCircle(rightNote);
-		mContext.add(rightNote);
-		mContext.add(rightCircle);
-		mContext.repaint();
-	}
+//	private void createNote() {
+//		Note leftNote = new Note(Note.LEFT_PLAYER, mContext);
+//		NoteCircle leftCircle = new NoteCircle(leftNote);
+//		mContext.add(leftNote);
+//		mContext.add(leftCircle);
+//		Note rightNote = new Note(Note.RIGHT_PLAYER, mContext);
+//		NoteCircle rightCircle = new NoteCircle(rightNote);
+//		mContext.add(rightNote);
+//		mContext.add(rightCircle);
+//		mContext.repaint();
+//	}
 	
 }

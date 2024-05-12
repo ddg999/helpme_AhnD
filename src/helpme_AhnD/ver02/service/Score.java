@@ -1,15 +1,15 @@
 package helpme_AhnD.ver02.service;
 
-import helpme_AhnD.ver02.AhnteacherFrame2;
+import helpme_AhnD.ver02.AhnteacherFrame_jw;
 
 public class Score {
 
-	AhnteacherFrame2 mContext;
+	AhnteacherFrame_jw mContext;
 	private int hp;
 	private int score;
 	private int combo;
+	private int countPerfect;
 	private int countExcellent;
-	private int countGreat;
 	private int countGood;
 	private int countBad;
 
@@ -17,8 +17,8 @@ public class Score {
 		hp = 100;
 		score = 0;
 		combo = 0;
+		countPerfect = 0;
 		countExcellent = 0;
-		countGreat = 0;
 		countGood = 0;
 		countBad = 0;
 	}
@@ -31,16 +31,16 @@ public class Score {
 		}
 	}
 
-	public void excellent() {
+	public void perfect() {
 		score += 3;
 		combo++;
 		countExcellent++;
 	}
 
-	public void great() {
+	public void excellent() {
 		score += 2;
 		combo++;
-		countGreat++;
+		countPerfect++;
 	}
 
 	public void good() {
@@ -88,11 +88,11 @@ public class Score {
 	}
 
 	public int getCountGreat() {
-		return countGreat;
+		return countPerfect;
 	}
 
 	public void setCountGreat(int countGreat) {
-		this.countGreat = countGreat;
+		this.countPerfect = countGreat;
 	}
 
 	public int getCountGood() {

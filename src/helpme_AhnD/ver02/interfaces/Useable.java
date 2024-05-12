@@ -1,5 +1,9 @@
 package helpme_AhnD.ver02.interfaces;
 
+import javax.swing.JLabel;
+
+import helpme_AhnD.ver02.state.Player;
+
 public interface Useable {
 	
 	public default int useItems(int input) {
@@ -7,5 +11,8 @@ public interface Useable {
 	}
 	
 	public default void useItems() {}
-
+	
+	public default JLabel useItems(Player place) {
+		return null;
+	}
 }

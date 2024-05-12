@@ -7,6 +7,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.components.NoteBar_jw;
+import helpme_AhnD.ver02.components.Note_jw;
 import helpme_AhnD.ver02.service.PlayerService;
 
 /*
@@ -16,16 +18,17 @@ import helpme_AhnD.ver02.service.PlayerService;
  * paint (이미지)
  */
 
-public class AhnteacherFrame2 extends JFrame {
+public class AhnteacherFrame_jw extends JFrame {
 	// 선언
-	AhnteacherFrame2 mContext = this;
-	private boolean isRun = true; // 게임 실행중
+	AhnteacherFrame_jw mContext = this;
+	private boolean isGame = true; // 게임 실행중
 	private PlayerService playerService;
+	private NoteBar_jw noteBar;
 	// private 이미지
 	private JLabel introImage;
 
 	// 생성자
-	public AhnteacherFrame2() {
+	public AhnteacherFrame_jw() {
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -38,6 +41,7 @@ public class AhnteacherFrame2 extends JFrame {
 		setSize(1600, 900); // 수정
 
 		playerService = new PlayerService(this);
+		noteBar = new NoteBar_jw(mContext);
 		new Thread(playerService).start();
 	}
 
@@ -57,30 +61,24 @@ public class AhnteacherFrame2 extends JFrame {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (isRun) {
-					switch (e.getKeyCode()) {
-					case KeyEvent.VK_LEFT:
-						playerService.getScore().excellent();
-						break;
-					case KeyEvent.VK_UP:
-						playerService.getScore().great();
-						break;
-					case KeyEvent.VK_RIGHT:
-						playerService.getScore().good();
-						break;
-					case KeyEvent.VK_DOWN:
-						playerService.getScore().bad();
-						break;
-
-					default:
-						break;
-					}
-				}
+//				if (isGame) {
+//					switch (e.getKeyCode()) {
+//					case KeyEvent.VK_LEFT:
+//						break;
+//					case KeyEvent.VK_UP:
+//						break;
+//					case KeyEvent.VK_RIGHT:
+//						break;
+//					case KeyEvent.VK_DOWN:
+//						break;
+//					default:
+//						break;
+//					}
+//				}
 			}
 		});
 	}
@@ -97,7 +95,8 @@ public class AhnteacherFrame2 extends JFrame {
 
 	// 코드 테스트
 	public static void main(String[] args) {
-		new AhnteacherFrame_hj();
+//		new AhnteacherFrame_hj();
+		new AhnteacherFrame_jw();
 	}
 
 }// end of class
