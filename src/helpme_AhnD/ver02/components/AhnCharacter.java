@@ -39,7 +39,7 @@ public class AhnCharacter extends JLabel {
 		twoPoint_DanceR = new ImageIcon(Define.IMG_TWO_POINT_RIGHT);
 		threePoint_DanceL = new ImageIcon(Define.IMG_THREE_POINT_LEFT);
 		threePoint_DanceR = new ImageIcon(Define.IMG_THREE_POINT_RIGHT);
-		x = 308;
+		x = 150;
 		y = 300;
 
 	}
