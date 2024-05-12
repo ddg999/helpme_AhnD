@@ -1,14 +1,17 @@
 package helpme_AhnD.ver02.components;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
 public class ItemBomb extends Items implements Useable {
 
 	private ImageIcon bomb; // 화면 숨김
 	private ImageIcon bombImg;
+	private JLabel bombImgLabel;
 	
 	public ItemBomb() {
 		initData();
@@ -18,18 +21,27 @@ public class ItemBomb extends Items implements Useable {
 	private void initData() {
 		bomb = new ImageIcon(Define.IMG_ITEMS_BOMB);
 		bombImg = new ImageIcon(Define.IMG_ITEMS_BOMB_IMG);
+		
 	}
 
 	private void setInitLayout() {
 		setIcon(bomb);
-		setSize(622, 565);
-		setLocation(1200, 200);
+		setSize(50, 50);
+		setLocation(x, y);
 	}
-	// todo useable 수정
 	@Override
-	public void useItems() {
-		// TODO Auto-generated method stub
-		super.useItems();
+	public JLabel useItems(Player place) {
+		
+		if (place == Player.LEFT) {
+			bombImgLabel = new JLabel(bombImg);
+			setSize(622,565);
+			setLocation(900, 100);
+		} else {
+			bombImgLabel = new JLabel(bombImg);
+			setSize(622,565);
+			setLocation(100, 100);
+		}
+		return bombImgLabel;
 	}
 	
 }

@@ -5,11 +5,11 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.TestFramekh;
+import helpme_AhnD.ver02.Frame.FirstGameFrame;
 
 public class Note extends JLabel {
 	private ImageIcon noteSample;
-	private TestFramekh mContext;
+	private FirstGameFrame mContext;
 	private int player; // player 0는 왼쪽 1은 오른쪽
 	public final static int LEFT_PLAYER = 0;
 	public final static int RIGHT_PLAYER = 1;
@@ -29,7 +29,7 @@ public class Note extends JLabel {
 	// 중복을 피하기 위해 이미 그 좌표가 사용중인지 확인
 	private static boolean[][] isUse = new boolean[LAST_COORDINATE][LAST_COORDINATE];
 
-	public Note(int player, TestFramekh mContext) {
+	public Note(int player, FirstGameFrame mContext) {
 		this.player = player;
 		this.mContext = mContext;
 		initData();

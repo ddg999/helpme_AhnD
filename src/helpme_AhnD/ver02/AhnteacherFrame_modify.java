@@ -7,9 +7,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.Frame.GameSelectPanel;
+import helpme_AhnD.ver02.utils.Define;
+import helpme_AhnD.ver02.Frame.GameSelectFrame;
+import helpme_AhnD.ver02.service.BGMService;
 
 public class AhnteacherFrame_modify extends JFrame {
+	
+	// 셀프 참조
+	AhnteacherFrame_modify mContext;
 
 	// 컴포넌트
 	private JLabel startButton;
@@ -17,6 +22,13 @@ public class AhnteacherFrame_modify extends JFrame {
 	private JLabel setting;
 	
 	private JLabel backgroundLabel;
+	
+	// 서비스 클래스
+	private BGMService bgmService;
+
+	public BGMService getBgmService() {
+		return bgmService;
+	}
 
 	public AhnteacherFrame_modify() {
 		initData();
@@ -25,10 +37,12 @@ public class AhnteacherFrame_modify extends JFrame {
 	}
 	
 	private void initData() {
-		backgroundLabel = new JLabel(new ImageIcon("images/mainFrame/bg.jpg"));
-		startButton = new JLabel(new ImageIcon("images/mainFrame/buttonStart.png"));
-		exitButton = new JLabel(new ImageIcon("images/mainFrame/buttonExit.png"));
-		setting = new JLabel(new ImageIcon("images/mainFrame/set1.png"));
+		backgroundLabel = new JLabel(new ImageIcon(Define.IMG_MAINFRAME_BG));
+		startButton = new JLabel(new ImageIcon(Define.IMG_MAINFRAME_START));
+		exitButton = new JLabel(new ImageIcon(Define.IMG_MAINFRAME_EXIT));
+		setting = new JLabel(new ImageIcon(Define.IMG_MAINFRAME_SET));
+		mContext = this;
+		bgmService = new BGMService();
 		setTitle("리듬 게임 시작 화면");
 		setSize(1600, 900); // 화면 사이즈
 		setContentPane(backgroundLabel);
@@ -59,10 +73,10 @@ public class AhnteacherFrame_modify extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_F1 :
-						startButton.setIcon(new ImageIcon("images/mainFrame/started3.png"));
+						startButton.setIcon(new ImageIcon(Define.IMG_MAINFRAME_STARTED));
 						break;
 					case KeyEvent.VK_F2 :
-						exitButton.setIcon(new ImageIcon("images/mainFrame/exited3.png"));
+						exitButton.setIcon(new ImageIcon(Define.IMG_MAINFRAME_EXITED));
 						break;
 					case KeyEvent.VK_ESCAPE :
 						break;
@@ -72,8 +86,9 @@ public class AhnteacherFrame_modify extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_F1 :
+						startButton.setIcon(new ImageIcon(Define.IMG_MAINFRAME_START));
 						setVisible(false);
-						new GameSelectPanel();
+						new GameSelectFrame(mContext);
 						break;
 					case KeyEvent.VK_F2 :
 						setVisible(false);

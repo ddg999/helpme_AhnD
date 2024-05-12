@@ -1,5 +1,5 @@
 package helpme_AhnD.ver02.state;
 
-public class Sample {
-
+public enum Player {
+	LEFT, RIGHT
 }

@@ -3,6 +3,7 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.utils.Define;
 
 public class ItemScoreDouble extends Items implements Useable{
 
@@ -13,33 +14,15 @@ public class ItemScoreDouble extends Items implements Useable{
 		setInitLayout();
 	}
 
-	public int score(int score) {
-		int resultScore = score * 2;
-		return resultScore;
-	}
-
 	private void initData() {
-		scoreDouble = new ImageIcon("images/hj_doublescore.png");
+		scoreDouble = new ImageIcon(Define.IMG_ITEMS_SCOREDOUBLE);
 	}
 
 	private void setInitLayout() {
 		setIcon(scoreDouble);
 		setSize(50, 50);
-		setLocation(1200, 150);
+		setLocation(x, y);
 	}
-
-	public ImageIcon getScoreDouble() {
-		return scoreDouble;
-	}
-
-	public void setScoreDouble(ImageIcon scoreDouble) {
-		this.scoreDouble = scoreDouble;
-	}
-
-	@Override
-	public int useItems(int input) {
-		int resultScore = input * 2;
-		return resultScore;
-	}
+	// todo score 클래스에 접근해서 일정시간동안 스코어 2배로 얻음
 	
 }

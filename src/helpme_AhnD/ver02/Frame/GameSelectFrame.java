@@ -1,15 +1,5 @@
 package helpme_AhnD.ver02.Frame;
 
-/*
- * 작은 화면 -> 노래 선택 버튼 좌, 우
- * 뒤로 가기
- * 소리 듣기 (끄고 , 킬 수 있게)
- * 
- * 창 -> 프레임으로 말고 게임 실행을 누르면 바로 노래 선택하는 게 뜬다고 가정을 하면
- * 바로 노래 이미지와 노래 선택 버튼이 뜨도록 설계 버튼과 라벨을 설정해보기
- * 
- */
-import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -18,13 +8,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import helpme_AhnD.ver02.AhnteacherFrame_modify;
 import helpme_AhnD.ver02.service.BGM;
+import helpme_AhnD.ver02.service.BGMService;
+import helpme_AhnD.ver02.utils.Define;
 
-public class GameSelectPanel extends JFrame {
+public class GameSelectFrame extends JFrame {
 
 	private JLabel backgroundLabel; // backgroundIng
 	private JLabel songLabel; // 노래 앨범
 	private JLabel songTitle; // 노래 제목
+	private AhnteacherFrame_modify mContext;
 
 	private ImageIcon firstSongImg;
 	private ImageIcon firstTitleImg;
@@ -51,7 +45,13 @@ public class GameSelectPanel extends JFrame {
 
 	// 새로운 게임 화면을 위한 GamePanel 클래스
 
-	public GameSelectPanel() {
+	public GameSelectFrame() {
+		initData();
+		setInitLayout();
+		addEventListener();
+	}
+	public GameSelectFrame(AhnteacherFrame_modify mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -61,51 +61,52 @@ public class GameSelectPanel extends JFrame {
 
 		setTitle("노래 선택 화면");
 		setSize(1600, 900);
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
+		
 		JPanel jPanel = new JPanel();
 
-		ImageIcon backgroundImage = new ImageIcon("images/hj_soundbg.jpg");
+		ImageIcon backgroundImage = new ImageIcon(Define.IMG_SELECTFRAME_BG);
 
 		// backgroundImg
 		backgroundLabel = new JLabel(backgroundImage);
 
 		// 노래 앨범
-		firstSongImg = new ImageIcon("images/hj_music.jpg");
-		secondSongImg = new ImageIcon("images/hj_music2.jpg");
+		firstSongImg = new ImageIcon(Define.IMG_SELECTFRAME_FIRSTMUSIC);
+		secondSongImg = new ImageIcon(Define.IMG_SELECTFRAME_SECONDMUSIC);
 
 		songLabel = new JLabel(firstSongImg);
 		// songLabel = new JLabel(secondSong);
 
 		// 노래 제목
-		firstTitleImg = new ImageIcon("images/song1_title.png");
-		secondTitleImg = new ImageIcon("images/song2_title.png");
+		firstTitleImg = new ImageIcon(Define.IMG_SELECTFRAME_FIRSTTITLE);
+		secondTitleImg = new ImageIcon(Define.IMG_SELECTFRAME_SECONDTITLE);
 
 		// songTitle = new JLabel(firstTitle);
 		songTitle = new JLabel(firstTitleImg);
 
 		// 왼쪽 버튼
-		leftButton = new JLabel(new ImageIcon("images/hj_arrowleft.png"));
+		leftButton = new JLabel(new ImageIcon(Define.IMG_SELECTFRAME_ARROWLEFT));
 
 		// 오른쪽 버튼
-		rightButton = new JLabel(new ImageIcon("images/hj_arrowright.png"));
+		rightButton = new JLabel(new ImageIcon(Define.IMG_SELECTFRAME_ARROWRIGHT));
 
 		// 음악 재생, 정지
-		musicPlayImg = new ImageIcon("images/play.png");
+		musicPlayImg = new ImageIcon(Define.IMG_SELECTFRAME_MUSICPLAY);
 		music = new JLabel(musicPlayImg);
-		musicStopImg = new ImageIcon("images/play_stop.png");
+		musicStopImg = new ImageIcon(Define.IMG_SELECTFRAME_MUSICSTOP);
 
 		// 게임 시작 버튼
-		startButton = new JLabel(new ImageIcon("images/hj_button1_small.png"));
+		startButton = new JLabel(new ImageIcon(Define.IMG_SELECTFRAME_START));
 
 		// 뒤로 가기 버튼
-		backButton = new JLabel(new ImageIcon("images/back.png"));
+		backButton = new JLabel(new ImageIcon(Define.IMG_SELECTFRAME_BACK));
 		
-		game1BGM = new BGM();
 	}
 
 	private void setInitLayout() {
+		setLocationRelativeTo(null);
+		setLayout(null);
+		
 		add(backgroundLabel);
 		backgroundLabel.setSize(1600, 900);
 		backgroundLabel.setLocation(0, 0);
@@ -159,29 +160,42 @@ public class GameSelectPanel extends JFrame {
 					songTitle.setSize(354, 35);
 					songTitle.setLocation(620, 140);
 					songLabel.setIcon(secondSongImg);
-					rightButton.setIcon(new ImageIcon("images/hj_arrowright_click.png"));
+					rightButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_ARROWRIGHTCLICK));
 					break;
 				case KeyEvent.VK_LEFT:
 					songTitle.setIcon(firstTitleImg);
 					songTitle.setSize(201, 35);
 					songTitle.setLocation(700, 140);
 					songLabel.setIcon(firstSongImg);
-					leftButton.setIcon(new ImageIcon("images/hj_arrowleft_click.png"));
+					leftButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_ARROWLEFTCLICK));
 					break;
 				case KeyEvent.VK_SPACE:
 					if(flag == true) {
 						music.setIcon(musicStopImg);
+						game1BGM = mContext.getBgmService().createBGM();
 						game1BGM.getClip().start();
 						flag = false;
 					}else {
 						music.setIcon(musicPlayImg);
-						game1BGM.getClip().stop();
-						// game1BGM.getClip().close();
-						
+						game1BGM.getClip().close();
 						flag= true;
 					}
 					break;
+				case KeyEvent.VK_BACK_SPACE :
+					backButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_BACKCLICK));
+					break;
+				// 볼륨 조절 테스트용 코드
+				// 추후 설정 화면으로 이관할 예정
+				case KeyEvent.VK_DOWN :
+					BGMService.volumDown();
+					game1BGM.getGainControl().setValue(BGMService.getVolume());
+					break;
+				case KeyEvent.VK_UP :
+					BGMService.volumeUp();
+					game1BGM.getGainControl().setValue(BGMService.getVolume());
+					break;
 				}
+				
 			}
 
 			@Override
@@ -192,23 +206,25 @@ public class GameSelectPanel extends JFrame {
 					songTitle.setSize(354, 35);
 					songTitle.setLocation(620, 140);
 					songLabel.setIcon(secondSongImg);
-					rightButton.setIcon(new ImageIcon("images/hj_arrowright.png"));
+					rightButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_ARROWRIGHT));
 					break;
 				case KeyEvent.VK_LEFT:
 					songTitle.setIcon(firstTitleImg);
 					songTitle.setSize(201, 35);
 					songTitle.setLocation(700, 140);
 					songLabel.setIcon(firstSongImg);
-					leftButton.setIcon(new ImageIcon("images/hj_arrowleft.png"));
+					leftButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_ARROWLEFT));
+					break;
+				case KeyEvent.VK_BACK_SPACE :
+					backButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_BACK));
+					setVisible(false);
+					mContext.setVisible(true);
+					game1BGM.getClip().close();
 					break;
 				}
 			}
 
 		});
 	}
-
-	public static void main(String[] args) {
-		new GameSelectPanel();
-	}// end of main
 
 }// end of class
