@@ -1,7 +1,6 @@
 package helpme_AhnD.ver02.service;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.Random;
 
 import helpme_AhnD.ver02.AhnteacherFrame_jw;
 import helpme_AhnD.ver02.components.AhnCharacter;
@@ -25,64 +24,21 @@ public class PlayerService implements Runnable {
 		new Thread(new ComboBox(this)).start();
 		new Thread(new HpBox(this)).start();
 
-//		Iterator<Note_jw> iter = noteList.iterator();
-//		while (iter.hasNext()) {
-//			System.out.println("ID : " + iter.next());
-//		}
-
-//		System.out.println(noteList.get(0).getY());
-
 	}
 
 	private void createNote() {
 		note = new Note_jw(this);
 		new Thread(note).start();
-
-		mContext.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyCode()) {
-				case KeyEvent.VK_LEFT:
-					if (note.getY() <= 700 && note.getY() >= 650 && note.getPlace() == 0) {
-						System.out.println("왼쪽");
-					}
-					break;
-				case KeyEvent.VK_UP:
-					if (note.getY() <= 700 && note.getY() >= 650 && note.getPlace() == 1) {
-						System.out.println("위");
-					}
-					break;
-				case KeyEvent.VK_RIGHT:
-					if (note.getY() <= 700 && note.getY() >= 650 && note.getPlace() == 2) {
-						System.out.println("오른쪽");
-					}
-					break;
-				case KeyEvent.VK_DOWN:
-					if (note.getY() <= 700 && note.getY() >= 650 && note.getPlace() == 3) {
-						System.out.println("아래");
-					}
-					break;
-				default:
-					break;
-				}
-			}
-		});
 	}
 
 	@Override
 	public void run() {
 		while (true) {
+			Random random = new Random();
+			int delay = random.nextInt(1000) + 300;
 			createNote();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(delay);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

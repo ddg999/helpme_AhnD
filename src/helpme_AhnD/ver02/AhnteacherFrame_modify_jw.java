@@ -7,10 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.utils.Define;
-import helpme_AhnD.ver02.Frame.GameSelectFrame;
 import helpme_AhnD.ver02.Frame.GameSelectFrame_jw;
 import helpme_AhnD.ver02.service.BGMService;
+import helpme_AhnD.ver02.utils.Define;
 
 public class AhnteacherFrame_modify_jw extends JFrame {
 

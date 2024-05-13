@@ -219,7 +219,6 @@ public class GameSelectFrame_jw extends JFrame {
 					}
 					selectGame(selectNumber);
 					rightButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_ARROWRIGHTCLICK));
-					System.out.println(selectNumber);
 					break;
 				case KeyEvent.VK_LEFT:
 					if (selectNumber == 1) {
