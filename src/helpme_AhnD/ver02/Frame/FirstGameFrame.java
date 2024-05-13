@@ -11,7 +11,7 @@ import helpme_AhnD.ver02.utils.Define;
 public class FirstGameFrame extends JFrame{
 	
 	JLabel background;
-	DropNotePlayerService playerService;
+	DropNotePlayerService dropNotePlayerService;
 	NoteBar noteBar;
 	
 	public FirstGameFrame() {
@@ -29,9 +29,9 @@ public class FirstGameFrame extends JFrame{
 		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		playerService = new DropNotePlayerService(this);
+		dropNotePlayerService = new DropNotePlayerService(this);
 		noteBar = new NoteBar(this);
-		new Thread(playerService).start();
+		new Thread(dropNotePlayerService).start();
 	}
 	private void setInitLayout() {
 		setLayout(null);
