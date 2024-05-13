@@ -1,40 +1,46 @@
 package helpme_AhnD.ver02.components;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.Frame.TestGameFrame_kh;
 import helpme_AhnD.ver02.service.DeathNoteCircle;
 import helpme_AhnD.ver02.service.DeathNoteService;
 import helpme_AhnD.ver02.service.PlayerService_js;
 
-public class DeathNote extends JLabel implements Runnable {
+public class DeathNoteLeft extends de implements Runnable {
 	DeathNoteCircle deathNoteCircle;
 	PlayerService_js playerService;
-	DeathNote deathNote;
+	DeathNoteLeft deathNote;
 	TestFrame testFrame;
+
+	private ImageIcon note_Img;
+	private ImageIcon note_Img_P;
+	private final int NOTE_WIDTH = 80;
+	private final int NOTE_HIGHT = 70;
+	private final int NOTE_Y_LOCATION = 200;
+	private int location_X;
+	private int place;
+	private final int LEFT = 0;
+	private final int UP = 1;
+	private final int RIGHT = 2;
+	private final int DOWN = 3;
 	
-	protected ImageIcon note_Img;
-	protected ImageIcon note_Img_P;
-	protected final int NOTE_WIDTH = 80;
-	protected final int NOTE_HIGHT = 70;
-	protected  final int NOTE_Y_LOCATION = 200;
-	protected  int location_X;
-	
-	
-	protected  boolean gameStart; // 게임 실행 확인
-	protected  boolean keyIsPressed =true;
-	protected  boolean isJudged = false;
-	
-	
-	
-	public DeathNote( int location_X, TestFrame testFrame ) {
+	private boolean gameStart; // 게임 실행 확인
+	private boolean keyIsPressed =true;
+	private boolean isJudged = false;
+
+	public DeathNoteLeft(DeathNoteService deathNoteService, int location_X,TestFrame testFrame,int Key ) {
 		this.location_X = location_X; // Y값은 변경 가능
 		this.testFrame = testFrame;
-		playerService = testFrame.playerService;
+		deathNote = this;
 		initData();
 		setInitLayout();
+		addEventListener();
 		new Thread(() -> {
 			while (true) {
 			 
@@ -53,10 +59,8 @@ public class DeathNote extends JLabel implements Runnable {
 				}
 			}
 		}).start();
-		
-			
 	}
-	
+
 	private void initData() {
 		note_Img = new ImageIcon("images/DeathNote.png"); // 샘플 이미지 변경
 		note_Img_P = new ImageIcon("images/DeathNoteP.png");
@@ -68,14 +72,11 @@ public class DeathNote extends JLabel implements Runnable {
 		setLocation(location_X, NOTE_Y_LOCATION);
 
 	}
-	
+
 	public void keypresed() {
 		setIcon(note_Img_P);
 	}
-	public TestFrame getTestFrame() {
-		return testFrame;
-	}
-	
+
 	public int getNOTE_Y_LOCATION() {
 		return NOTE_Y_LOCATION;
 	}
@@ -84,7 +85,10 @@ public class DeathNote extends JLabel implements Runnable {
 		return location_X;
 	}
 
-	
+	public TestFrame getTestFrame() {
+		return testFrame;
+	}
+	@Override
 	public void run() {
 		gameStart = true;
 		while (gameStart) {
@@ -113,10 +117,42 @@ public class DeathNote extends JLabel implements Runnable {
 		} // end of while
 
 	} // end of run
-
+	
+	public void addEventListener() {
+		getTestFrame().addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_LEFT: 
+					if(place==LEFT && !isJudged) {
+						new Thread(deathNote).start();
+					break;
+					}
+				case KeyEvent.VK_RIGHT: 
+					if (place == RIGHT && !isJudged) {
+					
+					break;
+					}
+				case KeyEvent.VK_DOWN: 
+					if (place == DOWN && !isJudged) {
+				
+					break;
+					}
+				case KeyEvent.VK_UP: 
+					if (place == UP && !isJudged) {
+					
+					break;
+					}
+					
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + e.getKeyCode());
+				}
+			}
+		});
+	}
 	
 	
-	
-
 	
 }
+
