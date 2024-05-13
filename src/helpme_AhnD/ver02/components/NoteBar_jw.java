@@ -26,5 +26,4 @@ public class NoteBar_jw extends JLabel {
 		setLocation(295, 700);
 		mContext.add(this);
 	}
-
 }

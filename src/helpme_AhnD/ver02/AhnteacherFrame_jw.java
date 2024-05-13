@@ -1,14 +1,10 @@
 package helpme_AhnD.ver02;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.components.NoteBar_jw;
-import helpme_AhnD.ver02.components.Note_jw;
 import helpme_AhnD.ver02.service.PlayerService;
 
 /*
@@ -31,7 +27,6 @@ public class AhnteacherFrame_jw extends JFrame {
 	public AhnteacherFrame_jw() {
 		initData();
 		setInitLayout();
-		addEventListener();
 	}
 
 	private void initData() {
@@ -41,46 +36,14 @@ public class AhnteacherFrame_jw extends JFrame {
 		setSize(1600, 900); // 수정
 
 		playerService = new PlayerService(this);
-		noteBar = new NoteBar_jw(mContext);
 		new Thread(playerService).start();
+		noteBar = new NoteBar_jw(mContext);
 	}
 
 	private void setInitLayout() {
 		setLocationRelativeTo(null); // 창이 정중앙에 위치
 		setResizable(false); // 프레임 크기 조절 불가
 		setVisible(true); // 화면 출력
-	}
-
-	private void addEventListener() { // 키 이벤트
-		addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-//				if (isGame) {
-//					switch (e.getKeyCode()) {
-//					case KeyEvent.VK_LEFT:
-//						break;
-//					case KeyEvent.VK_UP:
-//						break;
-//					case KeyEvent.VK_RIGHT:
-//						break;
-//					case KeyEvent.VK_DOWN:
-//						break;
-//					default:
-//						break;
-//					}
-//				}
-			}
-		});
 	}
 
 	// 이미지
@@ -95,7 +58,6 @@ public class AhnteacherFrame_jw extends JFrame {
 
 	// 코드 테스트
 	public static void main(String[] args) {
-//		new AhnteacherFrame_hj();
 		new AhnteacherFrame_jw();
 	}
 

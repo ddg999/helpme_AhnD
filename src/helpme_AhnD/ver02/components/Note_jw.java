@@ -1,17 +1,16 @@
 package helpme_AhnD.ver02.components;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.AhnteacherFrame_jw;
-import helpme_AhnD.ver02.service.NoteService_jw;
 import helpme_AhnD.ver02.service.PlayerService;
 
 public class Note_jw extends JLabel implements Runnable {
 
-	AhnteacherFrame_jw mContext;
 	PlayerService playerService;
 
 	private ImageIcon noteBall;
@@ -19,18 +18,19 @@ public class Note_jw extends JLabel implements Runnable {
 	private int x;
 	private int y;
 
-	private int place;
+	private int place; // 4곳 중 노트 나오는 지점
 	private final int LEFT = 0;
 	private final int UP = 1;
 	private final int RIGHT = 2;
 	private final int DOWN = 3;
-
+	private int noteSpeed = 2; // 노트 속도
 	private boolean drop = true;
 
 	public Note_jw(PlayerService playerService) {
 		this.playerService = playerService;
 		initData();
 		setInitLayout();
+		addEventListener();
 	}
 
 	public void initData() {
@@ -46,8 +46,6 @@ public class Note_jw extends JLabel implements Runnable {
 		} else if (place == DOWN) {
 			x = 600;
 		}
-
-//		new NoteService_jw(this);
 	}
 
 	public void setInitLayout() {
@@ -57,30 +55,115 @@ public class Note_jw extends JLabel implements Runnable {
 		playerService.getmContext().add(this);
 	}
 
-	public void drop() {
-		if (y <= 701) {
-			y++;
-			setLocation(x, y);
-		} else {
-			drop = false;
+	public void addEventListener() {
+		playerService.getmContext().addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_LEFT:
+					if (place == 0 && drop) {
+						judge();
+					}
+					break;
+				case KeyEvent.VK_UP:
+					if (place == 1 && drop) {
+						judge();
+					}
+					break;
+				case KeyEvent.VK_RIGHT:
+					if (place == 2 && drop) {
+						judge();
+					}
+					break;
+				case KeyEvent.VK_DOWN:
+					if (place == 3 && drop) {
+						judge();
+					}
+					break;
+
+				default:
+					break;
+				}
+			}
+		});
+	}
+
+	private void judge() {
+		if (y >= 570 && y < 600) {
 			setIcon(null);
+			System.out.println("BAD");
+			playerService.getScore().bad();
+			drop = false;
+		} else if (y >= 600 && y < 640) {
+			setIcon(null);
+			System.out.println("GOOD");
+			playerService.getScore().good();
+			drop = false;
+		} else if (y >= 640 && y < 680) {
+			setIcon(null);
+			System.out.println("EXCELLENT");
+			playerService.getScore().excellent();
+			drop = false;
+		} else if (y >= 680 && y < 720) {
+			setIcon(null);
+			System.out.println("PERFECT");
+			playerService.getScore().perfect();
+			drop = false;
+		} else if (y >= 720 && y < 760) {
+			setIcon(null);
+			System.out.println("EXCELLENT");
+			playerService.getScore().excellent();
+			drop = false;
+		} else if (y >= 760 && y < 800) {
+			setIcon(null);
+			System.out.println("GOOD");
+			playerService.getScore().good();
+			drop = false;
+		} else if (y >= 800 && y < 840) {
+			setIcon(null);
+			System.out.println("BAD");
+			playerService.getScore().bad();
+			drop = false;
+		}
+	}
+
+	public void drop() {
+		if (y <= 840) {
+			y += noteSpeed;
+			setLocation(x, y);
+		} else if (y > 840) {
+			setIcon(null);
+			drop = false;
+			System.out.println("BAD");
+			playerService.getScore().bad();
 		}
 	}
 
 	@Override
 	public void run() {
-		while (true) {
+		while (drop) {
 			drop();
-			if (drop) {
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			} else {
-				break;
+			try {
+				Thread.sleep(5);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
+	}
+
+	public void setNoteSpeed(int noteSpeed) {
+		this.noteSpeed = noteSpeed;
 	}
 
 	public PlayerService getPlayerService() {
@@ -89,14 +172,6 @@ public class Note_jw extends JLabel implements Runnable {
 
 	public void setPlayerService(PlayerService playerService) {
 		this.playerService = playerService;
-	}
-
-	public AhnteacherFrame_jw getmContext() {
-		return mContext;
-	}
-
-	public void setmContext(AhnteacherFrame_jw mContext) {
-		this.mContext = mContext;
 	}
 
 	public int getX() {
@@ -122,5 +197,4 @@ public class Note_jw extends JLabel implements Runnable {
 	public void setPlace(int place) {
 		this.place = place;
 	}
-
 }

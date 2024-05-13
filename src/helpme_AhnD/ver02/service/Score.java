@@ -79,20 +79,28 @@ public class Score {
 		this.combo = combo;
 	}
 
+	public AhnteacherFrame_jw getmContext() {
+		return mContext;
+	}
+
+	public void setmContext(AhnteacherFrame_jw mContext) {
+		this.mContext = mContext;
+	}
+
+	public int getCountPerfect() {
+		return countPerfect;
+	}
+
+	public void setCountPerfect(int countPerfect) {
+		this.countPerfect = countPerfect;
+	}
+
 	public int getCountExcellent() {
 		return countExcellent;
 	}
 
 	public void setCountExcellent(int countExcellent) {
 		this.countExcellent = countExcellent;
-	}
-
-	public int getCountGreat() {
-		return countPerfect;
-	}
-
-	public void setCountGreat(int countGreat) {
-		this.countPerfect = countGreat;
 	}
 
 	public int getCountGood() {
@@ -110,4 +118,5 @@ public class Score {
 	public void setCountBad(int countBad) {
 		this.countBad = countBad;
 	}
+
 }
