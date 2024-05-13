@@ -1,15 +1,10 @@
 package helpme_AhnD.ver02;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Random;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.components.NoteBar_jw;
-import helpme_AhnD.ver02.components.Note_jw;
 import helpme_AhnD.ver02.service.PlayerService;
 
 /*
