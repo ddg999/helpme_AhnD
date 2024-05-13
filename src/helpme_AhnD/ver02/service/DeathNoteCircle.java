@@ -18,6 +18,7 @@ public class DeathNoteCircle extends JLabel{
 	ImageIcon booly;
 	DeathNote deathNote;
 	TestFrame testFrame;
+	public int checkNow;
 	boolean flag ;
 	
 	
@@ -40,6 +41,7 @@ public class DeathNoteCircle extends JLabel{
 				for (int i = BAD_OVER_CIRCLE; i <= BAD_LATE_CIRCLE; i++) {
 					setIcon(image[i]);
 					setLocation(x + i * 5, y);
+					checkNow = i;
 					this.repaint();
 					Thread.sleep(300);
 				}
@@ -76,10 +78,53 @@ public class DeathNoteCircle extends JLabel{
 
 	}
 	
+	public ImageIcon[] getImage() {
+		return image;
+	}
+
+
+
+
 	private  void falseG() {
 		if(image.equals(booly)) {
 		
 		}
 		flag =true;
 	}
+	public  boolean circleExcellentZone() {
+		if(image.equals(image[EXCELLENT_CIRCLE])) {
+			
+			return true;
+		}
+		return false;
+	}
+	public  boolean circlePerfecttZone() {
+		if(image.equals(image[PERFECT_CIRCLE])) {
+			
+			return true;
+		}
+		return false;
+	}
+	public  boolean circleGoodZone() {
+		if(image.equals(image[GOOD_CIRCLE])) {
+			
+			return true;
+		}
+		return false;
+	}
+	private  boolean circleBadLateZone() {
+		if(image.equals(image[BAD_LATE_CIRCLE])) {
+			
+			return true;
+		}
+		return false;
+	}
+	private  boolean circleBadOverZone() {
+		if(image.equals(image[BAD_OVER_CIRCLE])) {
+			
+			return true;
+		}
+		return false;
+	}
+
 }
