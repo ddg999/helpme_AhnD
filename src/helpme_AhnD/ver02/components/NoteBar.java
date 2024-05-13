@@ -3,21 +3,22 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.Frame.TestGameFrame_kh;
+import helpme_AhnD.ver02.Frame.FirstGameFrame;
+import helpme_AhnD.ver02.utils.Define;
 
-public class NoteBar_kh extends JLabel {
+public class NoteBar extends JLabel {
 
-	TestGameFrame_kh mContext;
+	FirstGameFrame mContext;
 	private ImageIcon noteBar;
 
-	public NoteBar_kh(TestGameFrame_kh mContext) {
+	public NoteBar(FirstGameFrame mContext) {
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
 	}
 
 	public void initData() {
-		noteBar = new ImageIcon("images/noteBar_jw.png");
+		noteBar = new ImageIcon(Define.IMG_DROPNOTE_NOTEBAR);
 	}
 
 	public void setInitLayout() {

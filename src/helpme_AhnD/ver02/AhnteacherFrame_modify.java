@@ -2,6 +2,9 @@ package helpme_AhnD.ver02;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,7 +15,7 @@ import helpme_AhnD.ver02.Frame.GameSelectFrame;
 import helpme_AhnD.ver02.service.BGMService;
 
 public class AhnteacherFrame_modify extends JFrame {
-	
+
 	// 셀프 참조
 	AhnteacherFrame_modify mContext;
 
@@ -20,9 +23,9 @@ public class AhnteacherFrame_modify extends JFrame {
 	private JLabel startButton;
 	private JLabel exitButton;
 	private JLabel setting;
-	
+
 	private JLabel backgroundLabel;
-	
+
 	// 서비스 클래스
 	private BGMService bgmService;
 
@@ -35,7 +38,7 @@ public class AhnteacherFrame_modify extends JFrame {
 		setInitLayout();
 		addEventListener();
 	}
-	
+
 	private void initData() {
 		backgroundLabel = new JLabel(new ImageIcon(Define.IMG_MAINFRAME_BG));
 		startButton = new JLabel(new ImageIcon(Define.IMG_MAINFRAME_START));
@@ -53,52 +56,93 @@ public class AhnteacherFrame_modify extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null); // 화면 중앙에 프레임 위치
 		setVisible(true);
-		
+
 		add(startButton);
 		startButton.setSize(368, 124);
 		startButton.setLocation(616, 500);
-		
+
 		add(exitButton);
 		exitButton.setSize(368, 124);
 		exitButton.setLocation(616, 650);
-		
+
 		add(setting);
 		setting.setSize(50, 50);
 		setting.setLocation(1500, 800);
 	}
-	
+
 	private void addEventListener() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (isStartButton(e.getX(),e.getY())) {
+					startButton.setIcon(
+							new ImageIcon(Define.IMG_MAINFRAME_STARTED));
+				} else if (isExitButton(e.getX(), e.getY())) {
+					exitButton.setIcon(
+							new ImageIcon(Define.IMG_MAINFRAME_EXITED));
+				}
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (isStartButton(e.getX(),e.getY())) {
+					startButton.setIcon(
+							new ImageIcon(Define.IMG_MAINFRAME_START));
+					setVisible(false);
+					new GameSelectFrame(mContext);
+				} else if (isExitButton(e.getX(), e.getY())) {
+					setVisible(false);
+				}
+			}
+		});
+
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				switch(e.getKeyCode()) {
-					case KeyEvent.VK_F1 :
-						startButton.setIcon(new ImageIcon(Define.IMG_MAINFRAME_STARTED));
-						break;
-					case KeyEvent.VK_F2 :
-						exitButton.setIcon(new ImageIcon(Define.IMG_MAINFRAME_EXITED));
+				switch (e.getKeyCode()) {
+					case KeyEvent.VK_S :
+						startButton.setIcon(
+								new ImageIcon(Define.IMG_MAINFRAME_STARTED));
 						break;
 					case KeyEvent.VK_ESCAPE :
+						exitButton.setIcon(
+								new ImageIcon(Define.IMG_MAINFRAME_EXITED));
+						break;
+					case KeyEvent.VK_CONTROL :
 						break;
 				}
 			}
 			@Override
 			public void keyReleased(KeyEvent e) {
-				switch(e.getKeyCode()) {
-					case KeyEvent.VK_F1 :
-						startButton.setIcon(new ImageIcon(Define.IMG_MAINFRAME_START));
+				switch (e.getKeyCode()) {
+					case KeyEvent.VK_S :
+						startButton.setIcon(
+								new ImageIcon(Define.IMG_MAINFRAME_START));
 						setVisible(false);
 						new GameSelectFrame(mContext);
 						break;
-					case KeyEvent.VK_F2 :
+					case KeyEvent.VK_ESCAPE :
 						setVisible(false);
 						break;
 				}
 			}
 		});
 	}
+
+	public boolean isStartButton(int x, int y) {
+		if (616 <= x && x <= 984 && 500 <= y && y <= 624) {
+			return true;
+		}
+		return false;
+	}
 	
-	
+	public boolean isExitButton(int x, int y) {
+		if (616 <= x && x <= 984 && 650 <= y && y <= 774) {
+			return true;
+		}
+		return false;
+	}
+
 	// 코드 테스트
 	public static void main(String[] args) {
 		new AhnteacherFrame_modify();

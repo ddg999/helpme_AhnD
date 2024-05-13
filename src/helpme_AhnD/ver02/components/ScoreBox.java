@@ -2,18 +2,18 @@ package helpme_AhnD.ver02.components;
 
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.service.PlayerService;
+import helpme_AhnD.ver02.service.DropNotePlayerService;
 
 public class ScoreBox extends JLabel implements Runnable {
 
-	PlayerService playerService;
+	DropNotePlayerService playerService;
 
 	// TODO 1p 2p 콤보박스 좌표설정
 //	private int x;
 //	private int y;
 	private boolean isRun = true; // 게임 실행중
 
-	public ScoreBox(PlayerService playerService) {
+	public ScoreBox(DropNotePlayerService playerService) {
 		this.playerService = playerService;
 		initData();
 		setInitLayout();

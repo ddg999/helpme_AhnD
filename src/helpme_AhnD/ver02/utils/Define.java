@@ -26,6 +26,13 @@ public class Define {
 	public final static String IMG_SELECTFRAME_BACK = "images/selectFrame/IMG_SELECTFRAME_BACK.png";
 	public final static String IMG_SELECTFRAME_BACKCLICK = "images/selectFrame/IMG_SELECTFRAME_BACKCLICK.png";
 	
+	// 인게임 이미지
+	public final static String IMG_DROPNOTE_NOTE = "images/dropNote/IMG_DROPNOTE_NOTE.png";
+	public final static String IMG_DROPNOTE_NOTEBAR = "images/dropNote/IMG_DROPNOTE_NOTEBAR.png";
+	
+	// 첫게임 이미지
+	public final static String IMG_FIRSTGAME_BG = "images/firstGame/IMG_FIRSTGAME_BG.jpg";
+	
 	// 캐릭터 이미지
 	public final static String IMG_BASIC_CHARCTER = "images/character/IMG_BASIC_CHARCTER.png";
 	public final static String IMG_ONE_POINT_RIGHT="images/character/IMG_ONE_POINT_RIGHT.png";
@@ -36,10 +43,10 @@ public class Define {
 	public final static String IMG_THREE_POINT_RIGHT="images/character/IMG_THREE_POINT_RIGHT.png";
 	
 	// 아이템 이미지
-	public final static String IMG_ITEMS_HP_PLUS = "images/item/hpPlus.png";
-	public final static String IMG_ITEMS_HP_MINUS = "images/item/hpMius.png";
-	public final static String IMG_ITEMS_BOMB = "images/item/bomb.png";
-	public final static String IMG_ITEMS_BOMB_IMG = "images/item/bombImg.png";
-	public final static String IMG_ITEMS_SCOREDOUBLE = "images/item/scoredouble.png";
-	public final static String IMG_ITEMS_REVERSE = "images/item/reverse.png";
+	public final static String IMG_ITEMS_HP_PLUS = "images/item/IMG_ITEMS_HP_PLUS.png";
+	public final static String IMG_ITEMS_HP_MINUS = "images/item/IMG_ITEMS_HP_MINUS.png";
+	public final static String IMG_ITEMS_BOMB = "images/item/IMG_ITEMS_BOMB.png";
+	public final static String IMG_ITEMS_BOMB_IMG = "images/item/IMG_ITEMS_BOMB_IMG.png";
+	public final static String IMG_ITEMS_SCOREDOUBLE = "images/item/IMG_ITEMS_SCOREDOUBLE.png";
+	public final static String IMG_ITEMS_REVERSE = "images/item/IMG_ITEMS_REVERSE.png";
 }

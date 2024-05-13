@@ -3,11 +3,11 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.service.PlayerService;
+import helpme_AhnD.ver02.service.DropNotePlayerService;
 
 public class HpBox extends JLabel implements Runnable {
 
-	PlayerService playerService;
+	DropNotePlayerService playerService;
 
 	// TODO 1p 2p 체력바 좌표설정
 //	private int x; 
@@ -20,7 +20,7 @@ public class HpBox extends JLabel implements Runnable {
 	private ImageIcon hp20;
 	private ImageIcon hp0;
 
-	public HpBox(PlayerService playerService) {
+	public HpBox(DropNotePlayerService playerService) {
 		this.playerService = playerService;
 		initData();
 		setInitLayout();
