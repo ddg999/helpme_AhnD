@@ -14,8 +14,14 @@ public class Define {
 	public final static String IMG_SELECTFRAME_BG = "images/selectFrame/IMG_SELECTFRAME_BG.jpg";
 	public final static String IMG_SELECTFRAME_FIRSTMUSIC = "images/selectFrame/IMG_SELECTFRAME_FIRSTMUSIC.jpg";
 	public final static String IMG_SELECTFRAME_SECONDMUSIC = "images/selectFrame/IMG_SELECTFRAME_SECONDMUSIC.jpg";
+	public final static String IMG_SELECTFRAME_THIRDMUSIC = "images/selectFrame/IMG_SELECTFRAME_THIRDMUSIC.jpg";
+	public final static String IMG_SELECTFRAME_FOURTHMUSIC = "images/selectFrame/IMG_SELECTFRAME_FOURTHMUSIC.jpg";
+	public final static String IMG_SELECTFRAME_FIFTHMUSIC = "images/selectFrame/IMG_SELECTFRAME_FIFTHMUSIC.jpg";
 	public final static String IMG_SELECTFRAME_FIRSTTITLE = "images/selectFrame/IMG_SELECTFRAME_FIRSTTITLE.png";
 	public final static String IMG_SELECTFRAME_SECONDTITLE = "images/selectFrame/IMG_SELECTFRAME_SECONDTITLE.png";
+	public final static String IMG_SELECTFRAME_THIRDTITLE = "images/selectFrame/IMG_SELECTFRAME_THIRDTITLE.png";
+	public final static String IMG_SELECTFRAME_FOURTHTITLE = "images/selectFrame/IMG_SELECTFRAME_FOURTHTITLE.png";
+	public final static String IMG_SELECTFRAME_FIFTHTITLE = "images/selectFrame/IMG_SELECTFRAME_FIFTHTITLE.png";
 	public final static String IMG_SELECTFRAME_ARROWLEFT = "images/selectFrame/IMG_SELECTFRAME_ARROWLEFT.png";
 	public final static String IMG_SELECTFRAME_ARROWLEFTCLICK = "images/selectFrame/IMG_SELECTFRAME_ARROWLEFTCLICK.png";
 	public final static String IMG_SELECTFRAME_ARROWRIGHT = "images/selectFrame/IMG_SELECTFRAME_ARROWRIGHT.png";
