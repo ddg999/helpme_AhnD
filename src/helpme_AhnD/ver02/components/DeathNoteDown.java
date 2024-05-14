@@ -7,10 +7,8 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.Frame.TestGameFrame_kh;
 import helpme_AhnD.ver02.service.DeathNoteCircle;
 import helpme_AhnD.ver02.service.DeathNoteService;
-import helpme_AhnD.ver02.service.PlayerService;
 import helpme_AhnD.ver02.service.PlayerService_js;
 
 public class DeathNoteDown extends DeathNote implements Runnable {
@@ -55,7 +53,7 @@ public class DeathNoteDown extends DeathNote implements Runnable {
 				switch (e.getKeyCode()) {
 
 				case KeyEvent.VK_DOWN:
-						setIcon(note_Img);
+						keyreleased();
 
 					break;
 
@@ -86,7 +84,7 @@ public class DeathNoteDown extends DeathNote implements Runnable {
 					System.out.println("good");
 					isJudged = true;
 					break;
-				} else if(deathNoteCircle.circleBadOverZone()) {
+				} else if(deathNoteCircle.circleBadZone()) {
 					//playerService.getScore().bad();
 					System.out.println("bad");
 					isJudged = true;
@@ -100,6 +98,12 @@ public class DeathNoteDown extends DeathNote implements Runnable {
 
 	} // end of run
 	
-	
-
+	@Override
+	public void keypresed() {
+		setIcon(note_Down_P);
+	}
+	@Override
+	public void keyreleased() {
+		setIcon(note_Down);
+	}
 }

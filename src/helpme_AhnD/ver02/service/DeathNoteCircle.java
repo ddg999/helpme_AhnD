@@ -41,7 +41,7 @@ public class DeathNoteCircle extends JLabel {
 					setLocation(x + i * 5, y);
 					checkNow = i;
 					this.repaint();
-					Thread.sleep(300);
+					Thread.sleep(100);
 				}
 				setIcon(booly);
 				testFrame.remove(this);
@@ -134,8 +134,8 @@ public class DeathNoteCircle extends JLabel {
 		return false;
 	}
 
-	public boolean circleBadOverZone() {
-		if (image[checkNow] == image[BAD_OVER_CIRCLE]) {
+	public boolean circleBadZone() {
+		if (image == null) {
 
 			return true;
 		}

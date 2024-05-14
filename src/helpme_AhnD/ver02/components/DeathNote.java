@@ -15,10 +15,17 @@ public class DeathNote extends JLabel implements Runnable {
 	DeathNote deathNote;
 	TestFrame testFrame;
 	
-	protected ImageIcon note_Img;
-	protected ImageIcon note_Img_P;
-	protected final int NOTE_WIDTH = 80;
-	protected final int NOTE_HIGHT = 80;
+	
+	protected ImageIcon note_Right;
+	protected ImageIcon note_Left;
+	protected ImageIcon note_Up;
+	protected ImageIcon note_Down;
+	protected ImageIcon note_Up_P;
+	protected ImageIcon note_Left_P;
+	protected ImageIcon note_Right_P;
+	protected ImageIcon note_Down_P;
+	protected final int NOTE_WIDTH = 85;
+	protected final int NOTE_HIGHT = 85;
 	protected  final int NOTE_Y_LOCATION = 200;
 	protected  int location_X;
 	
@@ -38,9 +45,9 @@ public class DeathNote extends JLabel implements Runnable {
 		new Thread(() -> {
 			while (true) {
 			 
-				int redIsGood = (new Random()).nextInt(5);
+				int redIsGood = (new Random()).nextInt(4);
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(900);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -58,37 +65,50 @@ public class DeathNote extends JLabel implements Runnable {
 	}
 	
 	private void initData() {
-		note_Img = new ImageIcon("images/DeathNote.png"); // 샘플 이미지 변경
-		note_Img_P = new ImageIcon("images/DeathNoteP.png");
+		note_Right = new ImageIcon("images/right.png"); // 샘플 이미지 변경
+		note_Left = new ImageIcon("images/left.png"); // 샘플 이미지 변경
+		note_Up = new ImageIcon("images/up.png"); // 샘플 이미지 변경
+		note_Down = new ImageIcon("images/down.png"); // 샘플 이미지 변경
+		note_Up_P = new ImageIcon("images/upp.png");
+		note_Left_P = new ImageIcon("images/leftp.png");
+		note_Right_P = new ImageIcon("images/rightp.png");
+		note_Down_P = new ImageIcon("images/downp.png");
 	}
 
 	private void setInitLayout() {
-		setIcon(note_Img);
+		
 		setSize(NOTE_WIDTH, NOTE_HIGHT);
 		setLocation(location_X, NOTE_Y_LOCATION);
 
 	}
 	
+	
 	public void keypresed() {
-		setIcon(note_Img_P);
+		
 	}
-	public TestFrame getTestFrame() {
-		return testFrame;
+	public void keyreleased() {
+		
 	}
 	
-	public int getNOTE_Y_LOCATION() {
-		return NOTE_Y_LOCATION;
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public int getLocation_X() {
 		return location_X;
 	}
 
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	public void setLocation_X(int location_X) {
+		this.location_X = location_X;
 	}
+
+	public int getNOTE_Y_LOCATION() {
+		return NOTE_Y_LOCATION;
+	}
+
+
 
 	
 	
