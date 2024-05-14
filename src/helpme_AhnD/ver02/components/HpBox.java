@@ -5,67 +5,154 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.service.DropNotePlayerService;
 
-public class HpBox extends JLabel implements Runnable {
+public class HpBox extends JLabel {
 
 	DropNotePlayerService playerService;
+	private int player;
 
-	// TODO 1p 2p 체력바 좌표설정
-//	private int x; 
-//	private int y;
+	private int x;
+	private int y = 180;
 	private boolean isRun = true; // 게임 실행중
-	private ImageIcon hp100;
-	private ImageIcon hp80;
-	private ImageIcon hp60;
-	private ImageIcon hp40;
-	private ImageIcon hp20;
-	private ImageIcon hp0;
 
-	public HpBox(DropNotePlayerService playerService) {
+	private ImageIcon hpFull;
+	private ImageIcon hpHalf;
+
+	public HpBox(DropNotePlayerService playerService, int player) {
 		this.playerService = playerService;
-		initData();
-		setInitLayout();
+		this.player = player;
+		hpFull = new ImageIcon("images/hp/HP_HPFULL.png");
+		hpHalf = new ImageIcon("images/hp/HP_HPHALF.png");
+		new Thread(new hp1()).start();
+		new Thread(new hp2()).start();
+		new Thread(new hp3()).start();
 	}
 
-	public void initData() {
-		// 체력표시 파일
-		hp100 = new ImageIcon("images/hp/hp100.png");
-		hp80 = new ImageIcon("images/hp/hp80.png");
-		hp60 = new ImageIcon("images/hp/hp60.png");
-		hp40 = new ImageIcon("images/hp/hp40.png");
-		hp20 = new ImageIcon("images/hp/hp20.png");
-		hp0 = new ImageIcon("images/hp/hp0.png");
-//		x = 100;
-//		y = 100;
-	}
+	// hp 첫번째 하트
+	class hp1 extends JLabel implements Runnable {
 
-	public void setInitLayout() {
-		setIcon(hp100);
-		setSize(100, 60);
-		setLocation(100, 100);
-		playerService.getmContext().add(this);
-	}
+		public hp1() {
+			initData();
+			setInitLayout();
+		}
 
-	@Override
-	public void run() {
-		while (isRun) {
-			if (playerService.getScore().getHp() >= 100) {
-				setIcon(hp100);
-			} else if (playerService.getScore().getHp() >= 80) {
-				setIcon(hp80);
-			} else if (playerService.getScore().getHp() >= 60) {
-				setIcon(hp60);
-			} else if (playerService.getScore().getHp() >= 40) {
-				setIcon(hp40);
-			} else if (playerService.getScore().getHp() > 0) {
-				setIcon(hp20);
-			} else if (playerService.getScore().getHp() <= 0) {
-				setIcon(hp0);
+		public void initData() {
+			if (player == 1) {
+				x = 410;
+			} else if (player == 2) {
+				x = 1125;
 			}
+		}
 
-			try {
-				Thread.sleep(1);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		public void setInitLayout() {
+			setIcon(hpFull);
+			setSize(50, 50);
+			setLocation(x, y);
+			playerService.getmContext().add(this);
+		}
+
+		@Override
+		public void run() {
+			while (isRun) {
+				while (isRun) {
+					if (playerService.getScore().getHp() >= 20) {
+						setIcon(hpFull);
+					} else if (playerService.getScore().getHp() >= 10) {
+						setIcon(hpHalf);
+					} else {
+						setIcon(null);
+					}
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
+	// hp 두번째 하트
+	class hp2 extends JLabel implements Runnable {
+
+		public hp2() {
+			initData();
+			setInitLayout();
+		}
+
+		public void initData() {
+			if (player == 1) {
+				x = 460;
+			} else if (player == 2) {
+				x = 1075;
+			}
+		}
+
+		public void setInitLayout() {
+			setIcon(hpFull);
+			setSize(50, 50);
+			setLocation(x, y);
+			playerService.getmContext().add(this);
+		}
+
+		@Override
+		public void run() {
+			while (isRun) {
+				while (isRun) {
+					if (playerService.getScore().getHp() >= 40) {
+						setIcon(hpFull);
+					} else if (playerService.getScore().getHp() >= 30) {
+						setIcon(hpHalf);
+					} else {
+						setIcon(null);
+					}
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
+	// hp 세번째 하트
+	class hp3 extends JLabel implements Runnable {
+
+		public hp3() {
+			initData();
+			setInitLayout();
+		}
+
+		public void initData() {
+			if (player == 1) {
+				x = 510;
+			} else if (player == 2) {
+				x = 1025;
+			}
+		}
+
+		public void setInitLayout() {
+			setIcon(hpFull);
+			setSize(50, 50);
+			setLocation(x, y);
+			playerService.getmContext().add(this);
+		}
+
+		@Override
+		public void run() {
+			while (isRun) {
+				if (playerService.getScore().getHp() >= 60) {
+					setIcon(hpFull);
+				} else if (playerService.getScore().getHp() >= 50) {
+					setIcon(hpHalf);
+				} else {
+					setIcon(null);
+				}
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

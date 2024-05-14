@@ -10,9 +10,14 @@ public class NoteBar extends JLabel {
 
 	FirstGameFrame mContext;
 	private ImageIcon noteBar;
+	private int player;
 
-	public NoteBar(FirstGameFrame mContext) {
+	private int x;
+	private int y;
+
+	public NoteBar(FirstGameFrame mContext, int player) {
 		this.mContext = mContext;
+		this.player = player;
 		initData();
 		setInitLayout();
 	}
@@ -24,7 +29,14 @@ public class NoteBar extends JLabel {
 	public void setInitLayout() {
 		setIcon(noteBar);
 		setSize(400, 100);
-		setLocation(295, 700);
+		if (player == 1) {
+			x = 295;
+			y = 700;
+		} else if (player == 2) {
+			x = 1000;
+			y = 700;
+		}
+		setLocation(x, y);
 		mContext.add(this);
 	}
 

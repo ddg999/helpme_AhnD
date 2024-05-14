@@ -1,10 +1,7 @@
 package helpme_AhnD.ver02.service;
 
-import helpme_AhnD.ver02.AhnteacherFrame_jw;
-
 public class Score {
 
-	AhnteacherFrame_jw mContext;
 	private int hp;
 	private int score;
 	private int combo;
@@ -13,8 +10,8 @@ public class Score {
 	private int countGood;
 	private int countBad;
 
-	public Score() {
-		hp = 100;
+	public Score(int player) {
+		hp = 60;
 		score = 0;
 		combo = 0;
 		countPerfect = 0;
@@ -24,8 +21,8 @@ public class Score {
 	}
 
 	public void beAttacked() {
-		if (hp >= 20) {
-			hp -= 20;
+		if (hp >= 10) {
+			hp -= 10;
 		} else {
 			hp = 0;
 		}
@@ -77,14 +74,6 @@ public class Score {
 
 	public void setCombo(int combo) {
 		this.combo = combo;
-	}
-
-	public AhnteacherFrame_jw getmContext() {
-		return mContext;
-	}
-
-	public void setmContext(AhnteacherFrame_jw mContext) {
-		this.mContext = mContext;
 	}
 
 	public int getCountPerfect() {

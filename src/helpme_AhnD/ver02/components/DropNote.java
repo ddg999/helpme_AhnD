@@ -17,6 +17,7 @@ public class DropNote extends JLabel implements Runnable {
 	DropNotePlayerService playerService;
 
 	private ImageIcon noteBall;
+	private int player;
 
 	private int x;
 	private int y;
@@ -30,8 +31,9 @@ public class DropNote extends JLabel implements Runnable {
 	private boolean drop = true;
 	private boolean isJudged = false;
 
-	public DropNote(DropNotePlayerService playerService) {
+	public DropNote(DropNotePlayerService playerService, int player) {
 		this.playerService = playerService;
+		this.player = player;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -41,14 +43,31 @@ public class DropNote extends JLabel implements Runnable {
 		noteBall = new ImageIcon(Define.IMG_DROPNOTE_NOTE);
 		Random random = new Random();
 		place = random.nextInt(4);
-		if (place == LEFT) {
-			x = 300;
-		} else if (place == UP) {
-			x = 400;
-		} else if (place == RIGHT) {
-			x = 500;
-		} else if (place == DOWN) {
-			x = 600;
+		switch (player) {
+		case 1:
+			if (place == LEFT) {
+				x = 300;
+			} else if (place == UP) {
+				x = 400;
+			} else if (place == RIGHT) {
+				x = 500;
+			} else if (place == DOWN) {
+				x = 600;
+			}
+			break;
+		case 2:
+			if (place == LEFT) {
+				x = 1005;
+			} else if (place == UP) {
+				x = 1105;
+			} else if (place == RIGHT) {
+				x = 1205;
+			} else if (place == DOWN) {
+				x = 1305;
+			}
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -59,141 +78,91 @@ public class DropNote extends JLabel implements Runnable {
 		playerService.getmContext().add(this);
 	}
 
+	public void judge() {
+		if (y < 600) {
+			return;
+		}
+		if (perfectZone()) {
+			System.out.println("퍼펙트");
+			playerService.getScore().perfect();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		} else if (excellentZone()) {
+			System.out.println("엑설런트");
+			playerService.getScore().excellent();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		} else if (goodZone()) {
+			System.out.println("굿");
+			playerService.getScore().good();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		} else {
+			System.out.println("배드");
+			playerService.getScore().bad();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		}
+	}
+
 	public void addEventListener() {
 		playerService.getmContext().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				switch (e.getKeyCode()) {
-					case KeyEvent.VK_LEFT :
+				if (player == 1) {
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_A:
 						if (place == LEFT && !isJudged) {
-							if (y < 600) {
-								break;
-							}
-							if (perfectZone()) {
-								System.out.println("퍼펙트");
-								playerService.getScore().perfect();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (excellentZone()) {
-								System.out.println("엑설런트");
-								playerService.getScore().excellent();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (goodZone()) {
-								System.out.println("굿");
-								playerService.getScore().good();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else {
-								System.out.println("배드");
-								playerService.getScore().bad();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							}
+							judge();
 						}
 						break;
-					case KeyEvent.VK_UP :
+					case KeyEvent.VK_W:
 						if (place == UP && !isJudged) {
-							if (y < 600) {
-								break;
-							}
-							if (perfectZone()) {
-								System.out.println("퍼펙트");
-								playerService.getScore().perfect();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (excellentZone()) {
-								System.out.println("엑설런트");
-								playerService.getScore().excellent();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (goodZone()) {
-								System.out.println("굿");
-								playerService.getScore().good();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else {
-								System.out.println("배드");
-								playerService.getScore().bad();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							}
+							judge();
 						}
 						break;
-					case KeyEvent.VK_RIGHT :
+					case KeyEvent.VK_D:
 						if (place == RIGHT && !isJudged) {
-							if (y < 600) {
-								break;
-							}
-							if (perfectZone()) {
-								System.out.println("퍼펙트");
-								playerService.getScore().perfect();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (excellentZone()) {
-								System.out.println("엑설런트");
-								playerService.getScore().excellent();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (goodZone()) {
-								System.out.println("굿");
-								playerService.getScore().good();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else {
-								System.out.println("배드");
-								playerService.getScore().bad();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							}
+							judge();
 						}
 						break;
-					case KeyEvent.VK_DOWN :
+					case KeyEvent.VK_S:
 						if (place == DOWN && !isJudged) {
-							if (y < 600) {
-								break;
-							}
-							if (perfectZone()) {
-								System.out.println("퍼펙트");
-								playerService.getScore().perfect();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (excellentZone()) {
-								System.out.println("엑설런트");
-								playerService.getScore().excellent();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else if (goodZone()) {
-								System.out.println("굿");
-								playerService.getScore().good();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							} else {
-								System.out.println("배드");
-								playerService.getScore().bad();
-								isJudged = true;
-								drop = false;
-								setIcon(null);
-							}
+							judge();
 						}
 						break;
-					default :
+					default:
 						break;
+					}
+				} else if (player == 2) {
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_LEFT:
+						if (place == LEFT && !isJudged) {
+							judge();
+						}
+						break;
+					case KeyEvent.VK_UP:
+						if (place == UP && !isJudged) {
+							judge();
+						}
+						break;
+					case KeyEvent.VK_RIGHT:
+						if (place == RIGHT && !isJudged) {
+							judge();
+						}
+						break;
+					case KeyEvent.VK_DOWN:
+						if (place == DOWN && !isJudged) {
+							judge();
+						}
+						break;
+					default:
+						break;
+					}
 				}
 			}
 		});
@@ -236,8 +205,8 @@ public class DropNote extends JLabel implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			drop();
 			if (drop) {
+				drop();
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
