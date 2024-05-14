@@ -18,7 +18,7 @@ public class DeathNote extends JLabel implements Runnable {
 	protected ImageIcon note_Img;
 	protected ImageIcon note_Img_P;
 	protected final int NOTE_WIDTH = 80;
-	protected final int NOTE_HIGHT = 70;
+	protected final int NOTE_HIGHT = 80;
 	protected  final int NOTE_Y_LOCATION = 200;
 	protected  int location_X;
 	
@@ -46,8 +46,8 @@ public class DeathNote extends JLabel implements Runnable {
 					e.printStackTrace();
 				}
 				if (redIsGood == 0) {
-					
-						testFrame.add(new DeathNoteCircle(this, testFrame));
+						deathNoteCircle = new DeathNoteCircle(this, testFrame);
+						testFrame.add(deathNoteCircle);
 					
 				} else {
 				}
@@ -84,35 +84,14 @@ public class DeathNote extends JLabel implements Runnable {
 		return location_X;
 	}
 
-	
+	@Override
 	public void run() {
-		gameStart = true;
-		while (gameStart) {
-			if (keyIsPressed) {
-				keypresed();
-				if (deathNoteCircle.circleExcellentZone()) { 
-					playerService.getScore().perfect();
-					System.out.println("excellent");
-					isJudged = true;
-				} else if (deathNoteCircle.circlePerfecttZone()) {
-					playerService.getScore().perfect();
-					System.out.println("perfect");
-					isJudged = true;
-				} else if (deathNoteCircle.circleGoodZone()) {
-					playerService.getScore().perfect();
-					System.out.println("good");
-					isJudged = true;
-				} else {
-					playerService.getScore().perfect();
-					System.out.println("bad");
-					isJudged = true;
-				}
-				break;
-			} // end of if
+		// TODO Auto-generated method stub
+		
+	}
 
-		} // end of while
-
-	} // end of run
+	
+	
 
 	
 	

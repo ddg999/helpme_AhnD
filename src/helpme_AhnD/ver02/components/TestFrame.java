@@ -8,6 +8,9 @@ public class TestFrame extends JFrame {
 	private static AhnCharacter ahnCharacter;
 	
 	DeathNoteRight deathNoteRight;
+	DeathNoteLeft deathNoteLeft;
+	DeathNoteUp deathNoteUp;
+	DeathNoteDown deathNoteDown;
 	PlayerService_js playerService;
 	
 	public TestFrame() {
@@ -29,6 +32,9 @@ public class TestFrame extends JFrame {
 		
 		ahnCharacter = new AhnCharacter();
 		deathNoteRight = new  DeathNoteRight(80, this);
+		deathNoteLeft = new DeathNoteLeft(180, this);
+		deathNoteUp = new DeathNoteUp(280, this);
+		deathNoteDown = new DeathNoteDown(380, this);
 		playerService = new PlayerService_js(this);
 		//new DeathNoteCircle();
 	}
@@ -40,7 +46,9 @@ public class TestFrame extends JFrame {
 
 		add(ahnCharacter);
 		add(deathNoteRight);
-		
+		add(deathNoteLeft);		
+		add(deathNoteUp);		
+		add(deathNoteDown);		
 
 	}
 

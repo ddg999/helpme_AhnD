@@ -13,17 +13,17 @@ import helpme_AhnD.ver02.service.DeathNoteService;
 import helpme_AhnD.ver02.service.PlayerService;
 import helpme_AhnD.ver02.service.PlayerService_js;
 
-public class DeathNoteLeft extends DeathNote implements Runnable {
-	DeathNoteLeft deathNoteLeft;
+public class DeathNoteUp extends DeathNote implements Runnable {
+	DeathNoteUp deathNoteUp;
 	PlayerService_js playerService;
 
 	protected boolean keyIsPressed = true;
 	protected boolean isJudged = false;
 	private int EXCELLENT_CIRCLE;
 
-	public DeathNoteLeft(int x, TestFrame testFrame) {
+	public DeathNoteUp(int x, TestFrame testFrame) {
 		super(x, testFrame);
-		deathNoteLeft = this;
+		deathNoteUp = this;
 		addEventListener();
 		
 	}
@@ -38,8 +38,8 @@ public class DeathNoteLeft extends DeathNote implements Runnable {
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
 
-				case KeyEvent.VK_LEFT:
-					new Thread(deathNoteLeft).start();
+				case KeyEvent.VK_UP:
+					new Thread(deathNoteUp).start();
 
 					break;
 
@@ -54,7 +54,7 @@ public class DeathNoteLeft extends DeathNote implements Runnable {
 				
 				switch (e.getKeyCode()) {
 
-				case KeyEvent.VK_LEFT:
+				case KeyEvent.VK_UP:
 						setIcon(note_Img);
 
 					break;

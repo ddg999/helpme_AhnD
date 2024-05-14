@@ -25,6 +25,7 @@ public class DeathNoteRight extends DeathNote implements Runnable {
 		super(x, testFrame);
 		deathNoteRight = this;
 		addEventListener();
+		
 	}
 	
 	
@@ -71,27 +72,34 @@ public class DeathNoteRight extends DeathNote implements Runnable {
 			if (keyIsPressed) {
 				keypresed();
 				if (deathNoteCircle.circleExcellentZone()) { 
-					playerService.getScore().excellent();
+					//playerService.getScore().excellent();
 					System.out.println("excellent");
 					isJudged = true;
+					break;
 				} else if (deathNoteCircle.circlePerfecttZone()) {
-					playerService.getScore().perfect();
+					//playerService.getScore().perfect();
 					System.out.println("perfect");
 					isJudged = true;
-				} else if (deathNoteCircle.GOOD_CIRCLE == deathNoteCircle.checkNow) {
-					playerService.getScore().good();
+					break;
+				} else if (deathNoteCircle.circleGoodZone()) {
+					//playerService.getScore().good();
 					System.out.println("good");
 					isJudged = true;
-				} else {
-					playerService.getScore().bad();
+					break;
+				} else if(deathNoteCircle.circleBadOverZone()) {
+					//playerService.getScore().bad();
 					System.out.println("bad");
 					isJudged = true;
+					break;
 				}
+			
 				break;
 			} // end of if
 			
 		} // end of while
 
 	} // end of run
+	
+	
 
 }
