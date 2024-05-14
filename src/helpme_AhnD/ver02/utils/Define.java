@@ -4,10 +4,10 @@ public class Define {
 	
 	// 초기 화면 이미지
 	public final static String IMG_MAINFRAME_BG = "images/mainFrame/IMG_MAINFRAME_BG.jpg";
-	public final static String IMG_MAINFRAME_START = "images/mainFrame/IMG_MAINFRAME_START.png";
-	public final static String IMG_MAINFRAME_STARTED = "images/mainFrame/IMG_MAINFRAME_STARTED.png";
-	public final static String IMG_MAINFRAME_EXIT = "images/mainFrame/IMG_MAINFRAME_EXIT.png";
-	public final static String IMG_MAINFRAME_EXITED = "images/mainFrame/IMG_MAINFRAME_EXITED.png";
+	public final static String IMG_MAINFRAME_START = "images/mainFrame/IMG_MAINFRAME_START.gif";
+	public final static String IMG_MAINFRAME_STARTED = "images/mainFrame/IMG_MAINFRAME_STARTED.gif";
+	public final static String IMG_MAINFRAME_EXIT = "images/mainFrame/IMG_MAINFRAME_EXIT.gif";
+	public final static String IMG_MAINFRAME_EXITED = "images/mainFrame/IMG_MAINFRAME_EXITED.gif";
 	public final static String IMG_MAINFRAME_SET = "images/mainFrame/IMG_MAINFRAME_SET.png";
 	
 	// 게임 선택 화면 이미지
@@ -28,9 +28,10 @@ public class Define {
 	public final static String IMG_SELECTFRAME_ARROWRIGHTCLICK = "images/selectFrame/IMG_SELECTFRAME_ARROWRIGHTCLICK.png";
 	public final static String IMG_SELECTFRAME_MUSICPLAY = "images/selectFrame/IMG_SELECTFRAME_MUSICPLAY.png";
 	public final static String IMG_SELECTFRAME_MUSICSTOP = "images/selectFrame/IMG_SELECTFRAME_MUSICSTOP.png";
-	public final static String IMG_SELECTFRAME_START = "images/selectFrame/IMG_SELECTFRAME_START.png";
-	public final static String IMG_SELECTFRAME_BACK = "images/selectFrame/IMG_SELECTFRAME_BACK.png";
-	public final static String IMG_SELECTFRAME_BACKCLICK = "images/selectFrame/IMG_SELECTFRAME_BACKCLICK.png";
+	public final static String IMG_SELECTFRAME_START = "images/selectFrame/IMG_SELECTFRAME_START.gif";
+	public final static String IMG_SELECTFRAME_STARTCLICK = "images/selectFrame/IMG_SELECTFRAME_STARTCLICK.gif";
+	public final static String IMG_SELECTFRAME_BACK = "images/selectFrame/IMG_SELECTFRAME_BACK.gif";
+	public final static String IMG_SELECTFRAME_BACKCLICK = "images/selectFrame/IMG_SELECTFRAME_BACKCLICK.gif";
 	
 	// 인게임 이미지
 	public final static String IMG_DROPNOTE_NOTE = "images/dropNote/IMG_DROPNOTE_NOTE.png";

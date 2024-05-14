@@ -74,7 +74,7 @@ public class AhnteacherFrame_modify extends JFrame {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (isStartButton(e.getX(),e.getY())) {
+				if (isStartButton(e.getX(), e.getY())) {
 					startButton.setIcon(
 							new ImageIcon(Define.IMG_MAINFRAME_STARTED));
 				} else if (isExitButton(e.getX(), e.getY())) {
@@ -82,12 +82,12 @@ public class AhnteacherFrame_modify extends JFrame {
 							new ImageIcon(Define.IMG_MAINFRAME_EXITED));
 				}
 			}
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (isStartButton(e.getX(),e.getY())) {
-					startButton.setIcon(
-							new ImageIcon(Define.IMG_MAINFRAME_START));
+				if (isStartButton(e.getX(), e.getY())) {
+					startButton
+							.setIcon(new ImageIcon(Define.IMG_MAINFRAME_START));
 					setVisible(false);
 					new GameSelectFrame(mContext);
 				} else if (isExitButton(e.getX(), e.getY())) {
@@ -135,7 +135,7 @@ public class AhnteacherFrame_modify extends JFrame {
 		}
 		return false;
 	}
-	
+
 	public boolean isExitButton(int x, int y) {
 		if (616 <= x && x <= 984 && 650 <= y && y <= 774) {
 			return true;
