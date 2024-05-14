@@ -1,15 +1,15 @@
-package helpme_AhnD.ver02.components;
+package helpme_AhnD.ver02.components.item;
 
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 import helpme_AhnD.ver02.utils.Define;
 
-public class ItemReverse extends Items implements Useable {
+public class Reverse extends Items implements Useable {
 
 	private ImageIcon reverse; // 점수 2배
 
-	public ItemReverse() {
+	public Reverse() {
 		initData();
 		setInitLayout();
 	}

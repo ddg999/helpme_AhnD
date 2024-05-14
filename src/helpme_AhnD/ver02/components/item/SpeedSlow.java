@@ -1,14 +1,14 @@
-package helpme_AhnD.ver02.components;
+package helpme_AhnD.ver02.components.item;
 
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 
-public class ItemSpeedSlow extends Items implements Useable{
+public class SpeedSlow extends Items implements Useable{
 	
 	private ImageIcon itemSpeedSlow;
 
-	public ItemSpeedSlow() {
+	public SpeedSlow() {
 		initData();
 		setInitLayout();
 	}

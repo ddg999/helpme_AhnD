@@ -1,4 +1,4 @@
-package helpme_AhnD.ver02.components;
+package helpme_AhnD.ver02.components.item;
 
 import javax.swing.JLabel;
 

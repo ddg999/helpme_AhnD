@@ -1,14 +1,14 @@
-package helpme_AhnD.ver02.components;
+package helpme_AhnD.ver02.components.item;
 
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 
-public class ItemNotPerfect extends Items implements Useable{
+public class NeverPerfect extends Items implements Useable{
 
 	private ImageIcon itemNotPerfect;
 	
-	public ItemNotPerfect() {
+	public NeverPerfect() {
 		initData();
 		setInitLayout();
 	}

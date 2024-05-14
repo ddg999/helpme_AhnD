@@ -1,15 +1,15 @@
-package helpme_AhnD.ver02.components;
+package helpme_AhnD.ver02.components.item;
 
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 import helpme_AhnD.ver02.utils.Define;
 
-public class ItemScoreDouble extends Items implements Useable{
+public class ScoreDouble extends Items implements Useable{
 
 	private ImageIcon scoreDouble; // 점수 2배
 
-	public ItemScoreDouble() {
+	public ScoreDouble() {
 		initData();
 		setInitLayout();
 	}

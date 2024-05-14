@@ -1,4 +1,4 @@
-package helpme_AhnD.ver02.components;
+package helpme_AhnD.ver02.components.item;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -7,13 +7,13 @@ import helpme_AhnD.ver02.interfaces.Useable;
 import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
-public class ItemBomb extends Items implements Useable {
+public class Bomb extends Items implements Useable {
 
 	private ImageIcon bomb; // 화면 숨김
 	private ImageIcon bombImg;
 	private JLabel bombImgLabel;
 	
-	public ItemBomb() {
+	public Bomb() {
 		initData();
 		setInitLayout();
 	}

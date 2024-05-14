@@ -1,82 +1,156 @@
 package helpme_AhnD.ver02.Frame;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import helpme_AhnD.ver02.utils.Define;
+import helpme_AhnD.ver02.service.BGM;
+import helpme_AhnD.ver02.service.BGMService;
 
-public class SoundSettingFrame extends JFrame{
+public class SoundSettingFrame extends JPanel {
 
-	private JLabel soundBackground;	// 배경
-	private JLabel musicButton;		// 음악 재생 버튼
-	private JLabel soundVolume;		// 음향
-	private JLabel soundLeft;		// 왼쪽 음악 아이콘
-	private JLabel soundRight;		// 오른쪽 음악 아이콘
-	
+	private MainFrame mContext;
+
+	private JLabel soundBackground; // 배경
+	private JLabel musicButton; // 음악 재생 버튼
+	private JLabel soundLeft; // 왼쪽 음악 아이콘
+	private JLabel soundRight; // 오른쪽 음악 아이콘
+	private JLabel soundVolume; // 음향
+
 	private ImageIcon musicOnImg;
 	private ImageIcon musicOffImg;
 	private ImageIcon[] volume;
 	
-	public SoundSettingFrame() {
+	private BGM bgm;
+	private boolean isPlay;
+
+	public SoundSettingFrame(MainFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
+		addEventListener();
 	}
-	
+
 	private void initData() {
-		
-		setTitle("음향 조절");
+
 		setSize(368, 200);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null); // 화면 중앙에 프레임 위치
-		
+
 		soundBackground = new JLabel(new ImageIcon("images/sound/soundSetting.png"));
 		soundLeft = new JLabel(new ImageIcon("images/sound/soundLeft.png"));
 		soundRight = new JLabel(new ImageIcon("images/sound/soundRight.png"));
 		musicButton = new JLabel(new ImageIcon("images/sound/soundOn.png"));
-		
+
 		volume = new ImageIcon[5];
-		volume[0] = new ImageIcon("images/sound/soundFull.png");
-		volume[1] = new ImageIcon("images/sound/sound75.png");
-		volume[2] = new ImageIcon("images/sound/sound50.png");
-		volume[3] = new ImageIcon("images/sound/sound25.png");
-		volume[4] = new ImageIcon("images/sound/sound0.png");
-		soundVolume = new JLabel(volume[0]);
-		
+		volume[BGMService.VOLUME_FULL] = new ImageIcon("images/sound/soundFull.png");
+		volume[BGMService.VOLUME_75] = new ImageIcon("images/sound/sound75.png");
+		volume[BGMService.VOLUME_DEFAULT] = new ImageIcon("images/sound/sound50.png");
+		volume[BGMService.VOLUME_25] = new ImageIcon("images/sound/sound25.png");
+		volume[BGMService.VOLUME_NULL] = new ImageIcon("images/sound/sound0.png");
+		soundVolume = new JLabel(volume[BGMService.VOLUME_DEFAULT]);
+
 	}
-	
+
 	private void setInitLayout() {
 
-		setResizable(false);
-		
 		add(soundBackground);
 		soundBackground.setSize(351, 173);
 		soundBackground.setLocation(0, 0);
-		
+
 		soundBackground.add(soundLeft);
 		soundLeft.setSize(24, 27);
 		soundLeft.setLocation(14, 67);
-		
+
 		soundBackground.add(soundVolume);
 		soundVolume.setSize(268, 39);
 		soundVolume.setLocation(40, 60);
-		
+
 		soundBackground.add(soundRight);
 		soundRight.setSize(29, 26);
 		soundRight.setLocation(310, 67);
-		
+
 		soundBackground.add(musicButton);
 		musicButton.setSize(35, 35);
 		musicButton.setLocation(10, 105);
-		
+
 		setLayout(null);
 		setVisible(true);
 	}
-	
-	
-	public static void main(String[] args) {
-		new SoundSettingFrame();
+
+	private void addEventListener() {
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// 볼륨 조절 창 좌표 확인
+				if (70 <= e.getY() && e.getY() <= 90) {
+					if (60 <= e.getX() && e.getX() < 95) {
+						// 이미지 변경, 소리값 변경
+						soundVolume.setIcon(volume[BGMService.VOLUME_NULL]);
+						BGMService.setVolumeLevel(BGMService.VOLUME_NULL);
+						// 이미 음악이 나오고 있다면 실시간 변경
+						if (bgm != null) {
+							bgm.getGainControl().setValue(BGMService.getVolume(BGMService.VOLUME_NULL));
+						}
+					}
+					if (95 <= e.getX() && e.getX() < 145) {
+						// 이미지 변경, 소리값 변경
+						soundVolume.setIcon(volume[BGMService.VOLUME_25]);
+						BGMService.setVolumeLevel(BGMService.VOLUME_25);
+						// 이미 음악이 나오고 있다면 실시간 변경
+						if (bgm != null) {
+							bgm.getGainControl().setValue(BGMService.getVolume(BGMService.VOLUME_25));
+						}
+					}
+					if (145 <= e.getX() && e.getX() < 195) {
+						// 이미지 변경, 소리값 변경
+						soundVolume.setIcon(volume[BGMService.VOLUME_DEFAULT]);
+						BGMService.setVolumeLevel(BGMService.VOLUME_DEFAULT);
+						// 이미 음악이 나오고 있다면 실시간 변경
+						if (bgm != null) {
+							bgm.getGainControl().setValue(BGMService.getVolume(BGMService.VOLUME_DEFAULT));
+						}
+					}
+					if (195 <= e.getX() && e.getX() < 245) {
+						// 이미지 변경, 소리값 변경
+						soundVolume.setIcon(volume[BGMService.VOLUME_75]);
+						BGMService.setVolumeLevel(BGMService.VOLUME_75);
+						// 이미 음악이 나오고 있다면 실시간 변경
+						if (bgm != null) {
+							bgm.getGainControl().setValue(BGMService.getVolume(BGMService.VOLUME_75));
+						}
+					}
+					if (245 <= e.getX() && e.getX() < 270) {
+						// 이미지 변경, 소리값 변경
+						soundVolume.setIcon(volume[BGMService.VOLUME_FULL]);
+						BGMService.setVolumeLevel(BGMService.VOLUME_FULL);
+						// 이미 음악이 나오고 있다면 실시간 변경
+						if (bgm != null) {
+							bgm.getGainControl().setValue(BGMService.getVolume(BGMService.VOLUME_FULL));
+						}
+					}
+				}
+				// 버튼 누르면 음악 재생, 중지 반복
+				if (isMusicButton(e.getX(),e.getY())) {
+					if (!isPlay) {
+						bgm = mContext.getBgmService().createBGM();
+						bgm.getClip().start();
+						isPlay = true;
+					} else {
+						bgm.getClip().close();
+						isPlay = false;
+					}
+				}
+			}
+		});
 	}
-	
+
+	private boolean isMusicButton(int x, int y) {
+		if (15 <= x && x <= 15 + 35 && 110 <= y && y <= 145) {
+			return true;
+		}
+		return false;
+	}
+
 }

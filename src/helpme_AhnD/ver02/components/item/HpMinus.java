@@ -1,15 +1,15 @@
-package helpme_AhnD.ver02.components;
+package helpme_AhnD.ver02.components.item;
 
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 import helpme_AhnD.ver02.utils.Define;
 
-public class ItemHpMinus extends Items implements Useable{
+public class HpMinus extends Items implements Useable{
 
 	private ImageIcon hpMinus; // 체력 -10
 	
-	public ItemHpMinus() {
+	public HpMinus() {
 		initData();
 		setInitLayout();
 	}

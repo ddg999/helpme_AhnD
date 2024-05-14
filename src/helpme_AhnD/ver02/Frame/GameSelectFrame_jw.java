@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import helpme_AhnD.ver02.AhnteacherFrame_modify;
 import helpme_AhnD.ver02.AhnteacherFrame_modify_jw;
 import helpme_AhnD.ver02.service.BGM;
 import helpme_AhnD.ver02.service.BGMService;
