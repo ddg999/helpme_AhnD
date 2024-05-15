@@ -3,10 +3,11 @@ package helpme_AhnD.ver02.components.item;
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.utils.Define;
 
 public class NeverPerfect extends Items implements Useable{
 
-	private ImageIcon itemNotPerfect;
+	private ImageIcon neverPerfect;
 	
 	public NeverPerfect() {
 		initData();
@@ -14,15 +15,15 @@ public class NeverPerfect extends Items implements Useable{
 	}
 
 	private void initData() {
-		itemNotPerfect = new ImageIcon("images/allperfect.png");
+		neverPerfect = new ImageIcon(Define.IMG_ITEMS_NEVERPERFECT);
 	}
 	
 	private void setInitLayout() {
-		setIcon(itemNotPerfect);
+		setIcon(neverPerfect);
 		setSize(50, 50);
 		setLocation(x, y);
 	}
 	
-	// todo 전부 퍼펙트 아님
+	// todo 퍼펙트 불가
 	
 }

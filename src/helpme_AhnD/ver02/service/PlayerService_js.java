@@ -17,7 +17,7 @@ public class PlayerService_js implements Runnable {
 	public PlayerService_js(TestFrame testFrame) {
 		this.mContext = testFrame;
 		player = new AhnCharacter();
-		score = new Score();
+		score = new Score(1);
 	
 	}
 

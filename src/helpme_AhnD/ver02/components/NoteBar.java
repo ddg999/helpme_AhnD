@@ -3,19 +3,19 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.Frame.FirstGameFrame;
+import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.utils.Define;
 
 public class NoteBar extends JLabel {
 
-	FirstGameFrame mContext;
+	DropNoteFrame mContext;
 	private ImageIcon noteBar;
 	private int player;
 
 	private int x;
 	private int y;
 
-	public NoteBar(FirstGameFrame mContext, int player) {
+	public NoteBar(DropNoteFrame mContext, int player) {
 		this.mContext = mContext;
 		this.player = player;
 		initData();

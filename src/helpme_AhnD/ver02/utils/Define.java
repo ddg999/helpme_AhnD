@@ -10,6 +10,18 @@ public class Define {
 	public final static String IMG_MAINFRAME_EXITED = "images/mainFrame/IMG_MAINFRAME_EXITED.gif";
 	public final static String IMG_MAINFRAME_SET = "images/mainFrame/IMG_MAINFRAME_SET.png";
 	
+	// 소리 설정 화면 이미지
+	public final static String IMG_SOUNDSETTINGFRAME_BG = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_BG";
+	public final static String IMG_SOUNDSETTINGFRAME_LOW = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_LOW";
+	public final static String IMG_SOUNDSETTINGFRAME_HIGH = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_HIGH";
+	public final static String IMG_SOUNDSETTINGFRAME_MUSICON = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_MUSICON";
+	public final static String IMG_SOUNDSETTINGFRAME_MUSICOFF = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_MUSICOFF";
+	public final static String IMG_SOUNDSETTINGFRAME_VOULUME_FULL = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_FULL";
+	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_75 = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_75";
+	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT";
+	public final static String IMG_SOUNDSETTINGFRAME_VOULUME_25 = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_25";
+	public final static String IMG_SOUNDSETTINGFRAME_VOULUME_NULL = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_NULL";
+	
 	// 게임 선택 화면 이미지
 	public final static String IMG_SELECTFRAME_BG = "images/selectFrame/IMG_SELECTFRAME_BG.jpg";
 	public final static String IMG_SELECTFRAME_FIRSTMUSIC = "images/selectFrame/IMG_SELECTFRAME_FIRSTMUSIC.jpg";
@@ -56,4 +68,8 @@ public class Define {
 	public final static String IMG_ITEMS_BOMB_IMG = "images/item/IMG_ITEMS_BOMB_IMG.png";
 	public final static String IMG_ITEMS_SCOREDOUBLE = "images/item/IMG_ITEMS_SCOREDOUBLE.png";
 	public final static String IMG_ITEMS_REVERSE = "images/item/IMG_ITEMS_REVERSE.png";
+	public final static String IMG_ITEMS_ALLPERFECT = "images/item/IMG_ITEMS_ALLPERFECT.png";
+	public final static String IMG_ITEMS_FAST = "images/item/IMG_ITEMS_FAST.png";
+	public final static String IMG_ITEMS_SLOW = "images/item/IMG_ITEMS_SLOW.png";
+	public final static String IMG_ITEMS_NEVERPERFECT = "images/item/IMG_ITEMS_NEVERPERFECT.png";
 }

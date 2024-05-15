@@ -10,10 +10,10 @@ public class BGMService {
 	public static final int VOLUME_75 = 3;// -20.0f;
 	public static final int VOLUME_DEFAULT = 2;// -30.0f;
 	public static final int VOLUME_25 = 1;// -40.0f;
-	public static final int VOLUME_NULL = 0;// -50.0f;
+	public static final int VOLUME_NULL = 0;// -80.0f;
 	private static int volumeLevel = VOLUME_DEFAULT;
 	// 외부에서 볼륨을 조정하기 위해 static 으로 선언
-	private static float[] volume = { -10.0f, -20.0f, -30.0f, -40.0f, -50.0f };
+	private static float[] volume = { -80.0f, -40.0f, -30.0f, -20.0f, -10.0f };
 	
 	
 	public BGMService() {

@@ -3,6 +3,7 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
 
 public class HpBox extends JLabel {
@@ -12,7 +13,6 @@ public class HpBox extends JLabel {
 
 	private int x;
 	private int y = 180;
-	private boolean isRun = true; // 게임 실행중
 
 	private ImageIcon hpFull;
 	private ImageIcon hpHalf;
@@ -52,8 +52,8 @@ public class HpBox extends JLabel {
 
 		@Override
 		public void run() {
-			while (isRun) {
-				while (isRun) {
+			while (DropNoteFrame.isRunning()) {
+				while (DropNoteFrame.isRunning()) {
 					if (playerService.getScore().getHp() >= 20) {
 						setIcon(hpFull);
 					} else if (playerService.getScore().getHp() >= 10) {
@@ -96,8 +96,8 @@ public class HpBox extends JLabel {
 
 		@Override
 		public void run() {
-			while (isRun) {
-				while (isRun) {
+			while (DropNoteFrame.isRunning()) {
+				while (DropNoteFrame.isRunning()) {
 					if (playerService.getScore().getHp() >= 40) {
 						setIcon(hpFull);
 					} else if (playerService.getScore().getHp() >= 30) {
@@ -140,7 +140,7 @@ public class HpBox extends JLabel {
 
 		@Override
 		public void run() {
-			while (isRun) {
+			while (DropNoteFrame.isRunning()) {
 				if (playerService.getScore().getHp() >= 60) {
 					setIcon(hpFull);
 				} else if (playerService.getScore().getHp() >= 50) {

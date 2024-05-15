@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import helpme_AhnD.ver02.service.BGM;
 import helpme_AhnD.ver02.service.BGMService;
+import helpme_AhnD.ver02.utils.Define;
 
 public class SoundSettingFrame extends JPanel {
 
@@ -16,14 +17,12 @@ public class SoundSettingFrame extends JPanel {
 
 	private JLabel soundBackground; // 배경
 	private JLabel musicButton; // 음악 재생 버튼
-	private JLabel soundLeft; // 왼쪽 음악 아이콘
-	private JLabel soundRight; // 오른쪽 음악 아이콘
+	private JLabel soundLow; // 왼쪽 음악 아이콘
+	private JLabel soundHigh; // 오른쪽 음악 아이콘
 	private JLabel soundVolume; // 음향
 
-	private ImageIcon musicOnImg;
-	private ImageIcon musicOffImg;
 	private ImageIcon[] volume;
-	
+
 	private BGM bgm;
 	private boolean isPlay;
 
@@ -38,17 +37,17 @@ public class SoundSettingFrame extends JPanel {
 
 		setSize(368, 200);
 
-		soundBackground = new JLabel(new ImageIcon("images/sound/soundSetting.png"));
-		soundLeft = new JLabel(new ImageIcon("images/sound/soundLeft.png"));
-		soundRight = new JLabel(new ImageIcon("images/sound/soundRight.png"));
-		musicButton = new JLabel(new ImageIcon("images/sound/soundOn.png"));
+		soundBackground = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_BG));
+		soundLow = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_BG));
+		soundHigh = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_HIGH));
+		musicButton = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_MUSICON));
 
 		volume = new ImageIcon[5];
-		volume[BGMService.VOLUME_FULL] = new ImageIcon("images/sound/soundFull.png");
-		volume[BGMService.VOLUME_75] = new ImageIcon("images/sound/sound75.png");
-		volume[BGMService.VOLUME_DEFAULT] = new ImageIcon("images/sound/sound50.png");
-		volume[BGMService.VOLUME_25] = new ImageIcon("images/sound/sound25.png");
-		volume[BGMService.VOLUME_NULL] = new ImageIcon("images/sound/sound0.png");
+		volume[BGMService.VOLUME_FULL] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOULUME_FULL);
+		volume[BGMService.VOLUME_75] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOLUME_75);
+		volume[BGMService.VOLUME_DEFAULT] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT);
+		volume[BGMService.VOLUME_25] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOULUME_25);
+		volume[BGMService.VOLUME_NULL] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOULUME_NULL);
 		soundVolume = new JLabel(volume[BGMService.VOLUME_DEFAULT]);
 
 	}
@@ -59,17 +58,17 @@ public class SoundSettingFrame extends JPanel {
 		soundBackground.setSize(351, 173);
 		soundBackground.setLocation(0, 0);
 
-		soundBackground.add(soundLeft);
-		soundLeft.setSize(24, 27);
-		soundLeft.setLocation(14, 67);
+		soundBackground.add(soundLow);
+		soundLow.setSize(24, 27);
+		soundLow.setLocation(14, 67);
 
 		soundBackground.add(soundVolume);
 		soundVolume.setSize(268, 39);
 		soundVolume.setLocation(40, 60);
 
-		soundBackground.add(soundRight);
-		soundRight.setSize(29, 26);
-		soundRight.setLocation(310, 67);
+		soundBackground.add(soundHigh);
+		soundHigh.setSize(29, 26);
+		soundHigh.setLocation(310, 67);
 
 		soundBackground.add(musicButton);
 		musicButton.setSize(35, 35);
@@ -121,7 +120,7 @@ public class SoundSettingFrame extends JPanel {
 							bgm.getGainControl().setValue(BGMService.getVolume(BGMService.VOLUME_75));
 						}
 					}
-					if (245 <= e.getX() && e.getX() < 270) {
+					if (245 <= e.getX() && e.getX() < 290) {
 						// 이미지 변경, 소리값 변경
 						soundVolume.setIcon(volume[BGMService.VOLUME_FULL]);
 						BGMService.setVolumeLevel(BGMService.VOLUME_FULL);
@@ -132,13 +131,15 @@ public class SoundSettingFrame extends JPanel {
 					}
 				}
 				// 버튼 누르면 음악 재생, 중지 반복
-				if (isMusicButton(e.getX(),e.getY())) {
+				if (isMusicButton(e.getX(), e.getY())) {
 					if (!isPlay) {
 						bgm = mContext.getBgmService().createBGM();
 						bgm.getClip().start();
+						musicButton.setIcon(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_MUSICOFF));
 						isPlay = true;
 					} else {
 						bgm.getClip().close();
+						musicButton.setIcon(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_MUSICON));
 						isPlay = false;
 					}
 				}
@@ -151,6 +152,11 @@ public class SoundSettingFrame extends JPanel {
 			return true;
 		}
 		return false;
+	}
+
+	// getter
+	public BGM getBgm() {
+		return bgm;
 	}
 
 }

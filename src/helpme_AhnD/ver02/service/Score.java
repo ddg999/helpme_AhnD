@@ -31,13 +31,13 @@ public class Score {
 	public void perfect() {
 		score += 3;
 		combo++;
-		countExcellent++;
+		countPerfect++;
 	}
 
 	public void excellent() {
 		score += 2;
 		combo++;
-		countPerfect++;
+		countExcellent++;
 	}
 
 	public void good() {

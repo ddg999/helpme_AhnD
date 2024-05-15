@@ -19,6 +19,8 @@ public class GameSelectFrame extends JFrame {
 
 	// 메인 프레임 참조
 	private MainFrame mContext;
+	// 셀프 참조
+	private GameSelectFrame thisFrame;
 
 	// 라벨
 	private JLabel background; // background
@@ -60,6 +62,7 @@ public class GameSelectFrame extends JFrame {
 
 	public GameSelectFrame(MainFrame mContext) {
 		this.mContext = mContext;
+		thisFrame = this;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -222,6 +225,12 @@ public class GameSelectFrame extends JFrame {
 				case KeyEvent.VK_S:
 					startButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_START));
 					// todo 게임 시작
+					switch (selectNumber) {
+					case GAMENAME_DROPNOTE :
+						new DropNoteFrame(thisFrame);
+						setVisible(false);
+						break;
+					}
 					break;
 				case KeyEvent.VK_BACK_SPACE:
 					backButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_BACK));
@@ -382,6 +391,12 @@ public class GameSelectFrame extends JFrame {
 			return true;
 		}
 		return false;
+	}
+
+	
+	// getter
+	public MainFrame getmContext() {
+		return mContext;
 	}
 
 }// end of class

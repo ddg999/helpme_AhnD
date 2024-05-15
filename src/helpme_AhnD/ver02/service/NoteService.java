@@ -2,7 +2,7 @@ package helpme_AhnD.ver02.service;
 
 import java.awt.event.KeyEvent;
 
-import helpme_AhnD.ver02.Frame.FirstGameFrame;
+import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.components.Note;
 import helpme_AhnD.ver02.components.NoteCircle;
 
@@ -19,8 +19,8 @@ public class NoteService extends Thread{
 	private boolean isLeftPressed;
 	private boolean isRightPressed;
 	private boolean isDownPressed;
-	private FirstGameFrame mContext;
-	public NoteService(FirstGameFrame mContext) {
+	private DropNoteFrame mContext;
+	public NoteService(DropNoteFrame mContext) {
 		this.mContext = mContext;
 		isRun = true;
 		this.start();

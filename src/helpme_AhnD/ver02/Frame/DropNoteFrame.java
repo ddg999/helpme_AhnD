@@ -4,18 +4,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.components.ItemBox;
 import helpme_AhnD.ver02.components.NoteBar;
+import helpme_AhnD.ver02.service.BGM;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
 import helpme_AhnD.ver02.utils.Define;
 
-public class FirstGameFrame extends JFrame {
-
+public class DropNoteFrame extends JFrame {
+	
+	// 게임 종료시 최종적으로 게임선택화면으로 돌아가기 위해 필요함
+	GameSelectFrame gameSelectFrame;
+	
 	JLabel background;
 	DropNotePlayerService dropNotePlayerService1;
 	DropNotePlayerService dropNotePlayerService2;
-	NoteBar noteBar;
+	NoteBar noteBarLeft;
+	NoteBar noteBarRight;
+	BGM bgm;
+	
+	ItemBox itembox;
+	private static boolean Running;
 
-	public FirstGameFrame() {
+	public DropNoteFrame(GameSelectFrame gameSelectFrame) {
+		this.gameSelectFrame = gameSelectFrame;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -24,18 +35,22 @@ public class FirstGameFrame extends JFrame {
 	private void initData() {
 		// todo 각종 라벨 추가 예정
 		background = new JLabel(new ImageIcon(Define.IMG_FIRSTGAME_BG));
-
-		setTitle("첫번째 게임");
-		setSize(1600, 900);
+		
+		Running = true;
+		setTitle("DropNote");
+		setSize(MainFrame.FRAME_WIDTH, MainFrame.FRAME_HEIGHT);
 		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		noteBar = new NoteBar(this, 1);
-		noteBar = new NoteBar(this, 2);
+		noteBarLeft = new NoteBar(this, 1);
+		noteBarRight = new NoteBar(this, 2);
 		dropNotePlayerService1 = new DropNotePlayerService(this, 1);
 		dropNotePlayerService2 = new DropNotePlayerService(this, 2);
 		new Thread(dropNotePlayerService1).start();
 		new Thread(dropNotePlayerService2).start();
+		itembox = new ItemBox(this);
+		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
+		bgm.getClip().start();
 	}
 
 	private void setInitLayout() {
@@ -48,11 +63,17 @@ public class FirstGameFrame extends JFrame {
 	}
 
 	private void addEventListener() {
-
+		
 	}
 
-	// 코드 테스트 ( 최종은 지워야함 )
-	public static void main(String[] args) {
-		new FirstGameFrame();
+	
+	// getter setter
+	public static boolean isRunning() {
+		return Running;
 	}
+	
+	public static void setRunning(boolean running) {
+		Running = running;
+	}
+	
 }

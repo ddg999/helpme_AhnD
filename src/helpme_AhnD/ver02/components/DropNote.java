@@ -7,13 +7,13 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.Frame.FirstGameFrame;
+import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
 import helpme_AhnD.ver02.utils.Define;
 
 public class DropNote extends JLabel implements Runnable {
 
-	FirstGameFrame mContext;
+	DropNoteFrame mContext;
 	DropNotePlayerService playerService;
 
 	private ImageIcon noteBall;

@@ -3,6 +3,7 @@ package helpme_AhnD.ver02.components.item;
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.utils.Define;
 
 public class SpeedFast extends Items implements Useable{
 
@@ -14,7 +15,7 @@ public class SpeedFast extends Items implements Useable{
 	}
 	
 	private void initData() {
-		itemSpeedFast = new ImageIcon("images/fast.png");
+		itemSpeedFast = new ImageIcon(Define.IMG_ITEMS_SLOW);
 	}
 	
 	private void setInitLayout() {
