@@ -5,15 +5,18 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver01.service.PlayerService;
+import helpme_AhnD.ver02.Frame.DeathNoteFrame;
 import helpme_AhnD.ver02.service.DeathNoteCircle;
+import helpme_AhnD.ver02.service.DeathNotePlayerService;
 import helpme_AhnD.ver02.service.DeathNoteService;
 import helpme_AhnD.ver02.service.PlayerService_js;
 
 public class DeathNote extends JLabel implements Runnable {
 	DeathNoteCircle deathNoteCircle;
-	PlayerService_js playerService;
+	DeathNotePlayerService playerService;
 	DeathNote deathNote;
-	TestFrame testFrame;
+	DeathNoteFrame mContext;
 	
 	
 	protected ImageIcon note_Right;
@@ -29,17 +32,17 @@ public class DeathNote extends JLabel implements Runnable {
 	protected  final int NOTE_Y_LOCATION = 200;
 	protected  int location_X;
 	
-	
 	protected  boolean gameStart; // 게임 실행 확인
 	protected  boolean keyIsPressed =true;
 	protected  boolean isJudged = false;
 	
 	
 	
-	public DeathNote( int location_X, TestFrame testFrame ) {
+	public DeathNote( int location_X, DeathNoteFrame mContext, DeathNotePlayerService playerService) {
 		this.location_X = location_X; // Y값은 변경 가능
-		this.testFrame = testFrame;
-		playerService = testFrame.playerService;
+		this.mContext = mContext;
+		this.playerService = playerService;
+		//playerService = deathNoteFrame;
 		initData();
 		setInitLayout();
 		new Thread(() -> {
@@ -53,8 +56,8 @@ public class DeathNote extends JLabel implements Runnable {
 					e.printStackTrace();
 				}
 				if (redIsGood == 0) {
-						deathNoteCircle = new DeathNoteCircle(this, testFrame);
-						testFrame.add(deathNoteCircle);
+						deathNoteCircle = new DeathNoteCircle(this, mContext);
+						mContext.add(deathNoteCircle);
 					
 				} else {
 				}
@@ -117,5 +120,5 @@ public class DeathNote extends JLabel implements Runnable {
 	
 	
 
-	
+
 }

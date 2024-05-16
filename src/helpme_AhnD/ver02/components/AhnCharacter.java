@@ -3,12 +3,13 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.Frame.DeathNoteFrame;
 import helpme_AhnD.ver02.utils.Define;
 
 public class AhnCharacter extends JLabel {
 
 	// todo Score int 값 땡겨오기
-
+	DeathNoteFrame mContext;
 	private ImageIcon basic_Character;
 	private ImageIcon threePoint_DanceR;
 	private ImageIcon threePoint_DanceL;
@@ -25,10 +26,11 @@ public class AhnCharacter extends JLabel {
 
 	// todo score 불러 오기
 
-	public AhnCharacter() {
+	public AhnCharacter(DeathNoteFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
-
+		mContext.add(this);
 	}
 
 	private void initData() {
