@@ -1,10 +1,9 @@
 package helpme_AhnD.ver02.service;
 
-import java.util.Random;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.Frame.DeathNoteFrame;
 import helpme_AhnD.ver02.components.DeathNote;
 import helpme_AhnD.ver02.components.TestFrame;
 
@@ -18,17 +17,17 @@ public class DeathNoteCircle extends JLabel {
 	int i;
 	ImageIcon booly;
 	DeathNote deathNote;
-	TestFrame testFrame;
+	DeathNoteFrame deathNoteFrame;
 	public int checkNow;
 	boolean flag;
 
 	private int x;
 	private int y;
 
-	public DeathNoteCircle(DeathNote deathNote, TestFrame testFrame) {
+	public DeathNoteCircle(DeathNote deathNote, DeathNoteFrame deathNoteFrame) {
 		x = deathNote.getLocation_X() + 5;
 		y = deathNote.getNOTE_Y_LOCATION() - 5;
-		this.testFrame = testFrame;
+		this.deathNoteFrame = deathNoteFrame;
 
 		initData();
 		setInitLayout();
@@ -43,8 +42,9 @@ public class DeathNoteCircle extends JLabel {
 					this.repaint();
 					Thread.sleep(100);
 				}
-				setIcon(booly);
-				testFrame.remove(this);
+				setIcon(null);
+				this.repaint();
+				deathNoteFrame.remove(this);
 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

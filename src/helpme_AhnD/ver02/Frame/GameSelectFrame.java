@@ -230,6 +230,10 @@ public class GameSelectFrame extends JFrame {
 						new DropNoteFrame(thisFrame);
 						setVisible(false);
 						break;
+					case GAMENAME_SECONDGAME :
+						new DeathNoteFrame(thisFrame);
+						setVisible(false);
+						break;
 					}
 					break;
 				case KeyEvent.VK_BACK_SPACE:

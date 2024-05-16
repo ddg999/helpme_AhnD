@@ -4,9 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver01.utils.Define;
+import helpme_AhnD.ver02.Frame.DeathNoteFrame;
+import helpme_AhnD.ver02.Frame.GameSelectFrame;
+import helpme_AhnD.ver02.Frame.GameSelectFrame_jw;
 
 public class AhnCharacter extends JLabel {
-
+	DeathNoteFrame mContext;
 	// todo Score int 값 땡겨오기
 
 	private ImageIcon basic_Character;
@@ -25,11 +28,15 @@ public class AhnCharacter extends JLabel {
 
 	// todo score 불러 오기
 
-	public AhnCharacter() {
+	public AhnCharacter(DeathNoteFrame mContext) {
+		this.mContext = mContext;
 		initData();
 		setInitLayout();
-
+		mContext.add(this);
+		
 	}
+
+	
 
 	private void initData() {
 		basic_Character = new ImageIcon(Define.IMG_BASIC_CHARCTER);
