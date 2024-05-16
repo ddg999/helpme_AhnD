@@ -34,7 +34,7 @@ public class DropNoteFrame extends JFrame {
 
 	private void initData() {
 		// todo 각종 라벨 추가 예정
-		background = new JLabel(new ImageIcon(Define.IMG_FIRSTGAME_BG));
+		background = new JLabel(new ImageIcon(Define.IMG_DROPNOTE_BG));
 		
 		Running = true;
 		setTitle("DropNote");

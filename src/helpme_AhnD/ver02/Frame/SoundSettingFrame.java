@@ -35,19 +35,19 @@ public class SoundSettingFrame extends JPanel {
 
 	private void initData() {
 
-		setSize(368, 200);
+		setSize(351, 173);
 
 		soundBackground = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_BG));
-		soundLow = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_BG));
+		soundLow = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_LOW));
 		soundHigh = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_HIGH));
 		musicButton = new JLabel(new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_MUSICON));
 
 		volume = new ImageIcon[5];
-		volume[BGMService.VOLUME_FULL] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOULUME_FULL);
+		volume[BGMService.VOLUME_FULL] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOLUME_FULL);
 		volume[BGMService.VOLUME_75] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOLUME_75);
 		volume[BGMService.VOLUME_DEFAULT] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT);
-		volume[BGMService.VOLUME_25] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOULUME_25);
-		volume[BGMService.VOLUME_NULL] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOULUME_NULL);
+		volume[BGMService.VOLUME_25] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOLUME_25);
+		volume[BGMService.VOLUME_NULL] = new ImageIcon(Define.IMG_SOUNDSETTINGFRAME_VOLUME_NULL);
 		soundVolume = new JLabel(volume[BGMService.VOLUME_DEFAULT]);
 
 	}

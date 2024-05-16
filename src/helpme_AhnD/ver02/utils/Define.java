@@ -11,16 +11,16 @@ public class Define {
 	public final static String IMG_MAINFRAME_SET = "images/mainFrame/IMG_MAINFRAME_SET.png";
 	
 	// 소리 설정 화면 이미지
-	public final static String IMG_SOUNDSETTINGFRAME_BG = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_BG";
-	public final static String IMG_SOUNDSETTINGFRAME_LOW = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_LOW";
-	public final static String IMG_SOUNDSETTINGFRAME_HIGH = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_HIGH";
-	public final static String IMG_SOUNDSETTINGFRAME_MUSICON = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_MUSICON";
-	public final static String IMG_SOUNDSETTINGFRAME_MUSICOFF = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_MUSICOFF";
-	public final static String IMG_SOUNDSETTINGFRAME_VOULUME_FULL = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_FULL";
-	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_75 = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_75";
-	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT";
-	public final static String IMG_SOUNDSETTINGFRAME_VOULUME_25 = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_25";
-	public final static String IMG_SOUNDSETTINGFRAME_VOULUME_NULL = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_NULL";
+	public final static String IMG_SOUNDSETTINGFRAME_BG = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_BG.png";
+	public final static String IMG_SOUNDSETTINGFRAME_LOW = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_LOW.png";
+	public final static String IMG_SOUNDSETTINGFRAME_HIGH = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_HIGH.png";
+	public final static String IMG_SOUNDSETTINGFRAME_MUSICON = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_MUSICON.png";
+	public final static String IMG_SOUNDSETTINGFRAME_MUSICOFF = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_MUSICOFF.png";
+	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_FULL = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_FULL.png";
+	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_75 = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_75.png";
+	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_DEFAULT.png";
+	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_25 = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_25.png";
+	public final static String IMG_SOUNDSETTINGFRAME_VOLUME_NULL = "images/soundSettingFrame/IMG_SOUNDSETTINGFRAME_VOLUME_NULL.png";
 	
 	// 게임 선택 화면 이미지
 	public final static String IMG_SELECTFRAME_BG = "images/selectFrame/IMG_SELECTFRAME_BG.jpg";
@@ -45,12 +45,11 @@ public class Define {
 	public final static String IMG_SELECTFRAME_BACK = "images/selectFrame/IMG_SELECTFRAME_BACK.gif";
 	public final static String IMG_SELECTFRAME_BACKCLICK = "images/selectFrame/IMG_SELECTFRAME_BACKCLICK.gif";
 	
-	// 인게임 이미지
+	
+	// 첫게임(드랍노트) 이미지
+	public final static String IMG_DROPNOTE_BG = "images/dropNote/IMG_DROPNOTE_BG.jpg";
 	public final static String IMG_DROPNOTE_NOTE = "images/dropNote/IMG_DROPNOTE_NOTE.png";
 	public final static String IMG_DROPNOTE_NOTEBAR = "images/dropNote/IMG_DROPNOTE_NOTEBAR.png";
-	
-	// 첫게임 이미지
-	public final static String IMG_FIRSTGAME_BG = "images/firstGame/IMG_FIRSTGAME_BG.jpg";
 	
 	// 캐릭터 이미지
 	public final static String IMG_BASIC_CHARCTER = "images/character/IMG_BASIC_CHARCTER.png";
