@@ -9,15 +9,16 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
 public class DropNote extends JLabel implements Runnable {
 
 	DropNoteFrame mContext;
 	DropNotePlayerService playerService;
+	private Player player;
 
 	private ImageIcon noteBall;
-	private int player;
 
 	private int x;
 	private int y;
@@ -31,7 +32,7 @@ public class DropNote extends JLabel implements Runnable {
 	private boolean drop = true;
 	private boolean isJudged = false;
 
-	public DropNote(DropNotePlayerService playerService, int player) {
+	public DropNote(DropNotePlayerService playerService, Player player) {
 		this.playerService = playerService;
 		this.player = player;
 		initData();
@@ -44,7 +45,7 @@ public class DropNote extends JLabel implements Runnable {
 		Random random = new Random();
 		place = random.nextInt(4);
 		switch (player) {
-		case 1:
+		case LEFTPLAYER:
 			if (place == LEFT) {
 				x = 300;
 			} else if (place == UP) {
@@ -55,7 +56,7 @@ public class DropNote extends JLabel implements Runnable {
 				x = 600;
 			}
 			break;
-		case 2:
+		case RIGHTPLAYER:
 			if (place == LEFT) {
 				x = 1005;
 			} else if (place == UP) {
@@ -113,7 +114,7 @@ public class DropNote extends JLabel implements Runnable {
 		playerService.getmContext().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (player == 1) {
+				if (player == Player.LEFTPLAYER) {
 					switch (e.getKeyCode()) {
 					case KeyEvent.VK_A:
 						if (place == LEFT && !isJudged) {
@@ -138,7 +139,7 @@ public class DropNote extends JLabel implements Runnable {
 					default:
 						break;
 					}
-				} else if (player == 2) {
+				} else if (player == Player.RIGHTPLAYER) {
 					switch (e.getKeyCode()) {
 					case KeyEvent.VK_LEFT:
 						if (place == LEFT && !isJudged) {

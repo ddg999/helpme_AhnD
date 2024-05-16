@@ -5,11 +5,12 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.state.Player;
 
 public class HpBox extends JLabel {
 
 	DropNotePlayerService playerService;
-	private int player;
+	private Player player;
 
 	private int x;
 	private int y = 180;
@@ -17,7 +18,7 @@ public class HpBox extends JLabel {
 	private ImageIcon hpFull;
 	private ImageIcon hpHalf;
 
-	public HpBox(DropNotePlayerService playerService, int player) {
+	public HpBox(DropNotePlayerService playerService, Player player) {
 		this.playerService = playerService;
 		this.player = player;
 		hpFull = new ImageIcon("images/hp/HP_HPFULL.png");
@@ -36,9 +37,9 @@ public class HpBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x = 410;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x = 1125;
 			}
 		}
@@ -80,9 +81,9 @@ public class HpBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x = 460;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x = 1075;
 			}
 		}
@@ -124,9 +125,9 @@ public class HpBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x = 510;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x = 1025;
 			}
 		}

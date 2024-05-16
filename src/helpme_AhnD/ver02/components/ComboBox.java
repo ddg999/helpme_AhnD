@@ -4,10 +4,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.state.Player;
 
 public class ComboBox extends JLabel {
 
 	DropNotePlayerService playerService;
+	private Player player;
+
 	private ImageIcon comboBox;
 	private ImageIcon[] comboNum;
 	private ImageIcon comboExcellent;
@@ -17,10 +20,9 @@ public class ComboBox extends JLabel {
 
 	private int x;
 	private int y;
-	private int player;
 	private boolean isRun = true; // 게임 실행중
 
-	public ComboBox(DropNotePlayerService playerService, int player) {
+	public ComboBox(DropNotePlayerService playerService, Player player) {
 		this.playerService = playerService;
 		this.player = player;
 		initData();
@@ -31,10 +33,10 @@ public class ComboBox extends JLabel {
 	}
 
 	public void initData() {
-		if (player == 1) {
+		if (player == Player.LEFTPLAYER) {
 			x = 350;
 			y = 450;
-		} else if (player == 2) {
+		} else if (player == Player.RIGHTPLAYER) {
 			x = 1150;
 			y = 450;
 		}
@@ -75,10 +77,10 @@ public class ComboBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x1 = 350;
 				y1 = 525;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x1 = 1150;
 				y1 = 525;
 			}
@@ -124,10 +126,10 @@ public class ComboBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x2 = 382;
 				y2 = 525;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x2 = 1182;
 				y2 = 525;
 			}
@@ -169,10 +171,10 @@ public class ComboBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x3 = 414;
 				y3 = 525;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x3 = 1214;
 				y3 = 525;
 			}

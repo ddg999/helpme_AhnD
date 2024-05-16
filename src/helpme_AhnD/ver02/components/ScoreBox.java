@@ -4,11 +4,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.state.Player;
 
 public class ScoreBox extends JLabel {
 
 	DropNotePlayerService playerService;
-	private int player;
+	private Player player;
 
 	private ImageIcon scoreBox;
 	private ImageIcon[] scoreNum;
@@ -17,7 +18,7 @@ public class ScoreBox extends JLabel {
 	private int y;
 	private boolean isRun = true; // 게임 실행중
 
-	public ScoreBox(DropNotePlayerService playerService, int player) {
+	public ScoreBox(DropNotePlayerService playerService, Player player) {
 		this.playerService = playerService;
 		this.player = player;
 		initData();
@@ -29,10 +30,10 @@ public class ScoreBox extends JLabel {
 	}
 
 	public void initData() {
-		if (player == 1) {
+		if (player == Player.LEFTPLAYER) {
 			x = 410;
 			y = 20;
-		} else if (player == 2) {
+		} else if (player == Player.RIGHTPLAYER) {
 			x = 870;
 			y = 20;
 		}
@@ -69,10 +70,10 @@ public class ScoreBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x1 = 470;
 				y1 = 103;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x1 = 930;
 				y1 = 103;
 			}
@@ -118,10 +119,10 @@ public class ScoreBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x2 = 520;
 				y2 = 103;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x2 = 980;
 				y2 = 103;
 			}
@@ -167,10 +168,10 @@ public class ScoreBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x3 = 570;
 				y3 = 103;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x3 = 1030;
 				y3 = 103;
 			}
@@ -216,10 +217,10 @@ public class ScoreBox extends JLabel {
 		}
 
 		public void initData() {
-			if (player == 1) {
+			if (player == Player.LEFTPLAYER) {
 				x4 = 620;
 				y4 = 103;
-			} else if (player == 2) {
+			} else if (player == Player.RIGHTPLAYER) {
 				x4 = 1080;
 				y4 = 103;
 			}

@@ -8,23 +8,24 @@ import helpme_AhnD.ver02.components.DropNote;
 import helpme_AhnD.ver02.components.HpBox;
 import helpme_AhnD.ver02.components.ItemBox;
 import helpme_AhnD.ver02.components.ScoreBox;
+import helpme_AhnD.ver02.state.Player;
 
 public class DropNotePlayerService implements Runnable {
 
 	DropNoteFrame mContext;
+	Player player;
 	private DropNote note;
 	private Score score;
-	private int player;
 	private int delay;
 
-	public DropNotePlayerService(DropNoteFrame mContext, int player) {
+	public DropNotePlayerService(DropNoteFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
 		score = new Score(player);
 		new HpBox(this, player);
 		new ScoreBox(this, player);
 		new ComboBox(this, player);
-		
+
 	}
 
 	private void createNote() {
@@ -46,6 +47,7 @@ public class DropNotePlayerService implements Runnable {
 			}
 		}
 	}
+
 	// getter
 	public DropNoteFrame getmContext() {
 		return mContext;

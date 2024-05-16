@@ -1,5 +1,7 @@
 package helpme_AhnD.ver02.service;
 
+import helpme_AhnD.ver02.state.Player;
+
 public class Score {
 
 	private int hp;
@@ -10,7 +12,7 @@ public class Score {
 	private int countGood;
 	private int countBad;
 
-	public Score(int player) {
+	public Score(Player player) {
 		hp = 60;
 		score = 0;
 		combo = 0;
