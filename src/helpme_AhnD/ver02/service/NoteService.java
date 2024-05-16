@@ -3,8 +3,6 @@ package helpme_AhnD.ver02.service;
 import java.awt.event.KeyEvent;
 
 import helpme_AhnD.ver02.Frame.DropNoteFrame;
-import helpme_AhnD.ver02.components.Note;
-import helpme_AhnD.ver02.components.NoteCircle;
 
 public class NoteService extends Thread{
 	// 박자를 맞추기 위해 Thread.sleep에 입력해줄 값 음표 기준
