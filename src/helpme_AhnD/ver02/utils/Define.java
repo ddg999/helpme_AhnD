@@ -51,6 +51,10 @@ public class Define {
 	public final static String IMG_DROPNOTE_NOTE = "images/dropNote/IMG_DROPNOTE_NOTE.png";
 	public final static String IMG_DROPNOTE_NOTEBAR = "images/dropNote/IMG_DROPNOTE_NOTEBAR.png";
 	
+	// 게임 종료 이미지
+	public final static String IMG_GAMEOVER_LEFTWIN = "images/gameover/IMG_GAMEOVER_LEFTWIN.png";
+	public final static String IMG_GAMEOVER_RIGHTWIN = "images/gameover/IMG_GAMEOVER_RIGHTWIN.png";
+	
 	// 캐릭터 이미지
 	public final static String IMG_BASIC_CHARCTER = "images/character/IMG_BASIC_CHARCTER.png";
 	public final static String IMG_ONE_POINT_RIGHT="images/character/IMG_ONE_POINT_RIGHT.png";

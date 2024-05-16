@@ -1,9 +1,13 @@
 package helpme_AhnD.ver02.service;
 
+import helpme_AhnD.ver02.Frame.DropNoteFrame;
+import helpme_AhnD.ver02.Frame.GameEndFrame;
 import helpme_AhnD.ver02.state.Player;
 
 public class Score {
-
+	
+	private DropNoteFrame mContext;
+	private Player player;
 	private int hp;
 	private int score;
 	private int combo;
@@ -11,8 +15,11 @@ public class Score {
 	private int countExcellent;
 	private int countGood;
 	private int countBad;
+	private static boolean isJudged = false;
 
-	public Score(Player player) {
+	public Score(DropNoteFrame mContext, Player player) {
+		this.mContext = mContext;
+		this.player = player;
 		hp = 60;
 		score = 0;
 		combo = 0;
@@ -25,6 +32,12 @@ public class Score {
 	public void beAttacked() {
 		if (hp >= 10) {
 			hp -= 10;
+			if (hp == 0) {
+				isJudged = true;
+				mContext.setVisible(false);
+				mContext.setRunning(false);
+				new GameEndFrame(mContext, player);
+			}
 		} else {
 			hp = 0;
 		}

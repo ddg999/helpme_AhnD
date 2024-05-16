@@ -21,7 +21,7 @@ public class DropNotePlayerService implements Runnable {
 	public DropNotePlayerService(DropNoteFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
-		score = new Score(player);
+		score = new Score(mContext, player);
 		comboBox = new ComboBox(this, player);
 		new ScoreBox(this, player);
 		new HpBox(this, player);
