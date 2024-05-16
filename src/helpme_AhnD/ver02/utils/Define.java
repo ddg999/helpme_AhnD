@@ -71,4 +71,15 @@ public class Define {
 	public final static String IMG_ITEMS_FAST = "images/item/IMG_ITEMS_FAST.png";
 	public final static String IMG_ITEMS_SLOW = "images/item/IMG_ITEMS_SLOW.png";
 	public final static String IMG_ITEMS_NEVERPERFECT = "images/item/IMG_ITEMS_NEVERPERFECT.png";
+	
+	// 아이템 클래스
+	public final static int INT_ITEMS_HP_PLUS = 0;
+	public final static int INT_ITEMS_ALLPERFECT = 1;
+	public final static int INT_ITEMS_SCOREDOUBLE = 2;
+	public final static int INT_ITEMS_SLOW = 3;
+	public final static int INT_ITEMS_HP_MINUS = 4;
+	public final static int INT_ITEMS_BOMB = 5;
+	public final static int INT_ITEMS_REVERSE = 6;
+	public final static int INT_ITEMS_FAST = 7;
+	public final static int INT_ITEMS_NEVERPERFECT = 8;
 }

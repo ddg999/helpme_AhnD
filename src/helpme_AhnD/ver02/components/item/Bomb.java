@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.service.DropNotePlayerService;
 import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
@@ -21,27 +22,29 @@ public class Bomb extends Items implements Useable {
 	private void initData() {
 		bomb = new ImageIcon(Define.IMG_ITEMS_BOMB);
 		bombImg = new ImageIcon(Define.IMG_ITEMS_BOMB_IMG);
-		
+		buffType = Items.DEBUFF;
+		durationType = Items.DURATION;
 	}
 
 	private void setInitLayout() {
 		setIcon(bomb);
 		setSize(50, 50);
-		setLocation(x, y);
+		setLocation(X, Y);
 	}
 	@Override
-	public JLabel useItems(Player place) {
+	public void useItems(DropNotePlayerService dropNotePlayerService) {
 		
-		if (place == Player.LEFT) {
+		if (dropNotePlayerService.getPlayer() == Player.LEFTPLAYER) {
 			bombImgLabel = new JLabel(bombImg);
-			setSize(622,565);
-			setLocation(900, 100);
+			bombImgLabel.setSize(622,565);
+			bombImgLabel.setLocation(900, 200);
 		} else {
 			bombImgLabel = new JLabel(bombImg);
-			setSize(622,565);
-			setLocation(100, 100);
+			bombImgLabel.setSize(622,565);
+			bombImgLabel.setLocation(100, 200);
 		}
-		return bombImgLabel;
+		dropNotePlayerService.getmContext().add(bombImgLabel);
+		dropNotePlayerService.getmContext().repaint();
 	}
 	
 }

@@ -16,12 +16,14 @@ public class Reverse extends Items implements Useable {
 
 	private void initData() {
 		reverse = new ImageIcon(Define.IMG_ITEMS_REVERSE);
+		buffType = Items.DEBUFF;
+		durationType = Items.DURATION;
 	}
 
 	private void setInitLayout() {
 		setIcon(reverse);
 		setSize(50, 50);
-		setLocation(x, y);
+		setLocation(X, Y);
 	}
 	
 

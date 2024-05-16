@@ -3,24 +3,27 @@ package helpme_AhnD.ver02.components.item;
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.utils.Define;
 
-public class SpeedSlow extends Items implements Useable{
+public class Slow extends Items implements Useable{
 	
-	private ImageIcon itemSpeedSlow;
+	private ImageIcon slow;
 
-	public SpeedSlow() {
+	public Slow() {
 		initData();
 		setInitLayout();
 	}
 	
 	private void initData() {
-		itemSpeedSlow = new ImageIcon("images/slow.png");
+		slow = new ImageIcon(Define.IMG_ITEMS_SLOW);
+		buffType = Items.BUFF;
+		durationType = Items.DURATION;
 	}
 	
 	private void setInitLayout() {
-		setIcon(itemSpeedSlow);
+		setIcon(slow);
 		setSize(50, 50);
-		setLocation(x, y);
+		setLocation(X, Y);
 	}
 	
 	// todo 스피드 느리게

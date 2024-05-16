@@ -57,4 +57,8 @@ public class DropNotePlayerService implements Runnable {
 		return score;
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+
 }

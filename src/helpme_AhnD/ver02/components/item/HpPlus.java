@@ -3,6 +3,8 @@ package helpme_AhnD.ver02.components.item;
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.service.Score;
 import helpme_AhnD.ver02.utils.Define;
 
 public class HpPlus extends Items implements Useable {
@@ -16,17 +18,19 @@ public class HpPlus extends Items implements Useable {
 	
 	private void initData() {
 		hpPlus = new ImageIcon(Define.IMG_ITEMS_HP_PLUS);
+		buffType = Items.BUFF;
+		durationType = Items.IMMEDIATE;
 	}
 
 	private void setInitLayout() {
 		setIcon(hpPlus);
 		setSize(50, 50);
-		setLocation(x, y);
+		setLocation(X, Y);
 	}
 
 	@Override
-	public int useItems(int input) {
-		return input + 20;
+	public void useItems(DropNotePlayerService dropNotePlayerService) {
+		dropNotePlayerService.getScore().setHp(dropNotePlayerService.getScore().getHp() + 20);
 	}
 	
 

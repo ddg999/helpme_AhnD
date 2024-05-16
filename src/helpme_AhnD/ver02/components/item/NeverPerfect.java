@@ -16,12 +16,14 @@ public class NeverPerfect extends Items implements Useable{
 
 	private void initData() {
 		neverPerfect = new ImageIcon(Define.IMG_ITEMS_NEVERPERFECT);
+		buffType = Items.DEBUFF;
+		durationType = Items.DURATION;
 	}
 	
 	private void setInitLayout() {
 		setIcon(neverPerfect);
 		setSize(50, 50);
-		setLocation(x, y);
+		setLocation(X, Y);
 	}
 	
 	// todo 퍼펙트 불가

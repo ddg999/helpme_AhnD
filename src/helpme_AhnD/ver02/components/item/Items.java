@@ -4,26 +4,32 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 
-public class Items extends JLabel implements Useable{
+public class Items extends JLabel implements Useable {
 
-	protected int x;
-	protected int y;
-	
+	public static final int X = 55;
+	public static final int Y = 80;
+	protected int buffType;
+	public static final int BUFF = 0;
+	public static final int DEBUFF = 1;
+	protected int durationType;
+	public static final int IMMEDIATE = 2;
+	public static final int DURATION = 3;
+
 	// get, set
 	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
+		return X;
 	}
 
 	public int getY() {
-		return y;
+		return Y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public int getBuffType() {
+		return buffType;
+	}
+
+	public int getDurationType() {
+		return durationType;
 	}
 
 }

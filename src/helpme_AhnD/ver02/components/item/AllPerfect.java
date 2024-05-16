@@ -6,7 +6,8 @@ import helpme_AhnD.ver02.interfaces.Useable;
 import helpme_AhnD.ver02.utils.Define;
 
 public class AllPerfect extends Items implements Useable {
-
+	
+	
 	private ImageIcon itemAllPerfect;
 	
 	public AllPerfect() {
@@ -16,14 +17,16 @@ public class AllPerfect extends Items implements Useable {
 
 	private void initData() {
 		itemAllPerfect = new ImageIcon(Define.IMG_ITEMS_ALLPERFECT);
+		buffType = Items.BUFF;
+		durationType = Items.DURATION;
 	}
-	
+
 	private void setInitLayout() {
 		setIcon(itemAllPerfect);
 		setSize(50, 50);
-		setLocation(x, y);
+		setLocation(X, Y);
 	}
-	
-	// todo 전부  퍼펙트
+
+	// todo 전부 퍼펙트
 
 }

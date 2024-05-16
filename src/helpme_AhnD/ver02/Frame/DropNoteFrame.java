@@ -1,5 +1,8 @@
 package helpme_AhnD.ver02.Frame;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,7 +68,13 @@ public class DropNoteFrame extends JFrame {
 	}
 
 	private void addEventListener() {
-
+		// 임시 코드
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				System.out.println(e.getX() + " " + e.getY());
+			}
+		});
 	}
 
 	// getter setter
@@ -76,5 +85,19 @@ public class DropNoteFrame extends JFrame {
 	public static void setRunning(boolean running) {
 		Running = running;
 	}
+
+	public DropNotePlayerService getDropNoteLeftPlayerService() {
+		return dropNoteLeftPlayerService;
+	}
+
+	public DropNotePlayerService getDropNoteRightPlayerService() {
+		return dropNoteRightPlayerService;
+	}
+
+	public JLabel getBackgroundLabel() {
+		return background;
+	}
+	
+	
 
 }

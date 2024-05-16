@@ -5,23 +5,25 @@ import javax.swing.ImageIcon;
 import helpme_AhnD.ver02.interfaces.Useable;
 import helpme_AhnD.ver02.utils.Define;
 
-public class SpeedFast extends Items implements Useable{
+public class Fast extends Items implements Useable{
 
 	private ImageIcon itemSpeedFast;
 
-	public SpeedFast() {
+	public Fast() {
 		initData();
 		setInitLayout();
 	}
 	
 	private void initData() {
-		itemSpeedFast = new ImageIcon(Define.IMG_ITEMS_SLOW);
+		itemSpeedFast = new ImageIcon(Define.IMG_ITEMS_FAST);
+		buffType = Items.DEBUFF;
+		durationType = Items.DURATION;
 	}
 	
 	private void setInitLayout() {
 		setIcon(itemSpeedFast);
 		setSize(50, 50);
-		setLocation(x, y);
+		setLocation(X, Y);
 	}
 	
 	// todo 스피드 빠르게
