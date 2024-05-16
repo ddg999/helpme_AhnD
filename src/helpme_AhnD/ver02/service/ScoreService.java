@@ -3,19 +3,26 @@ package helpme_AhnD.ver02.service;
 import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.Frame.GameEndFrame;
 import helpme_AhnD.ver02.state.Player;
+import helpme_AhnD.ver02.utils.Define;
 
 public class ScoreService {
-	
+
 	private DropNoteFrame mContext;
 	private Player player;
+	// 스코어 서비스에서 관리하는 데이터
 	private int hp;
 	private int score;
 	private int combo;
+	// 최종화면에 띄울 통계 수집용 변수
+	private int countMaxCombo;
 	private int countPerfect;
 	private int countExcellent;
 	private int countGood;
 	private int countBad;
-	private static boolean isJudged = false;
+
+	private static boolean isJudged = false; // 중복 종료 방지용 불리언 변수
+
+	// 아이템 사용 확인용 깃발
 	private boolean isDouble;
 	private boolean isAllPerfect;
 	private boolean isNeverPerfect;
@@ -23,29 +30,10 @@ public class ScoreService {
 	public ScoreService(DropNoteFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
-		hp = 60;
-		score = 0;
-		combo = 0;
-		countPerfect = 0;
-		countExcellent = 0;
-		countGood = 0;
-		countBad = 0;
+		hp = Define.HP_3_0_HEART;
 	}
-
-	public void beAttacked() {
-		if (hp >= 10) {
-			hp -= 10;
-			if (hp == 0) {
-				isJudged = true;
-				mContext.setVisible(false);
-				mContext.setRunning(false);
-				new GameEndFrame(mContext, player);
-			}
-		} else {
-			hp = 0;
-		}
-	}
-
+	
+	// DropNote에서 판정에 따라 호출할 메소드
 	public void perfect() {
 		if (isDouble) {
 			score += 6;
@@ -56,6 +44,10 @@ public class ScoreService {
 			score -= 1;
 		}
 		combo++;
+		// 콤보수가 10의 배수 일때마다 체력 회복
+		if (combo % 10 == 0) {
+			recovery();
+		}
 		countPerfect++;
 	}
 
@@ -69,6 +61,10 @@ public class ScoreService {
 			score += 1;
 		}
 		combo++;
+		// 콤보수가 10의 배수 일때마다 체력 회복
+		if (combo % 10 == 0) {
+			recovery();
+		}
 		countExcellent++;
 	}
 
@@ -82,69 +78,73 @@ public class ScoreService {
 			score += 2;
 		}
 		combo++;
+		// 콤보수가 10의 배수 일때마다 체력 회복
+		if (combo % 10 == 0) {
+			recovery();
+		}
 		countGood++;
 	}
 
 	public void bad() {
-		beAttacked();
+		// 최대 콤보수 저장
+		if (countMaxCombo < combo) {
+			countMaxCombo = combo;
+		}
+		// 콤보 초기화
 		combo = 0;
 		countBad++;
+		beAttacked(); // 게임을 종료시키는 메소드이기 때문에 마지막에 수행
 	}
 
+	// 배드 판정시 체력을 깎는 메소드
+	// 체력이 0이 되면 게임을 종료 시키는 기능 포함
+	public void beAttacked() {
+		if (hp >= Define.HP_0_5_HEART) {
+			hp -= Define.HP_0_5_HEART;
+			if (hp == Define.HP_DEATH) {
+				isJudged = true;
+				mContext.setVisible(false);
+				mContext.setRunning(false);
+				mContext.getBgm().getClip().close();
+				new GameEndFrame(mContext, player);
+			}
+		} else {
+			hp = Define.HP_DEATH;
+		}
+	}
+
+	// 체력 회복 메소드
+	public void recovery() {
+		hp += Define.HP_0_5_HEART;
+	}
+
+	// getter setter
 	public int getHp() {
 		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = hp;
 	}
 
 	public int getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
-	}
-
 	public int getCombo() {
 		return combo;
-	}
-
-	public void setCombo(int combo) {
-		this.combo = combo;
 	}
 
 	public int getCountPerfect() {
 		return countPerfect;
 	}
 
-	public void setCountPerfect(int countPerfect) {
-		this.countPerfect = countPerfect;
-	}
-
 	public int getCountExcellent() {
 		return countExcellent;
-	}
-
-	public void setCountExcellent(int countExcellent) {
-		this.countExcellent = countExcellent;
 	}
 
 	public int getCountGood() {
 		return countGood;
 	}
 
-	public void setCountGood(int countGood) {
-		this.countGood = countGood;
-	}
-
 	public int getCountBad() {
 		return countBad;
-	}
-
-	public void setCountBad(int countBad) {
-		this.countBad = countBad;
 	}
 
 	public void setDouble(boolean isDouble) {
@@ -158,6 +158,5 @@ public class ScoreService {
 	public void setNeverPerfect(boolean isNeverPerfect) {
 		this.isNeverPerfect = isNeverPerfect;
 	}
-	
 
 }

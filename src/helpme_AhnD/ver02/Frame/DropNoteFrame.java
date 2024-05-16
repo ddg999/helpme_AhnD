@@ -93,7 +93,10 @@ public class DropNoteFrame extends JFrame {
 	public JLabel getBackgroundLabel() {
 		return background;
 	}
-	
+
+	public BGM getBgm() {
+		return bgm;
+	}
 	
 
 }

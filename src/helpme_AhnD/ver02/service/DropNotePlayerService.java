@@ -54,7 +54,7 @@ public class DropNotePlayerService implements Runnable {
 		return mContext;
 	}
 
-	public ScoreService getScore() {
+	public ScoreService getScoreService() {
 		return score;
 	}
 

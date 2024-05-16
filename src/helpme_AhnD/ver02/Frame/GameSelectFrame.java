@@ -50,7 +50,7 @@ public class GameSelectFrame extends JFrame {
 	boolean isPlay;
 
 	// 음악
-	private BGM game1BGM;
+	private BGM bgm;
 
 	// 새로운 게임 화면을 위한 GamePanel 클래스
 
@@ -184,12 +184,12 @@ public class GameSelectFrame extends JFrame {
 					// 스페이스 버튼 하나로 음악 재생 정지 둘다
 					if (!isPlay) {
 						musicButton.setIcon(musicStopImg);
-						game1BGM = mContext.getBgmService().createBGM(); // bgm 객체 생성
-						game1BGM.getClip().start(); // 생성된 음악 재생
+						bgm = mContext.getBgmService().createBGM(); // bgm 객체 생성
+						bgm.getClip().start(); // 생성된 음악 재생
 						isPlay = true;
 					} else {
 						musicButton.setIcon(musicPlayImg);
-						game1BGM.getClip().close(); // 음악 닫기
+						bgm.getClip().close(); // 음악 닫기
 						isPlay = false;
 					}
 					break;
@@ -224,7 +224,10 @@ public class GameSelectFrame extends JFrame {
 					break;
 				case KeyEvent.VK_S:
 					startButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_START));
-					// todo 게임 시작
+					if (bgm != null) {
+						// 혹시 음악이 틀어져 있다면 끔
+						bgm.getClip().close();
+					}
 					switch (selectNumber) {
 					case GAMENAME_DROPNOTE :
 						new DropNoteFrame(thisFrame);
@@ -240,9 +243,9 @@ public class GameSelectFrame extends JFrame {
 					backButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_BACK));
 					setVisible(false); // 현재 프레임 안보이게
 					mContext.setVisible(true); // 메인 프레임 보이게
-					if (game1BGM != null) {
+					if (bgm != null) {
 						// 혹시 음악이 틀어져 있다면 끔
-						game1BGM.getClip().close();
+						bgm.getClip().close();
 					}
 					break;
 				}
@@ -275,12 +278,12 @@ public class GameSelectFrame extends JFrame {
 				if (isPlayButton(e.getX(), e.getY())) {
 					if (!isPlay) {
 						musicButton.setIcon(musicStopImg);
-						game1BGM = mContext.getBgmService().createBGM(); // bgm 객체 생성
-						game1BGM.getClip().start(); // 생성된 음악 재생
+						bgm = mContext.getBgmService().createBGM(); // bgm 객체 생성
+						bgm.getClip().start(); // 생성된 음악 재생
 						isPlay = true;
 					} else {
 						musicButton.setIcon(musicPlayImg);
-						game1BGM.getClip().close(); // 음악 닫기
+						bgm.getClip().close(); // 음악 닫기
 						isPlay = false;
 					}
 				}
@@ -311,15 +314,29 @@ public class GameSelectFrame extends JFrame {
 				// 게임 시작
 				if (isStartButton(e.getX(), e.getY())) {
 					startButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_START));
+					if (bgm != null) {
+						// 혹시 음악이 틀어져 있다면 끔
+						bgm.getClip().close();
+					}
 					// 게임시작 뗏을때 게임화면 띄우기
+					switch (selectNumber) {
+					case GAMENAME_DROPNOTE :
+						new DropNoteFrame(thisFrame);
+						setVisible(false);
+						break;
+					case GAMENAME_SECONDGAME :
+						new DeathNoteFrame(thisFrame);
+						setVisible(false);
+						break;
+					}
 				}
 				// 뒤로가기
 				if (isBackButton(e.getX(), e.getY())) {
 					backButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_BACK));
 					setVisible(false);
 					mContext.setVisible(true);
-					if (game1BGM != null) {
-						game1BGM.getClip().close();
+					if (bgm != null) {
+						bgm.getClip().close();
 					}
 				}
 

@@ -78,6 +78,7 @@ public class ScoreBox extends JLabel {
 
 		public void initData() {
 			switch (digit) {
+			// 일의 자리수 좌표 세팅
 			case ONES:
 				if (player == Player.LEFTPLAYER) {
 					x = 620;
@@ -85,6 +86,7 @@ public class ScoreBox extends JLabel {
 					x = 1080;
 				}
 				break;
+			// 십의 자리수 좌표 세팅
 			case TENS:
 				if (player == Player.LEFTPLAYER) {
 					x = 570;
@@ -92,6 +94,7 @@ public class ScoreBox extends JLabel {
 					x = 1030;
 				}
 				break;
+			// 백의 자리수 좌표 세팅
 			case HUNDREDS:
 				if (player == Player.LEFTPLAYER) {
 					x = 520;
@@ -99,6 +102,7 @@ public class ScoreBox extends JLabel {
 					x = 980;
 				}
 				break;
+			// 천의 자리수 좌표 세팅
 			case THOUSANDS:
 				if (player == Player.LEFTPLAYER) {
 					x = 470;
@@ -121,34 +125,34 @@ public class ScoreBox extends JLabel {
 		@Override
 		public void run() {
 			while (DropNoteFrame.isRunning()) {
-				if (playerService.getScore().getScore() >= MAX_SCORE) {
+				if (playerService.getScoreService().getScore() >= MAX_SCORE) {
 					setIcon(scoreNum[9]);
 				} else {
 					switch (digit) {
 					case ONES:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if (playerService.getScore().getScore() % 10 == i) {
+							if (playerService.getScoreService().getScore() % 10 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case TENS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScore().getScore() % 100) / 10 == i) {
+							if ((playerService.getScoreService().getScore() % 100) / 10 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case HUNDREDS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScore().getScore() % 1000) / 100 == i) {
+							if ((playerService.getScoreService().getScore() % 1000) / 100 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case THOUSANDS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScore().getScore() % 10000) / 1000 == i) {
+							if ((playerService.getScoreService().getScore() % 10000) / 1000 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}

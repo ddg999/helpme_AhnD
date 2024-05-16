@@ -111,6 +111,14 @@ public class Define {
 	// hp 이미지
 	public final static String IMG_HP_HPFULL = "images/hp/IMG_HP_HPFULL.png";
 	public final static String IMG_HP_HPHALF = "images/hp/IMG_HP_HPHALF.png";
+	// hp 구분
+	public final static int HP_3_0_HEART = 60;
+	public final static int HP_2_5_HEART = 50;
+	public final static int HP_2_0_HEART = 40;
+	public final static int HP_1_5_HEART = 30;
+	public final static int HP_1_0_HEART = 20;
+	public final static int HP_0_5_HEART = 10;
+	public final static int HP_DEATH = 0;
 	
 	// 아이템 클래스
 	public final static int INT_ITEMS_HP_PLUS = 0;

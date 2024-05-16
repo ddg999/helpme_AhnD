@@ -125,10 +125,10 @@ public class ItemBox extends JLabel {
 			}
 		}).start();
 	}
-	
+	// 아이템 생성 메소드
 	private Items createItem() {
 		appear = true;
-		int randomItem = (new Random()).nextInt(9);
+		int randomItem = (new Random()).nextInt(9); // 동일 확률 랜덤 생성
 		return items[randomItem];
 	}
 }

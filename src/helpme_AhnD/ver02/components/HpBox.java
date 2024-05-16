@@ -12,7 +12,7 @@ public class HpBox extends JLabel {
 
 	DropNotePlayerService playerService;
 	private Player player;
-
+	
 	private final int FIRST_HEART = 1;
 	private final int SECOND_HEART = 2;
 	private final int THIRD_HEART = 3;
@@ -43,6 +43,7 @@ public class HpBox extends JLabel {
 		}
 
 		public void initData() {
+			// 플레이어당 하트 3개 위치 지정
 			switch (order) {
 			case FIRST_HEART:
 				if (player == Player.LEFTPLAYER) {
@@ -80,29 +81,30 @@ public class HpBox extends JLabel {
 		@Override
 		public void run() {
 			while (DropNoteFrame.isRunning()) {
+				// 체력 감소에 따른 하트 변화
 				switch (order) {
 				case FIRST_HEART:
-					if (playerService.getScore().getHp() >= 20) {
+					if (playerService.getScoreService().getHp() >= Define.HP_1_0_HEART) {
 						setIcon(hpFull);
-					} else if (playerService.getScore().getHp() >= 10) {
+					} else if (playerService.getScoreService().getHp() >= Define.HP_0_5_HEART) {
 						setIcon(hpHalf);
 					} else {
 						setIcon(null);
 					}
 					break;
 				case SECOND_HEART:
-					if (playerService.getScore().getHp() >= 40) {
+					if (playerService.getScoreService().getHp() >= Define.HP_2_0_HEART) {
 						setIcon(hpFull);
-					} else if (playerService.getScore().getHp() >= 30) {
+					} else if (playerService.getScoreService().getHp() >= Define.HP_1_5_HEART) {
 						setIcon(hpHalf);
 					} else {
 						setIcon(null);
 					}
 					break;
 				case THIRD_HEART:
-					if (playerService.getScore().getHp() >= 60) {
+					if (playerService.getScoreService().getHp() >= Define.HP_3_0_HEART) {
 						setIcon(hpFull);
-					} else if (playerService.getScore().getHp() >= 50) {
+					} else if (playerService.getScoreService().getHp() >= Define.HP_2_5_HEART) {
 						setIcon(hpHalf);
 					} else {
 						setIcon(null);
