@@ -12,6 +12,9 @@ public class HpBox extends JLabel {
 	DropNotePlayerService playerService;
 	private Player player;
 
+	private final int FIRSTHEART = 1;
+	private final int SECONDHEART = 2;
+	private final int THIRDHEART = 3;
 	private int x;
 	private int y = 180;
 
@@ -23,24 +26,46 @@ public class HpBox extends JLabel {
 		this.player = player;
 		hpFull = new ImageIcon("images/hp/HP_HPFULL.png");
 		hpHalf = new ImageIcon("images/hp/HP_HPHALF.png");
-		new Thread(new hp1()).start();
-		new Thread(new hp2()).start();
-		new Thread(new hp3()).start();
+		new Thread(new Heart(FIRSTHEART)).start();
+		new Thread(new Heart(SECONDHEART)).start();
+		new Thread(new Heart(THIRDHEART)).start();
 	}
 
-	// hp 첫번째 하트
-	class hp1 extends JLabel implements Runnable {
+	class Heart extends JLabel implements Runnable {
 
-		public hp1() {
+		private int order;
+
+		public Heart(int order) {
+			this.order = order;
 			initData();
 			setInitLayout();
 		}
 
 		public void initData() {
-			if (player == Player.LEFTPLAYER) {
-				x = 410;
-			} else if (player == Player.RIGHTPLAYER) {
-				x = 1125;
+			switch (order) {
+			case FIRSTHEART:
+				if (player == Player.LEFTPLAYER) {
+					x = 410;
+				} else if (player == Player.RIGHTPLAYER) {
+					x = 1125;
+				}
+				break;
+			case SECONDHEART:
+				if (player == Player.LEFTPLAYER) {
+					x = 460;
+				} else if (player == Player.RIGHTPLAYER) {
+					x = 1075;
+				}
+				break;
+			case THIRDHEART:
+				if (player == Player.LEFTPLAYER) {
+					x = 510;
+				} else if (player == Player.RIGHTPLAYER) {
+					x = 1025;
+				}
+				break;
+			default:
+				break;
 			}
 		}
 
@@ -54,7 +79,8 @@ public class HpBox extends JLabel {
 		@Override
 		public void run() {
 			while (DropNoteFrame.isRunning()) {
-				while (DropNoteFrame.isRunning()) {
+				switch (order) {
+				case FIRSTHEART:
 					if (playerService.getScore().getHp() >= 20) {
 						setIcon(hpFull);
 					} else if (playerService.getScore().getHp() >= 10) {
@@ -62,46 +88,20 @@ public class HpBox extends JLabel {
 					} else {
 						setIcon(null);
 					}
-					try {
-						Thread.sleep(1);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-	}
-
-	// hp 두번째 하트
-	class hp2 extends JLabel implements Runnable {
-
-		public hp2() {
-			initData();
-			setInitLayout();
-		}
-
-		public void initData() {
-			if (player == Player.LEFTPLAYER) {
-				x = 460;
-			} else if (player == Player.RIGHTPLAYER) {
-				x = 1075;
-			}
-		}
-
-		public void setInitLayout() {
-			setIcon(hpFull);
-			setSize(50, 50);
-			setLocation(x, y);
-			playerService.getmContext().add(this);
-		}
-
-		@Override
-		public void run() {
-			while (DropNoteFrame.isRunning()) {
-				while (DropNoteFrame.isRunning()) {
+					break;
+				case SECONDHEART:
 					if (playerService.getScore().getHp() >= 40) {
 						setIcon(hpFull);
 					} else if (playerService.getScore().getHp() >= 30) {
+						setIcon(hpHalf);
+					} else {
+						setIcon(null);
+					}
+					break;
+				case THIRDHEART:
+					if (playerService.getScore().getHp() >= 60) {
+						setIcon(hpFull);
+					} else if (playerService.getScore().getHp() >= 50) {
 						setIcon(hpHalf);
 					} else {
 						setIcon(null);
@@ -111,44 +111,11 @@ public class HpBox extends JLabel {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+					break;
+				default:
+					break;
 				}
-			}
-		}
-	}
 
-	// hp 세번째 하트
-	class hp3 extends JLabel implements Runnable {
-
-		public hp3() {
-			initData();
-			setInitLayout();
-		}
-
-		public void initData() {
-			if (player == Player.LEFTPLAYER) {
-				x = 510;
-			} else if (player == Player.RIGHTPLAYER) {
-				x = 1025;
-			}
-		}
-
-		public void setInitLayout() {
-			setIcon(hpFull);
-			setSize(50, 50);
-			setLocation(x, y);
-			playerService.getmContext().add(this);
-		}
-
-		@Override
-		public void run() {
-			while (DropNoteFrame.isRunning()) {
-				if (playerService.getScore().getHp() >= 60) {
-					setIcon(hpFull);
-				} else if (playerService.getScore().getHp() >= 50) {
-					setIcon(hpHalf);
-				} else {
-					setIcon(null);
-				}
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {

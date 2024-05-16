@@ -6,7 +6,6 @@ import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.components.ComboBox;
 import helpme_AhnD.ver02.components.DropNote;
 import helpme_AhnD.ver02.components.HpBox;
-import helpme_AhnD.ver02.components.ItemBox;
 import helpme_AhnD.ver02.components.ScoreBox;
 import helpme_AhnD.ver02.state.Player;
 
@@ -17,18 +16,18 @@ public class DropNotePlayerService implements Runnable {
 	private DropNote note;
 	private Score score;
 	private int delay;
+	private ComboBox comboBox;
 
 	public DropNotePlayerService(DropNoteFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
 		score = new Score(player);
-		new HpBox(this, player);
+		comboBox = new ComboBox(this, player);
 		new ScoreBox(this, player);
-		new ComboBox(this, player);
-
+		new HpBox(this, player);
 	}
 
-	private void createNote() {
+	public void createNote() {
 		note = new DropNote(this, player);
 		new Thread(note).start();
 	}
@@ -38,7 +37,7 @@ public class DropNotePlayerService implements Runnable {
 		while (DropNoteFrame.isRunning()) {
 			createNote();
 			Random random = new Random();
-			delay = random.nextInt(800) + 400;
+			delay = random.nextInt(1000) + 500;
 
 			try {
 				Thread.sleep(delay);

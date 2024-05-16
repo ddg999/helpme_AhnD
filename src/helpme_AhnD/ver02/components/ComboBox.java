@@ -3,7 +3,9 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.state.Digit;
 import helpme_AhnD.ver02.state.Player;
 
 public class ComboBox extends JLabel {
@@ -13,13 +15,9 @@ public class ComboBox extends JLabel {
 
 	private ImageIcon comboBox;
 	private ImageIcon[] comboNum;
-	private ImageIcon comboExcellent;
-	private ImageIcon comboGood;
-	private ImageIcon comboBad;
-	private ImageIcon comboMiss;
 
 	private int x;
-	private int y;
+	private int y = 450;
 	private boolean isRun = true; // 게임 실행중
 
 	public ComboBox(DropNotePlayerService playerService, Player player) {
@@ -27,18 +25,16 @@ public class ComboBox extends JLabel {
 		this.player = player;
 		initData();
 		setInitLayout();
-		new Thread(new comboNum1()).start();
-		new Thread(new comboNum2()).start();
-		new Thread(new comboNum3()).start();
+		new Thread(new ComboNum(Digit.ONES)).start();
+		new Thread(new ComboNum(Digit.TENS)).start();
+		new Thread(new ComboNum(Digit.HUNDREDS)).start();
 	}
 
 	public void initData() {
 		if (player == Player.LEFTPLAYER) {
-			x = 350;
-			y = 450;
+			x = 280;
 		} else if (player == Player.RIGHTPLAYER) {
-			x = 1150;
-			y = 450;
+			x = 1205;
 		}
 		comboBox = new ImageIcon("images/combo/COMBO_COMBO.png");
 		comboNum = new ImageIcon[10];
@@ -52,10 +48,6 @@ public class ComboBox extends JLabel {
 		comboNum[7] = new ImageIcon("images/combo/COMBO_7.png");
 		comboNum[8] = new ImageIcon("images/combo/COMBO_8.png");
 		comboNum[9] = new ImageIcon("images/combo/COMBO_9.png");
-		comboExcellent = new ImageIcon("images/combo/COMBO_EXCELLENT.png");
-		comboGood = new ImageIcon("images/combo/COMBO_GOOD.png");
-		comboBad = new ImageIcon("images/combo/COMBO_BAD.png");
-		comboMiss = new ImageIcon("images/combo/miss.png");
 	}
 
 	public void setInitLayout() {
@@ -65,134 +57,83 @@ public class ComboBox extends JLabel {
 		playerService.getmContext().add(this);
 	}
 
-	// combo 100의 자리 숫자
-	class comboNum1 extends JLabel implements Runnable {
+	class ComboNum extends JLabel implements Runnable {
 
-		private int x1;
-		private int y1;
+		private Digit digit;
+		private int x;
+		private int y = 525;
 
-		public comboNum1() {
+		public ComboNum(Digit digit) {
+			this.digit = digit;
 			initData();
 			setInitLayout();
 		}
 
 		public void initData() {
-			if (player == Player.LEFTPLAYER) {
-				x1 = 350;
-				y1 = 525;
-			} else if (player == Player.RIGHTPLAYER) {
-				x1 = 1150;
-				y1 = 525;
+			switch (digit) {
+			case ONES:
+				if (player == Player.LEFTPLAYER) {
+					x = 344;
+				} else if (player == Player.RIGHTPLAYER) {
+					x = 1269;
+				}
+				break;
+			case TENS:
+				if (player == Player.LEFTPLAYER) {
+					x = 312;
+				} else if (player == Player.RIGHTPLAYER) {
+					x = 1237;
+				}
+				break;
+			case HUNDREDS:
+				if (player == Player.LEFTPLAYER) {
+					x = 280;
+				} else if (player == Player.RIGHTPLAYER) {
+					x = 1205;
+				}
+				break;
+			default:
+				break;
 			}
 		}
 
 		public void setInitLayout() {
 			setIcon(comboNum[0]);
 			setSize(30, 46);
-			setLocation(x1, y1);
+			setLocation(x, y);
 			playerService.getmContext().add(this);
 		}
 
 		@Override
 		public void run() {
-			while (isRun) {
+			while (DropNoteFrame.isRunning()) {
 				if (playerService.getScore().getCombo() >= 9999) {
 					setIcon(comboNum[9]);
 				} else {
-					for (int i = 0; i < comboNum.length; i++) {
-						if ((playerService.getScore().getCombo() % 1000) / 100 == i) {
-							setIcon(comboNum[i]);
+					switch (digit) {
+					case ONES:
+						for (int i = 0; i < comboNum.length; i++) {
+							if (playerService.getScore().getCombo() % 10 == i) {
+								setIcon(comboNum[i]);
+							}
 						}
-					}
-				}
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	// combo 10의 자리 숫자
-	class comboNum2 extends JLabel implements Runnable {
-
-		private int x2;
-		private int y2;
-
-		public comboNum2() {
-			initData();
-			setInitLayout();
-		}
-
-		public void initData() {
-			if (player == Player.LEFTPLAYER) {
-				x2 = 382;
-				y2 = 525;
-			} else if (player == Player.RIGHTPLAYER) {
-				x2 = 1182;
-				y2 = 525;
-			}
-		}
-
-		public void setInitLayout() {
-			setIcon(comboNum[0]);
-			setSize(30, 46);
-			setLocation(x2, y2);
-			playerService.getmContext().add(this);
-		}
-
-		@Override
-		public void run() {
-			while (isRun) {
-				for (int i = 0; i < comboNum.length; i++) {
-					if ((playerService.getScore().getCombo() % 100) / 10 == i) {
-						setIcon(comboNum[i]);
-					}
-				}
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	// combo 1의 자리 숫자
-	class comboNum3 extends JLabel implements Runnable {
-
-		private int x3;
-		private int y3;
-
-		public comboNum3() {
-			initData();
-			setInitLayout();
-		}
-
-		public void initData() {
-			if (player == Player.LEFTPLAYER) {
-				x3 = 414;
-				y3 = 525;
-			} else if (player == Player.RIGHTPLAYER) {
-				x3 = 1214;
-				y3 = 525;
-			}
-		}
-
-		public void setInitLayout() {
-			setIcon(comboNum[0]);
-			setSize(30, 46);
-			setLocation(x3, y3);
-			playerService.getmContext().add(this);
-		}
-
-		@Override
-		public void run() {
-			while (isRun) {
-				for (int i = 0; i < comboNum.length; i++) {
-					if (playerService.getScore().getCombo() % 10 == i) {
-						setIcon(comboNum[i]);
+						break;
+					case TENS:
+						for (int i = 0; i < comboNum.length; i++) {
+							if ((playerService.getScore().getCombo() % 100) / 10 == i) {
+								setIcon(comboNum[i]);
+							}
+						}
+						break;
+					case HUNDREDS:
+						for (int i = 0; i < comboNum.length; i++) {
+							if ((playerService.getScore().getCombo() % 1000) / 100 == i) {
+								setIcon(comboNum[i]);
+							}
+						}
+						break;
+					default:
+						break;
 					}
 				}
 				try {
