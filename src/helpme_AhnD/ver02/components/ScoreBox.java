@@ -17,7 +17,7 @@ public class ScoreBox extends JLabel {
 	private ImageIcon[] scoreNum;
 
 	private int x;
-	private int y;
+	private int y = 20;
 	private boolean isRun = true; // 게임 실행중
 
 	public ScoreBox(DropNotePlayerService playerService, Player player) {
@@ -25,19 +25,17 @@ public class ScoreBox extends JLabel {
 		this.player = player;
 		initData();
 		setInitLayout();
-		new Thread(new scoreNum(Digit.ONES)).start();
-		new Thread(new scoreNum(Digit.TENS)).start();
-		new Thread(new scoreNum(Digit.HUNDREDS)).start();
-		new Thread(new scoreNum(Digit.THOUSANDS)).start();
+		new Thread(new ScoreNum(Digit.ONES)).start();
+		new Thread(new ScoreNum(Digit.TENS)).start();
+		new Thread(new ScoreNum(Digit.HUNDREDS)).start();
+		new Thread(new ScoreNum(Digit.THOUSANDS)).start();
 	}
 
 	public void initData() {
 		if (player == Player.LEFTPLAYER) {
 			x = 410;
-			y = 20;
 		} else if (player == Player.RIGHTPLAYER) {
 			x = 870;
-			y = 20;
 		}
 		scoreBox = new ImageIcon("images/score/scoreScore.jpg");
 		scoreNum = new ImageIcon[10];
@@ -60,13 +58,13 @@ public class ScoreBox extends JLabel {
 		playerService.getmContext().add(this);
 	}
 
-	class scoreNum extends JLabel implements Runnable {
+	class ScoreNum extends JLabel implements Runnable {
 
 		private Digit digit;
 		private int x;
-		private int y;
+		private int y = 103;
 
-		public scoreNum(Digit digit) {
+		public ScoreNum(Digit digit) {
 			this.digit = digit;
 			initData();
 			setInitLayout();
@@ -77,37 +75,29 @@ public class ScoreBox extends JLabel {
 			case ONES:
 				if (player == Player.LEFTPLAYER) {
 					x = 620;
-					y = 103;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1080;
-					y = 103;
 				}
 				break;
 			case TENS:
 				if (player == Player.LEFTPLAYER) {
 					x = 570;
-					y = 103;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1030;
-					y = 103;
 				}
 				break;
 			case HUNDREDS:
 				if (player == Player.LEFTPLAYER) {
 					x = 520;
-					y = 103;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 980;
-					y = 103;
 				}
 				break;
 			case THOUSANDS:
 				if (player == Player.LEFTPLAYER) {
 					x = 470;
-					y = 103;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 930;
-					y = 103;
 				}
 				break;
 			default:

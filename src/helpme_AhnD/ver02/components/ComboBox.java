@@ -15,13 +15,9 @@ public class ComboBox extends JLabel {
 
 	private ImageIcon comboBox;
 	private ImageIcon[] comboNum;
-	private ImageIcon comboExcellent;
-	private ImageIcon comboGood;
-	private ImageIcon comboBad;
-	private ImageIcon comboMiss;
 
 	private int x;
-	private int y;
+	private int y = 450;
 	private boolean isRun = true; // 게임 실행중
 
 	public ComboBox(DropNotePlayerService playerService, Player player) {
@@ -29,18 +25,16 @@ public class ComboBox extends JLabel {
 		this.player = player;
 		initData();
 		setInitLayout();
-		new Thread(new comboNum(Digit.ONES)).start();
-		new Thread(new comboNum(Digit.TENS)).start();
-		new Thread(new comboNum(Digit.HUNDREDS)).start();
+		new Thread(new ComboNum(Digit.ONES)).start();
+		new Thread(new ComboNum(Digit.TENS)).start();
+		new Thread(new ComboNum(Digit.HUNDREDS)).start();
 	}
 
 	public void initData() {
 		if (player == Player.LEFTPLAYER) {
 			x = 280;
-			y = 450;
 		} else if (player == Player.RIGHTPLAYER) {
 			x = 1205;
-			y = 450;
 		}
 		comboBox = new ImageIcon("images/combo/COMBO_COMBO.png");
 		comboNum = new ImageIcon[10];
@@ -54,10 +48,6 @@ public class ComboBox extends JLabel {
 		comboNum[7] = new ImageIcon("images/combo/COMBO_7.png");
 		comboNum[8] = new ImageIcon("images/combo/COMBO_8.png");
 		comboNum[9] = new ImageIcon("images/combo/COMBO_9.png");
-		comboExcellent = new ImageIcon("images/combo/COMBO_EXCELLENT.png");
-		comboGood = new ImageIcon("images/combo/COMBO_GOOD.png");
-		comboBad = new ImageIcon("images/combo/COMBO_BAD.png");
-		comboMiss = new ImageIcon("images/combo/miss.png");
 	}
 
 	public void setInitLayout() {
@@ -67,13 +57,13 @@ public class ComboBox extends JLabel {
 		playerService.getmContext().add(this);
 	}
 
-	class comboNum extends JLabel implements Runnable {
+	class ComboNum extends JLabel implements Runnable {
 
 		private Digit digit;
 		private int x;
-		private int y;
+		private int y = 525;
 
-		public comboNum(Digit digit) {
+		public ComboNum(Digit digit) {
 			this.digit = digit;
 			initData();
 			setInitLayout();
@@ -84,28 +74,22 @@ public class ComboBox extends JLabel {
 			case ONES:
 				if (player == Player.LEFTPLAYER) {
 					x = 344;
-					y = 525;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1269;
-					y = 525;
 				}
 				break;
 			case TENS:
 				if (player == Player.LEFTPLAYER) {
 					x = 312;
-					y = 525;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1237;
-					y = 525;
 				}
 				break;
 			case HUNDREDS:
 				if (player == Player.LEFTPLAYER) {
 					x = 280;
-					y = 525;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1205;
-					y = 525;
 				}
 				break;
 			default:

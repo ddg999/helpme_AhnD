@@ -26,16 +26,16 @@ public class HpBox extends JLabel {
 		this.player = player;
 		hpFull = new ImageIcon("images/hp/HP_HPFULL.png");
 		hpHalf = new ImageIcon("images/hp/HP_HPHALF.png");
-		new Thread(new heart(FIRSTHEART)).start();
-		new Thread(new heart(SECONDHEART)).start();
-		new Thread(new heart(THIRDHEART)).start();
+		new Thread(new Heart(FIRSTHEART)).start();
+		new Thread(new Heart(SECONDHEART)).start();
+		new Thread(new Heart(THIRDHEART)).start();
 	}
 
-	class heart extends JLabel implements Runnable {
+	class Heart extends JLabel implements Runnable {
 
 		private int order;
 
-		public heart(int order) {
+		public Heart(int order) {
 			this.order = order;
 			initData();
 			setInitLayout();

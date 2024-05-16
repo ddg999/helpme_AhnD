@@ -30,6 +30,12 @@ public class DropNote extends JLabel implements Runnable {
 	private final int RIGHT = 2;
 	private final int DOWN = 3;
 
+	boolean isPerfect;
+	boolean isExcellent;
+	boolean isGood;
+	boolean isBad;
+	boolean isMiss;
+
 	private boolean drop = true;
 	private boolean isJudged = false;
 
@@ -39,6 +45,7 @@ public class DropNote extends JLabel implements Runnable {
 		initData();
 		setInitLayout();
 		addEventListener();
+		new Thread(new judgeImage(player)).start();
 	}
 
 	public void initData() {
@@ -80,29 +87,144 @@ public class DropNote extends JLabel implements Runnable {
 		playerService.getmContext().add(this);
 	}
 
+	class judgeImage extends JLabel implements Runnable {
+
+		private ImageIcon perfect;
+		private ImageIcon excellent;
+		private ImageIcon good;
+		private ImageIcon bad;
+		private ImageIcon miss;
+		private Player player;
+
+		private int x;
+		private int y = 415;
+
+		public judgeImage(Player player) {
+			this.player = player;
+			initData();
+			setInitLayout();
+		}
+
+		public void initData() {
+			if (player == Player.LEFTPLAYER) {
+				x = 260;
+			} else if (player == Player.RIGHTPLAYER) {
+				x = 1185;
+			}
+			perfect = new ImageIcon("images/combo/COMBO_PERFECT.png");
+			excellent = new ImageIcon("images/combo/COMBO_EXCELLENT.png");
+			good = new ImageIcon("images/combo/COMBO_GOOD.png");
+			bad = new ImageIcon("images/combo/COMBO_BAD.png");
+			miss = new ImageIcon("images/combo/miss.png");
+		}
+
+		public void setInitLayout() {
+			setIcon(null);
+			setLocation(x, y);
+			setSize(132, 36);
+			playerService.getmContext().add(this, 0);
+		}
+
+		@Override
+		public void run() {
+			while (DropNoteFrame.isRunning()) {
+				if (isPerfect) {
+					setIcon(perfect);
+					try {
+						Thread.sleep(450);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					isPerfect = false;
+					setIcon(null);
+				} else if (isExcellent) {
+					setIcon(excellent);
+					try {
+						Thread.sleep(450);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					isExcellent = false;
+					setIcon(null);
+				} else if (isGood) {
+					if (player == Player.LEFTPLAYER) {
+						setLocation(290, y);
+					} else {
+						setLocation(1215, y);
+					}
+					setIcon(good);
+					try {
+						Thread.sleep(450);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					isGood = false;
+					setIcon(null);
+				} else if (isBad) {
+					if (player == Player.LEFTPLAYER) {
+						setLocation(300, y);
+					} else {
+						setLocation(1225, y);
+					}
+					setIcon(bad);
+					try {
+						Thread.sleep(450);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					isBad = false;
+					setIcon(null);
+				} else if (isMiss) {
+					if (player == Player.LEFTPLAYER) {
+						setLocation(293, y);
+					} else {
+						setLocation(1218, y);
+					}
+					setIcon(miss);
+					try {
+						Thread.sleep(450);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					isMiss = false;
+					setIcon(null);
+				}
+				try {
+					Thread.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	public void judge() {
-		if (y < 570) {
+		if (y < 640) {
 			return;
 		}
 		if (perfectZone()) {
+			isPerfect = true;
 			System.out.println("퍼펙트");
 			playerService.getScore().perfect();
 			isJudged = true;
 			drop = false;
 			setIcon(null);
 		} else if (excellentZone()) {
+			isExcellent = true;
 			System.out.println("엑설런트");
 			playerService.getScore().excellent();
 			isJudged = true;
 			drop = false;
 			setIcon(null);
 		} else if (goodZone()) {
+			isGood = true;
 			System.out.println("굿");
 			playerService.getScore().good();
 			isJudged = true;
 			drop = false;
 			setIcon(null);
 		} else if (badZone()) {
+			isBad = true;
 			System.out.println("배드");
 			playerService.getScore().bad();
 			isJudged = true;
@@ -171,16 +293,16 @@ public class DropNote extends JLabel implements Runnable {
 	}
 
 	public boolean perfectZone() {
-		if (y >= 700 && y <= 750) {
+		if (y >= 705 && y <= 745) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean excellentZone() {
-		if (y >= 680 && y < 700) {
+		if (y >= 680 && y < 705) {
 			return true;
-		} else if (y > 750 && y < 770) {
+		} else if (y > 745 && y < 770) {
 			return true;
 		}
 		return false;
@@ -196,20 +318,21 @@ public class DropNote extends JLabel implements Runnable {
 	}
 
 	public boolean badZone() {
-		if (y >= 640 && y < 650) {
+		if (y >= 635 && y < 650) {
 			return true;
-		} else if (y >= 800 && y < 840) {
+		} else if (y >= 800 && y < 850) {
 			return true;
 		}
 		return false;
 	}
 
 	public void drop() {
-		if (y <= 840) {
+		if (y <= 850) {
 			y += noteSpeed;
 			setLocation(x, y);
-		} else if (y > 840) {
+		} else if (y > 850) {
 			setIcon(null);
+			isMiss = true;
 			drop = false;
 			playerService.getScore().bad();
 		}
@@ -217,7 +340,7 @@ public class DropNote extends JLabel implements Runnable {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (DropNoteFrame.isRunning()) {
 			if (drop) {
 				drop();
 				try {
@@ -234,4 +357,9 @@ public class DropNote extends JLabel implements Runnable {
 	public int getY() {
 		return y;
 	}
+
+	public DropNotePlayerService getDropNotePlayerService() {
+		return playerService;
+	}
+
 }
