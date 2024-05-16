@@ -22,6 +22,7 @@ public class DropNote extends JLabel implements Runnable {
 
 	private int x;
 	private int y;
+	private int noteSpeed = 2;
 
 	private int place;
 	private final int LEFT = 0;
@@ -47,24 +48,24 @@ public class DropNote extends JLabel implements Runnable {
 		switch (player) {
 		case LEFTPLAYER:
 			if (place == LEFT) {
-				x = 300;
+				x = 150;
 			} else if (place == UP) {
-				x = 400;
+				x = 250;
 			} else if (place == RIGHT) {
-				x = 500;
+				x = 350;
 			} else if (place == DOWN) {
-				x = 600;
+				x = 450;
 			}
 			break;
 		case RIGHTPLAYER:
 			if (place == LEFT) {
-				x = 1005;
+				x = 1080;
 			} else if (place == UP) {
-				x = 1105;
+				x = 1180;
 			} else if (place == RIGHT) {
-				x = 1205;
+				x = 1280;
 			} else if (place == DOWN) {
-				x = 1305;
+				x = 1380;
 			}
 			break;
 		default:
@@ -80,7 +81,7 @@ public class DropNote extends JLabel implements Runnable {
 	}
 
 	public void judge() {
-		if (y < 600) {
+		if (y < 570) {
 			return;
 		}
 		if (perfectZone()) {
@@ -101,7 +102,7 @@ public class DropNote extends JLabel implements Runnable {
 			isJudged = true;
 			drop = false;
 			setIcon(null);
-		} else {
+		} else if (badZone()) {
 			System.out.println("배드");
 			playerService.getScore().bad();
 			isJudged = true;
@@ -170,36 +171,47 @@ public class DropNote extends JLabel implements Runnable {
 	}
 
 	public boolean perfectZone() {
-		if (y <= 705 && y > 680) {
+		if (y >= 700 && y <= 750) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean excellentZone() {
-		if (y <= 680 && y > 655) {
+		if (y >= 680 && y < 700) {
+			return true;
+		} else if (y > 750 && y < 770) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean goodZone() {
-		if (y <= 655 && y > 630) {
+		if (y >= 650 && y < 680) {
+			return true;
+		} else if (y >= 770 && y < 800) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean badZone() {
+		if (y >= 640 && y < 650) {
+			return true;
+		} else if (y >= 800 && y < 840) {
 			return true;
 		}
 		return false;
 	}
 
 	public void drop() {
-		if (y <= 710) {
-			y++;
+		if (y <= 840) {
+			y += noteSpeed;
 			setLocation(x, y);
-		} else {
+		} else if (y > 840) {
+			setIcon(null);
 			drop = false;
 			playerService.getScore().bad();
-		}
-		if (y >= 700) {
-			setIcon(null);
 		}
 	}
 
@@ -209,7 +221,7 @@ public class DropNote extends JLabel implements Runnable {
 			if (drop) {
 				drop();
 				try {
-					Thread.sleep(1);
+					Thread.sleep(5);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -219,28 +231,7 @@ public class DropNote extends JLabel implements Runnable {
 		}
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
 	public int getY() {
 		return y;
 	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getPlace() {
-		return place;
-	}
-
-	public void setPlace(int place) {
-		this.place = place;
-	}
-
 }

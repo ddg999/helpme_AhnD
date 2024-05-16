@@ -31,14 +31,13 @@ public class NoteBar extends JLabel {
 		setIcon(noteBar);
 		setSize(400, 100);
 		if (player == Player.LEFTPLAYER) {
-			x = 295;
+			x = 145;
 			y = 700;
 		} else if (player == Player.RIGHTPLAYER) {
-			x = 1000;
+			x = 1075;
 			y = 700;
 		}
 		setLocation(x, y);
 		mContext.add(this);
 	}
-
 }

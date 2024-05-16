@@ -45,11 +45,13 @@ public class DropNoteFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		noteBarLeft = new NoteBar(this, Player.LEFTPLAYER);
-		noteBarRight = new NoteBar(this, Player.RIGHTPLAYER);
 		dropNoteLeftPlayerService = new DropNotePlayerService(this, Player.LEFTPLAYER);
-		dropNoteRightPlayerService = new DropNotePlayerService(this, Player.RIGHTPLAYER);
 		new Thread(dropNoteLeftPlayerService).start();
+
+		noteBarRight = new NoteBar(this, Player.RIGHTPLAYER);
+		dropNoteRightPlayerService = new DropNotePlayerService(this, Player.RIGHTPLAYER);
 		new Thread(dropNoteRightPlayerService).start();
+
 		itembox = new ItemBox(this);
 		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
 		bgm.getClip().start();
