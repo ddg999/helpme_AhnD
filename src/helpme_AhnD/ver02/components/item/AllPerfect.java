@@ -31,12 +31,12 @@ public class AllPerfect extends Items implements Useable {
 	// todo 전부 퍼펙트
 	@Override
 	public void useItems(DropNotePlayerService dropNotePlayerService) {
-		dropNotePlayerService.getScore().setNeverPerfect(true);
+		dropNotePlayerService.getScoreService().setNeverPerfect(true);
 		// 지속 시간 이후 효과 제거
 		new Thread(() -> {
 			try {
 				Thread.sleep(Items.DURATION_TIME);
-				dropNotePlayerService.getScore().setNeverPerfect(false);
+				dropNotePlayerService.getScoreService().setNeverPerfect(false);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

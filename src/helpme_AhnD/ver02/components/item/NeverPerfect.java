@@ -28,12 +28,12 @@ public class NeverPerfect extends Items implements Useable{
 	}
 	
 	public void useItems(DropNotePlayerService dropNotePlayerService) {
-		dropNotePlayerService.getScore().setAllPerfect(true);
+		dropNotePlayerService.getScoreService().setAllPerfect(true);
 		// 지속 시간 이후 효과 제거
 		new Thread(() -> {
 			try {
 				Thread.sleep(Items.DURATION_TIME);
-				dropNotePlayerService.getScore().setAllPerfect(false);
+				dropNotePlayerService.getScoreService().setAllPerfect(false);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

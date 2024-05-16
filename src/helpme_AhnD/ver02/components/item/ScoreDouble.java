@@ -27,12 +27,12 @@ public class ScoreDouble extends Items implements Useable{
 		setLocation(X, Y);
 	}
 	public void useItems(DropNotePlayerService dropNotePlayerService) {
-		dropNotePlayerService.getScore().setDouble(true);
+		dropNotePlayerService.getScoreService().setDouble(true);
 		// 지속 시간 이후 효과 제거
 		new Thread(() -> {
 			try {
 				Thread.sleep(Items.DURATION_TIME);
-				dropNotePlayerService.getScore().setDouble(false);
+				dropNotePlayerService.getScoreService().setDouble(false);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
