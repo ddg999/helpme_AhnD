@@ -4,7 +4,7 @@ import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.Frame.GameEndFrame;
 import helpme_AhnD.ver02.state.Player;
 
-public class Score {
+public class ScoreService {
 	
 	private DropNoteFrame mContext;
 	private Player player;
@@ -16,8 +16,11 @@ public class Score {
 	private int countGood;
 	private int countBad;
 	private static boolean isJudged = false;
+	private boolean isDouble;
+	private boolean isAllPerfect;
+	private boolean isNeverPerfect;
 
-	public Score(DropNoteFrame mContext, Player player) {
+	public ScoreService(DropNoteFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
 		hp = 60;
@@ -44,19 +47,40 @@ public class Score {
 	}
 
 	public void perfect() {
-		score += 3;
+		if (isDouble) {
+			score += 6;
+		} else {
+			score += 3;
+		}
+		if (isNeverPerfect) {
+			score -= 1;
+		}
 		combo++;
 		countPerfect++;
 	}
 
 	public void excellent() {
-		score += 2;
+		if (isDouble) {
+			score += 4;
+		} else {
+			score += 2;
+		}
+		if (isAllPerfect) {
+			score += 1;
+		}
 		combo++;
 		countExcellent++;
 	}
 
 	public void good() {
-		score += 1;
+		if (isDouble) {
+			score += 2;
+		} else {
+			score += 1;
+		}
+		if (isAllPerfect) {
+			score += 2;
+		}
 		combo++;
 		countGood++;
 	}
@@ -122,5 +146,18 @@ public class Score {
 	public void setCountBad(int countBad) {
 		this.countBad = countBad;
 	}
+
+	public void setDouble(boolean isDouble) {
+		this.isDouble = isDouble;
+	}
+
+	public void setAllPerfect(boolean isAllPerfect) {
+		this.isAllPerfect = isAllPerfect;
+	}
+
+	public void setNeverPerfect(boolean isNeverPerfect) {
+		this.isNeverPerfect = isNeverPerfect;
+	}
+	
 
 }

@@ -23,7 +23,7 @@ public class HpMinus extends Items implements Useable{
 	
 	private void setInitLayout() {
 		setIcon(hpMinus);
-		setSize(50, 50);
+		setSize(WIDTH, HEIGHT);
 		setLocation(X, Y);
 	}
 	

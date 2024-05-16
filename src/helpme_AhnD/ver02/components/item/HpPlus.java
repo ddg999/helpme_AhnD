@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
-import helpme_AhnD.ver02.service.Score;
+import helpme_AhnD.ver02.service.ScoreService;
 import helpme_AhnD.ver02.utils.Define;
 
 public class HpPlus extends Items implements Useable {
@@ -24,7 +24,7 @@ public class HpPlus extends Items implements Useable {
 
 	private void setInitLayout() {
 		setIcon(hpPlus);
-		setSize(50, 50);
+		setSize(WIDTH, HEIGHT);
 		setLocation(X, Y);
 	}
 

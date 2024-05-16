@@ -20,14 +20,17 @@ public class DropNoteFrame extends JFrame {
 	GameSelectFrame gameSelectFrame;
 
 	JLabel background;
-
+	
+	// DropNote 게임을 관리하는 서비스 클래스 (플레이어 위치로 나눔) 
 	DropNotePlayerService dropNoteLeftPlayerService;
 	DropNotePlayerService dropNoteRightPlayerService;
+	// 게임 시작시 띄울 컴포넌트
 	NoteBar noteBarLeft;
 	NoteBar noteBarRight;
+	ItemBox itembox;
+	// 게임시작시 재생될 bgm
 	BGM bgm;
 
-	ItemBox itembox;
 	private static boolean Running;
 
 	public DropNoteFrame(GameSelectFrame gameSelectFrame) {
@@ -38,7 +41,6 @@ public class DropNoteFrame extends JFrame {
 	}
 
 	private void initData() {
-		// todo 각종 라벨 추가 예정
 		background = new JLabel(new ImageIcon(Define.IMG_DROPNOTE_BG));
 
 		Running = true;
@@ -66,17 +68,9 @@ public class DropNoteFrame extends JFrame {
 		setResizable(false);
 		setVisible(true);
 
-		// todo 각종 컴포넌트 add
 	}
 
 	private void addEventListener() {
-		// 임시 코드
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				System.out.println(e.getX() + " " + e.getY());
-			}
-		});
 	}
 
 	// getter setter

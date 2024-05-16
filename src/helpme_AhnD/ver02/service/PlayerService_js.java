@@ -12,12 +12,12 @@ public class PlayerService_js implements Runnable {
 
 	TestFrame mContext;
 	private AhnCharacter player;
-	private Score score;
+	private ScoreService score;
 
 	public PlayerService_js(TestFrame testFrame) {
 		this.mContext = testFrame;
 		player = new AhnCharacter();
-		score = new Score(1);
+		score = new ScoreService(1);
 	
 	}
 
@@ -27,7 +27,7 @@ public class PlayerService_js implements Runnable {
 		return mContext;
 	}
 
-	public Score getScore() {
+	public ScoreService getScore() {
 		return score;
 	}
 

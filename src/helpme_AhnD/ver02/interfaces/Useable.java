@@ -1,7 +1,7 @@
 package helpme_AhnD.ver02.interfaces;
 
 import helpme_AhnD.ver02.service.DropNotePlayerService;
-import helpme_AhnD.ver02.service.Score;
+import helpme_AhnD.ver02.service.ScoreService;
 
 public interface Useable {
 	

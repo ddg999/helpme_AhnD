@@ -7,6 +7,7 @@ import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
 import helpme_AhnD.ver02.state.Digit;
 import helpme_AhnD.ver02.state.Player;
+import helpme_AhnD.ver02.utils.Define;
 
 public class ComboBox extends JLabel {
 
@@ -18,6 +19,7 @@ public class ComboBox extends JLabel {
 
 	private int x;
 	private int y = 450;
+	private final int MAX_COMBO = 9999;
 
 	public ComboBox(DropNotePlayerService playerService, Player player) {
 		this.playerService = playerService;
@@ -35,18 +37,18 @@ public class ComboBox extends JLabel {
 		} else if (player == Player.RIGHTPLAYER) {
 			x = 1205;
 		}
-		comboBox = new ImageIcon("images/combo/COMBO_COMBO.png");
+		comboBox = new ImageIcon(Define.IMG_COMBO_COMBO);
 		comboNum = new ImageIcon[10];
-		comboNum[0] = new ImageIcon("images/combo/COMBO_0.png");
-		comboNum[1] = new ImageIcon("images/combo/COMBO_1.png");
-		comboNum[2] = new ImageIcon("images/combo/COMBO_2.png");
-		comboNum[3] = new ImageIcon("images/combo/COMBO_3.png");
-		comboNum[4] = new ImageIcon("images/combo/COMBO_4.png");
-		comboNum[5] = new ImageIcon("images/combo/COMBO_5.png");
-		comboNum[6] = new ImageIcon("images/combo/COMBO_6.png");
-		comboNum[7] = new ImageIcon("images/combo/COMBO_7.png");
-		comboNum[8] = new ImageIcon("images/combo/COMBO_8.png");
-		comboNum[9] = new ImageIcon("images/combo/COMBO_9.png");
+		comboNum[0] = new ImageIcon(Define.IMG_COMBO_0);
+		comboNum[1] = new ImageIcon(Define.IMG_COMBO_1);
+		comboNum[2] = new ImageIcon(Define.IMG_COMBO_2);
+		comboNum[3] = new ImageIcon(Define.IMG_COMBO_3);
+		comboNum[4] = new ImageIcon(Define.IMG_COMBO_4);
+		comboNum[5] = new ImageIcon(Define.IMG_COMBO_5);
+		comboNum[6] = new ImageIcon(Define.IMG_COMBO_6);
+		comboNum[7] = new ImageIcon(Define.IMG_COMBO_7);
+		comboNum[8] = new ImageIcon(Define.IMG_COMBO_8);
+		comboNum[9] = new ImageIcon(Define.IMG_COMBO_9);
 	}
 
 	public void setInitLayout() {
@@ -106,7 +108,7 @@ public class ComboBox extends JLabel {
 		@Override
 		public void run() {
 			while (DropNoteFrame.isRunning()) {
-				if (playerService.getScore().getCombo() >= 9999) {
+				if (playerService.getScore().getCombo() >= MAX_COMBO) {
 					setIcon(comboNum[9]);
 				} else {
 					switch (digit) {

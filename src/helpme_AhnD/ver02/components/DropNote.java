@@ -21,7 +21,8 @@ public class DropNote extends JLabel implements Runnable {
 
 	private int x;
 	private int y;
-	private int noteSpeed = 2;
+	private int noteSpeed;
+	public static final int DEFAULT_SPEED = 2;
 
 	private int place;
 	private final int LEFT = 0;
@@ -38,9 +39,13 @@ public class DropNote extends JLabel implements Runnable {
 	private boolean drop = true;
 	private boolean isJudged = false;
 
-	public DropNote(DropNotePlayerService playerService, Player player) {
+	private static boolean leftReverse;
+	private static boolean rightReverse;
+
+	public DropNote(DropNotePlayerService playerService, Player player, int speed) {
 		this.playerService = playerService;
 		this.player = player;
+		this.noteSpeed = speed;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -110,11 +115,11 @@ public class DropNote extends JLabel implements Runnable {
 			} else if (player == Player.RIGHTPLAYER) {
 				x = 1185;
 			}
-			perfect = new ImageIcon("images/combo/COMBO_PERFECT.png");
-			excellent = new ImageIcon("images/combo/COMBO_EXCELLENT.png");
-			good = new ImageIcon("images/combo/COMBO_GOOD.png");
-			bad = new ImageIcon("images/combo/COMBO_BAD.png");
-			miss = new ImageIcon("images/combo/miss.png");
+			perfect = new ImageIcon(Define.IMG_COMBO_PERFECT);
+			excellent = new ImageIcon(Define.IMG_COMBO_EXCELLENT);
+			good = new ImageIcon(Define.IMG_COMBO_GOOD);
+			bad = new ImageIcon(Define.IMG_COMBO_BAD);
+			miss = new ImageIcon(Define.IMG_COMBO_MISS);
 		}
 
 		public void setInitLayout() {
@@ -236,8 +241,13 @@ public class DropNote extends JLabel implements Runnable {
 		playerService.getmContext().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				int getKeyCode = e.getKeyCode();
+				// 키 반전 상태일경우 반전
+				if (leftReverse || rightReverse) {
+					getKeyCode = reverse(getKeyCode);
+				}
 				if (player == Player.LEFTPLAYER) {
-					switch (e.getKeyCode()) {
+					switch (getKeyCode) {
 					case KeyEvent.VK_A:
 						if (place == LEFT && !isJudged) {
 							judge();
@@ -262,7 +272,7 @@ public class DropNote extends JLabel implements Runnable {
 						break;
 					}
 				} else if (player == Player.RIGHTPLAYER) {
-					switch (e.getKeyCode()) {
+					switch (getKeyCode) {
 					case KeyEvent.VK_LEFT:
 						if (place == LEFT && !isJudged) {
 							judge();
@@ -352,4 +362,44 @@ public class DropNote extends JLabel implements Runnable {
 			}
 		}
 	}
+
+	private int reverse(int keyCode) {
+		if (leftReverse) {
+			switch (keyCode) {
+			case KeyEvent.VK_W:
+				return KeyEvent.VK_S;
+			case KeyEvent.VK_S:
+				return KeyEvent.VK_W;
+			case KeyEvent.VK_A:
+				return KeyEvent.VK_D;
+			case KeyEvent.VK_D:
+				return KeyEvent.VK_A;
+			default:
+				return keyCode;
+			}
+		} else {
+			switch (keyCode) {
+			case KeyEvent.VK_UP:
+				return KeyEvent.VK_DOWN;
+			case KeyEvent.VK_DOWN:
+				return KeyEvent.VK_UP;
+			case KeyEvent.VK_LEFT:
+				return KeyEvent.VK_RIGHT;
+			case KeyEvent.VK_RIGHT:
+				return KeyEvent.VK_LEFT;
+			default:
+				return keyCode;
+			}
+		}
+	}
+
+	// setter
+	public static void setLeftReverse(boolean input) {
+		leftReverse = input;
+	}
+
+	public static void setRightReverse(boolean input) {
+		rightReverse = input;
+	}
+
 }

@@ -3,6 +3,7 @@ package helpme_AhnD.ver02.components.item;
 import javax.swing.ImageIcon;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.service.DropNotePlayerService;
 import helpme_AhnD.ver02.utils.Define;
 
 public class NeverPerfect extends Items implements Useable{
@@ -22,10 +23,21 @@ public class NeverPerfect extends Items implements Useable{
 	
 	private void setInitLayout() {
 		setIcon(neverPerfect);
-		setSize(50, 50);
+		setSize(WIDTH, HEIGHT);
 		setLocation(X, Y);
 	}
 	
-	// todo 퍼펙트 불가
-	
+	public void useItems(DropNotePlayerService dropNotePlayerService) {
+		dropNotePlayerService.getScore().setAllPerfect(true);
+		// 지속 시간 이후 효과 제거
+		new Thread(() -> {
+			try {
+				Thread.sleep(Items.DURATION_TIME);
+				dropNotePlayerService.getScore().setAllPerfect(false);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+	}
 }
