@@ -18,7 +18,6 @@ public class ScoreBox extends JLabel {
 
 	private int x;
 	private int y = 20;
-	private boolean isRun = true; // 게임 실행중
 
 	public ScoreBox(DropNotePlayerService playerService, Player player) {
 		this.playerService = playerService;

@@ -14,7 +14,6 @@ import helpme_AhnD.ver02.utils.Define;
 
 public class DropNote extends JLabel implements Runnable {
 
-	DropNoteFrame mContext;
 	DropNotePlayerService playerService;
 	private Player player;
 
@@ -353,13 +352,4 @@ public class DropNote extends JLabel implements Runnable {
 			}
 		}
 	}
-
-	public int getY() {
-		return y;
-	}
-
-	public DropNotePlayerService getDropNotePlayerService() {
-		return playerService;
-	}
-
 }

@@ -18,7 +18,6 @@ public class ComboBox extends JLabel {
 
 	private int x;
 	private int y = 450;
-	private boolean isRun = true; // 게임 실행중
 
 	public ComboBox(DropNotePlayerService playerService, Player player) {
 		this.playerService = playerService;
