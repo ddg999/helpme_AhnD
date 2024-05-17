@@ -12,6 +12,7 @@ import helpme_AhnD.ver02.service.DeathNoteCircle;
 import helpme_AhnD.ver02.service.DeathNotePlayerService;
 import helpme_AhnD.ver02.service.DeathNoteService;
 import helpme_AhnD.ver02.service.PlayerService_js;
+import helpme_AhnD.ver02.state.Player;
 
 public class DeathNoteLeft extends DeathNote implements Runnable {
 	DeathNoteLeft deathNoteLeft;
@@ -20,6 +21,7 @@ public class DeathNoteLeft extends DeathNote implements Runnable {
 	protected boolean keyIsPressed = true;
 	protected boolean isJudged = false;
 	private int EXCELLENT_CIRCLE;
+	Player player;
 
 	public DeathNoteLeft(int x, DeathNoteFrame mContext, DeathNotePlayerService playerService) {
 
@@ -40,12 +42,17 @@ public class DeathNoteLeft extends DeathNote implements Runnable {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
-
-				case KeyEvent.VK_LEFT:
-					new Thread(deathNoteLeft).start();
-
+				
+				case KeyEvent.VK_LEFT :
+					if (player == player.RIGHTPLAYER) {
+						new Thread(deathNoteLeft).start();
+					}
 					break;
-
+				case KeyEvent.VK_A :
+					if (player == player.LEFTPLAYER) {
+						new Thread(deathNoteLeft).start();
+					}
+					break;
 				default:
 
 				}
@@ -54,17 +61,29 @@ public class DeathNoteLeft extends DeathNote implements Runnable {
 			@Override
 			public void keyReleased(KeyEvent e) {
 
-				switch (e.getKeyCode()) {
+				if (player == Player.LEFTPLAYER) {
+					switch (e.getKeyCode()) {
 
-				case KeyEvent.VK_LEFT:
-					keyreleased();
+					case KeyEvent.VK_LEFT:
+						keyreleased();
 
-					break;
+						break;
 
-				default:
+					default:
+					}
+				} else if (player == Player.RIGHTPLAYER) {
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_A:
+						keyreleased();
+
+						break;
+					default:
+
+					}
 
 				}
 			}
+
 		});
 	}
 
@@ -74,39 +93,36 @@ public class DeathNoteLeft extends DeathNote implements Runnable {
 			if (keyIsPressed) {
 				keypresed();
 				try {
-					
-				if (deathNoteCircle.circleExcellentZone()) {
-					playerService.getScore().excellent();
-					System.out.println("excellent");
-					isJudged = true;
-					break;
-				} else if (deathNoteCircle.circlePerfecttZone()) {
-					playerService.getScore().perfect();
-					System.out.println("perfect");
-					isJudged = true;
-					break;
-				} else if (deathNoteCircle.circleGoodZone()) {
-					playerService.getScore().good();
-					System.out.println("good");
-					isJudged = true;
-					break;
-				} else if (deathNoteCircle.circleBadZone()) {
-					playerService.getScore().bad();
-					System.out.println("bad");
-					isJudged = true;
-					break;
-				}
 
-				break;
+					if (deathNoteCircle.circleExcellentZone()) {
+						playerService.getScore().excellent();
+						System.out.println("excellent");
+						isJudged = true;
+						break;
+					} else if (deathNoteCircle.circlePerfecttZone()) {
+						playerService.getScore().perfect();
+						System.out.println("perfect");
+						isJudged = true;
+						break;
+					} else if (deathNoteCircle.circleGoodZone()) {
+						playerService.getScore().good();
+						System.out.println("good");
+						isJudged = true;
+						break;
+					} else if (deathNoteCircle.circleBadZone()) {
+						playerService.getScore().bad();
+						System.out.println("bad");
+						isJudged = true;
+						break;
+					}
+
+					break;
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
 			} // end of if
-
 		} // end of while
-
 	} // end of run
-
 	@Override
 	public void keypresed() {
 		setIcon(note_Left_P);

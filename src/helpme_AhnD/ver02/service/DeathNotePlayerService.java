@@ -17,6 +17,7 @@ import helpme_AhnD.ver02.components.HpBox2;
 import helpme_AhnD.ver02.components.ItemBox;
 import helpme_AhnD.ver02.components.ScoreBox;
 import helpme_AhnD.ver02.components.ScoreBox2;
+import helpme_AhnD.ver02.state.Player;
 
 public class DeathNotePlayerService implements Runnable {
 
@@ -30,18 +31,29 @@ public class DeathNotePlayerService implements Runnable {
 	private int player;
 	private int delay;
 
-	public DeathNotePlayerService(DeathNoteFrame mContext, int player) {
+	public DeathNotePlayerService(DeathNoteFrame mContext, int player, Player player2) {
 		this.mContext = mContext;
 		this.player = player;
-		score = new Score(player);
+		score = new Score(Player.LEFTPLAYER);
 		new HpBox2(this, player);
 		new ScoreBox2(this, player);
 		new ComboBox2(this, player);
-		deathNoteRight = new DeathNoteRight(80, mContext,this);
-		deathNoteLeft = new  DeathNoteLeft( 180, mContext,this);
-		deathNoteUp = new DeathNoteUp(280, mContext,this);
-		deathNoteDown = new  DeathNoteDown( 380 , mContext,this);
+		switch (player2) {
+		case LEFTPLAYER: 
+			deathNoteRight = new DeathNoteRight(80, mContext,this);
+			deathNoteLeft = new  DeathNoteLeft( 180, mContext,this);
+			deathNoteUp = new DeathNoteUp(280, mContext,this);
+			deathNoteDown = new  DeathNoteDown( 380 , mContext,this);
+			break;
+		case RIGHTPLAYER:
+			deathNoteRight = new DeathNoteRight(1090, mContext,this);
+			deathNoteLeft = new  DeathNoteLeft( 1190, mContext,this);
+			deathNoteUp = new DeathNoteUp(1290, mContext,this);
+			deathNoteDown = new  DeathNoteDown( 1390 , mContext,this);
 		
+		default:
+			break;
+		}
 	}
 
 	private void createNote() {

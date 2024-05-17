@@ -3,13 +3,18 @@ package helpme_AhnD.ver02.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.ver01.service.PlayerService;
 import helpme_AhnD.ver02.Frame.DeathNoteFrame;
+import helpme_AhnD.ver02.service.DeathNotePlayerService;
+import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
 public class AhnCharacter extends JLabel {
 
 	// todo Score int 값 땡겨오기
 	DeathNoteFrame mContext;
+	DeathNotePlayerService deathNotePlayerService;
+	
 	private ImageIcon basic_Character;
 	private ImageIcon threePoint_DanceR;
 	private ImageIcon threePoint_DanceL;
@@ -26,8 +31,24 @@ public class AhnCharacter extends JLabel {
 
 	// todo score 불러 오기
 
-	public AhnCharacter(DeathNoteFrame mContext) {
+	public AhnCharacter(DeathNoteFrame mContext,DeathNotePlayerService deathNotePlayerService, Player player ) {
+		this.deathNotePlayerService = deathNotePlayerService;
+		
 		this.mContext = mContext;
+		switch (player) {
+		case LEFTPLAYER: 
+			x = 150;
+			break;			
+		case RIGHTPLAYER:
+			x= 1290;
+			
+		default:
+			
+		}
+		
+		
+		
+		
 		initData();
 		setInitLayout();
 		mContext.add(this);
@@ -41,7 +62,7 @@ public class AhnCharacter extends JLabel {
 		twoPoint_DanceR = new ImageIcon(Define.IMG_TWO_POINT_RIGHT);
 		threePoint_DanceL = new ImageIcon(Define.IMG_THREE_POINT_LEFT);
 		threePoint_DanceR = new ImageIcon(Define.IMG_THREE_POINT_RIGHT);
-		x = 150;
+	
 		y = 300;
 
 	}

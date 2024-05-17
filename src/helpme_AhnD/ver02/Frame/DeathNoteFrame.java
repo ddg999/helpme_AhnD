@@ -20,6 +20,7 @@ import helpme_AhnD.ver02.service.BGMService;
 import helpme_AhnD.ver02.service.DeathNotePlayerService;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
 import helpme_AhnD.ver02.service.PlayerService_js;
+import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
 public class DeathNoteFrame extends JFrame {
@@ -60,12 +61,13 @@ public class DeathNoteFrame extends JFrame {
 //		deathNoteLeft = new DeathNoteLeft(180, this);
 //		deathNoteUp = new DeathNoteUp(280, this);
 //		deathNoteDown = new DeathNoteDown(380, this);
-		notePlayerService1 = new DeathNotePlayerService(this, 1);
-		notePlayerService2 = new DeathNotePlayerService(this, 2);
+		notePlayerService1 = new DeathNotePlayerService(this, 1, Player.LEFTPLAYER);
+		notePlayerService2 = new DeathNotePlayerService(this, 2, Player.RIGHTPLAYER);
 		new Thread(notePlayerService1).start();
 		new Thread(notePlayerService2).start();
 		itemBox = new ItemBox2(this);
-		ahnCharacter = new AhnCharacter(this);
+		ahnCharacter = new AhnCharacter(this, notePlayerService1, Player.LEFTPLAYER);
+		ahnCharacter = new AhnCharacter(this, notePlayerService2, Player.RIGHTPLAYER);
 		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
 		bgm.getClip().start();
 	}
@@ -75,7 +77,7 @@ public class DeathNoteFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setVisible(true);
-		
+
 	}
 
 	private void addEventListener() {
@@ -85,11 +87,9 @@ public class DeathNoteFrame extends JFrame {
 	public boolean isRunning() {
 		return Running;
 	}
-		
-	
+
 	public static void setRunning(boolean running) {
 		Running = running;
 	}
-
 
 }
