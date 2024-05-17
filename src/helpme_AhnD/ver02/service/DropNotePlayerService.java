@@ -1,6 +1,8 @@
 package helpme_AhnD.ver02.service;
 
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import helpme_AhnD.ver02.Frame.DropNoteFrame;
 import helpme_AhnD.ver02.components.ComboBox;
@@ -16,7 +18,6 @@ public class DropNotePlayerService implements Runnable {
 	private DropNote note;
 	private ScoreService score;
 	private int delay;
-	private ComboBox comboBox;
 	private int noteSpeed;
 
 	public DropNotePlayerService(DropNoteFrame mContext, Player player) {
@@ -24,7 +25,7 @@ public class DropNotePlayerService implements Runnable {
 		this.player = player;
 		noteSpeed = DropNote.DEFAULT_SPEED;
 		score = new ScoreService(mContext, player);
-		comboBox = new ComboBox(this, player);
+		new ComboBox(this, player);
 		new ScoreBox(this, player);
 		new HpBox(this, player);
 	}
@@ -36,17 +37,26 @@ public class DropNotePlayerService implements Runnable {
 
 	@Override
 	public void run() {
-		while (DropNoteFrame.isRunning()) {
-			createNote();
-			Random random = new Random();
-			delay = random.nextInt(1000) + 500;
+		Timer start = new Timer();
+		TimerTask task = new TimerTask() {
 
-			try {
-				Thread.sleep(delay);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			@Override
+			public void run() {
+				while (DropNoteFrame.isRunning()) {
+					createNote();
+					Random random = new Random();
+					delay = random.nextInt(1000) + 500;
+
+					try {
+						Thread.sleep(delay);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
-		}
+		};
+		start.schedule(task, 7000);
+
 	}
 
 	// getter

@@ -19,6 +19,7 @@ public class ScoreService {
 	private int countExcellent;
 	private int countGood;
 	private int countBad;
+	private int countMiss;
 
 	private static boolean isJudged = false; // 중복 종료 방지용 불리언 변수
 
@@ -32,7 +33,15 @@ public class ScoreService {
 		this.player = player;
 		hp = Define.HP_3_0_HEART;
 	}
-	
+
+	public void combo() {
+		combo++;
+		// 최대 콤보수 저장
+		if (countMaxCombo < combo) {
+			countMaxCombo = combo;
+		}
+	}
+
 	// DropNote에서 판정에 따라 호출할 메소드
 	public void perfect() {
 		if (isDouble) {
@@ -43,7 +52,7 @@ public class ScoreService {
 		if (isNeverPerfect) {
 			score -= 1;
 		}
-		combo++;
+		combo();
 		// 콤보수가 10의 배수 일때마다 체력 회복
 		if (combo % 10 == 0) {
 			recovery();
@@ -60,7 +69,7 @@ public class ScoreService {
 		if (isAllPerfect) {
 			score += 1;
 		}
-		combo++;
+		combo();
 		// 콤보수가 10의 배수 일때마다 체력 회복
 		if (combo % 10 == 0) {
 			recovery();
@@ -77,7 +86,7 @@ public class ScoreService {
 		if (isAllPerfect) {
 			score += 2;
 		}
-		combo++;
+		combo();
 		// 콤보수가 10의 배수 일때마다 체력 회복
 		if (combo % 10 == 0) {
 			recovery();
@@ -86,13 +95,16 @@ public class ScoreService {
 	}
 
 	public void bad() {
-		// 최대 콤보수 저장
-		if (countMaxCombo < combo) {
-			countMaxCombo = combo;
-		}
 		// 콤보 초기화
 		combo = 0;
 		countBad++;
+		beAttacked(); // 게임을 종료시키는 메소드이기 때문에 마지막에 수행
+	}
+
+	public void miss() {
+		// 콤보 초기화
+		combo = 0;
+		countMiss++;
 		beAttacked(); // 게임을 종료시키는 메소드이기 때문에 마지막에 수행
 	}
 
@@ -131,6 +143,10 @@ public class ScoreService {
 		return combo;
 	}
 
+	public int getMaxCombo() {
+		return countMaxCombo;
+	}
+
 	public int getCountPerfect() {
 		return countPerfect;
 	}
@@ -146,7 +162,11 @@ public class ScoreService {
 	public int getCountBad() {
 		return countBad;
 	}
-	
+
+	public int getCountMiss() {
+		return countMiss;
+	}
+
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
