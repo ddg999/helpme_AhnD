@@ -14,7 +14,6 @@ import helpme_AhnD.ver02.utils.Define;
 
 public class DropNote extends JLabel implements Runnable {
 
-	DropNoteFrame mContext;
 	DropNotePlayerService playerService;
 	private Player player;
 
@@ -22,7 +21,8 @@ public class DropNote extends JLabel implements Runnable {
 
 	private int x;
 	private int y;
-	private int noteSpeed = 2;
+	private int noteSpeed;
+	public static final int DEFAULT_SPEED = 2;
 
 	private int place;
 	private final int LEFT = 0;
@@ -30,18 +30,23 @@ public class DropNote extends JLabel implements Runnable {
 	private final int RIGHT = 2;
 	private final int DOWN = 3;
 
-	boolean isPerfect;
-	boolean isExcellent;
-	boolean isGood;
-	boolean isBad;
-	boolean isMiss;
+	private boolean isPerfect;
+	private boolean isExcellent;
+	private boolean isGood;
+	private boolean isBad;
+	private boolean isMiss;
+	
+	private boolean drop = true; // 노트 드랍 깃발
+	private boolean isJudged = false; // 판정 관련 깃발
+	
+	// 키 반전 아이템을 위한 깃발
+	private static boolean leftReverse;
+	private static boolean rightReverse;
 
-	private boolean drop = true;
-	private boolean isJudged = false;
-
-	public DropNote(DropNotePlayerService playerService, Player player) {
+	public DropNote(DropNotePlayerService playerService, Player player, int speed) {
 		this.playerService = playerService;
 		this.player = player;
+		this.noteSpeed = speed;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -50,8 +55,7 @@ public class DropNote extends JLabel implements Runnable {
 
 	public void initData() {
 		noteBall = new ImageIcon(Define.IMG_DROPNOTE_NOTE);
-		Random random = new Random();
-		place = random.nextInt(4);
+		place = (new Random()).nextInt(4); // 4방향 랜덤 생성
 		switch (player) {
 		case LEFTPLAYER:
 			if (place == LEFT) {
@@ -86,159 +90,18 @@ public class DropNote extends JLabel implements Runnable {
 		setLocation(x, 0);
 		playerService.getmContext().add(this);
 	}
-
-	class judgeImage extends JLabel implements Runnable {
-
-		private ImageIcon perfect;
-		private ImageIcon excellent;
-		private ImageIcon good;
-		private ImageIcon bad;
-		private ImageIcon miss;
-		private Player player;
-
-		private int x;
-		private int y = 415;
-
-		public judgeImage(Player player) {
-			this.player = player;
-			initData();
-			setInitLayout();
-		}
-
-		public void initData() {
-			if (player == Player.LEFTPLAYER) {
-				x = 260;
-			} else if (player == Player.RIGHTPLAYER) {
-				x = 1185;
-			}
-			perfect = new ImageIcon("images/combo/COMBO_PERFECT.png");
-			excellent = new ImageIcon("images/combo/COMBO_EXCELLENT.png");
-			good = new ImageIcon("images/combo/COMBO_GOOD.png");
-			bad = new ImageIcon("images/combo/COMBO_BAD.png");
-			miss = new ImageIcon("images/combo/miss.png");
-		}
-
-		public void setInitLayout() {
-			setIcon(null);
-			setLocation(x, y);
-			setSize(132, 36);
-			playerService.getmContext().add(this, 0);
-		}
-
-		@Override
-		public void run() {
-			while (DropNoteFrame.isRunning()) {
-				if (isPerfect) {
-					setIcon(perfect);
-					try {
-						Thread.sleep(450);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					isPerfect = false;
-					setIcon(null);
-				} else if (isExcellent) {
-					setIcon(excellent);
-					try {
-						Thread.sleep(450);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					isExcellent = false;
-					setIcon(null);
-				} else if (isGood) {
-					if (player == Player.LEFTPLAYER) {
-						setLocation(290, y);
-					} else {
-						setLocation(1215, y);
-					}
-					setIcon(good);
-					try {
-						Thread.sleep(450);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					isGood = false;
-					setIcon(null);
-				} else if (isBad) {
-					if (player == Player.LEFTPLAYER) {
-						setLocation(300, y);
-					} else {
-						setLocation(1225, y);
-					}
-					setIcon(bad);
-					try {
-						Thread.sleep(450);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					isBad = false;
-					setIcon(null);
-				} else if (isMiss) {
-					if (player == Player.LEFTPLAYER) {
-						setLocation(293, y);
-					} else {
-						setLocation(1218, y);
-					}
-					setIcon(miss);
-					try {
-						Thread.sleep(450);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					isMiss = false;
-					setIcon(null);
-				}
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	public void judge() {
-		if (y < 640) {
-			return;
-		}
-		if (perfectZone()) {
-			isPerfect = true;
-			System.out.println("퍼펙트");
-			playerService.getScore().perfect();
-			isJudged = true;
-			drop = false;
-			setIcon(null);
-		} else if (excellentZone()) {
-			isExcellent = true;
-			System.out.println("엑설런트");
-			playerService.getScore().excellent();
-			isJudged = true;
-			drop = false;
-			setIcon(null);
-		} else if (goodZone()) {
-			isGood = true;
-			System.out.println("굿");
-			playerService.getScore().good();
-			isJudged = true;
-			drop = false;
-			setIcon(null);
-		} else if (badZone()) {
-			isBad = true;
-			System.out.println("배드");
-			playerService.getScore().bad();
-			isJudged = true;
-			drop = false;
-			setIcon(null);
-		}
-	}
-
+	
 	public void addEventListener() {
 		playerService.getmContext().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				int getKeyCode = e.getKeyCode();
+				// 키 반전 상태일경우 반전
+				if (leftReverse || rightReverse) {
+					getKeyCode = reverse(getKeyCode);
+				}
 				if (player == Player.LEFTPLAYER) {
-					switch (e.getKeyCode()) {
+					switch (getKeyCode) {
 					case KeyEvent.VK_A:
 						if (place == LEFT && !isJudged) {
 							judge();
@@ -263,7 +126,7 @@ public class DropNote extends JLabel implements Runnable {
 						break;
 					}
 				} else if (player == Player.RIGHTPLAYER) {
-					switch (e.getKeyCode()) {
+					switch (getKeyCode) {
 					case KeyEvent.VK_LEFT:
 						if (place == LEFT && !isJudged) {
 							judge();
@@ -291,7 +154,155 @@ public class DropNote extends JLabel implements Runnable {
 			}
 		});
 	}
+	// 판정 메소드
+	public void judge() {
+		if (y < 640) {
+			return;
+		}
+		if (perfectZone()) {
+			isPerfect = true;
+			System.out.println("퍼펙트");
+			playerService.getScoreService().perfect();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		} else if (excellentZone()) {
+			isExcellent = true;
+			System.out.println("엑설런트");
+			playerService.getScoreService().excellent();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		} else if (goodZone()) {
+			isGood = true;
+			System.out.println("굿");
+			playerService.getScoreService().good();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		} else if (badZone()) {
+			isBad = true;
+			System.out.println("배드");
+			playerService.getScoreService().bad();
+			isJudged = true;
+			drop = false;
+			setIcon(null);
+		}
+	}
+	
+	// 판정 결과 이미지 출력용 내부 클래스
+		class judgeImage extends JLabel implements Runnable {
 
+			private ImageIcon perfect;
+			private ImageIcon excellent;
+			private ImageIcon good;
+			private ImageIcon bad;
+			private ImageIcon miss;
+			private Player player;
+
+			private int x;
+			private int y = 415;
+
+			public judgeImage(Player player) {
+				this.player = player;
+				initData();
+				setInitLayout();
+			}
+
+			public void initData() {
+				if (player == Player.LEFTPLAYER) {
+					x = 260;
+				} else if (player == Player.RIGHTPLAYER) {
+					x = 1185;
+				}
+				perfect = new ImageIcon(Define.IMG_COMBO_PERFECT);
+				excellent = new ImageIcon(Define.IMG_COMBO_EXCELLENT);
+				good = new ImageIcon(Define.IMG_COMBO_GOOD);
+				bad = new ImageIcon(Define.IMG_COMBO_BAD);
+				miss = new ImageIcon(Define.IMG_COMBO_MISS);
+			}
+
+			public void setInitLayout() {
+				setIcon(null);
+				setLocation(x, y);
+				setSize(132, 36);
+				playerService.getmContext().add(this, 0);
+			}
+
+			@Override
+			public void run() {
+				while (DropNoteFrame.isRunning()) {
+					if (isPerfect) {
+						setIcon(perfect);
+						try {
+							Thread.sleep(450);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						isPerfect = false;
+						setIcon(null);
+					} else if (isExcellent) {
+						setIcon(excellent);
+						try {
+							Thread.sleep(450);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						isExcellent = false;
+						setIcon(null);
+					} else if (isGood) {
+						if (player == Player.LEFTPLAYER) {
+							setLocation(290, y);
+						} else {
+							setLocation(1215, y);
+						}
+						setIcon(good);
+						try {
+							Thread.sleep(450);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						isGood = false;
+						setIcon(null);
+					} else if (isBad) {
+						if (player == Player.LEFTPLAYER) {
+							setLocation(300, y);
+						} else {
+							setLocation(1225, y);
+						}
+						setIcon(bad);
+						try {
+							Thread.sleep(450);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						isBad = false;
+						setIcon(null);
+					} else if (isMiss) {
+						if (player == Player.LEFTPLAYER) {
+							setLocation(293, y);
+						} else {
+							setLocation(1218, y);
+						}
+						setIcon(miss);
+						try {
+							Thread.sleep(450);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						isMiss = false;
+						setIcon(null);
+					}
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+	// 판정 범위 확인용 메소드
 	public boolean perfectZone() {
 		if (y >= 705 && y <= 745) {
 			return true;
@@ -325,7 +336,8 @@ public class DropNote extends JLabel implements Runnable {
 		}
 		return false;
 	}
-
+	
+	// 노트 움직임
 	public void drop() {
 		if (y <= 850) {
 			y += noteSpeed;
@@ -334,7 +346,7 @@ public class DropNote extends JLabel implements Runnable {
 			setIcon(null);
 			isMiss = true;
 			drop = false;
-			playerService.getScore().bad();
+			playerService.getScoreService().bad();
 		}
 	}
 
@@ -353,13 +365,46 @@ public class DropNote extends JLabel implements Runnable {
 			}
 		}
 	}
+	
+	// 키반전 메소드
+	private int reverse(int keyCode) {
+		if (leftReverse) {
+			switch (keyCode) {
+			case KeyEvent.VK_W:
+				return KeyEvent.VK_S;
+			case KeyEvent.VK_S:
+				return KeyEvent.VK_W;
+			case KeyEvent.VK_A:
+				return KeyEvent.VK_D;
+			case KeyEvent.VK_D:
+				return KeyEvent.VK_A;
+			default:
+				return keyCode;
+			}
+		} else {
+			switch (keyCode) {
+			case KeyEvent.VK_UP:
+				return KeyEvent.VK_DOWN;
+			case KeyEvent.VK_DOWN:
+				return KeyEvent.VK_UP;
+			case KeyEvent.VK_LEFT:
+				return KeyEvent.VK_RIGHT;
+			case KeyEvent.VK_RIGHT:
+				return KeyEvent.VK_LEFT;
+			default:
+				return keyCode;
+			}
+		}
+	}
+	
 
-	public int getY() {
-		return y;
+	// setter
+	public static void setLeftReverse(boolean input) {
+		leftReverse = input;
 	}
 
-	public DropNotePlayerService getDropNotePlayerService() {
-		return playerService;
+	public static void setRightReverse(boolean input) {
+		rightReverse = input;
 	}
 
 }

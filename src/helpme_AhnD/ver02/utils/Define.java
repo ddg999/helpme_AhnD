@@ -45,11 +45,14 @@ public class Define {
 	public final static String IMG_SELECTFRAME_BACK = "images/selectFrame/IMG_SELECTFRAME_BACK.gif";
 	public final static String IMG_SELECTFRAME_BACKCLICK = "images/selectFrame/IMG_SELECTFRAME_BACKCLICK.gif";
 	
-	
 	// 첫게임(드랍노트) 이미지
 	public final static String IMG_DROPNOTE_BG = "images/dropNote/IMG_DROPNOTE_BG.jpg";
 	public final static String IMG_DROPNOTE_NOTE = "images/dropNote/IMG_DROPNOTE_NOTE.png";
 	public final static String IMG_DROPNOTE_NOTEBAR = "images/dropNote/IMG_DROPNOTE_NOTEBAR.png";
+	
+	// 게임 종료 이미지
+	public final static String IMG_GAMEOVER_LEFTWIN = "images/gameover/IMG_GAMEOVER_LEFTWIN.png";
+	public final static String IMG_GAMEOVER_RIGHTWIN = "images/gameover/IMG_GAMEOVER_RIGHTWIN.png";
 	
 	// 캐릭터 이미지
 	public final static String IMG_BASIC_CHARCTER = "images/character/IMG_BASIC_CHARCTER.png";
@@ -61,6 +64,7 @@ public class Define {
 	public final static String IMG_THREE_POINT_RIGHT="images/character/IMG_THREE_POINT_RIGHT.png";
 	
 	// 아이템 이미지
+	public final static String IMG_ITEMS_ITEMBOX = "images/item/IMG_ITEMS_ITEMBOX.jpg";
 	public final static String IMG_ITEMS_HP_PLUS = "images/item/IMG_ITEMS_HP_PLUS.png";
 	public final static String IMG_ITEMS_HP_MINUS = "images/item/IMG_ITEMS_HP_MINUS.png";
 	public final static String IMG_ITEMS_BOMB = "images/item/IMG_ITEMS_BOMB.png";
@@ -71,4 +75,59 @@ public class Define {
 	public final static String IMG_ITEMS_FAST = "images/item/IMG_ITEMS_FAST.png";
 	public final static String IMG_ITEMS_SLOW = "images/item/IMG_ITEMS_SLOW.png";
 	public final static String IMG_ITEMS_NEVERPERFECT = "images/item/IMG_ITEMS_NEVERPERFECT.png";
+	
+	// 스코어 이미지
+	public final static String IMG_SCORE_SCOREBOX = "images/score/IMG_SCORE_SCOREBOX.jpg";
+	public final static String IMG_SCORE_0 = "images/score/IMG_SCORE_0.png";
+	public final static String IMG_SCORE_1 = "images/score/IMG_SCORE_1.png";
+	public final static String IMG_SCORE_2 = "images/score/IMG_SCORE_2.png";
+	public final static String IMG_SCORE_3 = "images/score/IMG_SCORE_3.png";
+	public final static String IMG_SCORE_4 = "images/score/IMG_SCORE_4.png";
+	public final static String IMG_SCORE_5 = "images/score/IMG_SCORE_5.png";
+	public final static String IMG_SCORE_6 = "images/score/IMG_SCORE_6.png";
+	public final static String IMG_SCORE_7 = "images/score/IMG_SCORE_7.png";
+	public final static String IMG_SCORE_8 = "images/score/IMG_SCORE_8.png";
+	public final static String IMG_SCORE_9 = "images/score/IMG_SCORE_9.png";
+	
+	// 콤보 이미지
+	public final static String IMG_COMBO_COMBO = "images/combo/IMG_COMBO_COMBO.png";
+	public final static String IMG_COMBO_0 = "images/combo/IMG_COMBO_0.png";
+	public final static String IMG_COMBO_1 = "images/combo/IMG_COMBO_1.png";
+	public final static String IMG_COMBO_2 = "images/combo/IMG_COMBO_2.png";
+	public final static String IMG_COMBO_3 = "images/combo/IMG_COMBO_3.png";
+	public final static String IMG_COMBO_4 = "images/combo/IMG_COMBO_4.png";
+	public final static String IMG_COMBO_5 = "images/combo/IMG_COMBO_5.png";
+	public final static String IMG_COMBO_6 = "images/combo/IMG_COMBO_6.png";
+	public final static String IMG_COMBO_7 = "images/combo/IMG_COMBO_7.png";
+	public final static String IMG_COMBO_8 = "images/combo/IMG_COMBO_8.png";
+	public final static String IMG_COMBO_9 = "images/combo/IMG_COMBO_9.png";
+	public final static String IMG_COMBO_PERFECT = "images/combo/IMG_COMBO_PERFECT.png";
+	public final static String IMG_COMBO_EXCELLENT = "images/combo/IMG_COMBO_EXCELLENT.png";
+	public final static String IMG_COMBO_GOOD = "images/combo/IMG_COMBO_GOOD.png";
+	public final static String IMG_COMBO_BAD = "images/combo/IMG_COMBO_BAD.png";
+	public final static String IMG_COMBO_MISS = "images/combo/IMG_COMBO_MISS.png";
+	
+	
+	// hp 이미지
+	public final static String IMG_HP_HPFULL = "images/hp/IMG_HP_HPFULL.png";
+	public final static String IMG_HP_HPHALF = "images/hp/IMG_HP_HPHALF.png";
+	// hp 구분
+	public final static int HP_3_0_HEART = 60;
+	public final static int HP_2_5_HEART = 50;
+	public final static int HP_2_0_HEART = 40;
+	public final static int HP_1_5_HEART = 30;
+	public final static int HP_1_0_HEART = 20;
+	public final static int HP_0_5_HEART = 10;
+	public final static int HP_DEATH = 0;
+	
+	// 아이템 클래스
+	public final static int INT_ITEMS_HP_PLUS = 0;
+	public final static int INT_ITEMS_ALLPERFECT = 1;
+	public final static int INT_ITEMS_SCOREDOUBLE = 2;
+	public final static int INT_ITEMS_SLOW = 3;
+	public final static int INT_ITEMS_HP_MINUS = 4;
+	public final static int INT_ITEMS_BOMB = 5;
+	public final static int INT_ITEMS_REVERSE = 6;
+	public final static int INT_ITEMS_FAST = 7;
+	public final static int INT_ITEMS_NEVERPERFECT = 8;
 }

@@ -4,14 +4,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.interfaces.Useable;
+import helpme_AhnD.ver02.service.DropNotePlayerService;
 import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
 public class Bomb extends Items implements Useable {
 
 	private ImageIcon bomb; // 화면 숨김
-	private ImageIcon bombImg;
 	private JLabel bombImgLabel;
+	private ImageIcon bombImg;
 	
 	public Bomb() {
 		initData();
@@ -21,27 +22,40 @@ public class Bomb extends Items implements Useable {
 	private void initData() {
 		bomb = new ImageIcon(Define.IMG_ITEMS_BOMB);
 		bombImg = new ImageIcon(Define.IMG_ITEMS_BOMB_IMG);
-		
+		buffType = Items.DEBUFF;
+		durationType = Items.DURATION;
 	}
 
 	private void setInitLayout() {
 		setIcon(bomb);
-		setSize(50, 50);
-		setLocation(x, y);
+		setSize(WIDTH, HEIGHT);
+		setLocation(X, Y);
 	}
 	@Override
-	public JLabel useItems(Player place) {
-		
-		if (place == Player.LEFT) {
+	public void useItems(DropNotePlayerService dropNotePlayerService) {
+		// 디버프는 상대 주소를 받아옴
+		if (dropNotePlayerService.getPlayer() == Player.LEFTPLAYER) {
 			bombImgLabel = new JLabel(bombImg);
-			setSize(622,565);
-			setLocation(900, 100);
+			bombImgLabel.setSize(622,565);
+			bombImgLabel.setLocation(100, 200);
 		} else {
 			bombImgLabel = new JLabel(bombImg);
-			setSize(622,565);
-			setLocation(100, 100);
+			bombImgLabel.setSize(622,565);
+			bombImgLabel.setLocation(900, 200);
 		}
-		return bombImgLabel;
+		dropNotePlayerService.getmContext().add(bombImgLabel);
+		dropNotePlayerService.getmContext().repaint();
+		new Thread(() -> {
+			try {
+				// 지속시간 이후 제거
+				Thread.sleep(Items.DURATION_TIME);
+				dropNotePlayerService.getmContext().remove(bombImgLabel);
+				dropNotePlayerService.getmContext().repaint();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
 	}
 	
 }

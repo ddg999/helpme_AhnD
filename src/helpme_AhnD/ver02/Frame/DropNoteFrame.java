@@ -1,5 +1,8 @@
 package helpme_AhnD.ver02.Frame;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,27 +18,49 @@ public class DropNoteFrame extends JFrame {
 
 	// 게임 종료시 최종적으로 게임선택화면으로 돌아가기 위해 필요함
 	GameSelectFrame gameSelectFrame;
-
+	
+	DropNoteFrame dropNoteFrame;
+	
 	JLabel background;
 
-	DropNotePlayerService dropNoteLeftPlayerService;
-	DropNotePlayerService dropNoteRightPlayerService;
+	// DropNote 게임을 관리하는 서비스 클래스 (플레이어 위치로 나눔)
+	DropNotePlayerService LeftPlayerService;
+	DropNotePlayerService RightPlayerService;
+	// 게임 시작시 띄울 컴포넌트
 	NoteBar noteBarLeft;
 	NoteBar noteBarRight;
+	ItemBox itembox;
+	// 게임시작시 재생될 bgm
 	BGM bgm;
 
-	ItemBox itembox;
 	private static boolean Running;
 
 	public DropNoteFrame(GameSelectFrame gameSelectFrame) {
 		this.gameSelectFrame = gameSelectFrame;
+		dropNoteFrame = this;
 		initData();
 		setInitLayout();
 		addEventListener();
+		new Thread(() -> {
+			try {
+				Thread.sleep(BGM.END_TIME); // 일정 시간 이후 종료
+				Running = false;
+				setVisible(false);
+				bgm.getClip().close();
+				if (LeftPlayerService.getScoreService().getScore() > RightPlayerService.getScoreService().getScore()) {
+					new GameEndFrame(dropNoteFrame, Player.RIGHTPLAYER); // 진쪽을 넘겨줌
+				} else {
+					new GameEndFrame(dropNoteFrame, Player.LEFTPLAYER);
+				}
+
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
 	}
 
 	private void initData() {
-		// todo 각종 라벨 추가 예정
 		background = new JLabel(new ImageIcon(Define.IMG_DROPNOTE_BG));
 
 		Running = true;
@@ -45,12 +70,12 @@ public class DropNoteFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		noteBarLeft = new NoteBar(this, Player.LEFTPLAYER);
-		dropNoteLeftPlayerService = new DropNotePlayerService(this, Player.LEFTPLAYER);
-		new Thread(dropNoteLeftPlayerService).start();
+		LeftPlayerService = new DropNotePlayerService(this, Player.LEFTPLAYER);
+		new Thread(LeftPlayerService).start();
 
 		noteBarRight = new NoteBar(this, Player.RIGHTPLAYER);
-		dropNoteRightPlayerService = new DropNotePlayerService(this, Player.RIGHTPLAYER);
-		new Thread(dropNoteRightPlayerService).start();
+		RightPlayerService = new DropNotePlayerService(this, Player.RIGHTPLAYER);
+		new Thread(RightPlayerService).start();
 
 		itembox = new ItemBox(this);
 		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
@@ -63,11 +88,9 @@ public class DropNoteFrame extends JFrame {
 		setResizable(false);
 		setVisible(true);
 
-		// todo 각종 컴포넌트 add
 	}
 
 	private void addEventListener() {
-
 	}
 
 	// getter setter
@@ -77,6 +100,22 @@ public class DropNoteFrame extends JFrame {
 
 	public static void setRunning(boolean running) {
 		Running = running;
+	}
+
+	public DropNotePlayerService getDropNoteLeftPlayerService() {
+		return LeftPlayerService;
+	}
+
+	public DropNotePlayerService getDropNoteRightPlayerService() {
+		return RightPlayerService;
+	}
+
+	public JLabel getBackgroundLabel() {
+		return background;
+	}
+
+	public BGM getBgm() {
+		return bgm;
 	}
 
 }

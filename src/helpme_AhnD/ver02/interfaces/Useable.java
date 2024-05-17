@@ -1,18 +1,12 @@
 package helpme_AhnD.ver02.interfaces;
 
-import javax.swing.JLabel;
-
-import helpme_AhnD.ver02.state.Player;
+import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.service.ScoreService;
 
 public interface Useable {
 	
-	public default int useItems(int input) {
-		return 0;
-	}
+	// public default void useItems() {}
 	
-	public default void useItems() {}
+	public default void useItems(DropNotePlayerService dropNotePlayerService) {}
 	
-	public default JLabel useItems(Player place) {
-		return null;
-	}
 }

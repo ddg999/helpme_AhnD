@@ -8,7 +8,8 @@ import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
 public class NoteBar extends JLabel {
-
+	// 단순 이미지용 클래스
+	
 	DropNoteFrame mContext;
 	Player player;
 	private ImageIcon noteBar;

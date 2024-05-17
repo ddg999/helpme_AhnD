@@ -14,21 +14,23 @@ public class DropNotePlayerService implements Runnable {
 	DropNoteFrame mContext;
 	Player player;
 	private DropNote note;
-	private Score score;
+	private ScoreService score;
 	private int delay;
 	private ComboBox comboBox;
+	private int noteSpeed;
 
 	public DropNotePlayerService(DropNoteFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
-		score = new Score(player);
+		noteSpeed = DropNote.DEFAULT_SPEED;
+		score = new ScoreService(mContext, player);
 		comboBox = new ComboBox(this, player);
 		new ScoreBox(this, player);
 		new HpBox(this, player);
 	}
 
 	public void createNote() {
-		note = new DropNote(this, player);
+		note = new DropNote(this, player, noteSpeed);
 		new Thread(note).start();
 	}
 
@@ -52,8 +54,16 @@ public class DropNotePlayerService implements Runnable {
 		return mContext;
 	}
 
-	public Score getScore() {
+	public ScoreService getScoreService() {
 		return score;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setNoteSpeed(int noteSpeed) {
+		this.noteSpeed = noteSpeed;
 	}
 
 }

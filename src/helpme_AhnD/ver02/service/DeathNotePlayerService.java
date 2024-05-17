@@ -27,14 +27,16 @@ public class DeathNotePlayerService implements Runnable {
 	DeathNoteUp deathNoteUp;
 	DeathNoteDown deathNoteDown;
 	private DeathNote note;
-	private Score score;
+	private ScoreService score;
 	private int player;
 	private int delay;
 
 	public DeathNotePlayerService(DeathNoteFrame mContext, int player, Player player2) {
 		this.mContext = mContext;
 		this.player = player;
+
 		score = new Score(Player.LEFTPLAYER);
+	
 		new HpBox2(this, player);
 		new ScoreBox2(this, player);
 		new ComboBox2(this, player);
@@ -74,7 +76,7 @@ public class DeathNotePlayerService implements Runnable {
 		return mContext;
 	}
 
-	public Score getScore() {
+	public ScoreService getScore() {
 		return score;
 	}
 
