@@ -24,8 +24,8 @@ public class DropNoteFrame extends JFrame {
 	JLabel background;
 
 	// DropNote 게임을 관리하는 서비스 클래스 (플레이어 위치로 나눔)
-	DropNotePlayerService LeftPlayerService;
-	DropNotePlayerService RightPlayerService;
+	DropNotePlayerService leftPlayerService;
+	DropNotePlayerService rightPlayerService;
 	// 게임 시작시 띄울 컴포넌트
 	NoteBar noteBarLeft;
 	NoteBar noteBarRight;
@@ -40,14 +40,13 @@ public class DropNoteFrame extends JFrame {
 		dropNoteFrame = this;
 		initData();
 		setInitLayout();
-		addEventListener();
 		new Thread(() -> {
 			try {
 				Thread.sleep(BGM.END_TIME); // 일정 시간 이후 종료
 				Running = false;
 				setVisible(false);
 				bgm.getClip().close();
-				if (LeftPlayerService.getScoreService().getScore() > RightPlayerService.getScoreService().getScore()) {
+				if (leftPlayerService.getScoreService().getScore() > rightPlayerService.getScoreService().getScore()) {
 					new GameEndFrame(dropNoteFrame, Player.RIGHTPLAYER); // 진쪽을 넘겨줌
 				} else {
 					new GameEndFrame(dropNoteFrame, Player.LEFTPLAYER);
@@ -70,12 +69,12 @@ public class DropNoteFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		noteBarLeft = new NoteBar(this, Player.LEFTPLAYER);
-		LeftPlayerService = new DropNotePlayerService(this, Player.LEFTPLAYER);
-		new Thread(LeftPlayerService).start();
+		leftPlayerService = new DropNotePlayerService(this, Player.LEFTPLAYER);
+		new Thread(leftPlayerService).start();
 
 		noteBarRight = new NoteBar(this, Player.RIGHTPLAYER);
-		RightPlayerService = new DropNotePlayerService(this, Player.RIGHTPLAYER);
-		new Thread(RightPlayerService).start();
+		rightPlayerService = new DropNotePlayerService(this, Player.RIGHTPLAYER);
+		new Thread(rightPlayerService).start();
 
 		itembox = new ItemBox(this);
 		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
@@ -90,9 +89,6 @@ public class DropNoteFrame extends JFrame {
 
 	}
 
-	private void addEventListener() {
-	}
-
 	// getter setter
 	public static boolean isRunning() {
 		return Running;
@@ -103,11 +99,11 @@ public class DropNoteFrame extends JFrame {
 	}
 
 	public DropNotePlayerService getDropNoteLeftPlayerService() {
-		return LeftPlayerService;
+		return leftPlayerService;
 	}
 
 	public DropNotePlayerService getDropNoteRightPlayerService() {
-		return RightPlayerService;
+		return rightPlayerService;
 	}
 
 	public JLabel getBackgroundLabel() {
