@@ -50,7 +50,7 @@ public class DropNote extends JLabel implements Runnable {
 		initData();
 		setInitLayout();
 		addEventListener();
-		new Thread(new judgeImage(player)).start();
+		new Thread(new JudgeImage(player)).start();
 	}
 
 	public void initData() {
@@ -96,6 +96,7 @@ public class DropNote extends JLabel implements Runnable {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int getKeyCode = e.getKeyCode();
+
 				// 키 반전 상태일경우 반전
 				if (leftReverse || rightReverse) {
 					getKeyCode = reverse(getKeyCode);
@@ -157,7 +158,7 @@ public class DropNote extends JLabel implements Runnable {
 
 	// 판정 메소드
 	public void judge() {
-		if (y < 640) {
+		if (y < 650) {
 			return;
 		}
 		if (perfectZone()) {
@@ -192,7 +193,7 @@ public class DropNote extends JLabel implements Runnable {
 	}
 
 	// 판정 결과 이미지 출력용 내부 클래스
-	class judgeImage extends JLabel implements Runnable {
+	class JudgeImage extends JLabel implements Runnable {
 
 		private ImageIcon perfect;
 		private ImageIcon excellent;
@@ -204,7 +205,7 @@ public class DropNote extends JLabel implements Runnable {
 		private int x;
 		private int y = 415;
 
-		public judgeImage(Player player) {
+		public JudgeImage(Player player) {
 			this.player = player;
 			initData();
 			setInitLayout();

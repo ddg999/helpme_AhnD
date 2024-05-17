@@ -1,8 +1,5 @@
 package helpme_AhnD.ver02.Frame;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +19,7 @@ public class DropNoteFrame extends JFrame {
 	DropNoteFrame dropNoteFrame;
 
 	JLabel background;
+	ImageIcon dunk;
 
 	// DropNote 게임을 관리하는 서비스 클래스 (플레이어 위치로 나눔)
 	DropNotePlayerService LeftPlayerService;
@@ -40,7 +38,6 @@ public class DropNoteFrame extends JFrame {
 		dropNoteFrame = this;
 		initData();
 		setInitLayout();
-		addEventListener();
 		new Thread(() -> {
 			try {
 				Thread.sleep(BGM.END_TIME); // 일정 시간 이후 종료
@@ -87,10 +84,6 @@ public class DropNoteFrame extends JFrame {
 		setLocationRelativeTo(null); // 화면 중앙에 프레임 위치
 		setResizable(false);
 		setVisible(true);
-
-	}
-
-	private void addEventListener() {
 	}
 
 	// getter setter
