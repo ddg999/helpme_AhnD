@@ -14,7 +14,7 @@ public class DropNotePlayerService implements Runnable {
 	DropNoteFrame mContext;
 	Player player;
 	private DropNote note;
-	private ScoreService score;
+	private ScoreService score; 
 	private int delay;
 	private ComboBox comboBox;
 	private int noteSpeed;
