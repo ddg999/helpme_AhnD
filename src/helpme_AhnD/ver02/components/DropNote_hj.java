@@ -59,28 +59,28 @@ public class DropNote_hj extends JLabel implements Runnable {
 		switch (player) {
 		case LEFTPLAYER:
 			if (place == LEFT) {
-				x = 150;
+				x = 630;
 			} else if (place == UP) {
-				x = 250;
+				x = 730;
 			} else if (place == RIGHT) {
-				x = 350;
+				x = 830;
 			} else if (place == DOWN) {
-				x = 450;
+				x = 930;
 			}
 			break;
-		case RIGHTPLAYER:
-			if (place == LEFT) {
-				x = 1080;
-			} else if (place == UP) {
-				x = 1180;
-			} else if (place == RIGHT) {
-				x = 1280;
-			} else if (place == DOWN) {
-				x = 1380;
-			}
-			break;
-		default:
-			break;
+//		case RIGHTPLAYER:
+//			if (place == LEFT) {
+//				x = 1080;
+//			} else if (place == UP) {
+//				x = 1180;
+//			} else if (place == RIGHT) {
+//				x = 1280;
+//			} else if (place == DOWN) {
+//				x = 1380;
+//			}
+//			break;
+//		default:
+//			break;
 		}
 	}
 

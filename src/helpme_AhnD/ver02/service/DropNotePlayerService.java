@@ -16,9 +16,9 @@ public class DropNotePlayerService implements Runnable {
 	DropNoteFrame mContext;
 	Player player;
 	private DropNote note;
-	private ScoreService score; 
-	private int delay;
-	private int noteSpeed;
+	private ScoreService score;
+	private int delay; // 노트 생성 시간 간격
+	private int noteSpeed; // 노트의 속도
 
 	public DropNotePlayerService(DropNoteFrame mContext, Player player) {
 		this.mContext = mContext;
@@ -39,7 +39,6 @@ public class DropNotePlayerService implements Runnable {
 	public void run() {
 		Timer start = new Timer();
 		TimerTask task = new TimerTask() {
-
 			@Override
 			public void run() {
 				while (DropNoteFrame.isRunning()) {
@@ -56,7 +55,6 @@ public class DropNotePlayerService implements Runnable {
 			}
 		};
 		start.schedule(task, 7000);
-
 	}
 
 	// getter

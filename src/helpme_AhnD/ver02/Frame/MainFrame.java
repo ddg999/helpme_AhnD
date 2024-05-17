@@ -4,14 +4,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.ver02.utils.Define;
 import helpme_AhnD.ver02.service.BGMService;
+import helpme_AhnD.ver02.utils.Define;
 
 public class MainFrame extends JFrame {
 
