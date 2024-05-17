@@ -4,14 +4,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.Frame.DropNoteFrame;
-import helpme_AhnD.ver02.service.DropNotePlayerService;
+import helpme_AhnD.ver02.Frame.GameSelectFrame;
+import helpme_AhnD.ver02.service.DeathNotePlayerService;
 import helpme_AhnD.ver02.state.Digit;
 import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
-public class ScoreBox extends JLabel {
+public class ScoreBox_kh extends JLabel {
 
-	DropNotePlayerService playerService;
+	DeathNotePlayerService playerService;
 	private Player player;
 
 	private ImageIcon scoreBox;
@@ -21,8 +22,8 @@ public class ScoreBox extends JLabel {
 	private int y = 20;
 	private final int MAX_SCORE = 9999;
 
-	public ScoreBox(DropNotePlayerService dropNotePlayerService, Player player) {
-		this.playerService = dropNotePlayerService;
+	public ScoreBox_kh(DeathNotePlayerService playerService, Player player) {
+		this.playerService = playerService;
 		this.player = player;
 		initData();
 		setInitLayout();
@@ -119,35 +120,35 @@ public class ScoreBox extends JLabel {
 
 		@Override
 		public void run() {
-			while (DropNoteFrame.isRunning()) {
-				if (playerService.getScoreService().getScore() >= MAX_SCORE) {
+			while (GameSelectFrame.isGameRunning()) {
+				if (playerService.getScoreService_kh().getScore() >= MAX_SCORE) {
 					setIcon(scoreNum[9]);
 				} else {
 					switch (digit) {
 					case ONES:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if (playerService.getScoreService().getScore() % 10 == i) {
+							if (playerService.getScoreService_kh().getScore() % 10 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case TENS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScoreService().getScore() % 100) / 10 == i) {
+							if ((playerService.getScoreService_kh().getScore() % 100) / 10 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case HUNDREDS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScoreService().getScore() % 1000) / 100 == i) {
+							if ((playerService.getScoreService_kh().getScore() % 1000) / 100 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case THOUSANDS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScoreService().getScore() % 10000) / 1000 == i) {
+							if ((playerService.getScoreService_kh().getScore() % 10000) / 1000 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}

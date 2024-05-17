@@ -12,106 +12,122 @@ import helpme_AhnD.ver02.service.DeathNoteCircle;
 import helpme_AhnD.ver02.service.DeathNotePlayerService;
 import helpme_AhnD.ver02.service.DeathNoteService;
 import helpme_AhnD.ver02.service.PlayerService_js;
+import helpme_AhnD.ver02.state.Player;
 
 public class DeathNoteDown extends DeathNote implements Runnable {
 	DeathNoteDown deathNoteDown;
 	DeathNotePlayerService playerService;
-	
+
 	protected boolean keyIsPressed = true;
 	protected boolean isJudged = false;
 	private int EXCELLENT_CIRCLE;
 
-	public DeathNoteDown(int x, DeathNoteFrame mContext,DeathNotePlayerService playerService) {
-		super(x, mContext,playerService);
+	public DeathNoteDown(DeathNoteFrame mContext, DeathNotePlayerService playerService, Player player) {
+		super(mContext, playerService, player);
 		deathNoteDown = this;
-		addEventListener();
 		initData();
+		setInitLayout();
+		addEventListener();
 		mContext.add(deathNoteDown);
 	}
-	public void initData(){
+
+	public void initData() {
 		setIcon(note_Down);
+		
+	}
+	private void setInitLayout() {
+		if (player == Player.LEFTPLAYER) {
+			location_X = 280;
+		} else {
+			location_X = 1290;
 		}
-	
-	
+		setLocation(location_X, NOTE_Y_LOCATION);
+	}
 
 	public void addEventListener() {
 		mContext.addKeyListener(new KeyAdapter() {
-
 			@Override
 			public void keyPressed(KeyEvent e) {
 				switch (e.getKeyCode()) {
-
 				case KeyEvent.VK_DOWN:
-					new Thread(deathNoteDown).start();
-
+					if (player == Player.RIGHTPLAYER) {
+						judge();
+					}
 					break;
-
+				case KeyEvent.VK_S:
+					if (player == Player.LEFTPLAYER) {
+						judge();
+					}
+					break;
 				default:
-
+					break;
 				}
 			}
-			
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
 				switch (e.getKeyCode()) {
-
 				case KeyEvent.VK_DOWN:
+					if (player == Player.RIGHTPLAYER) {
 						keyreleased();
-
+					}
 					break;
-
+				case KeyEvent.VK_S:
+					if (player == Player.LEFTPLAYER) {
+						keyreleased();
+					}
+					break;
 				default:
-
+					break;
 				}
 			}
 		});
 	}
-	
-	public void run() {
-			
-		gameStart = true;
-		while (gameStart) {
-			try {
-			if (keyIsPressed) {
-				keypresed();
-				if (deathNoteCircle.circleExcellentZone()) { 
-					playerService.getScore().excellent();
-					System.out.println("excellent");
-					isJudged = true;
-					break;
-				} else if (deathNoteCircle.circlePerfecttZone()) {
-					playerService.getScore().perfect();
-					System.out.println("perfect");
-					isJudged = true;
-					break;
-				} else if (deathNoteCircle.circleGoodZone()) {
-					playerService.getScore().good();
-					System.out.println("good");
-					isJudged = true;
-					break;
-				} else if(deathNoteCircle.circleBadZone()) {
-					playerService.getScore().bad();
-					System.out.println("bad");
-					isJudged = true;
-					break;
-				}
-			
-				break;
-			} // end of if
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-		} // end of while
 
-	} // end of run
-	
+//	public void run() {
+//
+//		gameStart = true;
+//		while (gameStart) {
+//			try {
+//				if (keyIsPressed) {
+//					keypresed();
+//					if (deathNoteCircle.circleExcellentZone()) {
+//						playerService.getScoreService_kh().excellent();
+//						System.out.println("excellent");
+//						isJudged = true;
+//						break;
+//					} else if (deathNoteCircle.circlePerfecttZone()) {
+//						playerService.getScoreService_kh().perfect();
+//						System.out.println("perfect");
+//						isJudged = true;
+//						break;
+//					} else if (deathNoteCircle.circleGoodZone()) {
+//						playerService.getScoreService_kh().good();
+//						System.out.println("good");
+//						isJudged = true;
+//						break;
+//					} else if (deathNoteCircle.circleBadZone()) {
+//						playerService.getScoreService_kh().bad();
+//						System.out.println("bad");
+//						isJudged = true;
+//						break;
+//					}
+//
+//					break;
+//				} // end of if
+//			} catch (Exception e) {
+//				// TODO: handle exception
+//			}
+//
+//		} // end of while
+//
+//	} // end of run
+
 	@Override
 	public void keypresed() {
 		setIcon(note_Down_P);
 	}
+
 	@Override
 	public void keyreleased() {
 		setIcon(note_Down);

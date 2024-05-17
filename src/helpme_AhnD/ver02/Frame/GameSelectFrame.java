@@ -47,12 +47,12 @@ public class GameSelectFrame extends JFrame {
 	private JLabel backButton; // 뒤로가기 버튼
 	private JLabel musicButton; // 음악 재생
 
-	boolean isPlay;
-
+	// 게임 실행 확인용 깃발
+	private static boolean gameRunning;
+	
 	// 음악
 	private BGM bgm;
-
-	// 새로운 게임 화면을 위한 GamePanel 클래스
+	boolean isMusicPlay;
 
 	public GameSelectFrame() {
 		initData();
@@ -182,15 +182,15 @@ public class GameSelectFrame extends JFrame {
 					break;
 				case KeyEvent.VK_SPACE:
 					// 스페이스 버튼 하나로 음악 재생 정지 둘다
-					if (!isPlay) {
+					if (!isMusicPlay) {
 						musicButton.setIcon(musicStopImg);
 						bgm = mContext.getBgmService().createBGM(); // bgm 객체 생성
 						bgm.getClip().start(); // 생성된 음악 재생
-						isPlay = true;
+						isMusicPlay = true;
 					} else {
 						musicButton.setIcon(musicPlayImg);
 						bgm.getClip().close(); // 음악 닫기
-						isPlay = false;
+						isMusicPlay = false;
 					}
 					break;
 				}
@@ -228,6 +228,7 @@ public class GameSelectFrame extends JFrame {
 						// 혹시 음악이 틀어져 있다면 끔
 						bgm.getClip().close();
 					}
+					gameRunning = true;
 					switch (selectNumber) {
 					case GAMENAME_DROPNOTE :
 						new DropNoteFrame(thisFrame);
@@ -276,15 +277,15 @@ public class GameSelectFrame extends JFrame {
 				}
 				// 음악 재생
 				if (isPlayButton(e.getX(), e.getY())) {
-					if (!isPlay) {
+					if (!isMusicPlay) {
 						musicButton.setIcon(musicStopImg);
 						bgm = mContext.getBgmService().createBGM(); // bgm 객체 생성
 						bgm.getClip().start(); // 생성된 음악 재생
-						isPlay = true;
+						isMusicPlay = true;
 					} else {
 						musicButton.setIcon(musicPlayImg);
 						bgm.getClip().close(); // 음악 닫기
-						isPlay = false;
+						isMusicPlay = false;
 					}
 				}
 			}
@@ -318,6 +319,7 @@ public class GameSelectFrame extends JFrame {
 						// 혹시 음악이 틀어져 있다면 끔
 						bgm.getClip().close();
 					}
+					gameRunning = true;
 					// 게임시작 뗏을때 게임화면 띄우기
 					switch (selectNumber) {
 					case GAMENAME_DROPNOTE :
@@ -418,6 +420,14 @@ public class GameSelectFrame extends JFrame {
 	// getter
 	public MainFrame getmContext() {
 		return mContext;
+	}
+
+	public static boolean isGameRunning() {
+		return gameRunning;
+	}
+
+	public static void setGameRunning(boolean running) {
+		gameRunning = running;
 	}
 
 }// end of class

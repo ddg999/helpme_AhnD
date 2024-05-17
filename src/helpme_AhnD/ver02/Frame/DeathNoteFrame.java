@@ -7,15 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.components.AhnCharacter;
-import helpme_AhnD.ver01.service.BGM;
-import helpme_AhnD.ver01.service.PlayerService;
+import helpme_AhnD.ver02.service.BGM;
 import helpme_AhnD.ver02.components.DeathNote;
 import helpme_AhnD.ver02.components.DeathNoteDown;
 import helpme_AhnD.ver02.components.DeathNoteLeft;
 import helpme_AhnD.ver02.components.DeathNoteRight;
 import helpme_AhnD.ver02.components.DeathNoteUp;
 import helpme_AhnD.ver02.components.ItemBox;
-import helpme_AhnD.ver02.components.ItemBox2;
+import helpme_AhnD.ver02.components.ItemBox_kh;
 import helpme_AhnD.ver02.service.BGMService;
 import helpme_AhnD.ver02.service.DeathNotePlayerService;
 import helpme_AhnD.ver02.service.DropNotePlayerService;
@@ -24,26 +23,32 @@ import helpme_AhnD.ver02.state.Player;
 import helpme_AhnD.ver02.utils.Define;
 
 public class DeathNoteFrame extends JFrame {
-
+	
+	// 게임 종료시 최종적으로 게임선택화면으로 돌아가기 위해 필요함
 	GameSelectFrame gameSelectFrame;
-
+	
+	DeathNoteFrame deathNoteFrame;
+	
+	// DropNote 게임을 관리하는 서비스 클래스 (플레이어 위치로 나눔)
+	DeathNotePlayerService leftPlayerService;
+	DeathNotePlayerService rightPlayerService;
+	
 	JLabel background;
-	DeathNotePlayerService notePlayerService1;
-	DeathNotePlayerService notePlayerService2;
+	
 	DeathNote deathNote;
 //	DeathNoteLeft deathNoteLeft;
 //	DeathNoteRight deathNoteRight;
 //	DeathNoteUp deathNoteUp;
 //	DeathNoteDown deathNoteDown;
-	PlayerService playerService;
-	helpme_AhnD.ver02.service.BGM bgm;
+	BGM bgm;
 	AhnCharacter ahnCharacter;
 
-	ItemBox2 itemBox;
+	ItemBox_kh itemBox;
 	private static boolean Running;
 
 	public DeathNoteFrame(GameSelectFrame gameSelectFrame) {
 		this.gameSelectFrame = gameSelectFrame;
+		deathNoteFrame = this;
 		initData();
 		setInitLayout();
 	}
@@ -57,17 +62,11 @@ public class DeathNoteFrame extends JFrame {
 		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-//		deathNoteRight = new DeathNoteRight(80, this);
-//		deathNoteLeft = new DeathNoteLeft(180, this);
-//		deathNoteUp = new DeathNoteUp(280, this);
-//		deathNoteDown = new DeathNoteDown(380, this);
-		notePlayerService1 = new DeathNotePlayerService(this, 1, Player.LEFTPLAYER);
-		notePlayerService2 = new DeathNotePlayerService(this, 2, Player.RIGHTPLAYER);
-		new Thread(notePlayerService1).start();
-		new Thread(notePlayerService2).start();
-		itemBox = new ItemBox2(this);
-		ahnCharacter = new AhnCharacter(this, notePlayerService1, Player.LEFTPLAYER);
-		ahnCharacter = new AhnCharacter(this, notePlayerService2, Player.RIGHTPLAYER);
+		leftPlayerService = new DeathNotePlayerService(this, Player.LEFTPLAYER);
+		rightPlayerService = new DeathNotePlayerService(this, Player.RIGHTPLAYER);
+		itemBox = new ItemBox_kh(this);
+		ahnCharacter = new AhnCharacter(this, leftPlayerService, Player.LEFTPLAYER);
+		ahnCharacter = new AhnCharacter(this, rightPlayerService, Player.RIGHTPLAYER);
 		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
 		bgm.getClip().start();
 	}
@@ -79,11 +78,8 @@ public class DeathNoteFrame extends JFrame {
 		setVisible(true);
 
 	}
-
-	private void addEventListener() {
-
-	}
-
+	
+	// getter setter
 	public boolean isRunning() {
 		return Running;
 	}
@@ -92,4 +88,16 @@ public class DeathNoteFrame extends JFrame {
 		Running = running;
 	}
 
+	public BGM getBgm() {
+		return bgm;
+	}
+
+	public DeathNotePlayerService getLeftPlayerService() {
+		return leftPlayerService;
+	}
+
+	public DeathNotePlayerService getRightPlayerService() {
+		return rightPlayerService;
+	}
+	
 }

@@ -50,6 +50,49 @@ public class Define {
 	public final static String IMG_DROPNOTE_NOTE = "images/dropNote/IMG_DROPNOTE_NOTE.png";
 	public final static String IMG_DROPNOTE_NOTEBAR = "images/dropNote/IMG_DROPNOTE_NOTEBAR.png";
 	
+	// 트라이캐치 이미지
+	public final static String IMG_ARROW_BAD_OVER_LEFT = "images/arrow/IMG_ARROW_BAD_OVER_LEFT.png";
+	public final static String IMG_ARROW_BAD_OVER_UP = "images/arrow/IMG_ARROW_BAD_OVER_UP.png";
+	public final static String IMG_ARROW_BAD_OVER_DOWN = "images/arrow/IMG_ARROW_BAD_OVER_DOWN.png";
+	public final static String IMG_ARROW_BAD_OVER_RIGHT = "images/arrow/IMG_ARROW_BAD_OVER_RIGHT.png";
+	public final static String IMG_ARROW_GOOD_LEFT = "images/arrow/IMG_ARROW_GOOD_LEFT.png";
+	public final static String IMG_ARROW_GOOD_UP = "images/arrow/IMG_ARROW_GOOD_UP.png";
+	public final static String IMG_ARROW_GOOD_DOWN = "images/arrow/IMG_ARROW_GOOD_DOWN.png";
+	public final static String IMG_ARROW_GOOD_RIGHT = "images/arrow/IMG_ARROW_GOOD_RIGHT.png";
+	public final static String IMG_ARROW_EXCELLENT_LEFT = "images/arrow/IMG_ARROW_EXCELLENT_LEFT.png";
+	public final static String IMG_ARROW_EXCELLENT_UP = "images/arrow/IMG_ARROW_EXCELLENT_UP.png";
+	public final static String IMG_ARROW_EXCELLENT_DOWN = "images/arrow/IMG_ARROW_EXCELLENT_DOWN.png";
+	public final static String IMG_ARROW_EXCELLENT_RIGHT = "images/arrow/IMG_ARROW_EXCELLENT_RIGHT.png";
+	public final static String IMG_ARROW_PERFECT_LEFT = "images/arrow/IMG_ARROW_PERFECT_LEFT.png";
+	public final static String IMG_ARROW_PERFECT_UP = "images/arrow/IMG_ARROW_PERFECT_UP.png";
+	public final static String IMG_ARROW_PERFECT_DOWN = "images/arrow/IMG_ARROW_PERFECT_DOWN.png";
+	public final static String IMG_ARROW_PERFECT_RIGHT = "images/arrow/IMG_ARROW_PERFECT_RIGHT.png";
+	public final static String IMG_ARROW_BAD_LATE_LEFT = "images/arrow/IMG_ARROW_BAD_LATE_LEFT.png";
+	public final static String IMG_ARROW_BAD_LATE_UP = "images/arrow/IMG_ARROW_BAD_LATE_UP.png";
+	public final static String IMG_ARROW_BAD_LATE_DOWN = "images/arrow/IMG_ARROW_BAD_LATE_DOWN.png";
+	public final static String IMG_ARROW_BAD_LATE_RIGHT = "images/arrow/IMG_ARROW_BAD_LATE_RIGHT.png";
+	// 아이콘 인덱스 번호
+	public final static int INDEX_ARROW_BAD_OVER_LEFT = 0;
+	public final static int INDEX_ARROW_GOOD_LEFT = 1;
+	public final static int INDEX_ARROW_EXCELLENT_LEFT = 2;
+	public final static int INDEX_ARROW_PERFECT_LEFT = 3;
+	public final static int INDEX_ARROW_BAD_LATE_LEFT = 4;
+	public final static int INDEX_ARROW_BAD_OVER_UP = 5;
+	public final static int INDEX_ARROW_GOOD_UP = 6;
+	public final static int INDEX_ARROW_EXCELLENT_UP = 7;
+	public final static int INDEX_ARROW_PERFECT_UP = 8;
+	public final static int INDEX_ARROW_BAD_LATE_UP = 9;
+	public final static int INDEX_ARROW_BAD_OVER_DOWN = 10;
+	public final static int INDEX_ARROW_GOOD_DOWN = 11;
+	public final static int INDEX_ARROW_EXCELLENT_DOWN = 12;
+	public final static int INDEX_ARROW_PERFECT_DOWN = 13;
+	public final static int INDEX_ARROW_BAD_LATE_DOWN = 14;
+	public final static int INDEX_ARROW_BAD_OVER_RIGHT = 15;
+	public final static int INDEX_ARROW_GOOD_RIGHT = 16;
+	public final static int INDEX_ARROW_EXCELLENT_RIGHT = 17;
+	public final static int INDEX_ARROW_PERFECT_RIGHT = 18;
+	public final static int INDEX_ARROW_BAD_LATE_RIGHT = 19;
+	
 	// 게임 종료 이미지
 	public final static String IMG_GAMEOVER_LEFTWIN = "images/gameover/IMG_GAMEOVER_LEFTWIN.png";
 	public final static String IMG_GAMEOVER_RIGHTWIN = "images/gameover/IMG_GAMEOVER_RIGHTWIN.png";
@@ -130,4 +173,5 @@ public class Define {
 	public final static int INT_ITEMS_REVERSE = 6;
 	public final static int INT_ITEMS_FAST = 7;
 	public final static int INT_ITEMS_NEVERPERFECT = 8;
+	
 }

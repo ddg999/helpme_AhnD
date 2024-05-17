@@ -5,29 +5,27 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.ver02.Frame.DeathNoteFrame;
 import helpme_AhnD.ver02.components.DeathNote;
-import helpme_AhnD.ver02.components.TestFrame;
+import helpme_AhnD.ver02.state.KeyType;
+import helpme_AhnD.ver02.utils.Define;
 
 public class DeathNoteCircle extends JLabel {
-	private ImageIcon[] image;
-	public final static int BAD_OVER_CIRCLE = 0;
-	public final static int GOOD_CIRCLE = 1;
-	public final static int EXCELLENT_CIRCLE = 2;
-	public final static int PERFECT_CIRCLE = 3;
-	public final static int BAD_LATE_CIRCLE = 4;
-	int i;
-	ImageIcon booly;
 	DeathNote deathNote;
 	DeathNoteFrame deathNoteFrame;
 	public int checkNow;
 	boolean flag;
-
+	private ImageIcon[] image;
+	private int index;
+	private int startIndex;
+	private int endIndex;
 	private int x;
 	private int y;
+	KeyType key;
 
-	public DeathNoteCircle(DeathNote deathNote, DeathNoteFrame deathNoteFrame) {
-		x = deathNote.getLocation_X() + 5;
+	public DeathNoteCircle(DeathNote deathNote, DeathNoteFrame deathNoteFrame, KeyType key) {
+		x = deathNote.getLocation_X() - 30;
 		y = deathNote.getNOTE_Y_LOCATION() - 5;
 		this.deathNoteFrame = deathNoteFrame;
+		this.key = key;
 
 		initData();
 		setInitLayout();
@@ -35,16 +33,16 @@ public class DeathNoteCircle extends JLabel {
 			// while(true) {
 
 			try {
-				for (i = BAD_OVER_CIRCLE; i <= BAD_LATE_CIRCLE; i++) {
-					setIcon(image[i]);
-					setLocation(x + i * 5, y);
-					checkNow = i;
+				for (index = startIndex; index <= endIndex; index++) {
+					setIcon(image[index]);
+					setLocation(x + index * 5, y);
+					checkNow = index;
 					this.repaint();
-					Thread.sleep(100);
+					Thread.sleep(200);
 				}
 				setIcon(null);
-				this.repaint();
 				deathNoteFrame.remove(this);
+				this.repaint();
 
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -57,89 +55,182 @@ public class DeathNoteCircle extends JLabel {
 //	}
 
 	private void initData() {
-		image = new ImageIcon[5];
-		image[BAD_OVER_CIRCLE] = new ImageIcon("images/circle/badOverCircle.png");
-		image[GOOD_CIRCLE] = new ImageIcon("images/circle/goodCircle.png");
-		image[EXCELLENT_CIRCLE] = new ImageIcon("images/circle/excellentCircle.png");
-		image[PERFECT_CIRCLE] = new ImageIcon("images/circle/perfectCircle.png");
-		image[BAD_LATE_CIRCLE] = new ImageIcon("images/circle/badLateCircle.png");
-		booly = new ImageIcon("");
+		image = new ImageIcon[20];
+		image[Define.INDEX_ARROW_BAD_OVER_LEFT] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_LEFT);
+		image[Define.INDEX_ARROW_GOOD_LEFT] = new ImageIcon(Define.IMG_ARROW_GOOD_LEFT);
+		image[Define.INDEX_ARROW_EXCELLENT_LEFT] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_LEFT);
+		image[Define.INDEX_ARROW_PERFECT_LEFT] = new ImageIcon(Define.IMG_ARROW_PERFECT_LEFT);
+		image[Define.INDEX_ARROW_BAD_LATE_LEFT] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_LEFT);
+		image[Define.INDEX_ARROW_BAD_OVER_UP] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_UP);
+		image[Define.INDEX_ARROW_GOOD_UP] = new ImageIcon(Define.IMG_ARROW_GOOD_UP);
+		image[Define.INDEX_ARROW_EXCELLENT_UP] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_UP);
+		image[Define.INDEX_ARROW_PERFECT_UP] = new ImageIcon(Define.IMG_ARROW_PERFECT_UP);
+		image[Define.INDEX_ARROW_BAD_LATE_UP] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_UP);
+		image[Define.INDEX_ARROW_BAD_OVER_DOWN] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_DOWN);
+		image[Define.INDEX_ARROW_GOOD_DOWN] = new ImageIcon(Define.IMG_ARROW_GOOD_DOWN);
+		image[Define.INDEX_ARROW_EXCELLENT_DOWN] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_DOWN);
+		image[Define.INDEX_ARROW_PERFECT_DOWN] = new ImageIcon(Define.IMG_ARROW_PERFECT_DOWN);
+		image[Define.INDEX_ARROW_BAD_LATE_DOWN] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_DOWN);
+		image[Define.INDEX_ARROW_BAD_OVER_RIGHT] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_RIGHT);
+		image[Define.INDEX_ARROW_GOOD_RIGHT] = new ImageIcon(Define.IMG_ARROW_GOOD_RIGHT);
+		image[Define.INDEX_ARROW_EXCELLENT_RIGHT] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_RIGHT);
+		image[Define.INDEX_ARROW_PERFECT_RIGHT] = new ImageIcon(Define.IMG_ARROW_PERFECT_RIGHT);
+		image[Define.INDEX_ARROW_BAD_LATE_RIGHT] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_RIGHT);
+
+		switch (key) {
+		case LEFT:
+			startIndex = Define.INDEX_ARROW_BAD_OVER_LEFT;
+			endIndex = Define.INDEX_ARROW_BAD_LATE_LEFT;
+			break;
+		case UP:
+			startIndex = Define.INDEX_ARROW_BAD_OVER_UP;
+			endIndex = Define.INDEX_ARROW_BAD_LATE_UP;
+			break;
+		case DOWN:
+			startIndex = Define.INDEX_ARROW_BAD_OVER_DOWN;
+			endIndex = Define.INDEX_ARROW_BAD_LATE_DOWN;
+			break;
+		case RIGHT:
+			startIndex = Define.INDEX_ARROW_BAD_OVER_RIGHT;
+			endIndex = Define.INDEX_ARROW_BAD_LATE_RIGHT;
+			break;
+		}
 	}
 
 	private void setInitLayout() {
-		setSize(90, 90);
-		setIcon(image[BAD_OVER_CIRCLE]);
+		setSize(100, 100);
+		setIcon();
 		setLocation(x, y);
 
+	}
+
+	private void setIcon() {
+		switch (key) {
+		case LEFT:
+			setIcon(image[Define.INDEX_ARROW_BAD_OVER_LEFT]);
+			break;
+		case UP:
+			setIcon(image[Define.INDEX_ARROW_BAD_OVER_UP]);
+			break;
+		case DOWN:
+			setIcon(image[Define.INDEX_ARROW_BAD_OVER_DOWN]);
+			break;
+		case RIGHT:
+			setIcon(image[Define.INDEX_ARROW_BAD_OVER_RIGHT]);
+			break;
+		}
 	}
 
 	public ImageIcon[] getImage() {
 		return image;
 	}
 
-	private void falseG() {
-		if (image.equals(booly)) {
-
+	public boolean circlePerfectZone() {
+		switch (key) {
+		case LEFT:
+			if (index == Define.INDEX_ARROW_PERFECT_LEFT) {
+				return true;
+			}
+			return false;
+		case UP:
+			if (index == Define.INDEX_ARROW_PERFECT_UP) {
+				return true;
+			}
+			return false;
+		case DOWN:
+			if (index == Define.INDEX_ARROW_PERFECT_DOWN) {
+				return true;
+			}
+			return false;
+		case RIGHT:
+			if (index == Define.INDEX_ARROW_PERFECT_RIGHT) {
+				return true;
+			}
+			return false;
+		default:
+			return false;
 		}
-		flag = true;
 	}
 
 	public boolean circleExcellentZone() {
-		try {
-			if (i == EXCELLENT_CIRCLE) {
-				
+		switch (key) {
+		case LEFT:
+			if (index == Define.INDEX_ARROW_EXCELLENT_LEFT) {
 				return true;
 			}
-			
-		} catch (Exception e) {
-			System.out.println("예외3");
-		}
-		return false;
-	}
-
-	public boolean circlePerfecttZone() {
-	
-		try {
-			if (i== PERFECT_CIRCLE) {
-
+			return false;
+		case UP:
+			if (index == Define.INDEX_ARROW_EXCELLENT_UP) {
 				return true;
 			}
-			
-		} catch (Exception e) {
-			System.out.println("예외2");
+			return false;
+		case DOWN:
+			if (index == Define.INDEX_ARROW_EXCELLENT_DOWN) {
+				return true;
+			}
+			return false;
+		case RIGHT:
+			if (index == Define.INDEX_ARROW_EXCELLENT_RIGHT) {
+				return true;
+			}
+			return false;
+		default:
+			return false;
 		}
-		
-		return false;
 	}
 
 	public boolean circleGoodZone() {
-		
-		try {
-			if (i== GOOD_CIRCLE) {
-
+		switch (key) {
+		case LEFT:
+			if (index == Define.INDEX_ARROW_GOOD_LEFT) {
 				return true;
 			}
-			
-		} catch (Exception e) {
-			System.out.println("예외1");
+			return false;
+		case UP:
+			if (index == Define.INDEX_ARROW_GOOD_UP) {
+				return true;
+			}
+			return false;
+		case DOWN:
+			if (index == Define.INDEX_ARROW_GOOD_DOWN) {
+				return true;
+			}
+			return false;
+		case RIGHT:
+			if (index == Define.INDEX_ARROW_GOOD_RIGHT) {
+				return true;
+			}
+			return false;
+		default:
+			return false;
 		}
-		return false;
-	}
-
-	public boolean circleBadLateZone() {
-		if (i == BAD_LATE_CIRCLE) {
-
-			return true;
-		}
-		return false;
 	}
 
 	public boolean circleBadZone() {
-		if (image == null) {
-
-			return true;
+		switch (key) {
+		case LEFT:
+			if (index == Define.INDEX_ARROW_BAD_OVER_LEFT || index == Define.INDEX_ARROW_BAD_LATE_LEFT) {
+				return true;
+			}
+			return false;
+		case UP:
+			if (index == Define.INDEX_ARROW_BAD_OVER_UP || index == Define.INDEX_ARROW_BAD_LATE_UP) {
+				return true;
+			}
+			return false;
+		case DOWN:
+			if (index == Define.INDEX_ARROW_BAD_OVER_DOWN || index == Define.INDEX_ARROW_BAD_LATE_DOWN) {
+				return true;
+			}
+			return false;
+		case RIGHT:
+			if (index == Define.INDEX_ARROW_BAD_OVER_RIGHT || index == Define.INDEX_ARROW_BAD_LATE_RIGHT) {
+				return true;
+			}
+			return false;
+		default:
+			return false;
 		}
-		return false;
 	}
 
 }
