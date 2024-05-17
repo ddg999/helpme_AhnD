@@ -3,21 +3,18 @@ package helpme_AhnD.ver02.components;
 import javax.swing.JFrame;
 
 import helpme_AhnD.ver02.service.PlayerService_js;
+import helpme_AhnD.ver02.state.Player;
 
 public class TestFrame extends JFrame {
 	private static AhnCharacter ahnCharacter;
-	
-	DeathNoteRight deathNoteRight;
-	DeathNoteLeft deathNoteLeft;
-	DeathNoteUp deathNoteUp;
-	DeathNoteDown deathNoteDown;
-	PlayerService_js playerService;
+	Player player = Player.LEFTPLAYER;
+
 	
 	public TestFrame() {
 		initData();
 		setInitLayout();
-	
-		ahnCharacter.playerScoreImage();
+		add(new CatchNote());
+		
 		
 	}
 	
@@ -30,12 +27,7 @@ public class TestFrame extends JFrame {
 		setSize(1600, 900);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		ahnCharacter = new AhnCharacter();
-		deathNoteRight = new  DeathNoteRight(80, this);
-		deathNoteLeft = new DeathNoteLeft(180, this);
-		deathNoteUp = new DeathNoteUp(280, this);
-		deathNoteDown = new DeathNoteDown(380, this);
-		playerService = new PlayerService_js(this);
+		
 		//new DeathNoteCircle();
 	}
 	private void setInitLayout() {
@@ -44,11 +36,6 @@ public class TestFrame extends JFrame {
 		setLocationRelativeTo(null); // JFrame 여러분 모니터 가운데 자동 배치
 		setVisible(true);
 
-		add(ahnCharacter);
-		add(deathNoteRight);
-		add(deathNoteLeft);		
-		add(deathNoteUp);		
-		add(deathNoteDown);		
 
 	}
 

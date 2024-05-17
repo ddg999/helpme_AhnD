@@ -18,9 +18,9 @@ public class DropNoteFrame extends JFrame {
 
 	// 게임 종료시 최종적으로 게임선택화면으로 돌아가기 위해 필요함
 	GameSelectFrame gameSelectFrame;
-	
+
 	DropNoteFrame dropNoteFrame;
-	
+
 	JLabel background;
 
 	// DropNote 게임을 관리하는 서비스 클래스 (플레이어 위치로 나눔)
