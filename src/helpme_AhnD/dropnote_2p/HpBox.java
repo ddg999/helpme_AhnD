@@ -4,13 +4,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.service.DropNote_2P_PlayerService;
+import helpme_AhnD.service.PlayerService;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
 public class HpBox extends JLabel {
 
-	DropNote_2P_PlayerService playerService;
+	GameSelectFrame mContext;
+	PlayerService playerService;
 	private Player player;
 
 	private final int FIRST_HEART = 1;
@@ -22,8 +25,9 @@ public class HpBox extends JLabel {
 	private ImageIcon hpFull;
 	private ImageIcon hpHalf;
 
-	public HpBox(DropNote_2P_PlayerService playerService, Player player) {
+	public HpBox(PlayerService playerService, Player player) {
 		this.playerService = playerService;
+		mContext = playerService.getmContext();
 		this.player = player;
 		hpFull = new ImageIcon(Define.IMG_HP_HPFULL);
 		hpHalf = new ImageIcon(Define.IMG_HP_HPHALF);
@@ -75,36 +79,46 @@ public class HpBox extends JLabel {
 			setIcon(hpFull);
 			setSize(50, 50);
 			setLocation(x, y);
-			playerService.getmContext().add(this);
+			switch (mContext.getSelectNumber()) {
+			case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+				break;
+			case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+				playerService.getDropNoteFrame_2P().add(this);
+				break;
+			case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+				break;
+			case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+				break;
+			}
 		}
 
 		@Override
 		public void run() {
-			while (DropNoteFrame_2P.isRunning()) {
+			while (GameSelectFrame.isGameRunning()) {
 				// 체력 감소에 따른 하트 변화
 				switch (order) {
 				case FIRST_HEART:
-					if (playerService.getScoreService().getHp() >= Define.HP_1_0_HEART) {
+					if (playerService.getScore().getHp() >= Define.HP_1_0_HEART) {
 						setIcon(hpFull);
-					} else if (playerService.getScoreService().getHp() >= Define.HP_0_5_HEART) {
+					} else if (playerService.getScore().getHp() >= Define.HP_0_5_HEART) {
 						setIcon(hpHalf);
 					} else {
 						setIcon(null);
 					}
 					break;
 				case SECOND_HEART:
-					if (playerService.getScoreService().getHp() >= Define.HP_2_0_HEART) {
+					if (playerService.getScore().getHp() >= Define.HP_2_0_HEART) {
 						setIcon(hpFull);
-					} else if (playerService.getScoreService().getHp() >= Define.HP_1_5_HEART) {
+					} else if (playerService.getScore().getHp() >= Define.HP_1_5_HEART) {
 						setIcon(hpHalf);
 					} else {
 						setIcon(null);
 					}
 					break;
 				case THIRD_HEART:
-					if (playerService.getScoreService().getHp() >= Define.HP_3_0_HEART) {
+					if (playerService.getScore().getHp() >= Define.HP_3_0_HEART) {
 						setIcon(hpFull);
-					} else if (playerService.getScoreService().getHp() >= Define.HP_2_5_HEART) {
+					} else if (playerService.getScore().getHp() >= Define.HP_2_5_HEART) {
 						setIcon(hpHalf);
 					} else {
 						setIcon(null);

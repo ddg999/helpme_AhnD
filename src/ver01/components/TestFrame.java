@@ -29,7 +29,7 @@ public class TestFrame extends JFrame {
 		setSize(1600, 900);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		ahnCharacter = new AhnCharacter();
+		//ahnCharacter = new AhnCharacter();
 		
 	}
 	private void setInitLayout() {

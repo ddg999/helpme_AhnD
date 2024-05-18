@@ -10,13 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.frame.MainFrame;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
 public class GameEndFrame extends JFrame {
 
-	private DropNoteFrame_2P mContext;
+	private GameSelectFrame mContext;
 	private Player loser;
 	private JLabel background;
 	private ImageIcon leftWin;
@@ -34,7 +35,7 @@ public class GameEndFrame extends JFrame {
 	private JLabel[] leftScore;
 	private JLabel[] rightScore;
 
-	public GameEndFrame(DropNoteFrame_2P mContext, Player loser) {
+	public GameEndFrame(GameSelectFrame mContext, Player loser) {
 		this.loser = loser;
 		this.mContext = mContext;
 		initData();
@@ -57,45 +58,26 @@ public class GameEndFrame extends JFrame {
 
 		if (loser == Player.LEFTPLAYER) {
 			background = new JLabel(rightWin);
-		} else {
+		} else if (loser == Player.RIGHTPLAYER) {
 			background = new JLabel(leftWin);
 		}
 		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		font = new Font("휴먼엑스포", Font.ITALIC, 50);
+		// 게임 셀렉 프레임의 셀렉넘버에 따라 호출
+		switch (mContext.getSelectNumber()) {
+		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+			break;
+		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+			dropNote2pImage();
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			break;
+		}
 
-		leftScore = new JLabel[7];
-		leftScore[SCORE] = new JLabel(
-				Integer.toString(mContext.getDropNoteLeftPlayerService().getScoreService().getScore()));
-		leftScore[PERFECT] = new JLabel(
-				Integer.toString(mContext.getDropNoteLeftPlayerService().getScoreService().getCountPerfect()));
-		leftScore[EXCELLENT] = new JLabel(
-				Integer.toString(mContext.getDropNoteLeftPlayerService().getScoreService().getCountExcellent()));
-		leftScore[GOOD] = new JLabel(
-				Integer.toString(mContext.getDropNoteLeftPlayerService().getScoreService().getCountGood()));
-		leftScore[BAD] = new JLabel(
-				Integer.toString(mContext.getDropNoteLeftPlayerService().getScoreService().getCountBad()));
-		leftScore[MISS] = new JLabel(
-				Integer.toString(mContext.getDropNoteLeftPlayerService().getScoreService().getCountMiss()));
-		leftScore[MAX_COMBO] = new JLabel(
-				Integer.toString(mContext.getDropNoteLeftPlayerService().getScoreService().getMaxCombo()));
-
-		rightScore = new JLabel[7];
-		rightScore[SCORE] = new JLabel(
-				Integer.toString(mContext.getDropNoteRightPlayerService().getScoreService().getScore()));
-		rightScore[PERFECT] = new JLabel(
-				Integer.toString(mContext.getDropNoteRightPlayerService().getScoreService().getCountPerfect()));
-		rightScore[EXCELLENT] = new JLabel(
-				Integer.toString(mContext.getDropNoteRightPlayerService().getScoreService().getCountExcellent()));
-		rightScore[GOOD] = new JLabel(
-				Integer.toString(mContext.getDropNoteRightPlayerService().getScoreService().getCountGood()));
-		rightScore[BAD] = new JLabel(
-				Integer.toString(mContext.getDropNoteRightPlayerService().getScoreService().getCountBad()));
-		rightScore[MISS] = new JLabel(
-				Integer.toString(mContext.getDropNoteRightPlayerService().getScoreService().getCountMiss()));
-		rightScore[MAX_COMBO] = new JLabel(
-				Integer.toString(mContext.getDropNoteRightPlayerService().getScoreService().getMaxCombo()));
 	}
 
 	private void setInitLayout() {
@@ -113,7 +95,7 @@ public class GameEndFrame extends JFrame {
 			leftWin = new ImageIcon(Define.IMG_GAMEOVER_LEFTWIN_SCORE);
 			background.setIcon(leftWin);
 		}
-		
+
 		for (int i = 0; i < leftScore.length; i++) {
 			leftScore[i].setFont(font);
 			leftScore[i].setForeground(Color.white);
@@ -143,8 +125,52 @@ public class GameEndFrame extends JFrame {
 	}
 
 	private void passFrame() {
-		mContext.gameSelectFrame.setVisible(true);
+		switch (mContext.getSelectNumber()) {
+		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+			break;
+		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+			mContext.dropNoteFrame_2P.setVisible(true);
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			break;
+		}
 		setVisible(false);
+	}
+
+	private void dropNote2pImage() {
+		leftScore = new JLabel[7];
+		leftScore[SCORE] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService().getScore().getScore()));
+		leftScore[PERFECT] = new JLabel(Integer
+				.toString(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService().getScore().getCountPerfect()));
+		leftScore[EXCELLENT] = new JLabel(Integer
+				.toString(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService().getScore().getCountExcellent()));
+		leftScore[GOOD] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService().getScore().getCountGood()));
+		leftScore[BAD] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService().getScore().getCountBad()));
+		leftScore[MISS] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService().getScore().getCountMiss()));
+		leftScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService().getScore().getMaxCombo()));
+
+		rightScore = new JLabel[7];
+		rightScore[SCORE] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getScore()));
+		rightScore[PERFECT] = new JLabel(Integer
+				.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getCountPerfect()));
+		rightScore[EXCELLENT] = new JLabel(Integer
+				.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getCountExcellent()));
+		rightScore[GOOD] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getCountGood()));
+		rightScore[BAD] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getCountBad()));
+		rightScore[MISS] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getCountMiss()));
+		rightScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getMaxCombo()));
 	}
 
 }

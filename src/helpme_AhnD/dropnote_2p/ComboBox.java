@@ -3,15 +3,17 @@ package helpme_AhnD.dropnote_2p;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.frame.DropNoteFrame_2P;
-import helpme_AhnD.service.DropNote_2P_PlayerService;
-import helpme_AhnD.state.*;
+import helpme_AhnD.frame.GameSelectFrame;
+import helpme_AhnD.service.PlayerService;
+import helpme_AhnD.state.Digit;
+import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
 public class ComboBox extends JLabel {
 	// 현재 콤보 수를 띄우는 라벨
-
-	DropNote_2P_PlayerService playerService;
+	
+	GameSelectFrame mContext;
+	PlayerService playerService;
 	private Player player;
 
 	private ImageIcon comboBox;
@@ -21,8 +23,9 @@ public class ComboBox extends JLabel {
 	private int y = 450;
 	private final int MAX_COMBO = 999;
 
-	public ComboBox(DropNote_2P_PlayerService playerService, Player player) {
+	public ComboBox(PlayerService playerService, Player player) {
 		this.playerService = playerService;
+		mContext = playerService.getmContext();
 		this.player = player;
 		initData();
 		setInitLayout();
@@ -55,7 +58,17 @@ public class ComboBox extends JLabel {
 		setIcon(comboBox);
 		setSize(100, 100);
 		setLocation(x, y);
-		playerService.getmContext().add(this);
+		switch (mContext.getSelectNumber()) {
+		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+			break;
+		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+			playerService.getDropNoteFrame_2P().add(this);
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			break;
+		}
 	}
 
 	class ComboNum extends JLabel implements Runnable {
@@ -105,34 +118,44 @@ public class ComboBox extends JLabel {
 			setIcon(comboNum[0]);
 			setSize(30, 46);
 			setLocation(x, y);
-			playerService.getmContext().add(this);
+			switch (mContext.getSelectNumber()) {
+			case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+				break;
+			case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+				playerService.getDropNoteFrame_2P().add(this);
+				break;
+			case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+				break;
+			case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+				break;
+			}
 		}
 
 		@Override
 		public void run() {
-			while (DropNoteFrame_2P.isRunning()) {
-				if (playerService.getScoreService().getCombo() >= MAX_COMBO) {
+			while (GameSelectFrame.isGameRunning()) {
+				if (playerService.getScore().getCombo() >= MAX_COMBO) {
 					setIcon(comboNum[9]);
 				} else {
 					// 반복문 돌면서 각 자리의 수와 같은 i 값에 해당하는 이미지로 변경
 					switch (digit) {
 					case ONES:
 						for (int i = 0; i < comboNum.length; i++) {
-							if (playerService.getScoreService().getCombo() % 10 == i) {
+							if (playerService.getScore().getCombo() % 10 == i) {
 								setIcon(comboNum[i]);
 							}
 						}
 						break;
 					case TENS:
 						for (int i = 0; i < comboNum.length; i++) {
-							if ((playerService.getScoreService().getCombo() % 100) / 10 == i) {
+							if ((playerService.getScore().getCombo() % 100) / 10 == i) {
 								setIcon(comboNum[i]);
 							}
 						}
 						break;
 					case HUNDREDS:
 						for (int i = 0; i < comboNum.length; i++) {
-							if ((playerService.getScoreService().getCombo() % 1000) / 100 == i) {
+							if ((playerService.getScore().getCombo() % 1000) / 100 == i) {
 								setIcon(comboNum[i]);
 							}
 						}

@@ -12,7 +12,7 @@ import helpme_AhnD.utils.Define;
 public class DropNoteFrame_2P extends JFrame {
 
 	// 게임 종료시 최종적으로 게임선택화면으로 돌아가기 위해 필요함
-	public GameSelectFrame gameSelectFrame;
+	public GameSelectFrame mContext;
 
 	DropNoteFrame_2P dropNoteFrame;
 
@@ -29,27 +29,24 @@ public class DropNoteFrame_2P extends JFrame {
 	// 게임시작시 재생될 bgm
 	BGM bgm;
 
-	private static boolean Running;
-
-	public DropNoteFrame_2P(GameSelectFrame gameSelectFrame) {
-		this.gameSelectFrame = gameSelectFrame;
+	public DropNoteFrame_2P(GameSelectFrame mContext) {
+		this.mContext = mContext;
 		dropNoteFrame = this;
 		initData();
 		setInitLayout();
 		new Thread(() -> {
 			try {
 				Thread.sleep(BGM.END_TIME); // 일정 시간 이후 종료
-				Running = false;
 				setVisible(false);
 				bgm.getClip().close();
-				if (leftPlayerService.getScoreService().getScore() > rightPlayerService.getScoreService().getScore()) {
-					new GameEndFrame(dropNoteFrame, Player.RIGHTPLAYER); // 진쪽을 넘겨줌
+				GameSelectFrame.setGameRunning(false);
+				if (leftPlayerService.getScore().getScore() > rightPlayerService.getScore().getScore()) {
+					new GameEndFrame(mContext, Player.RIGHTPLAYER); // 진쪽을 넘겨줌
 				} else {
-					new GameEndFrame(dropNoteFrame, Player.LEFTPLAYER);
+					new GameEndFrame(mContext, Player.LEFTPLAYER);
 				}
 
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}).start();
@@ -58,22 +55,21 @@ public class DropNoteFrame_2P extends JFrame {
 	private void initData() {
 		background = new JLabel(new ImageIcon(Define.IMG_DROPNOTE_BG));
 
-		Running = true;
 		setTitle("DropNote");
 		setSize(MainFrame.FRAME_WIDTH, MainFrame.FRAME_HEIGHT);
 		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		noteBarLeft = new NoteBar(this, Player.LEFTPLAYER);
+		noteBarLeft = new NoteBar(mContext, Player.LEFTPLAYER);
 		leftPlayerService = new DropNote_2P_PlayerService(this, Player.LEFTPLAYER);
 		new Thread(leftPlayerService).start();
 
-		noteBarRight = new NoteBar(this, Player.RIGHTPLAYER);
+		noteBarRight = new NoteBar(mContext, Player.RIGHTPLAYER);
 		rightPlayerService = new DropNote_2P_PlayerService(this, Player.RIGHTPLAYER);
 		new Thread(rightPlayerService).start();
 
-		itembox = new ItemBox(this);
-		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
+		itembox = new ItemBox(mContext);
+		bgm = mContext.getBgmService().createBGM();
 		bgm.getClip().start();
 	}
 
@@ -82,17 +78,12 @@ public class DropNoteFrame_2P extends JFrame {
 		setLocationRelativeTo(null); // 화면 중앙에 프레임 위치
 		setResizable(false);
 		setVisible(true);
+		add(noteBarLeft);
+		add(noteBarRight);
+		add(itembox);
 	}
 
 	// getter setter
-	public static boolean isRunning() {
-		return Running;
-	}
-
-	public static void setRunning(boolean running) {
-		Running = running;
-	}
-
 	public DropNote_2P_PlayerService getDropNoteLeftPlayerService() {
 		return leftPlayerService;
 	}

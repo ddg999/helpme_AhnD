@@ -57,7 +57,7 @@ public class DeathNoteFrame extends JFrame {
 		itemBox = new ItemBox_kh(this);
 		ahnCharacter = new AhnCharacter(this, leftPlayerService, Player.LEFTPLAYER);
 		ahnCharacter = new AhnCharacter(this, rightPlayerService, Player.RIGHTPLAYER);
-		bgm = gameSelectFrame.getmContext().getBgmService().createBGM();
+		bgm = gameSelectFrame.getBgmService().createBGM();
 		bgm.getClip().start();
 	}
 

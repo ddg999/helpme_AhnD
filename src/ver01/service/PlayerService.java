@@ -14,7 +14,7 @@ public class PlayerService implements Runnable {
 
 	public PlayerService(AhnteacherFrame2 mContext) {
 		this.mContext = mContext;
-		player = new AhnCharacter();
+		//player = new AhnCharacter();
 		score = new Score();
 		new Thread(new ComboBox(this)).start();
 		new Thread(new HpBox(this)).start();

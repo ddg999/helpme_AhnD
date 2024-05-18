@@ -9,11 +9,12 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.components.item.*;
 import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.utils.Define;
 
 public class ItemBox extends JLabel {
 
-	DropNoteFrame_2P mContext;
+	GameSelectFrame mContext;
 
 	private ImageIcon itemBox;
 	private int x;
@@ -27,7 +28,7 @@ public class ItemBox extends JLabel {
 	private int countLeft;
 	private int countRight;
 
-	public ItemBox(DropNoteFrame_2P mContext) {
+	public ItemBox(GameSelectFrame mContext) {
 		this.mContext = mContext;
 		initData();
 		setInitLayout();
@@ -41,74 +42,77 @@ public class ItemBox extends JLabel {
 		y = 20;
 		appear = false;
 		items = new Items[9];
-		items[Define.INT_ITEMS_HP_PLUS] = new HpPlus();
-		items[Define.INT_ITEMS_ALLPERFECT] = new AllPerfect();
-		items[Define.INT_ITEMS_SCOREDOUBLE] = new ScoreDouble();
-		items[Define.INT_ITEMS_SLOW] = new Slow();
-		items[Define.INT_ITEMS_HP_MINUS] = new HpMinus();
-		items[Define.INT_ITEMS_BOMB] = new Bomb();
-		items[Define.INT_ITEMS_REVERSE] = new Reverse();
-		items[Define.INT_ITEMS_FAST] = new Fast();
-		items[Define.INT_ITEMS_NEVERPERFECT] = new NeverPerfect();
+		items[Define.INDEX_ITEMS_HP_PLUS] = new HpPlus();
+		items[Define.INDEX_ITEMS_ALLPERFECT] = new AllPerfect();
+		items[Define.INDEX_ITEMS_SCOREDOUBLE] = new ScoreDouble();
+		items[Define.INDEX_ITEMS_SLOW] = new Slow();
+		items[Define.INDEX_ITEMS_HP_MINUS] = new HpMinus();
+		items[Define.INDEX_ITEMS_BOMB] = new Bomb();
+		items[Define.INDEX_ITEMS_REVERSE] = new Reverse();
+		items[Define.INDEX_ITEMS_FAST] = new Fast();
+		items[Define.INDEX_ITEMS_NEVERPERFECT] = new NeverPerfect();
 	}
 
 	public void setInitLayout() {
 		setIcon(itemBox);
 		setSize(159, 160);
 		setLocation(x, y);
-		mContext.add(this);
 	}
 
 	public void addEventListener() {
-		mContext.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (appear) {
-					if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-						countLeft++;
-						if (countLeft >= 30) {
-							// 왼쪽 플레이어가 아이템 사용
-							if (currentItem.getBuffType() == Items.BUFF) {
-								// 버프 아이템일 경우 자신의 서비스 주소 넘김
-								currentItem.useItems(mContext.getDropNoteLeftPlayerService());
-							} else {
-								// 디버프 아이템일 경우 상대의 서비스 주소 넘김
-								currentItem.useItems(mContext.getDropNoteRightPlayerService());
+		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
+			mContext.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if (appear) {
+						if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+							countLeft++;
+							if (countLeft >= 10) {
+								// 왼쪽 플레이어가 아이템 사용
+								if (currentItem.getBuffType() == Items.BUFF) {
+									// 버프 아이템일 경우 자신의 서비스 주소 넘김
+									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService());
+								} else {
+									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
+									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService());
+								}
+								appear = false;
+								remove(currentItem);
 							}
-							appear = false;
-							remove(currentItem);
 						}
-					}
-					if (e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
-						countRight++;
-						if (countRight >= 30) {
-							// 오른쪽 플레이어가 아이템 사용
-							if (currentItem.getBuffType() == Items.BUFF) {
-								// 버프 아이템일 경우 자신의 서비스 주소 넘김
-								currentItem.useItems(mContext.getDropNoteRightPlayerService());
-							} else {
-								// 디버프 아이템일 경우 상대의 서비스 주소 넘김
-								currentItem.useItems(mContext.getDropNoteLeftPlayerService());
+						if (e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
+							countRight++;
+							if (countRight >= 10) {
+								// 오른쪽 플레이어가 아이템 사용
+								if (currentItem.getBuffType() == Items.BUFF) {
+									// 버프 아이템일 경우 자신의 서비스 주소 넘김
+									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService());
+								} else {
+									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
+									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService());
+								}
+								appear = false;
+								remove(currentItem);
+								repaint();
 							}
-							appear = false;
-							remove(currentItem);
 						}
 					}
 				}
-			}
-		});
+			});
+		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
+			// todo
+		}
 	}
 
 	private void itemThread() {
 		new Thread(() -> {
-			while (mContext.isRunning()) {
+			while (GameSelectFrame.isGameRunning()) {
 				try {
 					Thread.sleep(30000); // 30초에 한번씩 아이템 등장
-					remove(currentItem); // 혹시나 아이템을 획득 하지 않았다면 아이템을 우선 지움
 					currentItem = createItem(); // 아이템 생성
 					add(currentItem);
+					remove(currentItem); // 혹시나 아이템을 획득 하지 않았다면 아이템을 우선 지움
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -118,7 +122,17 @@ public class ItemBox extends JLabel {
 	// 아이템 생성 메소드
 	private Items createItem() {
 		appear = true;
-		int randomItem = (new Random()).nextInt(9); // 동일 확률 랜덤 생성
-		return items[randomItem];
+		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
+			int randomItem = (new Random()).nextInt(9); // 동일 확률 랜덤 생성
+			return items[randomItem];
+		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
+			// todo
+			int randomItem = (new Random()).nextInt(9); // 동일 확률 랜덤 생성 3, 7 제외
+			while (randomItem == Define.INDEX_ITEMS_SLOW || randomItem == Define.INDEX_ITEMS_FAST) {
+				randomItem = (new Random()).nextInt(9);
+			}
+			return items[randomItem];
+		}
+		return null;
 	}
 }

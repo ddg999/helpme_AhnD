@@ -29,8 +29,8 @@ public class HpMinus extends Items implements Useable {
 
 	@Override
 	public void useItems(DropNote_2P_PlayerService dropNotePlayerService) {
-		dropNotePlayerService.getScoreService().beAttacked();
-		dropNotePlayerService.getScoreService().beAttacked();
+		dropNotePlayerService.getScore().beAttacked();
+		dropNotePlayerService.getScore().beAttacked();
 	}
 
 }

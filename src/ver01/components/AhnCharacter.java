@@ -5,8 +5,6 @@ import javax.swing.JLabel;
 
 import ver01.utils.Define;
 import ver02.Frame.DeathNoteFrame;
-import ver02.Frame.GameSelectFrame;
-import ver02.Frame.GameSelectFrame_jw;
 
 public class AhnCharacter extends JLabel {
 	DeathNoteFrame mContext;

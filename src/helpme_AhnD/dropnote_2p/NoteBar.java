@@ -3,21 +3,21 @@ package helpme_AhnD.dropnote_2p;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
 public class NoteBar extends JLabel {
 	// 단순 이미지용 클래스
 	
-	DropNoteFrame_2P mContext;
+	GameSelectFrame mContext;
 	Player player;
 	private ImageIcon noteBar;
 
 	private int x;
 	private int y;
 
-	public NoteBar(DropNoteFrame_2P mContext, Player player) {
+	public NoteBar(GameSelectFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
 		initData();
@@ -39,6 +39,5 @@ public class NoteBar extends JLabel {
 			y = 700;
 		}
 		setLocation(x, y);
-		mContext.add(this);
 	}
 }

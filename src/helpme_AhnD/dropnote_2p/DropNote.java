@@ -8,13 +8,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.service.DropNote_2P_PlayerService;
-import helpme_AhnD.state.Player;
+import helpme_AhnD.service.PlayerService;
+import helpme_AhnD.state.*;
 import helpme_AhnD.utils.Define;
 
 public class DropNote extends JLabel implements Runnable {
 
-	DropNote_2P_PlayerService playerService;
+	GameSelectFrame mContext;
+	PlayerService playerService;
 	private Player player;
 
 	private ImageIcon noteBall;
@@ -43,8 +46,9 @@ public class DropNote extends JLabel implements Runnable {
 	private static boolean leftReverse;
 	private static boolean rightReverse;
 
-	public DropNote(DropNote_2P_PlayerService playerService, Player player, int speed) {
+	public DropNote(PlayerService playerService, Player player, int speed) {
 		this.playerService = playerService;
+		mContext = playerService.getmContext();
 		this.player = player;
 		this.noteSpeed = speed;
 		initData();
@@ -88,107 +92,146 @@ public class DropNote extends JLabel implements Runnable {
 		setSize(50, 50);
 		setIcon(noteBall);
 		setLocation(x, 0);
-		playerService.getmContext().add(this);
+		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
+			playerService.getDropNoteFrame_2P().add(this);
+		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_1P) {
+
+		}
 	}
 
 	public void addEventListener() {
-		playerService.getmContext().addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				int getKeyCode = e.getKeyCode();
+		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
+			playerService.getDropNoteFrame_2P().addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					int getKeyCode = e.getKeyCode();
 
-				// 키 반전 상태일경우 반전
-				if (leftReverse || rightReverse) {
-					getKeyCode = reverse(getKeyCode);
-				}
-				if (player == Player.LEFTPLAYER) {
-					switch (getKeyCode) {
-					case KeyEvent.VK_A:
-						if (place == LEFT && !isJudged) {
-							judge();
-						}
-						break;
-					case KeyEvent.VK_W:
-						if (place == UP && !isJudged) {
-							judge();
-						}
-						break;
-					case KeyEvent.VK_D:
-						if (place == RIGHT && !isJudged) {
-							judge();
-						}
-						break;
-					case KeyEvent.VK_S:
-						if (place == DOWN && !isJudged) {
-							judge();
-						}
-						break;
-					default:
-						break;
+					// 키 반전 상태일경우 반전
+					if (leftReverse || rightReverse) {
+						getKeyCode = reverse(getKeyCode);
 					}
-				} else if (player == Player.RIGHTPLAYER) {
-					switch (getKeyCode) {
-					case KeyEvent.VK_LEFT:
-						if (place == LEFT && !isJudged) {
-							judge();
+					if (player == Player.LEFTPLAYER) {
+						switch (getKeyCode) {
+						case KeyEvent.VK_A:
+							if (place == LEFT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_W:
+							if (place == UP && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_D:
+							if (place == RIGHT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_S:
+							if (place == DOWN && !isJudged) {
+								judge();
+							}
+							break;
+						default:
+							break;
 						}
-						break;
-					case KeyEvent.VK_UP:
-						if (place == UP && !isJudged) {
-							judge();
+					} else if (player == Player.RIGHTPLAYER) {
+						switch (getKeyCode) {
+						case KeyEvent.VK_LEFT:
+							if (place == LEFT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_UP:
+							if (place == UP && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_RIGHT:
+							if (place == RIGHT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_DOWN:
+							if (place == DOWN && !isJudged) {
+								judge();
+							}
+							break;
+						default:
+							break;
 						}
-						break;
-					case KeyEvent.VK_RIGHT:
-						if (place == RIGHT && !isJudged) {
-							judge();
-						}
-						break;
-					case KeyEvent.VK_DOWN:
-						if (place == DOWN && !isJudged) {
-							judge();
-						}
-						break;
-					default:
-						break;
 					}
 				}
-			}
-		});
+			});
+		}
+		else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_1P) {
+
+		}
 	}
 
 	// 판정 메소드
 	public void judge() {
+		// 일정 높이 이상에서는 판정 하지 않음
 		if (y < 650) {
 			return;
 		}
 		if (perfectZone()) {
 			isPerfect = true;
 			System.out.println("퍼펙트");
-			playerService.getScoreService().perfect();
+			playerService.getScore().judgeScore(ScoreType.PERFECT);
 			isJudged = true;
 			drop = false;
 			setIcon(null);
 		} else if (excellentZone()) {
 			isExcellent = true;
 			System.out.println("엑설런트");
-			playerService.getScoreService().excellent();
+			playerService.getScore().judgeScore(ScoreType.EXCELLENT);
 			isJudged = true;
 			drop = false;
 			setIcon(null);
 		} else if (goodZone()) {
 			isGood = true;
 			System.out.println("굿");
-			playerService.getScoreService().good();
+			playerService.getScore().judgeScore(ScoreType.GOOD);
 			isJudged = true;
 			drop = false;
 			setIcon(null);
 		} else if (badZone()) {
 			isBad = true;
 			System.out.println("배드");
-			playerService.getScoreService().bad();
+			playerService.getScore().judgeScore(ScoreType.BAD);
 			isJudged = true;
 			drop = false;
 			setIcon(null);
+		}
+	}
+
+	// 노트 움직임
+	public void drop() {
+		if (y <= 850) {
+			y += noteSpeed;
+			setLocation(x, y);
+		} else if (y > 850) {
+			setIcon(null);
+			isMiss = true;
+			drop = false;
+			playerService.getScore().miss();
+		}
+	}
+
+	@Override
+	public void run() {
+		while (GameSelectFrame.isGameRunning()) {
+			if (drop) {
+				drop();
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} else {
+				break;
+			}
 		}
 	}
 
@@ -228,13 +271,22 @@ public class DropNote extends JLabel implements Runnable {
 			setIcon(null);
 			setLocation(x, y);
 			setSize(132, 36);
-			playerService.getmContext().add(this, 0);
+			if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
+				playerService.getDropNoteFrame_2P().add(this, 0);
+			} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_1P) {
+
+			}
 		}
 
 		@Override
 		public void run() {
-			while (DropNoteFrame_2P.isRunning()) {
+			while (GameSelectFrame.isGameRunning()) {
 				if (isPerfect) {
+					if (player == Player.LEFTPLAYER) {
+						setLocation(260, y);
+					} else {
+						setLocation(1185, y);
+					}
 					setIcon(perfect);
 					try {
 						Thread.sleep(450);
@@ -244,6 +296,11 @@ public class DropNote extends JLabel implements Runnable {
 					isPerfect = false;
 					setIcon(null);
 				} else if (isExcellent) {
+					if (player == Player.LEFTPLAYER) {
+						setLocation(260, y);
+					} else {
+						setLocation(1185, y);
+					}
 					setIcon(excellent);
 					try {
 						Thread.sleep(450);
@@ -337,35 +394,6 @@ public class DropNote extends JLabel implements Runnable {
 			return true;
 		}
 		return false;
-	}
-
-	// 노트 움직임
-	public void drop() {
-		if (y <= 850) {
-			y += noteSpeed;
-			setLocation(x, y);
-		} else if (y > 850) {
-			setIcon(null);
-			isMiss = true;
-			drop = false;
-			playerService.getScoreService().miss();
-		}
-	}
-
-	@Override
-	public void run() {
-		while (DropNoteFrame_2P.isRunning()) {
-			if (drop) {
-				drop();
-				try {
-					Thread.sleep(5);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			} else {
-				break;
-			}
-		}
 	}
 
 	// 키반전 메소드

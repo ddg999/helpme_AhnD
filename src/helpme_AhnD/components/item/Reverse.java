@@ -1,6 +1,7 @@
 package helpme_AhnD.components.item;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import helpme_AhnD.dropnote_2p.DropNote;
 import helpme_AhnD.interfaces.Useable;
@@ -11,6 +12,9 @@ import helpme_AhnD.utils.Define;
 public class Reverse extends Items implements Useable {
 
 	private ImageIcon reverse; // 키 반전
+	// 키 반전 자체가 영향이 커서 반전 상황을 알려주는 이미지 띄움
+	private JLabel reverseImgLabel;  
+	private ImageIcon reverseImg;
 
 	public Reverse() {
 		initData();
@@ -19,6 +23,7 @@ public class Reverse extends Items implements Useable {
 
 	private void initData() {
 		reverse = new ImageIcon(Define.IMG_ITEMS_REVERSE);
+		reverseImg = new ImageIcon(Define.IMG_ITEMS_REVERSE_IMG);
 		buffType = Items.DEBUFF;
 		durationType = Items.DURATION;
 	}
@@ -34,17 +39,26 @@ public class Reverse extends Items implements Useable {
 		// 디버프 아이템일 경우 상대의 서비스 주소 받아옴
 		if (dropNotePlayerService.getPlayer() == Player.LEFTPLAYER) {
 			DropNote.setLeftReverse(true);
+			reverseImgLabel = new JLabel(reverseImg);
+			reverseImgLabel.setSize(220, 198);
+			reverseImgLabel.setLocation(220, 500);
 		} else {
 			DropNote.setRightReverse(true);
+			reverseImgLabel = new JLabel(reverseImg);
+			reverseImgLabel.setSize(220, 198);
+			reverseImgLabel.setLocation(1150, 500);
 		}
+		dropNotePlayerService.getmContext().add(reverseImgLabel);
+		dropNotePlayerService.getmContext().repaint();
 		// 지속 시간 이후 효과 제거
 		new Thread(() -> {
 			try {
-				Thread.sleep(Items.DURATION_TIME );
+				Thread.sleep(Items.DURATION_TIME);
 				DropNote.setLeftReverse(false);
 				DropNote.setRightReverse(false);
+				dropNotePlayerService.getmContext().remove(reverseImgLabel);
+				dropNotePlayerService.getmContext().repaint();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}).start();

@@ -38,11 +38,11 @@ public class Bomb extends Items implements Useable {
 		if (dropNotePlayerService.getPlayer() == Player.LEFTPLAYER) {
 			bombImgLabel = new JLabel(bombImg);
 			bombImgLabel.setSize(622, 565);
-			bombImgLabel.setLocation(100, 200);
+			bombImgLabel.setLocation(34, 200);
 		} else {
 			bombImgLabel = new JLabel(bombImg);
 			bombImgLabel.setSize(622, 565);
-			bombImgLabel.setLocation(900, 200);
+			bombImgLabel.setLocation(964, 200);
 		}
 		dropNotePlayerService.getmContext().add(bombImgLabel);
 		dropNotePlayerService.getmContext().repaint();
@@ -53,7 +53,6 @@ public class Bomb extends Items implements Useable {
 				dropNotePlayerService.getmContext().remove(bombImgLabel);
 				dropNotePlayerService.getmContext().repaint();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}).start();

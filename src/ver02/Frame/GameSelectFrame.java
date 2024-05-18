@@ -236,9 +236,9 @@ public class GameSelectFrame extends JFrame {
 						setVisible(false);
 						break;
 					case GAMENAME_DROPNOTE_1P :
-						new DeathNoteFrame(thisFrame);
-						setVisible(false);
-						break;
+//						new DeathNoteFrame(thisFrame);
+//						setVisible(false);
+//						break;
 					}
 					break;
 				case KeyEvent.VK_BACK_SPACE:
@@ -328,9 +328,9 @@ public class GameSelectFrame extends JFrame {
 						setVisible(false);
 						break;
 					case GAMENAME_DROPNOTE_1P :
-						new DeathNoteFrame(thisFrame);
-						setVisible(false);
-						break;
+//						new DeathNoteFrame(thisFrame);
+//						setVisible(false);
+//						break;
 					}
 				}
 				// 뒤로가기

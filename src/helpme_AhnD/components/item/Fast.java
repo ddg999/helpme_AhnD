@@ -28,7 +28,6 @@ public class Fast extends Items implements Useable {
 		setLocation(X, Y);
 	}
 
-	// todo 스피드 빠르게
 	@Override
 	public void useItems(DropNote_2P_PlayerService dropNotePlayerService) {
 		dropNotePlayerService.setNoteSpeed(DropNote.DEFAULT_SPEED + 1);
@@ -38,7 +37,6 @@ public class Fast extends Items implements Useable {
 				Thread.sleep(Items.DURATION_TIME);
 				dropNotePlayerService.setNoteSpeed(DropNote.DEFAULT_SPEED);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}).start();

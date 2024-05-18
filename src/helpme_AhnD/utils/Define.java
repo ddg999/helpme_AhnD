@@ -116,6 +116,7 @@ public class Define {
 	public final static String IMG_ITEMS_BOMB_IMG = "images/item/IMG_ITEMS_BOMB_IMG.png";
 	public final static String IMG_ITEMS_SCOREDOUBLE = "images/item/IMG_ITEMS_SCOREDOUBLE.png";
 	public final static String IMG_ITEMS_REVERSE = "images/item/IMG_ITEMS_REVERSE.png";
+	public final static String IMG_ITEMS_REVERSE_IMG = "images/item/IMG_ITEMS_REVERSE_IMG.png";
 	public final static String IMG_ITEMS_ALLPERFECT = "images/item/IMG_ITEMS_ALLPERFECT.png";
 	public final static String IMG_ITEMS_FAST = "images/item/IMG_ITEMS_FAST.png";
 	public final static String IMG_ITEMS_SLOW = "images/item/IMG_ITEMS_SLOW.png";
@@ -165,14 +166,14 @@ public class Define {
 	public final static int HP_DEATH = 0;
 
 	// 아이템 클래스
-	public final static int INT_ITEMS_HP_PLUS = 0;
-	public final static int INT_ITEMS_ALLPERFECT = 1;
-	public final static int INT_ITEMS_SCOREDOUBLE = 2;
-	public final static int INT_ITEMS_SLOW = 3;
-	public final static int INT_ITEMS_HP_MINUS = 4;
-	public final static int INT_ITEMS_BOMB = 5;
-	public final static int INT_ITEMS_REVERSE = 6;
-	public final static int INT_ITEMS_FAST = 7;
-	public final static int INT_ITEMS_NEVERPERFECT = 8;
+	public final static int INDEX_ITEMS_HP_PLUS = 0;
+	public final static int INDEX_ITEMS_ALLPERFECT = 1;
+	public final static int INDEX_ITEMS_SCOREDOUBLE = 2;
+	public final static int INDEX_ITEMS_SLOW = 3;
+	public final static int INDEX_ITEMS_HP_MINUS = 4;
+	public final static int INDEX_ITEMS_BOMB = 5;
+	public final static int INDEX_ITEMS_REVERSE = 6;
+	public final static int INDEX_ITEMS_FAST = 7;
+	public final static int INDEX_ITEMS_NEVERPERFECT = 8;
 	
 }

@@ -4,14 +4,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.service.DropNote_2P_PlayerService;
+import helpme_AhnD.service.PlayerService;
 import helpme_AhnD.state.Digit;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
 public class ScoreBox extends JLabel {
 
-	DropNote_2P_PlayerService playerService;
+	GameSelectFrame mContext;
+	PlayerService playerService;
 	private Player player;
 
 	private ImageIcon scoreBox;
@@ -21,8 +24,9 @@ public class ScoreBox extends JLabel {
 	private int y = 20;
 	private final int MAX_SCORE = 9999;
 
-	public ScoreBox(DropNote_2P_PlayerService dropNotePlayerService, Player player) {
-		this.playerService = dropNotePlayerService;
+	public ScoreBox(PlayerService playerService, Player player) {
+		this.playerService = playerService;
+		mContext = playerService.getmContext();
 		this.player = player;
 		initData();
 		setInitLayout();
@@ -56,7 +60,20 @@ public class ScoreBox extends JLabel {
 		setIcon(scoreBox);
 		setSize(304, 160);
 		setLocation(x, y);
-		playerService.getmContext().add(this);
+		switch (mContext.getSelectNumber()) {
+		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+			playerService.getDropNoteFrame_2P().add(this);
+			break;
+		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+			playerService.getDropNoteFrame_2P().add(this);
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+			playerService.getDropNoteFrame_2P().add(this);
+			break;
+		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			playerService.getDropNoteFrame_2P().add(this);
+			break;
+		}
 	}
 
 	class ScoreNum extends JLabel implements Runnable {
@@ -114,40 +131,53 @@ public class ScoreBox extends JLabel {
 			setIcon(scoreNum[0]);
 			setSize(33, 57);
 			setLocation(x, y);
-			playerService.getmContext().add(this, 0); // add 우선순위??
+			switch (mContext.getSelectNumber()) {
+			case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+				playerService.getDropNoteFrame_2P().add(this, 0);
+				break;
+			case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+				playerService.getDropNoteFrame_2P().add(this, 0);
+				break;
+			case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+				playerService.getDropNoteFrame_2P().add(this, 0);
+				break;
+			case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+				playerService.getDropNoteFrame_2P().add(this, 0);
+				break;
+			}
 		}
 
 		@Override
 		public void run() {
-			while (DropNoteFrame_2P.isRunning()) {
-				if (playerService.getScoreService().getScore() >= MAX_SCORE) {
+			while (GameSelectFrame.isGameRunning()) {
+				if (playerService.getScore().getScore() >= MAX_SCORE) {
 					setIcon(scoreNum[9]);
 				} else {
 					switch (digit) {
 					case ONES:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if (playerService.getScoreService().getScore() % 10 == i) {
+							if (playerService.getScore().getScore() % 10 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case TENS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScoreService().getScore() % 100) / 10 == i) {
+							if ((playerService.getScore().getScore() % 100) / 10 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case HUNDREDS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScoreService().getScore() % 1000) / 100 == i) {
+							if ((playerService.getScore().getScore() % 1000) / 100 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}
 						break;
 					case THOUSANDS:
 						for (int i = 0; i < scoreNum.length; i++) {
-							if ((playerService.getScoreService().getScore() % 10000) / 1000 == i) {
+							if ((playerService.getScore().getScore() % 10000) / 1000 == i) {
 								setIcon(scoreNum[i]);
 							}
 						}

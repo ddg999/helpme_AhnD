@@ -29,7 +29,7 @@ public class HpPlus extends Items implements Useable {
 
 	@Override
 	public void useItems(DropNote_2P_PlayerService dropNotePlayerService) {
-		dropNotePlayerService.getScoreService().setHp(dropNotePlayerService.getScoreService().getHp() + 20);
+		dropNotePlayerService.getScore().setHp(dropNotePlayerService.getScore().getHp() + 20);
 	}
 
 }

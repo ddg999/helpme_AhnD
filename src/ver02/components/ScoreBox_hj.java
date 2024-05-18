@@ -4,11 +4,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import ver02.Frame.DropNoteFrame_2P;
-import ver02.components.ScoreBox2.scoreNum1;
-import ver02.components.ScoreBox2.scoreNum2;
-import ver02.components.ScoreBox2.scoreNum3;
-import ver02.components.ScoreBox2.scoreNum4;
-import ver02.service.DeathNotePlayerService;
 import ver02.service.DropNotePlayerService_hj;
 import ver02.state.Digit;
 import ver02.state.Player;

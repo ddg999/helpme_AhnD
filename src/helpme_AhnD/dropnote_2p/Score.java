@@ -1,12 +1,15 @@
 package helpme_AhnD.dropnote_2p;
 
+import helpme_AhnD.components.item.ScoreDouble;
 import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.state.Player;
+import helpme_AhnD.state.ScoreType;
 import helpme_AhnD.utils.Define;
 
 public class Score {
 
-	private DropNoteFrame_2P mContext;
+	private GameSelectFrame mContext;
 	private Player player;
 	// 스코어 서비스에서 관리하는 데이터
 	private int hp;
@@ -23,14 +26,15 @@ public class Score {
 	private static boolean isJudged = false; // 중복 종료 방지용 불리언 변수
 
 	// 아이템 사용 확인용 깃발
-	private boolean isDouble;
+	private int doubleScore; // 더블이 활성화되면 스코어를 2배로 얻음
 	private boolean isAllPerfect;
 	private boolean isNeverPerfect;
 
-	public Score(DropNoteFrame_2P mContext, Player player) {
+	public Score(GameSelectFrame mContext, Player player) {
 		this.mContext = mContext;
 		this.player = player;
 		hp = Define.HP_3_0_HEART;
+		doubleScore = ScoreDouble.DEFAULT;
 	}
 
 	public void combo() {
@@ -42,54 +46,54 @@ public class Score {
 	}
 
 	// DropNote에서 판정에 따라 호출할 메소드
+	public void judgeScore(ScoreType score) {
+		if (isAllPerfect) {
+			perfect();
+			return;
+		}
+		switch (score) {
+		case PERFECT:
+			if (isNeverPerfect) {
+				excellent();
+				break;
+			}
+			perfect();
+			break;
+		case EXCELLENT:
+			excellent();
+			break;
+		case GOOD:
+			good();
+			break;
+		case BAD:
+			bad();
+			break;
+		case MISS:
+			miss();
+			break;
+		default:
+			break;
+		}
+	}
+
 	public void perfect() {
-		if (isDouble) {
-			score += 6;
-		} else {
-			score += 3;
-		}
-		if (isNeverPerfect) {
-			score -= 1;
-		}
+		score += 3 * doubleScore;
 		combo();
-		// 콤보수가 10의 배수 일때마다 체력 회복
-		if (combo % 10 == 0) {
-			recovery();
-		}
+		recovery();
 		countPerfect++;
 	}
 
 	public void excellent() {
-		if (isDouble) {
-			score += 4;
-		} else {
-			score += 2;
-		}
-		if (isAllPerfect) {
-			score += 1;
-		}
+		score += 2 * doubleScore;
 		combo();
-		// 콤보수가 10의 배수 일때마다 체력 회복
-		if (combo % 10 == 0) {
-			recovery();
-		}
+		recovery();
 		countExcellent++;
 	}
 
 	public void good() {
-		if (isDouble) {
-			score += 2;
-		} else {
-			score += 1;
-		}
-		if (isAllPerfect) {
-			score += 2;
-		}
+		score += 1 * doubleScore;
 		combo();
-		// 콤보수가 10의 배수 일때마다 체력 회복
-		if (combo % 10 == 0) {
-			recovery();
-		}
+		recovery();
 		countGood++;
 	}
 
@@ -114,10 +118,20 @@ public class Score {
 			hp -= Define.HP_0_5_HEART;
 			if (hp == Define.HP_DEATH) {
 				isJudged = true;
-				mContext.setVisible(false);
-				mContext.setRunning(false);
-				mContext.getBgm().getClip().close();
-				new GameEndFrame(mContext, player);
+				GameSelectFrame.setGameRunning(false);
+				switch (mContext.getSelectNumber()) {
+				case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+					break;
+				case GameSelectFrame.GAMENAME_DROPNOTE_2P:
+					mContext.dropNoteFrame_2P.setVisible(false);
+					mContext.dropNoteFrame_2P.getBgm().getClip().close();
+					new GameEndFrame(mContext, player);
+					break;
+				case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+					break;
+				case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+					break;
+				}
 			}
 		} else {
 			hp = Define.HP_DEATH;
@@ -126,7 +140,10 @@ public class Score {
 
 	// 체력 회복 메소드
 	public void recovery() {
-		hp += Define.HP_0_5_HEART;
+		// 콤보수가 20의 배수 일때마다 체력 회복
+		if (combo % 20 == 0) {
+			hp += Define.HP_0_5_HEART;
+		}
 	}
 
 	// getter setter
@@ -170,8 +187,8 @@ public class Score {
 		this.hp = hp;
 	}
 
-	public void setDouble(boolean isDouble) {
-		this.isDouble = isDouble;
+	public void setDouble(int doubleScore) {
+		this.doubleScore = doubleScore;
 	}
 
 	public void setAllPerfect(boolean isAllPerfect) {

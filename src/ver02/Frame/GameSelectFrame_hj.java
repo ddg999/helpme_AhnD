@@ -76,11 +76,11 @@ public class GameSelectFrame_hj extends JFrame {
 
 		// 노래 앨범
 		gameLabelImg = new ImageIcon[5];
-		gameLabelImg[GAMENAME_DROPNOTE] = new ImageIcon(Define.IMG_SELECTFRAME_FIRSTMUSIC);
-		gameLabelImg[GAMENAME_SECONDGAME] = new ImageIcon(Define.IMG_SELECTFRAME_SECONDMUSIC);
-		gameLabelImg[GAMENAME_THIRDGAME] = new ImageIcon(Define.IMG_SELECTFRAME_THIRDMUSIC);
-		gameLabelImg[GAMENAME_FOURTHGAME] = new ImageIcon(Define.IMG_SELECTFRAME_FOURTHMUSIC);
-		gameLabelImg[GAMENAME_FIFTHGAME] = new ImageIcon(Define.IMG_SELECTFRAME_FIFTHMUSIC);
+		gameLabelImg[GAMENAME_DROPNOTE] = new ImageIcon(Define.IMG_SELECTFRAME_FIRSTGAME);
+		gameLabelImg[GAMENAME_SECONDGAME] = new ImageIcon(Define.IMG_SELECTFRAME_SECONDGAME);
+		gameLabelImg[GAMENAME_THIRDGAME] = new ImageIcon(Define.IMG_SELECTFRAME_THIRDGAME);
+		gameLabelImg[GAMENAME_FOURTHGAME] = new ImageIcon(Define.IMG_SELECTFRAME_FOURTHGAME);
+		gameLabelImg[GAMENAME_FIFTHGAME] = new ImageIcon(Define.IMG_SELECTFRAME_FIFTHGAME);
 		gameLabel = new JLabel(gameLabelImg[GAMENAME_DROPNOTE]);
 
 		// 노래 제목

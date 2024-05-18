@@ -10,15 +10,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import helpme_AhnD.service.BGM;
+import helpme_AhnD.service.BGMService;
 import helpme_AhnD.utils.Define;
 import ver02.Frame.DeathNoteFrame;
 
 public class GameSelectFrame extends JFrame {
 
 	// 메인 프레임 참조
-	private MainFrame mContext;
+	private MainFrame mainFrame;
+	private BGMService bgmService;
 	// 셀프 참조
-	private GameSelectFrame thisFrame;
+	private GameSelectFrame mContext;
+	// 각종 게임 모드 참조
+	public DropNoteFrame_2P dropNoteFrame_2P;
+	// todo 남은 3개 더 참조해야함
 
 	// 라벨
 	private JLabel background; // background
@@ -32,10 +37,10 @@ public class GameSelectFrame extends JFrame {
 	// 이미지
 	private ImageIcon[] gameLabelImg;
 	private ImageIcon[] gameTitleImg;
-	private final int GAMENAME_DROPNOTE_2P = 0;
-	private final int GAMENAME_DROPNOTE_1P = 1;
-	private final int GAMENAME_TRYCATCH_2P = 2;
-	private final int GAMENAME_TRYCATCH_1P = 3;
+	public static final int GAMENAME_DROPNOTE_2P = 0;
+	public static final int GAMENAME_DROPNOTE_1P = 1;
+	public static final int GAMENAME_TRYCATCH_2P = 2;
+	public static final int GAMENAME_TRYCATCH_1P = 3;
 	// private final int GAMENAME_FIFTHGAME = 4;
 	private int selectNumber; // 게임 번호 선택
 
@@ -62,9 +67,9 @@ public class GameSelectFrame extends JFrame {
 		addEventListener();
 	}
 
-	public GameSelectFrame(MainFrame mContext) {
-		this.mContext = mContext;
-		thisFrame = this;
+	public GameSelectFrame(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
+		mContext = this;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -79,7 +84,7 @@ public class GameSelectFrame extends JFrame {
 		// 배경
 		background = new JLabel(new ImageIcon(Define.IMG_SELECTFRAME_BG));
 
-		// 노래 앨범
+		// 게임 앨범
 		gameLabelImg = new ImageIcon[5];
 		gameLabelImg[GAMENAME_DROPNOTE_2P] = new ImageIcon(Define.IMG_SELECTFRAME_FIRSTGAME);
 		gameLabelImg[GAMENAME_DROPNOTE_1P] = new ImageIcon(Define.IMG_SELECTFRAME_SECONDGAME);
@@ -88,7 +93,7 @@ public class GameSelectFrame extends JFrame {
 		//gameLabelImg[GAMENAME_FIFTHGAME] = new ImageIcon(Define.IMG_SELECTFRAME_FIFTHGAME);
 		gameLabel = new JLabel(gameLabelImg[GAMENAME_DROPNOTE_2P]);
 
-		// 노래 제목
+		// 게임 제목
 		gameTitleImg = new ImageIcon[5];
 		gameTitleImg[GAMENAME_DROPNOTE_2P] = new ImageIcon(Define.IMG_SELECTFRAME_FIRSTTITLE);
 		gameTitleImg[GAMENAME_DROPNOTE_1P] = new ImageIcon(Define.IMG_SELECTFRAME_SECONDTITLE);
@@ -107,6 +112,8 @@ public class GameSelectFrame extends JFrame {
 		musicPlayImg = new ImageIcon(Define.IMG_SELECTFRAME_MUSICPLAY);
 		musicStopImg = new ImageIcon(Define.IMG_SELECTFRAME_MUSICSTOP);
 		musicButton = new JLabel(musicPlayImg);
+		
+		bgmService = mainFrame.getBgmService();
 
 		// 게임 시작 버튼
 		startButton = new JLabel(new ImageIcon(Define.IMG_SELECTFRAME_START));
@@ -186,7 +193,7 @@ public class GameSelectFrame extends JFrame {
 					// 스페이스 버튼 하나로 음악 재생 정지 둘다
 					if (!isMusicPlay) {
 						musicButton.setIcon(musicStopImg);
-						bgm = mContext.getBgmService().createBGM(); // bgm 객체 생성
+						bgm = mainFrame.getBgmService().createBGM(); // bgm 객체 생성
 						bgm.getClip().start(); // 생성된 음악 재생
 						isMusicPlay = true;
 					} else {
@@ -233,11 +240,11 @@ public class GameSelectFrame extends JFrame {
 					gameRunning = true;
 					switch (selectNumber) {
 					case GAMENAME_DROPNOTE_2P :
-						new DropNoteFrame_2P(thisFrame);
+						dropNoteFrame_2P = new DropNoteFrame_2P(mContext);
 						setVisible(false);
 						break;
 					case GAMENAME_DROPNOTE_1P :
-						new DeathNoteFrame(thisFrame);
+						new DeathNoteFrame(mContext);
 						setVisible(false);
 						break;
 					}
@@ -245,7 +252,7 @@ public class GameSelectFrame extends JFrame {
 				case KeyEvent.VK_BACK_SPACE:
 					backButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_BACK));
 					setVisible(false); // 현재 프레임 안보이게
-					mContext.setVisible(true); // 메인 프레임 보이게
+					mainFrame.setVisible(true); // 메인 프레임 보이게
 					if (bgm != null) {
 						// 혹시 음악이 틀어져 있다면 끔
 						bgm.getClip().close();
@@ -260,7 +267,7 @@ public class GameSelectFrame extends JFrame {
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println("x 좌표 : " + e.getX() + "y 좌표 : " + e.getY());
+				// System.out.println("x 좌표 : " + e.getX() + "y 좌표 : " + e.getY());
 				// 왼쪽 버튼
 				if (isLeftButton(e.getX(), e.getY())) {
 					leftButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_ARROWLEFTCLICK));
@@ -281,7 +288,7 @@ public class GameSelectFrame extends JFrame {
 				if (isPlayButton(e.getX(), e.getY())) {
 					if (!isMusicPlay) {
 						musicButton.setIcon(musicStopImg);
-						bgm = mContext.getBgmService().createBGM(); // bgm 객체 생성
+						bgm = mainFrame.getBgmService().createBGM(); // bgm 객체 생성
 						bgm.getClip().start(); // 생성된 음악 재생
 						isMusicPlay = true;
 					} else {
@@ -325,11 +332,11 @@ public class GameSelectFrame extends JFrame {
 					// 게임시작 뗏을때 게임화면 띄우기
 					switch (selectNumber) {
 					case GAMENAME_DROPNOTE_2P :
-						new DropNoteFrame_2P(thisFrame);
+						dropNoteFrame_2P = new DropNoteFrame_2P(mContext);
 						setVisible(false);
 						break;
 					case GAMENAME_DROPNOTE_1P :
-						new DeathNoteFrame(thisFrame);
+						new DeathNoteFrame(mContext);
 						setVisible(false);
 						break;
 					}
@@ -338,7 +345,7 @@ public class GameSelectFrame extends JFrame {
 				if (isBackButton(e.getX(), e.getY())) {
 					backButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_BACK));
 					setVisible(false);
-					mContext.setVisible(true);
+					mainFrame.setVisible(true);
 					if (bgm != null) {
 						bgm.getClip().close();
 					}
@@ -411,16 +418,20 @@ public class GameSelectFrame extends JFrame {
 
 	
 	// getter
-	public MainFrame getmContext() {
-		return mContext;
-	}
-
 	public static boolean isGameRunning() {
 		return gameRunning;
 	}
 
 	public static void setGameRunning(boolean running) {
 		gameRunning = running;
+	}
+
+	public BGMService getBgmService() {
+		return bgmService;
+	}
+
+	public int getSelectNumber() {
+		return selectNumber;
 	}
 
 }// end of class
