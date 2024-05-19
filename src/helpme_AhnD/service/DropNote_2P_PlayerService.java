@@ -46,6 +46,7 @@ public class DropNote_2P_PlayerService extends PlayerService implements Runnable
 				while (GameSelectFrame.isGameRunning()) {
 					createNote();
 					Random random = new Random();
+					// 노트 빈도 조절 코드
 					delay = random.nextInt(700) + 200;
 
 					try {

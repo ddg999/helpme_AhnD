@@ -70,6 +70,7 @@ public class ComboBox extends JLabel {
 		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			playerService.getTryCatchFrame_2P().add(this);
 			break;
 		}
 	}
@@ -137,6 +138,7 @@ public class ComboBox extends JLabel {
 			case GameSelectFrame.GAMENAME_TRYCATCH_1P:
 				break;
 			case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+				playerService.getTryCatchFrame_2P().add(this);
 				break;
 			}
 		}

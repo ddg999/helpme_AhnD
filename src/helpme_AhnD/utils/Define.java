@@ -51,6 +51,14 @@ public class Define {
 	public final static String IMG_DROPNOTE_NOTEBAR = "images/dropNote/IMG_DROPNOTE_NOTEBAR.png";
 	
 	// 트라이캐치 이미지
+	public final static String IMG_CATCHNOTE_LEFT = "images/catchNote/IMG_CATCHNOTE_LEFT.png";
+	public final static String IMG_CATCHNOTE_UP = "images/catchNote/IMG_CATCHNOTE_UP.png";
+	public final static String IMG_CATCHNOTE_DOWN = "images/catchNote/IMG_CATCHNOTE_DOWN.png";
+	public final static String IMG_CATCHNOTE_RIGHT = "images/catchNote/IMG_CATCHNOTE_RIGHT.png";
+	public final static String IMG_CATCHNOTE_LEFT_PRESS = "images/catchNote/IMG_CATCHNOTE_LEFT_PRESS.png";
+	public final static String IMG_CATCHNOTE_UP_PRESS = "images/catchNote/IMG_CATCHNOTE_UP_PRESS.png";
+	public final static String IMG_CATCHNOTE_DOWN_PRESS = "images/catchNote/IMG_CATCHNOTE_DOWN_PRESS.png";
+	public final static String IMG_CATCHNOTE_RIGHT_PRESS = "images/catchNote/IMG_CATCHNOTE_RIGHT_PRESS.png";
 	public final static String IMG_ARROW_BAD_OVER_LEFT = "images/arrow/IMG_ARROW_BAD_OVER_LEFT.png";
 	public final static String IMG_ARROW_BAD_OVER_UP = "images/arrow/IMG_ARROW_BAD_OVER_UP.png";
 	public final static String IMG_ARROW_BAD_OVER_DOWN = "images/arrow/IMG_ARROW_BAD_OVER_DOWN.png";

@@ -55,13 +55,15 @@ public class GameEndFrame extends JFrame {
 
 		if (loser == Player.LEFTPLAYER) {
 			background = new JLabel(rightWin);
+			setContentPane(background);
 		} else if (loser == Player.RIGHTPLAYER) {
 			background = new JLabel(leftWin);
+			setContentPane(background);
 		} else if (loser == Player.SOLO) {
 			// todo 게임 오버 이미지
 			background = new JLabel(leftWin);
+			setContentPane(background);
 		}
-		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		font = new Font("휴먼엑스포", Font.ITALIC, 50);
@@ -89,10 +91,15 @@ public class GameEndFrame extends JFrame {
 	}
 
 	private void setInitLateLayout() {
+		// todo esc 입력시 게임선택화면으로 돌아간다는 표시
 		if (loser == Player.LEFTPLAYER) {
 			rightWin = new ImageIcon(Define.IMG_GAMEOVER_RIGHTWIN_SCORE);
 			background.setIcon(rightWin);
-		} else {
+		} else if (loser == Player.RIGHTPLAYER) {
+			leftWin = new ImageIcon(Define.IMG_GAMEOVER_LEFTWIN_SCORE);
+			background.setIcon(leftWin);
+		} else if (loser == Player.SOLO) {
+			// todo 게임 오버 이미지
 			leftWin = new ImageIcon(Define.IMG_GAMEOVER_LEFTWIN_SCORE);
 			background.setIcon(leftWin);
 		}

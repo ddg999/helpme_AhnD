@@ -70,8 +70,10 @@ public class ScoreBox extends JLabel {
 			playerService.getDropNoteFrame_2P().add(this);
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+			
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			playerService.getTryCatchFrame_2P().add(this);
 			break;
 		}
 	}
@@ -149,6 +151,7 @@ public class ScoreBox extends JLabel {
 			case GameSelectFrame.GAMENAME_TRYCATCH_1P:
 				break;
 			case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+				playerService.getTryCatchFrame_2P().add(this, 0);
 				break;
 			}
 		}

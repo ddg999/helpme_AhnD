@@ -134,6 +134,9 @@ public class Score {
 				case GameSelectFrame.GAMENAME_TRYCATCH_1P:
 					break;
 				case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+					mContext.tryCatchFrame_2P.setVisible(false);
+					mContext.tryCatchFrame_2P.getBgm().getClip().close();
+					new GameEndFrame(mContext, player);
 					break;
 				}
 			}

@@ -41,8 +41,7 @@ public class DropNoteFrame_1P extends JFrame {
 				bgm.getClip().close();
 				new GameEndFrame(mContext, Player.SOLO);
 
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}).start();

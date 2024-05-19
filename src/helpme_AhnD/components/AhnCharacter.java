@@ -3,17 +3,18 @@ package helpme_AhnD.components;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import helpme_AhnD.frame.GameSelectFrame;
+import helpme_AhnD.service.PlayerService;
+import helpme_AhnD.state.Player;
+import helpme_AhnD.utils.Define;
 import ver02.Frame.DeathNoteFrame;
-import ver02.service.DeathNotePlayerService;
-import ver02.state.Player;
-import ver02.utils.Define;
 
 public class AhnCharacter extends JLabel {
 
 	// todo Score int 값 땡겨오기
-	DeathNoteFrame mContext;
-	DeathNotePlayerService deathNotePlayerService;
-	
+	GameSelectFrame mContext;
+	PlayerService playerService;
+
 	private ImageIcon basic_Character;
 	private ImageIcon threePoint_DanceR;
 	private ImageIcon threePoint_DanceL;
@@ -25,32 +26,31 @@ public class AhnCharacter extends JLabel {
 	private int x; // 위치 값
 	private int y; // 위치 값
 	public int playerScore; // 점수 todo 점수 연결
+	public static final int PERFECT = 3;
+	public static final int EXCELLENT = 2;
+	public static final int BAD = 1;
 	private boolean gameStart = true;
 	private boolean perfect = true;
 
 	// todo score 불러 오기
 
-	public AhnCharacter(DeathNoteFrame mContext,DeathNotePlayerService deathNotePlayerService, Player player ) {
-		this.deathNotePlayerService = deathNotePlayerService;
-		
+	public AhnCharacter(GameSelectFrame mContext, PlayerService playerService, Player player) {
+		this.playerService = playerService;
 		this.mContext = mContext;
 		switch (player) {
-		case LEFTPLAYER: 
+		case LEFTPLAYER:
 			x = 150;
-			break;			
+			break;
 		case RIGHTPLAYER:
-			x= 1290;
-			
+			x = 1290;
+
 		default:
-			
+
 		}
-		
-		
-		
-		
+
 		initData();
 		setInitLayout();
-		mContext.add(this);
+		playerScoreImage();
 	}
 
 	private void initData() {
@@ -61,7 +61,7 @@ public class AhnCharacter extends JLabel {
 		twoPoint_DanceR = new ImageIcon(Define.IMG_TWO_POINT_RIGHT);
 		threePoint_DanceL = new ImageIcon(Define.IMG_THREE_POINT_LEFT);
 		threePoint_DanceR = new ImageIcon(Define.IMG_THREE_POINT_RIGHT);
-	
+
 		y = 300;
 
 	}
@@ -76,8 +76,7 @@ public class AhnCharacter extends JLabel {
 	public void playerScoreImage() {
 
 		new Thread(() -> {
-			while (gameStart) {
-				System.out.println("플레이어 스코어 : " + playerScore);
+			while (GameSelectFrame.isGameRunning()) {
 				if (playerScore == 3) {
 					for (int i = 0; i < 3; i++) {
 						if (perfect) {
@@ -137,8 +136,8 @@ public class AhnCharacter extends JLabel {
 						if (perfect) {
 							setIcon(basic_Character);
 
-						} 
-						
+						}
+
 						try {
 							Thread.sleep(200);
 						} catch (InterruptedException e) {

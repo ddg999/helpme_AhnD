@@ -111,6 +111,7 @@ public class DropNote extends JLabel implements Runnable {
 	}
 
 	public void addEventListener() {
+		// 키 입력 이벤트를 발생 시킬 위치 때문에 if else if가 필요함
 		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
 			playerService.getDropNoteFrame_2P().addKeyListener(new KeyAdapter() {
 				@Override

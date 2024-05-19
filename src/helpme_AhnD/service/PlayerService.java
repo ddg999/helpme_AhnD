@@ -13,6 +13,9 @@ public abstract class PlayerService {
 	public DropNoteFrame_1P getDropNoteFrame_1P() {
 		return null;
 	}
+	public TryCatchFrame_2P getTryCatchFrame_2P() {
+		return null;
+	}
 	public abstract GameSelectFrame getmContext();
 	
 	public abstract Player getPlayer();
