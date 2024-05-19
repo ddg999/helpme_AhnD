@@ -3,7 +3,7 @@ package helpme_AhnD.components.item;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.dropnote_2p.DropNote;
+import helpme_AhnD.components.DropNote;
 import helpme_AhnD.interfaces.Useable;
 import helpme_AhnD.service.DropNote_2P_PlayerService;
 import helpme_AhnD.state.Player;

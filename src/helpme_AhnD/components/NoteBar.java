@@ -1,4 +1,4 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.components;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -36,6 +36,9 @@ public class NoteBar extends JLabel {
 			y = 700;
 		} else if (player == Player.RIGHTPLAYER) {
 			x = 1075;
+			y = 700;
+		} else if (player == Player.SOLO) {
+			x = 610;
 			y = 700;
 		}
 		setLocation(x, y);

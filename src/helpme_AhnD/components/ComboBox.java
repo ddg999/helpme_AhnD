@@ -1,4 +1,4 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.components;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -39,6 +39,8 @@ public class ComboBox extends JLabel {
 			x = 280;
 		} else if (player == Player.RIGHTPLAYER) {
 			x = 1205;
+		} else if (player == Player.SOLO) {
+			x = 743;
 		}
 		comboBox = new ImageIcon(Define.IMG_COMBO_COMBO);
 		comboNum = new ImageIcon[10];
@@ -60,6 +62,7 @@ public class ComboBox extends JLabel {
 		setLocation(x, y);
 		switch (mContext.getSelectNumber()) {
 		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+			playerService.getDropNoteFrame_1P().add(this);
 			break;
 		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
 			playerService.getDropNoteFrame_2P().add(this);
@@ -91,6 +94,8 @@ public class ComboBox extends JLabel {
 					x = 344;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1269;
+				} else if (player == Player.SOLO) {
+					x = 807;
 				}
 				break;
 			// 십의 자리수 좌표 세팅
@@ -99,6 +104,8 @@ public class ComboBox extends JLabel {
 					x = 312;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1237;
+				} else if (player == Player.SOLO) {
+					x = 775;
 				}
 				break;
 			// 백의 자리수 좌표 세팅
@@ -107,6 +114,8 @@ public class ComboBox extends JLabel {
 					x = 280;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1205;
+				} else if (player == Player.SOLO) {
+					x = 743;
 				}
 				break;
 			default:
@@ -120,6 +129,7 @@ public class ComboBox extends JLabel {
 			setLocation(x, y);
 			switch (mContext.getSelectNumber()) {
 			case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+				playerService.getDropNoteFrame_1P().add(this);
 				break;
 			case GameSelectFrame.GAMENAME_DROPNOTE_2P:
 				playerService.getDropNoteFrame_2P().add(this);

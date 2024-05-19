@@ -1,4 +1,4 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.components;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

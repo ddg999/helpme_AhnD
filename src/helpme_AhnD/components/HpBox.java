@@ -1,4 +1,4 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.components;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -54,6 +54,8 @@ public class HpBox extends JLabel {
 					x = 410;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1125;
+				} else if (player == Player.SOLO) {
+					x = 715;
 				}
 				break;
 			case SECOND_HEART:
@@ -61,6 +63,8 @@ public class HpBox extends JLabel {
 					x = 460;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1075;
+				} else if (player == Player.SOLO) {
+					x = 765;
 				}
 				break;
 			case THIRD_HEART:
@@ -68,6 +72,8 @@ public class HpBox extends JLabel {
 					x = 510;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1025;
+				} else if (player == Player.SOLO) {
+					x = 815;
 				}
 				break;
 			default:
@@ -81,6 +87,7 @@ public class HpBox extends JLabel {
 			setLocation(x, y);
 			switch (mContext.getSelectNumber()) {
 			case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+				playerService.getDropNoteFrame_1P().add(this);
 				break;
 			case GameSelectFrame.GAMENAME_DROPNOTE_2P:
 				playerService.getDropNoteFrame_2P().add(this);

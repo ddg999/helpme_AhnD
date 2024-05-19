@@ -1,4 +1,4 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.frame;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -9,9 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.frame.DropNoteFrame_2P;
-import helpme_AhnD.frame.GameSelectFrame;
-import helpme_AhnD.frame.MainFrame;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
@@ -60,6 +57,9 @@ public class GameEndFrame extends JFrame {
 			background = new JLabel(rightWin);
 		} else if (loser == Player.RIGHTPLAYER) {
 			background = new JLabel(leftWin);
+		} else if (loser == Player.SOLO) {
+			// todo 게임 오버 이미지
+			background = new JLabel(leftWin);
 		}
 		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,6 +68,7 @@ public class GameEndFrame extends JFrame {
 		// 게임 셀렉 프레임의 셀렉넘버에 따라 호출
 		switch (mContext.getSelectNumber()) {
 		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+			dropNote1pImage();
 			break;
 		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
 			dropNote2pImage();
@@ -125,17 +126,7 @@ public class GameEndFrame extends JFrame {
 	}
 
 	private void passFrame() {
-		switch (mContext.getSelectNumber()) {
-		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
-			break;
-		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
-			mContext.dropNoteFrame_2P.setVisible(true);
-			break;
-		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
-			break;
-		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
-			break;
-		}
+		mContext.setVisible(true);
 		setVisible(false);
 	}
 
@@ -171,6 +162,33 @@ public class GameEndFrame extends JFrame {
 				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getCountMiss()));
 		rightScore[MAX_COMBO] = new JLabel(
 				Integer.toString(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService().getScore().getMaxCombo()));
+	}
+
+	private void dropNote1pImage() {
+		leftScore = new JLabel[7];
+		leftScore[SCORE] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getScore()));
+		leftScore[PERFECT] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getCountPerfect()));
+		leftScore[EXCELLENT] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getCountExcellent()));
+		leftScore[GOOD] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getCountGood()));
+		leftScore[BAD] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getCountBad()));
+		leftScore[MISS] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getCountMiss()));
+		leftScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getMaxCombo()));
+
+		rightScore = new JLabel[7];
+		rightScore[SCORE] = new JLabel(Integer.toString(0));
+		rightScore[PERFECT] = new JLabel(Integer.toString(0));
+		rightScore[EXCELLENT] = new JLabel(Integer.toString(0));
+		rightScore[GOOD] = new JLabel(Integer.toString(0));
+		rightScore[BAD] = new JLabel(Integer.toString(0));
+		rightScore[MISS] = new JLabel(Integer.toString(0));
+		rightScore[MAX_COMBO] = new JLabel(Integer.toString(0));
 	}
 
 }

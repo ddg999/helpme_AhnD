@@ -4,48 +4,45 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import helpme_AhnD.components.*;
+import helpme_AhnD.components.NoteBar;
 import helpme_AhnD.service.*;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
-public class DropNoteFrame_2P extends JFrame {
+
+public class DropNoteFrame_1P extends JFrame {
 
 	// 게임 종료시 최종적으로 게임선택화면으로 돌아가기 위해 필요함
 	public GameSelectFrame mContext;
-
-	DropNoteFrame_2P dropNoteFrame;
-
+	
+	DropNoteFrame_1P dropNoteFrame;
+	
 	JLabel background;
 
 	// DropNote 게임을 관리하는 서비스 클래스 (플레이어 위치로 나눔)
-	DropNote_2P_PlayerService leftPlayerService;
-	DropNote_2P_PlayerService rightPlayerService;
+	DropNote_1P_PlayerService soloPlayerService;
 	// 게임 시작시 띄울 컴포넌트
-	NoteBar noteBarLeft;
-	NoteBar noteBarRight;
-	ItemBox itembox;
+	NoteBar noteBarSolo;
+	// NoteBar_hj noteBarRight;
 	// 게임시작시 재생될 bgm
 	BGM bgm;
 
-	public DropNoteFrame_2P(GameSelectFrame mContext) {
+	public DropNoteFrame_1P(GameSelectFrame mContext) {
 		this.mContext = mContext;
 		dropNoteFrame = this;
 		initData();
 		setInitLayout();
+		addEventListener();
 		new Thread(() -> {
 			try {
 				Thread.sleep(BGM.END_TIME); // 일정 시간 이후 종료
+				GameSelectFrame.setGameRunning(false);
 				setVisible(false);
 				bgm.getClip().close();
-				GameSelectFrame.setGameRunning(false);
-				if (leftPlayerService.getScore().getScore() > rightPlayerService.getScore().getScore()) {
-					new GameEndFrame(mContext, Player.RIGHTPLAYER); // 진쪽을 넘겨줌
-				} else {
-					new GameEndFrame(mContext, Player.LEFTPLAYER);
-				}
+				new GameEndFrame(mContext, Player.SOLO);
 
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}).start();
@@ -59,15 +56,10 @@ public class DropNoteFrame_2P extends JFrame {
 		setContentPane(background);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		noteBarLeft = new NoteBar(mContext, Player.LEFTPLAYER);
-		leftPlayerService = new DropNote_2P_PlayerService(this, Player.LEFTPLAYER);
-		new Thread(leftPlayerService).start();
+		noteBarSolo = new NoteBar(mContext, Player.SOLO);
+		soloPlayerService = new DropNote_1P_PlayerService(this, Player.SOLO);
+		new Thread(soloPlayerService).start();
 
-		noteBarRight = new NoteBar(mContext, Player.RIGHTPLAYER);
-		rightPlayerService = new DropNote_2P_PlayerService(this, Player.RIGHTPLAYER);
-		new Thread(rightPlayerService).start();
-
-		itembox = new ItemBox(mContext);
 		bgm = mContext.getBgmService().createBGM();
 		bgm.getClip().start();
 	}
@@ -77,22 +69,20 @@ public class DropNoteFrame_2P extends JFrame {
 		setLocationRelativeTo(null); // 화면 중앙에 프레임 위치
 		setResizable(false);
 		setVisible(true);
-		add(noteBarLeft);
-		add(noteBarRight);
-		add(itembox);
+		add(noteBarSolo);
+	}
+
+	private void addEventListener() {
 	}
 
 	// getter setter
-	public DropNote_2P_PlayerService getDropNoteLeftPlayerService() {
-		return leftPlayerService;
+	public DropNote_1P_PlayerService getSoloPlayerService() {
+		return soloPlayerService;
 	}
-
-	public DropNote_2P_PlayerService getDropNoteRightPlayerService() {
-		return rightPlayerService;
-	}
-
+	
 	public BGM getBgm() {
 		return bgm;
 	}
+	
 
 }

@@ -23,6 +23,7 @@ public class GameSelectFrame extends JFrame {
 	private GameSelectFrame mContext;
 	// 각종 게임 모드 참조
 	public DropNoteFrame_2P dropNoteFrame_2P;
+	public DropNoteFrame_1P dropNoteFrame_1P;
 	// todo 남은 3개 더 참조해야함
 
 	// 라벨
@@ -244,7 +245,7 @@ public class GameSelectFrame extends JFrame {
 						setVisible(false);
 						break;
 					case GAMENAME_DROPNOTE_1P :
-						new DeathNoteFrame(mContext);
+						dropNoteFrame_1P = new DropNoteFrame_1P(mContext);
 						setVisible(false);
 						break;
 					}
@@ -336,7 +337,7 @@ public class GameSelectFrame extends JFrame {
 						setVisible(false);
 						break;
 					case GAMENAME_DROPNOTE_1P :
-						new DeathNoteFrame(mContext);
+						dropNoteFrame_1P = new DropNoteFrame_1P(mContext);
 						setVisible(false);
 						break;
 					}

@@ -1,4 +1,4 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.components;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -83,6 +83,17 @@ public class DropNote extends JLabel implements Runnable {
 				x = 1380;
 			}
 			break;
+		case SOLO:
+			if (place == LEFT) {
+				x = 615;
+			} else if (place == UP) {
+				x = 715;
+			} else if (place == DOWN) {
+				x = 815;
+			} else if (place == RIGHT) {
+				x = 915;
+			}
+			break;
 		default:
 			break;
 		}
@@ -95,7 +106,7 @@ public class DropNote extends JLabel implements Runnable {
 		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
 			playerService.getDropNoteFrame_2P().add(this);
 		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_1P) {
-
+			playerService.getDropNoteFrame_1P().add(this);
 		}
 	}
 
@@ -163,9 +174,58 @@ public class DropNote extends JLabel implements Runnable {
 					}
 				}
 			});
-		}
-		else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_1P) {
-
+		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_1P) {
+			playerService.getDropNoteFrame_1P().addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if (player == Player.SOLO) {
+						switch (e.getKeyCode()) {
+						case KeyEvent.VK_A:
+							if (place == LEFT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_W:
+							if (place == UP && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_D:
+							if (place == RIGHT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_S:
+							if (place == DOWN && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_LEFT:
+							if (place == LEFT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_UP:
+							if (place == UP && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_RIGHT:
+							if (place == RIGHT && !isJudged) {
+								judge();
+							}
+							break;
+						case KeyEvent.VK_DOWN:
+							if (place == DOWN && !isJudged) {
+								judge();
+							}
+							break;
+						default:
+							break;
+						}
+					}
+				}
+			});
 		}
 	}
 
@@ -259,6 +319,8 @@ public class DropNote extends JLabel implements Runnable {
 				x = 260;
 			} else if (player == Player.RIGHTPLAYER) {
 				x = 1185;
+			} else if (player == Player.SOLO) {
+				x = 723;
 			}
 			perfect = new ImageIcon(Define.IMG_COMBO_PERFECT);
 			excellent = new ImageIcon(Define.IMG_COMBO_EXCELLENT);
@@ -274,7 +336,7 @@ public class DropNote extends JLabel implements Runnable {
 			if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
 				playerService.getDropNoteFrame_2P().add(this, 0);
 			} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_1P) {
-
+				playerService.getDropNoteFrame_1P().add(this, 0);
 			}
 		}
 
@@ -284,8 +346,10 @@ public class DropNote extends JLabel implements Runnable {
 				if (isPerfect) {
 					if (player == Player.LEFTPLAYER) {
 						setLocation(260, y);
-					} else {
+					} else if (player == Player.RIGHTPLAYER) {
 						setLocation(1185, y);
+					} else if (player == Player.SOLO) {
+						setLocation(723, y);
 					}
 					setIcon(perfect);
 					try {
@@ -298,8 +362,10 @@ public class DropNote extends JLabel implements Runnable {
 				} else if (isExcellent) {
 					if (player == Player.LEFTPLAYER) {
 						setLocation(260, y);
-					} else {
+					} else if (player == Player.RIGHTPLAYER) {
 						setLocation(1185, y);
+					} else if (player == Player.SOLO) {
+						setLocation(723, y);
 					}
 					setIcon(excellent);
 					try {
@@ -312,8 +378,10 @@ public class DropNote extends JLabel implements Runnable {
 				} else if (isGood) {
 					if (player == Player.LEFTPLAYER) {
 						setLocation(290, y);
-					} else {
+					} else if (player == Player.RIGHTPLAYER) {
 						setLocation(1215, y);
+					} else if (player == Player.SOLO) {
+						setLocation(753, y);
 					}
 					setIcon(good);
 					try {
@@ -326,8 +394,10 @@ public class DropNote extends JLabel implements Runnable {
 				} else if (isBad) {
 					if (player == Player.LEFTPLAYER) {
 						setLocation(300, y);
-					} else {
+					} else if (player == Player.RIGHTPLAYER) {
 						setLocation(1225, y);
+					} else if (player == Player.SOLO) {
+						setLocation(763, y);
 					}
 					setIcon(bad);
 					try {
@@ -340,8 +410,10 @@ public class DropNote extends JLabel implements Runnable {
 				} else if (isMiss) {
 					if (player == Player.LEFTPLAYER) {
 						setLocation(293, y);
-					} else {
+					} else if (player == Player.RIGHTPLAYER) {
 						setLocation(1218, y);
+					} else if (player == Player.SOLO) {
+						setLocation(756, y);
 					}
 					setIcon(miss);
 					try {

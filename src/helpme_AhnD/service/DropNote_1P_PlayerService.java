@@ -8,23 +8,22 @@ import helpme_AhnD.components.ComboBox;
 import helpme_AhnD.components.DropNote;
 import helpme_AhnD.components.HpBox;
 import helpme_AhnD.components.ScoreBox;
-import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.DropNoteFrame_1P;
 import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.state.Player;
 
+public class DropNote_1P_PlayerService extends PlayerService implements Runnable {
 
-public class DropNote_2P_PlayerService extends PlayerService implements Runnable {
-
-	DropNoteFrame_2P gameFrame;
 	GameSelectFrame mContext;
+	DropNoteFrame_1P gameFrame;
 	Player player;
 	private Score score;
-	private int delay; // 노트 생성 시간 간격
-	private int noteSpeed; // 노트의 속도
+	private int delay;
+	private int noteSpeed;
 
-	public DropNote_2P_PlayerService(DropNoteFrame_2P gameFrame, Player player) {
+	public DropNote_1P_PlayerService(DropNoteFrame_1P gameFrame, Player player) {
 		this.gameFrame = gameFrame;
-		mContext = gameFrame.mContext;
+		this.mContext = gameFrame.mContext;
 		this.player = player;
 		noteSpeed = DropNote.DEFAULT_SPEED;
 		score = new Score(mContext, player);
@@ -46,6 +45,7 @@ public class DropNote_2P_PlayerService extends PlayerService implements Runnable
 				while (GameSelectFrame.isGameRunning()) {
 					createNote();
 					Random random = new Random();
+					// 노트 빈도 조절 코드
 					delay = random.nextInt(700) + 200;
 
 					try {
@@ -60,14 +60,15 @@ public class DropNote_2P_PlayerService extends PlayerService implements Runnable
 	}
 
 	// getter
-	
-	public DropNoteFrame_2P getDropNoteFrame_2P() {
+	public DropNoteFrame_1P getDropNoteFrame_1P() {
 		return gameFrame;
 	}
+
 	@Override
 	public GameSelectFrame getmContext() {
 		return mContext;
 	}
+
 	@Override
 	public Score getScore() {
 		return score;
@@ -75,10 +76,6 @@ public class DropNote_2P_PlayerService extends PlayerService implements Runnable
 
 	public Player getPlayer() {
 		return player;
-	}
-
-	public void setNoteSpeed(int noteSpeed) {
-		this.noteSpeed = noteSpeed;
 	}
 
 }

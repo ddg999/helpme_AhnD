@@ -1,7 +1,8 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.service;
 
 import helpme_AhnD.components.item.ScoreDouble;
 import helpme_AhnD.frame.DropNoteFrame_2P;
+import helpme_AhnD.frame.GameEndFrame;
 import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.state.ScoreType;
@@ -121,6 +122,9 @@ public class Score {
 				GameSelectFrame.setGameRunning(false);
 				switch (mContext.getSelectNumber()) {
 				case GameSelectFrame.GAMENAME_DROPNOTE_1P:
+					mContext.dropNoteFrame_1P.setVisible(false);
+					mContext.dropNoteFrame_1P.getBgm().getClip().close();
+					new GameEndFrame(mContext, player);
 					break;
 				case GameSelectFrame.GAMENAME_DROPNOTE_2P:
 					mContext.dropNoteFrame_2P.setVisible(false);
@@ -142,6 +146,9 @@ public class Score {
 	public void recovery() {
 		// 콤보수가 20의 배수 일때마다 체력 회복
 		if (combo % 20 == 0) {
+			if (hp == Define.HP_3_0_HEART) {
+				return;
+			}
 			hp += Define.HP_0_5_HEART;
 		}
 	}

@@ -1,4 +1,4 @@
-package helpme_AhnD.dropnote_2p;
+package helpme_AhnD.components;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -41,6 +41,8 @@ public class ScoreBox extends JLabel {
 			x = 410;
 		} else if (player == Player.RIGHTPLAYER) {
 			x = 870;
+		} else if (player == Player.SOLO) {
+			x = 640;
 		}
 		scoreBox = new ImageIcon(Define.IMG_SCORE_SCOREBOX);
 		scoreNum = new ImageIcon[10];
@@ -62,16 +64,14 @@ public class ScoreBox extends JLabel {
 		setLocation(x, y);
 		switch (mContext.getSelectNumber()) {
 		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
-			playerService.getDropNoteFrame_2P().add(this);
+			playerService.getDropNoteFrame_1P().add(this);
 			break;
 		case GameSelectFrame.GAMENAME_DROPNOTE_2P:
 			playerService.getDropNoteFrame_2P().add(this);
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
-			playerService.getDropNoteFrame_2P().add(this);
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
-			playerService.getDropNoteFrame_2P().add(this);
 			break;
 		}
 	}
@@ -96,6 +96,8 @@ public class ScoreBox extends JLabel {
 					x = 620;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1080;
+				} else if (player == Player.SOLO) {
+					x = 850;
 				}
 				break;
 			// 십의 자리수 좌표 세팅
@@ -104,6 +106,8 @@ public class ScoreBox extends JLabel {
 					x = 570;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 1030;
+				} else if (player == Player.SOLO) {
+					x = 800;
 				}
 				break;
 			// 백의 자리수 좌표 세팅
@@ -112,6 +116,8 @@ public class ScoreBox extends JLabel {
 					x = 520;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 980;
+				} else if (player == Player.SOLO) {
+					x = 750;
 				}
 				break;
 			// 천의 자리수 좌표 세팅
@@ -120,6 +126,8 @@ public class ScoreBox extends JLabel {
 					x = 470;
 				} else if (player == Player.RIGHTPLAYER) {
 					x = 930;
+				} else if (player == Player.SOLO) {
+					x = 700;
 				}
 				break;
 			default:
@@ -133,16 +141,14 @@ public class ScoreBox extends JLabel {
 			setLocation(x, y);
 			switch (mContext.getSelectNumber()) {
 			case GameSelectFrame.GAMENAME_DROPNOTE_1P:
-				playerService.getDropNoteFrame_2P().add(this, 0);
+				playerService.getDropNoteFrame_1P().add(this, 0);
 				break;
 			case GameSelectFrame.GAMENAME_DROPNOTE_2P:
 				playerService.getDropNoteFrame_2P().add(this, 0);
 				break;
 			case GameSelectFrame.GAMENAME_TRYCATCH_1P:
-				playerService.getDropNoteFrame_2P().add(this, 0);
 				break;
 			case GameSelectFrame.GAMENAME_TRYCATCH_2P:
-				playerService.getDropNoteFrame_2P().add(this, 0);
 				break;
 			}
 		}
