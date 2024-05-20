@@ -169,7 +169,7 @@ public class ItemBox extends JLabel {
 					Thread.sleep(30000); // 30초에 한번씩 아이템 등장
 					currentItem = createItem(); // 아이템 생성
 					add(currentItem);
-					remove(currentItem); // 혹시나 아이템을 획득 하지 않았다면 아이템을 우선 지움
+					repaint();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
