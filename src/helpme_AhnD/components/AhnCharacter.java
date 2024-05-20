@@ -32,19 +32,18 @@ public class AhnCharacter extends JLabel {
 	private boolean gameStart = true;
 	private boolean perfect = true;
 
-	// todo score 불러 오기
-
 	public AhnCharacter(GameSelectFrame mContext, PlayerService playerService, Player player) {
 		this.playerService = playerService;
 		this.mContext = mContext;
 		switch (player) {
 		case LEFTPLAYER:
-			x = 150;
+			x = 190;
 			break;
 		case RIGHTPLAYER:
-			x = 1290;
-
-		default:
+			x = 1120;
+			break;
+		case SOLO:
+			x = 665;
 
 		}
 
@@ -72,7 +71,6 @@ public class AhnCharacter extends JLabel {
 		setLocation(x, y);
 	}
 
-	// 점수에 따라 이미지 변경 todo 이미지 추가 하기
 	public void playerScoreImage() {
 
 		new Thread(() -> {

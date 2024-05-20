@@ -69,7 +69,11 @@ public class CatchNote extends JLabel implements Runnable {
 		setX();
 		setLocation(location_X, NOTE_Y_LOCATION);
 		setIcon();
-		playerService.getTryCatchFrame_2P().add(this);
+		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
+			playerService.getTryCatchFrame_2P().add(this);
+		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+			playerService.getTryCatchFrame_1P().add(this);
+		}
 	}
 
 	private void addEventListener() {
@@ -204,6 +208,131 @@ public class CatchNote extends JLabel implements Runnable {
 
 				}
 			});
+		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+
+			playerService.getTryCatchFrame_1P().addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_A:
+						if (key == KeyType.LEFT) {
+							setIcon(note_Left_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					case KeyEvent.VK_W:
+						if (key == KeyType.UP) {
+							setIcon(note_Up_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					case KeyEvent.VK_S:
+						if (key == KeyType.DOWN) {
+							setIcon(note_Down_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					case KeyEvent.VK_D:
+						if (key == KeyType.RIGHT) {
+							setIcon(note_Right_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					}
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_LEFT:
+						if (key == KeyType.LEFT) {
+							setIcon(note_Left_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					case KeyEvent.VK_UP:
+						if (key == KeyType.UP) {
+							setIcon(note_Up_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					case KeyEvent.VK_DOWN:
+						if (key == KeyType.DOWN) {
+							setIcon(note_Down_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					case KeyEvent.VK_RIGHT:
+						if (key == KeyType.RIGHT) {
+							setIcon(note_Right_P);
+							catchNote.repaint();
+							judge();
+						}
+						break;
+					}
+				}
+
+				@Override
+				public void keyReleased(KeyEvent e) {
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_A:
+						if (key == KeyType.LEFT) {
+							setIcon(note_Left);
+							catchNote.repaint();
+						}
+						break;
+					case KeyEvent.VK_W:
+						if (key == KeyType.UP) {
+							setIcon(note_Up);
+							catchNote.repaint();
+						}
+						break;
+					case KeyEvent.VK_S:
+						if (key == KeyType.DOWN) {
+							setIcon(note_Down);
+							catchNote.repaint();
+						}
+						break;
+					case KeyEvent.VK_D:
+						if (key == KeyType.RIGHT) {
+							setIcon(note_Right);
+							catchNote.repaint();
+						}
+						break;
+					}
+					switch (e.getKeyCode()) {
+					case KeyEvent.VK_LEFT:
+						if (key == KeyType.LEFT) {
+							setIcon(note_Left);
+							catchNote.repaint();
+						}
+						break;
+					case KeyEvent.VK_UP:
+						if (key == KeyType.UP) {
+							setIcon(note_Up);
+							catchNote.repaint();
+						}
+						break;
+					case KeyEvent.VK_DOWN:
+						if (key == KeyType.DOWN) {
+							setIcon(note_Down);
+							catchNote.repaint();
+						}
+						break;
+					case KeyEvent.VK_RIGHT:
+						if (key == KeyType.RIGHT) {
+							setIcon(note_Right);
+							catchNote.repaint();
+						}
+						break;
+					}
+				}
+
+			});
+
 		}
 	}
 
@@ -222,6 +351,7 @@ public class CatchNote extends JLabel implements Runnable {
 						if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
 							playerService.getTryCatchFrame_2P().add(catchNoteArrow);
 						} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+							playerService.getTryCatchFrame_1P().add(catchNoteArrow);
 						}
 						synchronized (catchNoteArrow) {
 							catchNoteArrow.wait();
@@ -232,38 +362,45 @@ public class CatchNote extends JLabel implements Runnable {
 				}
 			}
 		};
-		// todo 딜레이 늘려야함
-		start.schedule(task, 1000);
+		start.schedule(task, 7000);
 	}
 
 	private void setX() {
 		switch (key) {
 		case LEFT:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 80;
-			} else {
-				location_X = 1090;
+				location_X = 125;
+			} else if (player == Player.RIGHTPLAYER) {
+				location_X = 1050;
+			} else if (player == Player.SOLO) {
+				location_X = 600;
 			}
 			break;
 		case UP:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 180;
-			} else {
-				location_X = 1190;
+				location_X = 225;
+			} else if (player == Player.RIGHTPLAYER) {
+				location_X = 1150;
+			} else if (player == Player.SOLO) {
+				location_X = 700;
 			}
 			break;
 		case DOWN:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 280;
-			} else {
-				location_X = 1290;
+				location_X = 325;
+			} else if (player == Player.RIGHTPLAYER) {
+				location_X = 1250;
+			} else if (player == Player.SOLO) {
+				location_X = 800;
 			}
 			break;
 		case RIGHT:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 380;
-			} else {
-				location_X = 1390;
+				location_X = 425;
+			} else if (player == Player.RIGHTPLAYER) {
+				location_X = 1350;
+			} else if (player == Player.SOLO) {
+				location_X = 900;
 			}
 			break;
 		}
@@ -302,8 +439,8 @@ public class CatchNote extends JLabel implements Runnable {
 				} else if (player == Player.RIGHTPLAYER) {
 					mContext.tryCatchFrame_2P.ahnCharacterRight.playerScore = AhnCharacter.PERFECT;
 				}
-			} else {
-				// todo 솔로 모드일때
+			} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+				mContext.tryCatchFrame_1P.ahnCharacterSolo.playerScore = AhnCharacter.PERFECT;
 			}
 			catchNoteArrow.repaint();
 		} else if (catchNoteArrow.arrowExcellentZone()) {
@@ -318,8 +455,8 @@ public class CatchNote extends JLabel implements Runnable {
 				} else if (player == Player.RIGHTPLAYER) {
 					mContext.tryCatchFrame_2P.ahnCharacterRight.playerScore = AhnCharacter.EXCELLENT;
 				}
-			} else {
-				// todo 솔로 모드일때
+			} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+				mContext.tryCatchFrame_1P.ahnCharacterSolo.playerScore = AhnCharacter.EXCELLENT;
 			}
 			catchNoteArrow.repaint();
 		} else if (catchNoteArrow.arrowGoodZone()) {
@@ -334,8 +471,8 @@ public class CatchNote extends JLabel implements Runnable {
 				} else if (player == Player.RIGHTPLAYER) {
 					mContext.tryCatchFrame_2P.ahnCharacterRight.playerScore = AhnCharacter.EXCELLENT;
 				}
-			} else {
-				// todo 솔로 모드일때
+			} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+				mContext.tryCatchFrame_1P.ahnCharacterSolo.playerScore = AhnCharacter.EXCELLENT;
 			}
 			catchNoteArrow.repaint();
 		} else if (catchNoteArrow.arrowBadZone()) {
@@ -350,8 +487,8 @@ public class CatchNote extends JLabel implements Runnable {
 				} else if (player == Player.RIGHTPLAYER) {
 					mContext.tryCatchFrame_2P.ahnCharacterRight.playerScore = AhnCharacter.BAD;
 				}
-			} else {
-				// todo 솔로 모드일때
+			} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+				mContext.tryCatchFrame_1P.ahnCharacterSolo.playerScore = AhnCharacter.BAD;
 			}
 			catchNoteArrow.repaint();
 		}

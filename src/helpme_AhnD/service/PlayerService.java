@@ -16,6 +16,9 @@ public abstract class PlayerService {
 	public TryCatchFrame_2P getTryCatchFrame_2P() {
 		return null;
 	}
+	public TryCatchFrame_1P getTryCatchFrame_1P() {
+		return null;
+	}
 	public abstract GameSelectFrame getmContext();
 	
 	public abstract Player getPlayer();

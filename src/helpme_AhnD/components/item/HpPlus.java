@@ -2,8 +2,10 @@ package helpme_AhnD.components.item;
 
 import javax.swing.ImageIcon;
 
+import helpme_AhnD.components.HpBox;
 import helpme_AhnD.interfaces.Useable;
 import helpme_AhnD.service.DropNote_2P_PlayerService;
+import helpme_AhnD.service.TryCatch_2P_PlayerService;
 import helpme_AhnD.utils.Define;
 
 public class HpPlus extends Items implements Useable {
@@ -29,7 +31,11 @@ public class HpPlus extends Items implements Useable {
 
 	@Override
 	public void useItems(DropNote_2P_PlayerService dropNotePlayerService) {
-		dropNotePlayerService.getScore().setHp(dropNotePlayerService.getScore().getHp() + 20);
+		dropNotePlayerService.getScore().setHp(dropNotePlayerService.getScore().getHp() + Define.HP_1_0_HEART);
+	}
+	@Override
+	public void useItems(TryCatch_2P_PlayerService PlayerService) {
+		PlayerService.getScore().setHp(PlayerService.getScore().getHp() + Define.HP_1_0_HEART);
 	}
 
 }

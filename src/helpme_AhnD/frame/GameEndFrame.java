@@ -19,6 +19,7 @@ public class GameEndFrame extends JFrame {
 	private JLabel background;
 	private ImageIcon leftWin;
 	private ImageIcon rightWin;
+	private ImageIcon soloGameOver;
 
 	private final int SCORE = 0;
 	private final int PERFECT = 1;
@@ -50,6 +51,7 @@ public class GameEndFrame extends JFrame {
 	private void initData() {
 		leftWin = new ImageIcon(Define.IMG_GAMEOVER_LEFTWIN);
 		rightWin = new ImageIcon(Define.IMG_GAMEOVER_RIGHTWIN);
+		soloGameOver = new ImageIcon(Define.IMG_GAMEOVER_SOLO);
 		setTitle("게임 종료");
 		setSize(MainFrame.FRAME_WIDTH, MainFrame.FRAME_HEIGHT);
 
@@ -60,8 +62,7 @@ public class GameEndFrame extends JFrame {
 			background = new JLabel(leftWin);
 			setContentPane(background);
 		} else if (loser == Player.SOLO) {
-			// todo 게임 오버 이미지
-			background = new JLabel(leftWin);
+			background = new JLabel(soloGameOver);
 			setContentPane(background);
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,8 +77,10 @@ public class GameEndFrame extends JFrame {
 			dropNote2pImage();
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+			tryCatch1pImage();
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			tryCatch2pImage();
 			break;
 		}
 
@@ -91,7 +94,6 @@ public class GameEndFrame extends JFrame {
 	}
 
 	private void setInitLateLayout() {
-		// todo esc 입력시 게임선택화면으로 돌아간다는 표시
 		if (loser == Player.LEFTPLAYER) {
 			rightWin = new ImageIcon(Define.IMG_GAMEOVER_RIGHTWIN_SCORE);
 			background.setIcon(rightWin);
@@ -99,9 +101,8 @@ public class GameEndFrame extends JFrame {
 			leftWin = new ImageIcon(Define.IMG_GAMEOVER_LEFTWIN_SCORE);
 			background.setIcon(leftWin);
 		} else if (loser == Player.SOLO) {
-			// todo 게임 오버 이미지
-			leftWin = new ImageIcon(Define.IMG_GAMEOVER_LEFTWIN_SCORE);
-			background.setIcon(leftWin);
+			soloGameOver = new ImageIcon(Define.IMG_GAMEOVER_SOLO_SCORE);
+			background.setIcon(soloGameOver);
 		}
 
 		for (int i = 0; i < leftScore.length; i++) {
@@ -189,13 +190,73 @@ public class GameEndFrame extends JFrame {
 				Integer.toString(mContext.dropNoteFrame_1P.getSoloPlayerService().getScore().getMaxCombo()));
 
 		rightScore = new JLabel[7];
-		rightScore[SCORE] = new JLabel(Integer.toString(0));
-		rightScore[PERFECT] = new JLabel(Integer.toString(0));
-		rightScore[EXCELLENT] = new JLabel(Integer.toString(0));
-		rightScore[GOOD] = new JLabel(Integer.toString(0));
-		rightScore[BAD] = new JLabel(Integer.toString(0));
-		rightScore[MISS] = new JLabel(Integer.toString(0));
-		rightScore[MAX_COMBO] = new JLabel(Integer.toString(0));
+		rightScore[SCORE] = new JLabel("");
+		rightScore[PERFECT] = new JLabel("");
+		rightScore[EXCELLENT] = new JLabel("");
+		rightScore[GOOD] = new JLabel("");
+		rightScore[BAD] = new JLabel("");
+		rightScore[MISS] = new JLabel("");
+		rightScore[MAX_COMBO] = new JLabel("");
+	}
+
+	private void tryCatch2pImage() {
+		leftScore = new JLabel[7];
+		leftScore[SCORE] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getScore()));
+		leftScore[PERFECT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountPerfect()));
+		leftScore[EXCELLENT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountExcellent()));
+		leftScore[GOOD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountGood()));
+		leftScore[BAD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountBad()));
+		leftScore[MISS] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountMiss()));
+		leftScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getMaxCombo()));
+
+		rightScore = new JLabel[7];
+		rightScore[SCORE] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getScore()));
+		rightScore[PERFECT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountPerfect()));
+		rightScore[EXCELLENT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountExcellent()));
+		rightScore[GOOD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountGood()));
+		rightScore[BAD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountBad()));
+		rightScore[MISS] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountMiss()));
+		rightScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getMaxCombo()));
+	}
+	private void tryCatch1pImage() {
+		leftScore = new JLabel[7];
+		leftScore[SCORE] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_1P.getSoloPlayerService().getScore().getScore()));
+		leftScore[PERFECT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_1P.getSoloPlayerService().getScore().getCountPerfect()));
+		leftScore[EXCELLENT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_1P.getSoloPlayerService().getScore().getCountExcellent()));
+		leftScore[GOOD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_1P.getSoloPlayerService().getScore().getCountGood()));
+		leftScore[BAD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_1P.getSoloPlayerService().getScore().getCountBad()));
+		leftScore[MISS] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_1P.getSoloPlayerService().getScore().getCountMiss()));
+		leftScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_1P.getSoloPlayerService().getScore().getMaxCombo()));
+
+		rightScore = new JLabel[7];
+		rightScore[SCORE] = new JLabel("");
+		rightScore[PERFECT] = new JLabel("");
+		rightScore[EXCELLENT] = new JLabel("");
+		rightScore[GOOD] = new JLabel("");
+		rightScore[BAD] = new JLabel("");
+		rightScore[MISS] = new JLabel("");
+		rightScore[MAX_COMBO] = new JLabel("");
 	}
 
 }

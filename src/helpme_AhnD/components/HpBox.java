@@ -93,6 +93,7 @@ public class HpBox extends JLabel {
 				playerService.getDropNoteFrame_2P().add(this);
 				break;
 			case GameSelectFrame.GAMENAME_TRYCATCH_1P:
+				playerService.getTryCatchFrame_1P().add(this);
 				break;
 			case GameSelectFrame.GAMENAME_TRYCATCH_2P:
 				playerService.getTryCatchFrame_2P().add(this);
