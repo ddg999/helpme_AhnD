@@ -7,11 +7,9 @@ import helpme_AhnD.frame.GameSelectFrame;
 import helpme_AhnD.service.PlayerService;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
-import ver02.Frame.DeathNoteFrame;
 
 public class AhnCharacter extends JLabel {
 
-	// todo Score int 값 땡겨오기
 	GameSelectFrame mContext;
 	PlayerService playerService;
 
@@ -25,11 +23,10 @@ public class AhnCharacter extends JLabel {
 	// 이미지 추가
 	private int x; // 위치 값
 	private int y; // 위치 값
-	public int playerScore; // 점수 todo 점수 연결
+	public int playerScore; 
 	public static final int PERFECT = 3;
 	public static final int EXCELLENT = 2;
 	public static final int BAD = 1;
-	private boolean gameStart = true;
 	private boolean perfect = true;
 
 	public AhnCharacter(GameSelectFrame mContext, PlayerService playerService, Player player) {
