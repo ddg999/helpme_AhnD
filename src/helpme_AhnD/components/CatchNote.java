@@ -240,30 +240,30 @@ public class CatchNote extends JLabel implements Runnable {
 		switch (key) {
 		case LEFT:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 80;
-			} else {
-				location_X = 1090;
+				location_X = 125;
+			} else if (player == Player.RIGHTPLAYER){
+				location_X = 1050;
 			}
 			break;
 		case UP:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 180;
-			} else {
-				location_X = 1190;
+				location_X = 225;
+			} else if (player == Player.RIGHTPLAYER){
+				location_X = 1150;
 			}
 			break;
 		case DOWN:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 280;
-			} else {
-				location_X = 1290;
+				location_X = 325;
+			} else if (player == Player.RIGHTPLAYER){
+				location_X = 1250;
 			}
 			break;
 		case RIGHT:
 			if (player == Player.LEFTPLAYER) {
-				location_X = 380;
-			} else {
-				location_X = 1390;
+				location_X = 425;
+			} else if (player == Player.RIGHTPLAYER){
+				location_X = 1350;
 			}
 			break;
 		}

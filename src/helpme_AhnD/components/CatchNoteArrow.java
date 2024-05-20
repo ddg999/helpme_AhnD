@@ -64,42 +64,42 @@ public class CatchNoteArrow extends JLabel {
 	private void initData() {
 		arrows = new ImageIcon[20];
 		arrows[Define.INDEX_ARROW_BAD_OVER_LEFT] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_LEFT);
+		arrows[Define.INDEX_ARROW_BAD_LATE_LEFT] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_LEFT);
 		arrows[Define.INDEX_ARROW_GOOD_LEFT] = new ImageIcon(Define.IMG_ARROW_GOOD_LEFT);
 		arrows[Define.INDEX_ARROW_EXCELLENT_LEFT] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_LEFT);
 		arrows[Define.INDEX_ARROW_PERFECT_LEFT] = new ImageIcon(Define.IMG_ARROW_PERFECT_LEFT);
-		arrows[Define.INDEX_ARROW_BAD_LATE_LEFT] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_LEFT);
 		arrows[Define.INDEX_ARROW_BAD_OVER_UP] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_UP);
+		arrows[Define.INDEX_ARROW_BAD_LATE_UP] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_UP);
 		arrows[Define.INDEX_ARROW_GOOD_UP] = new ImageIcon(Define.IMG_ARROW_GOOD_UP);
 		arrows[Define.INDEX_ARROW_EXCELLENT_UP] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_UP);
 		arrows[Define.INDEX_ARROW_PERFECT_UP] = new ImageIcon(Define.IMG_ARROW_PERFECT_UP);
-		arrows[Define.INDEX_ARROW_BAD_LATE_UP] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_UP);
 		arrows[Define.INDEX_ARROW_BAD_OVER_DOWN] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_DOWN);
+		arrows[Define.INDEX_ARROW_BAD_LATE_DOWN] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_DOWN);
 		arrows[Define.INDEX_ARROW_GOOD_DOWN] = new ImageIcon(Define.IMG_ARROW_GOOD_DOWN);
 		arrows[Define.INDEX_ARROW_EXCELLENT_DOWN] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_DOWN);
 		arrows[Define.INDEX_ARROW_PERFECT_DOWN] = new ImageIcon(Define.IMG_ARROW_PERFECT_DOWN);
-		arrows[Define.INDEX_ARROW_BAD_LATE_DOWN] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_DOWN);
 		arrows[Define.INDEX_ARROW_BAD_OVER_RIGHT] = new ImageIcon(Define.IMG_ARROW_BAD_OVER_RIGHT);
+		arrows[Define.INDEX_ARROW_BAD_LATE_RIGHT] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_RIGHT);
 		arrows[Define.INDEX_ARROW_GOOD_RIGHT] = new ImageIcon(Define.IMG_ARROW_GOOD_RIGHT);
 		arrows[Define.INDEX_ARROW_EXCELLENT_RIGHT] = new ImageIcon(Define.IMG_ARROW_EXCELLENT_RIGHT);
 		arrows[Define.INDEX_ARROW_PERFECT_RIGHT] = new ImageIcon(Define.IMG_ARROW_PERFECT_RIGHT);
-		arrows[Define.INDEX_ARROW_BAD_LATE_RIGHT] = new ImageIcon(Define.IMG_ARROW_BAD_LATE_RIGHT);
 
 		switch (key) {
 		case LEFT:
 			startIndex = Define.INDEX_ARROW_BAD_OVER_LEFT;
-			endIndex = Define.INDEX_ARROW_BAD_LATE_LEFT;
+			endIndex = Define.INDEX_ARROW_PERFECT_LEFT;
 			break;
 		case UP:
 			startIndex = Define.INDEX_ARROW_BAD_OVER_UP;
-			endIndex = Define.INDEX_ARROW_BAD_LATE_UP;
+			endIndex = Define.INDEX_ARROW_PERFECT_UP;
 			break;
 		case DOWN:
 			startIndex = Define.INDEX_ARROW_BAD_OVER_DOWN;
-			endIndex = Define.INDEX_ARROW_BAD_LATE_DOWN;
+			endIndex = Define.INDEX_ARROW_PERFECT_DOWN;
 			break;
 		case RIGHT:
 			startIndex = Define.INDEX_ARROW_BAD_OVER_RIGHT;
-			endIndex = Define.INDEX_ARROW_BAD_LATE_RIGHT;
+			endIndex = Define.INDEX_ARROW_PERFECT_RIGHT;
 			break;
 		}
 	}

@@ -117,7 +117,7 @@ public class Score {
 	public void beAttacked() {
 		if (hp >= Define.HP_0_5_HEART) {
 			hp -= Define.HP_0_5_HEART;
-			if (hp == Define.HP_DEATH) {
+			if (hp == Define.HP_DEATH && GameSelectFrame.isGameRunning()) {
 				isJudged = true;
 				GameSelectFrame.setGameRunning(false);
 				switch (mContext.getSelectNumber()) {

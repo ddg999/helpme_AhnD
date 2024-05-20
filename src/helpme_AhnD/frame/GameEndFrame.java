@@ -78,6 +78,7 @@ public class GameEndFrame extends JFrame {
 		case GameSelectFrame.GAMENAME_TRYCATCH_1P:
 			break;
 		case GameSelectFrame.GAMENAME_TRYCATCH_2P:
+			tryCatch2pImage();
 			break;
 		}
 
@@ -196,6 +197,40 @@ public class GameEndFrame extends JFrame {
 		rightScore[BAD] = new JLabel(Integer.toString(0));
 		rightScore[MISS] = new JLabel(Integer.toString(0));
 		rightScore[MAX_COMBO] = new JLabel(Integer.toString(0));
+	}
+
+	private void tryCatch2pImage() {
+		leftScore = new JLabel[7];
+		leftScore[SCORE] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getScore()));
+		leftScore[PERFECT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountPerfect()));
+		leftScore[EXCELLENT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountExcellent()));
+		leftScore[GOOD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountGood()));
+		leftScore[BAD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountBad()));
+		leftScore[MISS] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getCountMiss()));
+		leftScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getLeftPlayerService().getScore().getMaxCombo()));
+
+		rightScore = new JLabel[7];
+		rightScore[SCORE] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getScore()));
+		rightScore[PERFECT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountPerfect()));
+		rightScore[EXCELLENT] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountExcellent()));
+		rightScore[GOOD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountGood()));
+		rightScore[BAD] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountBad()));
+		rightScore[MISS] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getCountMiss()));
+		rightScore[MAX_COMBO] = new JLabel(
+				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getMaxCombo()));
 	}
 
 }

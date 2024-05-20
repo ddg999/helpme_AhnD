@@ -32,17 +32,15 @@ public class AhnCharacter extends JLabel {
 	private boolean gameStart = true;
 	private boolean perfect = true;
 
-	// todo score 불러 오기
-
 	public AhnCharacter(GameSelectFrame mContext, PlayerService playerService, Player player) {
 		this.playerService = playerService;
 		this.mContext = mContext;
 		switch (player) {
 		case LEFTPLAYER:
-			x = 150;
+			x = 190;
 			break;
 		case RIGHTPLAYER:
-			x = 1290;
+			x = 1120;
 
 		default:
 
