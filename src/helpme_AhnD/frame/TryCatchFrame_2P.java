@@ -69,7 +69,7 @@ public class TryCatchFrame_2P extends JFrame {
 		rightPlayerService = new TryCatch_2P_PlayerService(this, Player.RIGHTPLAYER);
 		ahnCharacterRight = new AhnCharacter(mContext, rightPlayerService, Player.RIGHTPLAYER);
 		
-		itemBox = new ItemBox(mContext);
+		itemBox = new ItemBox(this);
 		bgm = mContext.getBgmService().createBGM();
 		bgm.getClip().start();
 	}

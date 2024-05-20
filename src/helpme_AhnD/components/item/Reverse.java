@@ -49,7 +49,7 @@ public class Reverse extends Items implements Useable {
 			reverseImgLabel.setSize(220, 198);
 			reverseImgLabel.setLocation(1150, 500);
 		}
-		dropNotePlayerService.getmContext().add(reverseImgLabel);
+		dropNotePlayerService.getmContext().dropNoteFrame_2P.add(reverseImgLabel);
 		dropNotePlayerService.getmContext().repaint();
 		// 지속 시간 이후 효과 제거
 		new Thread(() -> {
@@ -57,7 +57,7 @@ public class Reverse extends Items implements Useable {
 				Thread.sleep(Items.DURATION_TIME);
 				DropNote.setLeftReverse(false);
 				DropNote.setRightReverse(false);
-				dropNotePlayerService.getmContext().remove(reverseImgLabel);
+				dropNotePlayerService.getmContext().dropNoteFrame_2P.remove(reverseImgLabel);
 				dropNotePlayerService.getmContext().repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -78,7 +78,7 @@ public class Reverse extends Items implements Useable {
 					reverseImgLabel.setSize(220, 198);
 					reverseImgLabel.setLocation(1150, 500);
 				}
-				PlayerService.getmContext().add(reverseImgLabel);
+				PlayerService.getmContext().tryCatchFrame_2P.add(reverseImgLabel);
 				PlayerService.getmContext().repaint();
 				// 지속 시간 이후 효과 제거
 				new Thread(() -> {
@@ -86,7 +86,7 @@ public class Reverse extends Items implements Useable {
 						Thread.sleep(Items.DURATION_TIME);
 						DropNote.setLeftReverse(false);
 						DropNote.setRightReverse(false);
-						PlayerService.getmContext().remove(reverseImgLabel);
+						PlayerService.getmContext().tryCatchFrame_2P.remove(reverseImgLabel);
 						PlayerService.getmContext().repaint();
 					} catch (InterruptedException e) {
 						e.printStackTrace();

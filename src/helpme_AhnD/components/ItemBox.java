@@ -7,14 +7,26 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import helpme_AhnD.components.item.*;
+import helpme_AhnD.components.item.AllPerfect;
+import helpme_AhnD.components.item.Bomb;
+import helpme_AhnD.components.item.Fast;
+import helpme_AhnD.components.item.HpMinus;
+import helpme_AhnD.components.item.HpPlus;
+import helpme_AhnD.components.item.Items;
+import helpme_AhnD.components.item.NeverPerfect;
+import helpme_AhnD.components.item.Reverse;
+import helpme_AhnD.components.item.ScoreDouble;
+import helpme_AhnD.components.item.Slow;
 import helpme_AhnD.frame.DropNoteFrame_2P;
 import helpme_AhnD.frame.GameSelectFrame;
+import helpme_AhnD.frame.TryCatchFrame_2P;
 import helpme_AhnD.utils.Define;
 
 public class ItemBox extends JLabel {
 
 	GameSelectFrame mContext;
+	DropNoteFrame_2P dropNoteFrame_2P;
+	TryCatchFrame_2P tryCatchFrame_2P;
 
 	private ImageIcon itemBox;
 	private int x;
@@ -28,8 +40,17 @@ public class ItemBox extends JLabel {
 	private int countLeft;
 	private int countRight;
 
-	public ItemBox(GameSelectFrame mContext) {
-		this.mContext = mContext;
+	public ItemBox(DropNoteFrame_2P dropNoteFrame_2P) {
+		this.mContext = dropNoteFrame_2P.mContext;
+		this.dropNoteFrame_2P = dropNoteFrame_2P;
+		initData();
+		setInitLayout();
+		addEventListener();
+		itemThread();
+	}
+	public ItemBox(TryCatchFrame_2P tryCatchFrame_2P) {
+		this.mContext = tryCatchFrame_2P.mContext;
+		this.tryCatchFrame_2P = tryCatchFrame_2P;
 		initData();
 		setInitLayout();
 		addEventListener();
@@ -61,7 +82,7 @@ public class ItemBox extends JLabel {
 
 	public void addEventListener() {
 		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
-			mContext.dropNoteFrame_2P.addKeyListener(new KeyAdapter() {
+			dropNoteFrame_2P.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if (appear) {
@@ -71,10 +92,10 @@ public class ItemBox extends JLabel {
 								// 왼쪽 플레이어가 아이템 사용
 								if (currentItem.getBuffType() == Items.BUFF) {
 									// 버프 아이템일 경우 자신의 서비스 주소 넘김
-									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService());
+									currentItem.useItems(dropNoteFrame_2P.getDropNoteLeftPlayerService());
 								} else {
 									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
-									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService());
+									currentItem.useItems(dropNoteFrame_2P.getDropNoteRightPlayerService());
 								}
 								appear = false;
 								remove(currentItem);
@@ -86,10 +107,10 @@ public class ItemBox extends JLabel {
 								// 오른쪽 플레이어가 아이템 사용
 								if (currentItem.getBuffType() == Items.BUFF) {
 									// 버프 아이템일 경우 자신의 서비스 주소 넘김
-									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteRightPlayerService());
+									currentItem.useItems(dropNoteFrame_2P.getDropNoteRightPlayerService());
 								} else {
 									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
-									currentItem.useItems(mContext.dropNoteFrame_2P.getDropNoteLeftPlayerService());
+									currentItem.useItems(dropNoteFrame_2P.getDropNoteLeftPlayerService());
 								}
 								appear = false;
 								remove(currentItem);
@@ -100,7 +121,7 @@ public class ItemBox extends JLabel {
 				}
 			});
 		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
-			mContext.tryCatchFrame_2P.addKeyListener(new KeyAdapter() {
+			tryCatchFrame_2P.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if (appear) {
@@ -110,10 +131,10 @@ public class ItemBox extends JLabel {
 								// 왼쪽 플레이어가 아이템 사용
 								if (currentItem.getBuffType() == Items.BUFF) {
 									// 버프 아이템일 경우 자신의 서비스 주소 넘김
-									currentItem.useItems(mContext.tryCatchFrame_2P.getLeftPlayerService());
+									currentItem.useItems(tryCatchFrame_2P.getLeftPlayerService());
 								} else {
 									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
-									currentItem.useItems(mContext.tryCatchFrame_2P.getRightPlayerService());
+									currentItem.useItems(tryCatchFrame_2P.getRightPlayerService());
 								}
 								appear = false;
 								remove(currentItem);
@@ -125,10 +146,10 @@ public class ItemBox extends JLabel {
 								// 오른쪽 플레이어가 아이템 사용
 								if (currentItem.getBuffType() == Items.BUFF) {
 									// 버프 아이템일 경우 자신의 서비스 주소 넘김
-									currentItem.useItems(mContext.tryCatchFrame_2P.getRightPlayerService());
+									currentItem.useItems(tryCatchFrame_2P.getRightPlayerService());
 								} else {
 									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
-									currentItem.useItems(mContext.tryCatchFrame_2P.getLeftPlayerService());
+									currentItem.useItems(tryCatchFrame_2P.getLeftPlayerService());
 								}
 								appear = false;
 								remove(currentItem);

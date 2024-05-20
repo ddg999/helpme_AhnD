@@ -45,13 +45,13 @@ public class Bomb extends Items implements Useable {
 			bombImgLabel.setSize(622, 565);
 			bombImgLabel.setLocation(964, 200);
 		}
-		dropNotePlayerService.getmContext().add(bombImgLabel);
+		dropNotePlayerService.getmContext().dropNoteFrame_2P.add(bombImgLabel);
 		dropNotePlayerService.getmContext().repaint();
 		new Thread(() -> {
 			try {
 				// 지속시간 이후 제거
 				Thread.sleep(Items.DURATION_TIME);
-				dropNotePlayerService.getmContext().remove(bombImgLabel);
+				dropNotePlayerService.getmContext().dropNoteFrame_2P.remove(bombImgLabel);
 				dropNotePlayerService.getmContext().repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -70,13 +70,13 @@ public class Bomb extends Items implements Useable {
 			bombImgLabel.setSize(622, 565);
 			bombImgLabel.setLocation(964, 200);
 		}
-		PlayerService.getmContext().add(bombImgLabel);
+		PlayerService.getmContext().tryCatchFrame_2P.add(bombImgLabel);
 		PlayerService.getmContext().repaint();
 		new Thread(() -> {
 			try {
 				// 지속시간 이후 제거
 				Thread.sleep(Items.DURATION_TIME);
-				PlayerService.getmContext().remove(bombImgLabel);
+				PlayerService.getmContext().tryCatchFrame_2P.remove(bombImgLabel);
 				PlayerService.getmContext().repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

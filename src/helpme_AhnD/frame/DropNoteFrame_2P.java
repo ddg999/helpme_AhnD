@@ -67,7 +67,7 @@ public class DropNoteFrame_2P extends JFrame {
 		rightPlayerService = new DropNote_2P_PlayerService(this, Player.RIGHTPLAYER);
 		new Thread(rightPlayerService).start();
 
-		itembox = new ItemBox(mContext);
+		itembox = new ItemBox(this);
 		bgm = mContext.getBgmService().createBGM();
 		bgm.getClip().start();
 	}
