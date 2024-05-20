@@ -50,6 +50,7 @@ public class CatchNoteArrow extends JLabel {
 					if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
 						mContext.tryCatchFrame_2P.remove(this);
 					} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_1P) {
+						mContext.tryCatchFrame_1P.remove(this);
 					}
 					this.repaint();
 				}

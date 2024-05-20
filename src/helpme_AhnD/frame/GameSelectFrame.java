@@ -25,7 +25,7 @@ public class GameSelectFrame extends JFrame {
 	public DropNoteFrame_2P dropNoteFrame_2P;
 	public DropNoteFrame_1P dropNoteFrame_1P;
 	public TryCatchFrame_2P tryCatchFrame_2P;
-	// todo 남은 1개 더 참조해야함
+	public TryCatchFrame_1P tryCatchFrame_1P;
 
 	// 라벨
 	private JLabel background; // background
@@ -253,6 +253,10 @@ public class GameSelectFrame extends JFrame {
 						tryCatchFrame_2P = new TryCatchFrame_2P(mContext);
 						setVisible(false);
 						break;
+					case GAMENAME_TRYCATCH_1P :
+						tryCatchFrame_1P = new TryCatchFrame_1P(mContext);
+						setVisible(false);
+						break;
 					}
 					break;
 				case KeyEvent.VK_BACK_SPACE:
@@ -347,6 +351,10 @@ public class GameSelectFrame extends JFrame {
 						break;
 					case GAMENAME_TRYCATCH_2P :
 						tryCatchFrame_2P = new TryCatchFrame_2P(mContext);
+						setVisible(false);
+						break;
+					case GAMENAME_TRYCATCH_1P :
+						tryCatchFrame_1P = new TryCatchFrame_1P(mContext);
 						setVisible(false);
 						break;
 					}

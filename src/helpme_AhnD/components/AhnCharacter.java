@@ -41,8 +41,9 @@ public class AhnCharacter extends JLabel {
 			break;
 		case RIGHTPLAYER:
 			x = 1120;
-
-		default:
+			break;
+		case SOLO:
+			x = 665;
 
 		}
 
@@ -70,7 +71,6 @@ public class AhnCharacter extends JLabel {
 		setLocation(x, y);
 	}
 
-	// 점수에 따라 이미지 변경 todo 이미지 추가 하기
 	public void playerScoreImage() {
 
 		new Thread(() -> {
