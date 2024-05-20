@@ -362,8 +362,7 @@ public class CatchNote extends JLabel implements Runnable {
 				}
 			}
 		};
-		// todo 딜레이 늘려야함
-		start.schedule(task, 1000);
+		start.schedule(task, 7000);
 	}
 
 	private void setX() {

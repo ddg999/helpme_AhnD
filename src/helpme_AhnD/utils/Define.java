@@ -106,6 +106,8 @@ public class Define {
 	public final static String IMG_GAMEOVER_RIGHTWIN = "images/gameover/IMG_GAMEOVER_RIGHTWIN.png";
 	public final static String IMG_GAMEOVER_LEFTWIN_SCORE = "images/gameover/IMG_GAMEOVER_LEFTWIN_SCORE.png";
 	public final static String IMG_GAMEOVER_RIGHTWIN_SCORE = "images/gameover/IMG_GAMEOVER_RIGHTWIN_SCORE.png";
+	public final static String IMG_GAMEOVER_SOLO = "images/gameover/IMG_GAMEOVER_SOLO.png";
+	public final static String IMG_GAMEOVER_SOLO_SCORE = "images/gameover/IMG_GAMEOVER_SOLO_SCORE.jpg";
 
 	// 캐릭터 이미지
 	public final static String IMG_BASIC_CHARCTER = "images/character/IMG_BASIC_CHARCTER.png";

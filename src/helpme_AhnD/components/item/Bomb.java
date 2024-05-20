@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 
 import helpme_AhnD.interfaces.Useable;
 import helpme_AhnD.service.DropNote_2P_PlayerService;
+import helpme_AhnD.service.TryCatch_2P_PlayerService;
 import helpme_AhnD.state.Player;
 import helpme_AhnD.utils.Define;
 
@@ -52,6 +53,31 @@ public class Bomb extends Items implements Useable {
 				Thread.sleep(Items.DURATION_TIME);
 				dropNotePlayerService.getmContext().remove(bombImgLabel);
 				dropNotePlayerService.getmContext().repaint();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}).start();
+	}
+	@Override
+	public void useItems(TryCatch_2P_PlayerService PlayerService) {
+		// 디버프는 상대 주소를 받아옴
+		if (PlayerService.getPlayer() == Player.LEFTPLAYER) {
+			bombImgLabel = new JLabel(bombImg);
+			bombImgLabel.setSize(622, 565);
+			bombImgLabel.setLocation(34, 200);
+		} else {
+			bombImgLabel = new JLabel(bombImg);
+			bombImgLabel.setSize(622, 565);
+			bombImgLabel.setLocation(964, 200);
+		}
+		PlayerService.getmContext().add(bombImgLabel);
+		PlayerService.getmContext().repaint();
+		new Thread(() -> {
+			try {
+				// 지속시간 이후 제거
+				Thread.sleep(Items.DURATION_TIME);
+				PlayerService.getmContext().remove(bombImgLabel);
+				PlayerService.getmContext().repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

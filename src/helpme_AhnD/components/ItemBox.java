@@ -61,7 +61,7 @@ public class ItemBox extends JLabel {
 
 	public void addEventListener() {
 		if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_DROPNOTE_2P) {
-			mContext.addKeyListener(new KeyAdapter() {
+			mContext.dropNoteFrame_2P.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
 					if (appear) {
@@ -100,7 +100,44 @@ public class ItemBox extends JLabel {
 				}
 			});
 		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
-			// todo
+			mContext.tryCatchFrame_2P.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent e) {
+					if (appear) {
+						if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+							countLeft++;
+							if (countLeft >= 10) {
+								// 왼쪽 플레이어가 아이템 사용
+								if (currentItem.getBuffType() == Items.BUFF) {
+									// 버프 아이템일 경우 자신의 서비스 주소 넘김
+									currentItem.useItems(mContext.tryCatchFrame_2P.getLeftPlayerService());
+								} else {
+									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
+									currentItem.useItems(mContext.tryCatchFrame_2P.getRightPlayerService());
+								}
+								appear = false;
+								remove(currentItem);
+							}
+						}
+						if (e.getKeyCode() == KeyEvent.VK_NUMPAD0) {
+							countRight++;
+							if (countRight >= 10) {
+								// 오른쪽 플레이어가 아이템 사용
+								if (currentItem.getBuffType() == Items.BUFF) {
+									// 버프 아이템일 경우 자신의 서비스 주소 넘김
+									currentItem.useItems(mContext.tryCatchFrame_2P.getRightPlayerService());
+								} else {
+									// 디버프 아이템일 경우 상대의 서비스 주소 넘김
+									currentItem.useItems(mContext.tryCatchFrame_2P.getLeftPlayerService());
+								}
+								appear = false;
+								remove(currentItem);
+								repaint();
+							}
+						}
+					}
+				}
+			});
 		}
 	}
 
@@ -126,7 +163,6 @@ public class ItemBox extends JLabel {
 			int randomItem = (new Random()).nextInt(9); // 동일 확률 랜덤 생성
 			return items[randomItem];
 		} else if (mContext.getSelectNumber() == GameSelectFrame.GAMENAME_TRYCATCH_2P) {
-			// todo
 			int randomItem = (new Random()).nextInt(9); // 동일 확률 랜덤 생성 3, 7 제외
 			while (randomItem == Define.INDEX_ITEMS_SLOW || randomItem == Define.INDEX_ITEMS_FAST) {
 				randomItem = (new Random()).nextInt(9);

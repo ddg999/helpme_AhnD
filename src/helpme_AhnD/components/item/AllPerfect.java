@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 
 import helpme_AhnD.interfaces.Useable;
 import helpme_AhnD.service.DropNote_2P_PlayerService;
+import helpme_AhnD.service.TryCatch_2P_PlayerService;
 import helpme_AhnD.utils.Define;
 
 
@@ -37,6 +38,19 @@ public class AllPerfect extends Items implements Useable {
 			try {
 				Thread.sleep(Items.DURATION_TIME);
 				dropNotePlayerService.getScore().setNeverPerfect(false);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}).start();
+	}
+	@Override
+	public void useItems(TryCatch_2P_PlayerService PlayerService) {
+		PlayerService.getScore().setNeverPerfect(true);
+		// 지속 시간 이후 효과 제거
+		new Thread(() -> {
+			try {
+				Thread.sleep(Items.DURATION_TIME);
+				PlayerService.getScore().setNeverPerfect(false);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
