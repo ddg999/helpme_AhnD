@@ -58,6 +58,7 @@ public class GameSelectFrame extends JFrame {
 
 	// 게임 실행 확인용 깃발
 	private static boolean gameRunning;
+	private static boolean noteRunning;
 	
 	// 음악
 	private BGM bgm;
@@ -240,6 +241,7 @@ public class GameSelectFrame extends JFrame {
 						bgm.getClip().close();
 					}
 					gameRunning = true;
+					noteRunning = true;
 					switch (selectNumber) {
 					case GAMENAME_DROPNOTE_2P :
 						dropNoteFrame_2P = new DropNoteFrame_2P(mContext);
@@ -339,6 +341,7 @@ public class GameSelectFrame extends JFrame {
 						bgm.getClip().close();
 					}
 					gameRunning = true;
+					noteRunning = true;
 					// 게임시작 뗏을때 게임화면 띄우기
 					switch (selectNumber) {
 					case GAMENAME_DROPNOTE_2P :
@@ -444,6 +447,14 @@ public class GameSelectFrame extends JFrame {
 		gameRunning = running;
 	}
 
+	public static boolean isNoteRunning() {
+		return noteRunning;
+	}
+	
+	public static void setNoteRunning(boolean noteRunning) {
+		GameSelectFrame.noteRunning = noteRunning;
+	}
+	
 	public BGMService getBgmService() {
 		return bgmService;
 	}
@@ -451,5 +462,6 @@ public class GameSelectFrame extends JFrame {
 	public int getSelectNumber() {
 		return selectNumber;
 	}
+
 
 }// end of class

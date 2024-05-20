@@ -343,7 +343,7 @@ public class CatchNote extends JLabel implements Runnable {
 
 			@Override
 			public void run() {
-				while (GameSelectFrame.isGameRunning()) {
+				while (GameSelectFrame.isNoteRunning()) {
 					try {
 						delay = (new Random()).nextInt(3000) + 900;
 						Thread.sleep(delay);

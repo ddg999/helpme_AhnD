@@ -40,6 +40,8 @@ public class TryCatchFrame_2P extends JFrame {
 		new Thread(() -> {
 			try {
 				Thread.sleep(BGM.END_TIME); // 일정 시간 이후 종료
+				GameSelectFrame.setNoteRunning(false);
+				Thread.sleep(1500);
 				setVisible(false);
 				bgm.getClip().close();
 				GameSelectFrame.setGameRunning(false);

@@ -17,6 +17,7 @@ public class GameEndFrame extends JFrame {
 	private GameSelectFrame mContext;
 	private Player loser;
 	private JLabel background;
+	private JLabel escapeButton;
 	private ImageIcon leftWin;
 	private ImageIcon rightWin;
 	private ImageIcon soloGameOver;
@@ -119,6 +120,11 @@ public class GameEndFrame extends JFrame {
 			rightScore[i].setBounds(1000, 110 + 100 * i, 200, 50);
 			background.add(rightScore[i]);
 		}
+		escapeButton = new JLabel(new ImageIcon(Define.IMG_GAMEOVER_ESC));
+		background.add(escapeButton);
+		escapeButton.setSize(150, 47);
+		escapeButton.setLocation(1420, 30);
+		setVisible(true);
 		repaint();
 	}
 
@@ -232,6 +238,7 @@ public class GameEndFrame extends JFrame {
 		rightScore[MAX_COMBO] = new JLabel(
 				Integer.toString(mContext.tryCatchFrame_2P.getRightPlayerService().getScore().getMaxCombo()));
 	}
+
 	private void tryCatch1pImage() {
 		leftScore = new JLabel[7];
 		leftScore[SCORE] = new JLabel(

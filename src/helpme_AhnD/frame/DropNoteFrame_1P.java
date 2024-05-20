@@ -36,6 +36,8 @@ public class DropNoteFrame_1P extends JFrame {
 		new Thread(() -> {
 			try {
 				Thread.sleep(BGM.END_TIME); // 일정 시간 이후 종료
+				GameSelectFrame.setNoteRunning(false);
+				Thread.sleep(1500);
 				GameSelectFrame.setGameRunning(false);
 				setVisible(false);
 				bgm.getClip().close();

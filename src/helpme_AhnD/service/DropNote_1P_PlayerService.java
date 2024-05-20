@@ -42,7 +42,7 @@ public class DropNote_1P_PlayerService extends PlayerService implements Runnable
 		TimerTask task = new TimerTask() {
 			@Override
 			public void run() {
-				while (GameSelectFrame.isGameRunning()) {
+				while (GameSelectFrame.isNoteRunning()) {
 					createNote();
 					Random random = new Random();
 					// 노트 빈도 조절 코드

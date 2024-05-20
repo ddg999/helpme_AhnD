@@ -17,7 +17,7 @@ public class BGM {
 	 *  종료 : clip.close();
 	 */
 	private FloatControl gainControl; // 볼륨 조절용 변수
-	public static final int END_TIME = 172000; // 2분 52초
+	public static final int END_TIME = 168000; // 2분 48초
 
 	public BGM(int index) {
 		try {
