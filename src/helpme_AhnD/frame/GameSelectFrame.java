@@ -93,7 +93,6 @@ public class GameSelectFrame extends JFrame {
 		gameLabelImg[GAMENAME_DROPNOTE_1P] = new ImageIcon(Define.IMG_SELECTFRAME_SECONDGAME);
 		gameLabelImg[GAMENAME_TRYCATCH_2P] = new ImageIcon(Define.IMG_SELECTFRAME_THIRDGAME);
 		gameLabelImg[GAMENAME_TRYCATCH_1P] = new ImageIcon(Define.IMG_SELECTFRAME_FOURTHGAME);
-		//gameLabelImg[GAMENAME_FIFTHGAME] = new ImageIcon(Define.IMG_SELECTFRAME_FIFTHGAME);
 		gameLabel = new JLabel(gameLabelImg[GAMENAME_DROPNOTE_2P]);
 
 		// 게임 제목
@@ -102,7 +101,6 @@ public class GameSelectFrame extends JFrame {
 		gameTitleImg[GAMENAME_DROPNOTE_1P] = new ImageIcon(Define.IMG_SELECTFRAME_SECONDTITLE);
 		gameTitleImg[GAMENAME_TRYCATCH_2P] = new ImageIcon(Define.IMG_SELECTFRAME_THIRDTITLE);
 		gameTitleImg[GAMENAME_TRYCATCH_1P] = new ImageIcon(Define.IMG_SELECTFRAME_FOURTHTITLE);
-		//gameTitleImg[GAMENAME_FIFTHGAME] = new ImageIcon(Define.IMG_SELECTFRAME_FIFTHTITLE);
 		gameTitle = new JLabel(gameTitleImg[GAMENAME_DROPNOTE_2P]);
 
 		// 왼쪽 버튼
@@ -142,8 +140,6 @@ public class GameSelectFrame extends JFrame {
 		background.add(gameTitle);
 		gameTitle.setSize(TITLE_WIDTH, TITLE_HEIGHT);
 		gameTitle.setLocation(TITLE_X, TITLE_Y);
-		// songTitle.setSize(354, 35);
-		// songTitle.setLocation(620, 140);
 
 		background.add(leftButton);
 		leftButton.setSize(71, 78);
@@ -394,11 +390,6 @@ public class GameSelectFrame extends JFrame {
 			gameTitle.setIcon(gameTitleImg[GAMENAME_TRYCATCH_1P]);
 			gameLabel.setIcon(gameLabelImg[GAMENAME_TRYCATCH_1P]);
 			break;
-			// 5번째 게임 삭제
-//		case GAMENAME_FIFTHGAME:
-//			gameTitle.setIcon(gameTitleImg[GAMENAME_FIFTHGAME]);
-//			gameLabel.setIcon(gameLabelImg[GAMENAME_FIFTHGAME]);
-//			break;
 		}
 	}
 	// 마우스 입력 위치가 버튼과 맞는지 확인
