@@ -234,6 +234,7 @@ public class GameSelectFrame extends JFrame {
 					startButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_START));
 					if (bgm != null) {
 						// 혹시 음악이 틀어져 있다면 끔
+						musicButton.setIcon(musicPlayImg);
 						bgm.getClip().close();
 					}
 					gameRunning = true;
@@ -334,6 +335,7 @@ public class GameSelectFrame extends JFrame {
 					startButton.setIcon(new ImageIcon(Define.IMG_SELECTFRAME_START));
 					if (bgm != null) {
 						// 혹시 음악이 틀어져 있다면 끔
+						musicButton.setIcon(musicPlayImg);
 						bgm.getClip().close();
 					}
 					gameRunning = true;

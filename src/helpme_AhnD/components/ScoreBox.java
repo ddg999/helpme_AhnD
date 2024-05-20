@@ -60,7 +60,7 @@ public class ScoreBox extends JLabel {
 
 	public void setInitLayout() {
 		setIcon(scoreBox);
-		setSize(304, 160);
+		setSize(304, 157);
 		setLocation(x, y);
 		switch (mContext.getSelectNumber()) {
 		case GameSelectFrame.GAMENAME_DROPNOTE_1P:
